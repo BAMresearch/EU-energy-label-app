@@ -1,0 +1,202 @@
+/* * Copyright 2020 Bundesanstalt für Materialforschung und -prüfung (BAM) *
+* Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+* You may not use this work except in compliance with theLicence.
+* You may obtain a copy of the Licence at:
+* * https://joinup.ec.europa.eu/software/page/eupl *
+* Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific language governing permissions and limitations under the Licence.*/
+
+import 'dart:ui';
+
+import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
+import 'package:flutter/material.dart';
+
+class BamTextTheme {
+  BamTextTheme._();
+
+  static final TextTheme textTheme = const TextTheme(
+    headline1: BamTextStyles.headline1,
+
+    headline2: BamTextStyles.headline2,
+
+    headline3: BamTextStyles.headline3,
+
+    headline4: BamTextStyles.headline4,
+
+    headline5: BamTextStyles.headline5,
+
+    headline6: BamTextStyles.headline6,
+
+    subtitle1: BamTextStyles.subtitle1,
+
+    subtitle2: BamTextStyles.subtitle2,
+
+    bodyText1: BamTextStyles.body1,
+
+    bodyText2: BamTextStyles.body2,
+
+    caption: BamTextStyles.caption,
+
+    button: BamTextStyles.button,
+
+    overline: BamTextStyles.label,
+  );
+}
+
+class BamTextStyles {
+  BamTextStyles._();
+
+  static const headline1 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 27,
+    height: 1.296,
+  );
+  static const headline2 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 24,
+    height: 1.416,
+  );
+
+  static const headline3 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 21,
+    height: 1.333,
+  );
+
+  static const headline4 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 16,
+    height: 1.375,
+  );
+
+  static const headline5 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 36,
+    height: 1.166,
+  );
+
+  static const headline6 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 18,
+    letterSpacing: 0.65,
+    height: 1.5,
+  );
+
+  static const bottomTabBar = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 11,
+  );
+
+  static const subtitle1 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 21,
+    height: 1.333,
+  );
+
+  static const body1 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 21,
+    height: 1.333,
+  );
+
+  static const label = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 18,
+    height: 1.333,
+  );
+
+  static const subtitle2 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 15,
+    height: 1.2,
+  );
+
+  static const body2 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 18,
+    height: 1.333,
+  );
+
+  static const enumeration = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 18,
+    height: 1.333,
+  );
+
+  static const body3List = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 16,
+    height: 1.5,
+  );
+
+  static const subtitle3 = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 14,
+    height: 1.428,
+  );
+
+  static const caption = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 12,
+    height: 1.833,
+  );
+
+  static const button = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+    color: BamColorPalette.bamBlack,
+    fontSize: 18,
+    letterSpacing: 0.54,
+  );
+
+  static const buttonSpecial = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+    color: BamColorPalette.bamBlack,
+    fontSize: 12,
+    letterSpacing: 0.54,
+  );
+
+  static const buttonTop = TextStyle(
+    fontFamily: 'Rotobo',
+    fontStyle: FontStyle.normal,
+    color: BamColorPalette.bamBlack,
+    fontSize: 16,
+    height: 1.375,
+  );
+}

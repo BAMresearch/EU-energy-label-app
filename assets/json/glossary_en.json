@@ -1,0 +1,125 @@
+{
+  "type": "Glossary",
+  "glossary-entries": [
+    {
+      "type": "GlossaryEntry",
+      "title": "CE",
+      "description": "CE means \"Conformité Européenne\" (European Conformity). When affixing the CE-mark, manufacturers declare that their product meets all relevant EU law regarding protection of consumers and the environment and that a conformity assessment procedure has been carried out. Many products need CE-marking to be allowed on the EU common market."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "CO2-Emissions",
+      "description": "Carbon dioxide (CO2) is the most important climate gas. It is emitted (released to the atmosphere) when coal, oil or natural gas are burnt e.g. for electricity production. The global emissions of CO2 are still rising. This increases the (natural) green house effect: The planet gets warmer, which can be damaging to the environment but also to human activities like agriculture."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "ECO-programme of dishwashers",
+      "description": "Most of the energy a dishwasher uses is spent on heating the water that cleans the dishes. The ECO-programme uses a lower temperature (e.g. 45 degrees instead of 55) which consumes less energy. To achieve the same cleaning result, the machine takes more time to complete an ECO cycle, which can take 3 hours or longer. On a dishwasher's energy label, the electricity consumption and duration of an ECO-programme cycle are indicated."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "ECO-programme of washing machines",
+      "description": "In the Eco-programme the washing machine consumes less energy, because a smaller amount of water is used that is not as hot as in the normal programme. So the Program \"Eco 40-60\" actually runs at a lower temperature. The cleaning performance is the same as in a normal programme, because the detergent has more time to do its job. On a washing machine's energy label, the electricity consumption and duration of an ECO-programme cycle are indicated."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energy efficiency",
+      "description": "Efficiency is the ratio of useful output per unit of input. Energy efficiency therefore describes which amount of energy is needed to provide a service. An efficient appliance is one that uses the smallest energy input to do its job, be it cooling foodstuffs, displaying a video or heating your home. For many domestic appliances, the energy label gives information about energy efficiency."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energy efficiency index EEI",
+      "description": "The energy efficiency index (EEI) of an appliance is calculated from its energy use when providing a defined service. Other relevant factors like the size of the appliance, its capacity or performance add to the calculation. The smaller the index is, the more efficient the device. The index is converted to an energy class from A to G to enable consumers to compare similar products."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energy efficiency class",
+      "description": "On the EU energy label the energy efficiency class of a product is indicated. The scale runs from A (highest efficiency with a dark green bar) to G (lowest efficiency, red bar). To make the label more effective, the EU has rescaled the classes for a number of product groups, creating new labels starting March 2021. The labels for other products will follow. The rescaling is done based on the state of the art and projected development in energy efficiency. Older labels with \"plus\" classes (A+++, A++, A+) are replaced."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energy labelling",
+      "description": "The <a href=\"energylabelapp:pushPage?tab=knowHow&page=whyIsThere&pageArguments=1\">EU energy label</a> heps consumers to decide which product to buy by providing information about the product's energy efficiency. Since its creation, the energy label has encouraged manufacturers to develop more efficient products. It has to be clearly shown in shops and advertisements and contains the energy class and other relevant information, like water consumption (washing machine or dishwasher) or useful volume (refrigerator)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energy-related products",
+      "description": "The EU law has energy labelling regulations for 16 product groups that have to have an energy label and be registered in a database called EPREL. These products are all energy-related, meaning that they need energy to function. Examples are lamps, dishwashers or television sets. The database contains the relevant entries like energy efficiency class, model number, manufacturer and other useful information."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "EU energy label framework regulation",
+      "description": "To make the EU energy label more effective, the EU revised its legal framework in 2017. Starting March 2021, many products will again have an easy to understand scale from A to G. Dealers and manufacturers get additional obligations, like registering the products in a database and making clearer reference to the efficiency class when advertising."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Total volume",
+      "description": "For refrigerators and freezers, the EU energy label indicates the total volume of all compartments. This helps consumers find an appliance that fits their needs."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Annual energy consumption (AEC)",
+      "description": "The annual energy consumption (AEC) of an appliance is the number of kilowatt hours used in a year e.g. by a refrigerator under standardized conditions. The AEC is used to calculate the energy efficiency index (EEI). For other appliances (dishwasher, washing machines) the AEC is calculated by multiplying the energy used per cycle with a number representing the cycles per year of average use."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Kilowatt hour",
+      "description": "A kilowatt hour (kWh) is the amount of (electrical) energy used by a device with an input power of one kilowatt (1000 Watt) during one hour. For scale: one kilowatt hour is sufficient for an average washing cycle, an hour of vacuuming or about 50 hours of using a laptop computer. The annual energy consumption of a product is given in kilowatt hours and can be looked up in the EPREL database."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "LED",
+      "description": "LED is short for light-emitting diode. LEDs light up when energized by electricity – and produce only a little heat in the process. This makes them more efficient than the older incandescent lamps. OLED means organic LED, this is a newer technology used in flatscreen displays and some design lamps."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Minimum requirements",
+      "description": "The EU ecodesign directive creates a framework for minimum environmental performance requirements (MEPS). These requirements can set a minimum level for properties like efficiency or lifetime or require the manufacturer to provide spare parts for repair. Only products that fulfil the MEPS are allowed on the EU market."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Rescaling of EU energy label classes",
+      "description": "The EU has revised the energy labelling scheme: Starting March 2021, all new labels will have the scale with 7 classes from A (best) to G (worst), there will be no more classes with extra plus signs (+). At the same time the criteria for the classes are adapted according to technical progress. Most products will be in a significantly lower class than before: a refrigerator that used to be in the top class (A+++) may now be in class B or C, making room for even more efficient appliances."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Ecodesign directive",
+      "description": "To conserve resources and protect the environment, the European Parliament and the Council of the EU created the ecodesign directive. It sets the framework for requirements that make products more environmentally friendly, like minimum efficiency values and measures to improve product lifetime."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "EU product database EPREL",
+      "description": "In the EU product database <a href=\"https://ec.europa.eu/info/energy-climate-change-environment/standards-tools-and-labels/products-labelling-rules-and-requirements/energy-label-and-ecodesign/product-database_de\">EPREL</a> (\"European Product Registry for Energy Labelling\") all products that have to have an energy label must be registered before they are placed on the market. The public part of EPREL gives consumers information in the shape of the energy label and the product information sheet (fiche). There is also the compliance part with restricted access for the use of market surveillance authorities."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Product information sheet",
+      "description": "The product information sheet has entries like the efficiency class the consumption of other resources (e.g. water) and other relevant product data. For each product group, the regulations give the mandatory data categories. Manufacturers are obliged to upload an electronic product information sheet to EPREL for free download."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Programme duration",
+      "description": "The energy labels for appliances like dishwashers and washing machines show the duration of certain cycles of the product (e.g. the ECO programme)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "QR code",
+      "description": "Each new EU energy label has a QR code that can be scanned with a smartphone. This code links to the product's entry in the database EPREL to give consumers additional information."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Noise emission",
+      "description": "Many consumers would like to know how loud an appliance is in use before buying it. This is why the EU energy label has data on noise emission. There is the sound power level in decibels and also a noise class from A (low noise) to D (quite noisy)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Spin-drying efficiency class",
+      "description": "EU energy labels for washing machines and washer-driers have information on the spin-drying performance in the form of a class. It is calculated from the amount of water still in the laundry after the spin cycle. Class A is the best and class G the worst class. A high spin-drying efficiency class is especially important if you wish to dry your laundry in a tumble dryer because the more water it has to remove, the more energy the drier uses."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Standby mode",
+      "description": "In standby mode a device is deactivated temporarily but can be reactivated quickly. This can use some energy, especially in older products. Since 2010 there is a maximum value that products placed on the EU market are allowed to consume in standby mode."
+    }
+  ]
+}

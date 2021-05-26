@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+/* -----------------------------------
+1 - Colors
+------------------------------------*/
+
+:root {
+    --bamWhite: #FFFFFF;
+
+    --bamBlack: #002832;
+    --bamBlack10: #E6EBEE;
+    --bamBlack15: #CCD8DF;
+    --bamBlack30: #A3B8C3;
+    --bamBlack30Optimized: #B1BFC6;
+    --bamBlack45Optimized: #8E9FA9;
+    --bamBlack60Optimized: #6C7F89;
+    --bamBlack80: #325463;
+
+    --bamYellow1: #FFDE02;
+    --bamYellow2: #FAB70D;
+    --bamYellow3: #E29718;
+    --bamYellow4: #CC7A17;
+
+    --bamRed1: #D2001E;
+    --bamRed2: #B62025;
+    --bamRed3: #871517;
+    --bamRed4: #4A1012;
+
+    --bamGreen1: #8CBE3C;
+    --bamGreen2: #72A442;
+    --bamGreen3: #4F903D;
+    --bamGreen4: #2C7C3A;
+
+    --bamBlue1: #00AFF0;
+    --bamBlue2: #048FBF;
+    --bamBlue3: #03769B;
+    --bamBlue4: #015167;
+
+    --bamContainerShadow: #a2a2a2;
+}
+
+/* -----------------------------------
+2 - General Styles
+------------------------------------*/
+
+body {
+    margin-top: 34px;
+}
+
+/* Headline Styles */
+h1, h2, h3, h4 ,h5 {
+    font-family: Verdana, serif;
+}
+
+.bam-h1, .bam-h2, .bam-h3, .bam-h4, .bam-h5 {
+    color: var(--bamBlue3);
+}
+
+.bam-h1 {
+    font-size: 27px;
+    line-height: 35px;
+    font-weight: normal;
+}
+
+.bam-h2 {
+    font-size: 24px;
+    line-height: 33px;
+    font-weight: normal;
+}
+
+.bam-h3 {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: normal;
+}
+
+.bam-h4 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+}
+
+.bam-h5 {
+    font-size: 11px;
+    line-height: 13px;
+    font-weight: normal;
+}
+
+/* Subtitle Styles */
+.bam-s1 {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: normal;
+}
+
+.bam-s2 {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: normal;
+}
+
+.bam-s3 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+/* Body Styles */
+.bam-b1 {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: normal;
+}
+
+.bam-b2 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+/* Paragraph Styles */
+p {
+    font-family: Verdana, serif;
+    color: var(--bamBlack80);
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: normal;
+}
+
+/* List Styles */
+li {
+    font-family: Verdana, serif;
+    color: var(--bamBlack80);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+/* Container Styles */
+.text-container {
+    text-align: left;
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* -----------------------------------
+3 - About BAM Styles
+------------------------------------*/
+
+.about-bam-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-container {
+    margin: 32px 28px 32px 28px;
+    box-shadow: 0 0 8px var(--bamContainerShadow);
+}

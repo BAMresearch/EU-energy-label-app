@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="23.5" viewBox="0 0 17.5 23.5">
+    <g id="bulb-61" transform="translate(0.75 0.75)">
+        <path id="Pfad_577" data-name="Pfad 577" d="M20,9A8,8,0,1,0,9,16.413V19h6V16.413A8,8,0,0,0,20,9Z"
+              transform="translate(-4 -1)" fill="none" stroke="#E29718" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="1.5"/>
+        <path id="Pfad_578" data-name="Pfad 578" d="M15,19v4H9V19" transform="translate(-4 -1)" fill="none"
+              stroke="#E29718" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+              stroke-width="1.5"/>
+        <path id="Pfad_579" data-name="Pfad 579" d="M8,9a4,4,0,0,1,4-4" transform="translate(-4 -1)" fill="none"
+              stroke="#E29718" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+              stroke-width="1.5"/>
+    </g>
+</svg>

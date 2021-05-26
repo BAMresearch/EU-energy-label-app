@@ -1,0 +1,166 @@
+/* * Copyright 2020 Bundesanstalt für Materialforschung und -prüfung (BAM) *
+* Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+* You may not use this work except in compliance with theLicence.
+* You may obtain a copy of the Licence at:
+* * https://joinup.ec.europa.eu/software/page/eupl *
+* Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific language governing permissions and limitations under the Licence.*/
+
+import 'dart:async';
+
+import 'package:energielabel_app/data/favorite_repository.dart';
+import 'package:energielabel_app/data/label_guide_repository.dart';
+import 'package:energielabel_app/model/favorite.dart';
+import 'package:energielabel_app/ui/favorites/favorite_list_item.dart';
+import 'package:energielabel_app/ui/favorites/pages/favorite_type.dart';
+import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
+import 'package:pedantic/pedantic.dart';
+
+class FavoritesEditViewModel extends BaseViewModel {
+  FavoritesEditViewModel({
+    @required FavoriteType favoriteType,
+    @required int productCategory,
+    @required FavoriteRepository favoriteRepository,
+    @required LabelGuideRepository labelGuideRepository,
+    @required VoidCallback deletionConfirmationCallback,
+  })  : assert(favoriteType != null),
+        assert((favoriteType == FavoriteType.products && productCategory != null) ||
+            (favoriteType != FavoriteType.products && productCategory == null)),
+        assert(favoriteRepository != null),
+        assert(labelGuideRepository != null),
+        assert(deletionConfirmationCallback != null),
+        _favoriteType = favoriteType,
+        _productCategory = productCategory,
+        _favoriteRepository = favoriteRepository,
+        _labelGuideRepository = labelGuideRepository,
+        _deletionConfirmationCallback = deletionConfirmationCallback;
+
+  final FavoriteType _favoriteType;
+  final int _productCategory;
+  final FavoriteRepository _favoriteRepository;
+  final LabelGuideRepository _labelGuideRepository;
+  final VoidCallback _deletionConfirmationCallback;
+  final List<FavoriteListSectionEntry> _favoriteListSectionEntries = [];
+  final List<FavoriteListSectionEntry> _restorableItems = [];
+
+  List<FavoriteListSectionEntry> get favoriteListItems => List.unmodifiable(_favoriteListSectionEntries);
+
+  @override
+  void onViewStarted() {
+    _observeFavorites();
+  }
+
+  void onDeleteFavoritesAction(FavoriteListSectionEntry listItem) {
+    _restorableItems.addAll(List.of(_favoriteListSectionEntries));
+
+    _favoriteListSectionEntries.removeWhere((favoriteListItem) => favoriteListItem == listItem);
+    notifyListeners();
+
+    _deletionConfirmationCallback.call();
+  }
+
+  Future<void> onUndoDeletionOptionIgnored() async {
+    try {
+      await _saveEditedFavorites();
+      _restorableItems.clear();
+    } catch (error, stacktrace) {
+      Fimber.e('Failed to permanently delete favorites.', ex: error, stacktrace: stacktrace);
+    }
+  }
+
+  void onUndoDeletionAction() {
+    _favoriteListSectionEntries.clear();
+    _favoriteListSectionEntries.addAll(List.from(_restorableItems));
+    _restorableItems.clear();
+    notifyListeners();
+  }
+
+  void onFavoriteReordered(previousIndex, newIndex) {
+    final reorderedFavorite = _favoriteListSectionEntries[previousIndex];
+    _favoriteListSectionEntries.remove(reorderedFavorite);
+    if (newIndex >= _favoriteListSectionEntries.length) {
+      _favoriteListSectionEntries.add(reorderedFavorite);
+    } else {
+      _favoriteListSectionEntries.insert(newIndex, reorderedFavorite);
+    }
+    unawaited(_saveEditedFavorites());
+  }
+
+  Future<String> _resolveTitleForCategory(int categoryId) async {
+    final category = await _labelGuideRepository.getCategory(categoryId);
+    if (category.isPresent) {
+      return category.value.productType;
+    } else {
+      Fimber.e('Category lookup failed with ID: $categoryId');
+      return '';
+    }
+  }
+
+  void _observeFavorites() {
+    Stream<List<Favorite>> favoritesStream;
+    FutureOr<String> Function(Favorite) titleResolver;
+
+    switch (_favoriteType) {
+      case FavoriteType.products:
+        favoritesStream = _favoriteRepository.favoriteProductsUpdates
+            .map((productsForCategories) => productsForCategories[_productCategory]);
+        titleResolver = (favorite) {
+          final productFavorite = favorite as ProductFavorite;
+          return productFavorite.product?.title ?? productFavorite.title;
+        };
+        break;
+      case FavoriteType.checklists:
+        favoritesStream = _favoriteRepository.favoriteChecklistsUpdates;
+        titleResolver = (favorite) => _resolveTitleForCategory((favorite as ChecklistFavorite).categoryId);
+        break;
+      case FavoriteType.tips:
+        favoritesStream = _favoriteRepository.favoriteCategoryTipsUpdates;
+        titleResolver = (favorite) => _resolveTitleForCategory((favorite as CategoryTipsFavorite).categoryId);
+        break;
+    }
+
+    subscriptions.add(favoritesStream.listen((favorites) async {
+      _favoriteListSectionEntries.clear();
+
+      for (final favorite in favorites) {
+        _favoriteListSectionEntries.add(
+          FavoriteListSectionEntry(
+            title: await titleResolver(favorite),
+            favoriteType: _favoriteType,
+            favorite: favorite,
+          ),
+        );
+      }
+      notifyListeners();
+    })).onError((error, stacktrace) {
+      Fimber.e('Failed to observe the favorites.', ex: error, stacktrace: stacktrace);
+    });
+  }
+
+  Future<void> _saveEditedFavorites() async {
+    try {
+      switch (_favoriteType) {
+        case FavoriteType.products:
+          final favorites = _favoriteListSectionEntries.map<ProductFavorite>((listItem) => listItem.favorite).toList();
+          _favoriteRepository.latestProductList[_productCategory] = favorites;
+          await _favoriteRepository.updateProductFavorites(_favoriteRepository.latestProductList);
+          break;
+        case FavoriteType.checklists:
+          final favorites =
+              _favoriteListSectionEntries.map<ChecklistFavorite>((listItem) => listItem.favorite).toList();
+          await _favoriteRepository.updateChecklistFavorites(favorites);
+          break;
+        case FavoriteType.tips:
+          final favorites =
+              _favoriteListSectionEntries.map<CategoryTipsFavorite>((listItem) => listItem.favorite).toList();
+          await _favoriteRepository.updateCategoryTipsFavorites(favorites);
+          break;
+      }
+    } catch (e, stacktrace) {
+      Fimber.e('Failed to save the updated favorites.', ex: e, stacktrace: stacktrace);
+    }
+  }
+}

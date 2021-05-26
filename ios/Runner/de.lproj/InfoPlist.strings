@@ -1,0 +1,9 @@
+/*
+  InfoPlist.strings
+  Runner
+
+  Created by Maurice Raguse on 03.11.20.
+
+*/
+NSCameraUsageDescription = "Die App benötigt Zugriff auf die Kamera um QR-Codes zu lesen.";
+CFBundleDisplayName = "Energielabel";

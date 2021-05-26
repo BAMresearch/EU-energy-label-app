@@ -1,0 +1,103 @@
+{
+  "type": "RegulationData",
+  "title": "Verordnungen",
+  "description": "Die EU-Verordnungen zur Energieverbrauchskennzeichnung auf einen Blick: Sie legen die Anforderungen an die EU-Energielabel für verschiedene Gerätegruppen fest und regeln die Pflichten für Händler*innen und Hersteller*innen. Die Verordnungen wurden auf Basis der Rahmenverordnung zur Energieverbrauchskennzeichnung (EU) 2017/1369 bzw. der davor gültigen Richtlinie erlassen.",
+  "regulations": [
+    {
+      "type": "Regulation",
+      "title": "Kühl- und Tiefkühlgeräte im Haushalt",
+      "pdf-path": "assets/pdf/CELEX_02019R2016-20210301_DE_TXT.pdf",
+      "order-index": 0
+    },
+    {
+      "type": "Regulation",
+      "title": "Waschmaschinen und Waschtrockner im Haushalt",
+      "pdf-path": "assets/pdf/CELEX_02019R2014-20191205_DE_TXT.pdf",
+      "order-index": 1
+    },
+    {
+      "type": "Regulation",
+      "title": "Geschirrspüler im Haushalt",
+      "pdf-path": "assets/pdf/CELEX_02019R2017-20210301_DE_TXT.pdf",
+      "order-index": 2
+    },
+    {
+      "type": "Regulation",
+      "title": "Elektronische Displays (Fernseher, Monitore)",
+      "pdf-path": "assets/pdf/CELEX_02019R2013-20210301_DE_TXT.pdf",
+      "order-index": 3
+    },
+    {
+      "type": "Regulation",
+      "title": "Lichtquellen und separate Betriebsgeräte",
+      "pdf-path": "assets/pdf/CELEX_02019R2015-20210301_DE_TXT.pdf",
+      "order-index": 4
+    },
+    {
+      "type": "Regulation",
+      "title": "Kühlgeräte mit Direktverkaufsfunktion",
+      "pdf-path": "assets/pdf/CELEX_02019R2018-20210301_DE_TXT.pdf",
+      "order-index": 5
+    },
+    {
+      "type": "Regulation",
+      "title": "Wäschetrockner im Haushalt",
+      "pdf-path": "assets/pdf/CELEX_02012R0392-20200809_DE_TXT.pdf",
+      "order-index": 6
+    },
+    {
+      "type": "Regulation",
+      "title": "Backöfen und Dunstabzugshauben im Haushalt",
+      "pdf-path": "assets/pdf/CELEX_02014R0065-20170307_DE_TXT.pdf",
+      "order-index": 7
+    },
+    {
+      "type": "Regulation",
+      "title": "Heizkessel und Kombiboiler (Gas, Öl, elektrisch)",
+      "pdf-path": "assets/pdf/CELEX_02013R0811-20170307_DE_TXT.pdf",
+      "order-index": 8
+    },
+    {
+      "type": "Regulation",
+      "title": "Warmwasserbereiter",
+      "pdf-path": "assets/pdf/CELEX_02013R0812-20180426_DE_TXT.pdf",
+      "order-index": 9
+    },
+    {
+      "type": "Regulation",
+      "title": "Festbrennstoffkessel",
+      "pdf-path": "assets/pdf/CELEX_02015R1187-20170307_DE_TXT.pdf",
+      "order-index": 10
+    },
+    {
+      "type": "Regulation",
+      "title": "Einzelraumheizgeräte",
+      "pdf-path": "assets/pdf/CELEX_02015R1186-20170307_DE_TXT.pdf",
+      "order-index": 11
+    },
+    {
+      "type": "Regulation",
+      "title": "Gewerbliche Kühllagerschränke",
+      "pdf-path": "assets/pdf/CELEX_02015R1094-20170307_DE_TXT.pdf",
+      "order-index": 12
+    },
+    {
+      "type": "Regulation",
+      "title": "Wohnraumlüftungsgeräte",
+      "pdf-path": "assets/pdf/CELEX_02014R1254-20170307_DE_TXT.pdf",
+      "order-index": 13
+    },
+    {
+      "type": "Regulation",
+      "title": "Raumklimageräte",
+      "pdf-path": "assets/pdf/CELEX_02011R0626-20200809_DE_TXT.pdf",
+      "order-index": 14
+    },
+    {
+      "type": "Regulation",
+      "title": "Reifen",
+      "pdf-path": "assets/pdf/CELEX_32020R0740_DE_TXT.pdf",
+      "order-index": 15
+    }
+  ]
+}

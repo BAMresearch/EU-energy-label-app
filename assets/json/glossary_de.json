@@ -1,0 +1,125 @@
+{
+  "type": "Glossary",
+  "glossary-entries": [
+    {
+      "type": "GlossaryEntry",
+      "title": "CE",
+      "description": "CE steht für „Conformité Européenne“ (Europäische Konformität). Durch das Anbringen der CE-Kennzeichnung erklären die Hersteller*innen, dass ihr Produkt allen geltenden EU-Vorschriften zum Schutz von Verbraucher*innen und Umwelt entspricht und dass ein entsprechendes Konformitätsbewertungsverfahren erfolgreich durchgeführt wurde. Zahlreiche Produkte benötigen die CE-Kennzeichnung, bevor sie in der EU verkauft werden dürfen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "CO2-Emissionen",
+      "description": "Kohlendioxid (CO2) ist das bedeutsamste Klimagas. Es entsteht zum Beispiel, wenn Erdöl, Kohle oder Erdgas verbrannt werden und somit auch bei der Stromerzeugung. Weltweit steigt der Ausstoß (Emission) von CO2 in die Luft. Das verdichtet die Atmosphäre und verstärkt den natürlichen Treibhauseffekt: Die Erde wird immer wärmer, was gravierende Folgen für die Umwelt haben kann."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "ECO-Programm Spülmaschine",
+      "description": "Die meiste Energie benötigen Spülmaschinen für das Aufheizen des Wassers. Im Eco-Programm reinigen sie das Geschirr mit einer geringeren Wassertemperatur (z. B. 45 statt 55 Grad) und arbeiten so besonders energiesparend. Um ein ebenso sauberes Ergebnis wie im Normalprogramm zu erreichen, läuft die Maschine im Eco-Programm länger, oft 3 Stunden und mehr. Auf dem Energielabel der Spülmaschine ist die Dauer und der Energieverbrauch des Eco-Programms angegeben."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "ECO-Programm Waschmaschine",
+      "description": "Im Eco-Programm spart die Waschmaschine im erheblichen Maß Strom und Wasser, da sie die Wäsche bei geringerer Temperatur und mit weniger Wasser reinigt. Das Programm „Eco 40-60“ läuft also tatsächlich mit niedrigeren Temperaturen. Die Waschleistung entspricht aber einem Normalprogramm, da durch die längere Laufzeit das Waschmittel besser einwirken kann. Auf dem Energielabel der Waschmaschine ist die Dauer und der Verbrauch des Eco-Programms angegeben."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energieeffizienz",
+      "description": "Effizienz bezeichnet das Verhältnis von Nutzen und Aufwand. Somit beschreibt Energieeffizienz, wie viel Energie aufzuwenden ist, um einen festgelegten Nutzen zu erreichen. Energieeffizient arbeiten Geräte, die mit so wenig Energieaufwand wie möglich ein vorgegebenes Ziel erreichen, also zum Beispiel Lebensmittel kühlen oder die Wohnung wärmen. Bei Haushaltsgeräten informiert das EU-Energielabel über die jeweilige Energieeffizienz."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energieeffizienzindex EEI",
+      "description": "Der Energieeffizienzindex (EEI) eines Geräts berechnet sich wesentlich aus seinem Energieverbrauch. Aber auch weitere relevante Eigenschaften wie Gerätegröße, Füllmenge oder Stand-by-Verbrauch fließen zum Teil in die Berechnung ein. Je kleiner der ermittelte Index, desto effizienter ist das Gerät. Zur leichteren Orientierung der Verbraucher*innen wird der Index in die Energieeffizienzklassen A bis G übersetzt."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energieeffizienzklasse",
+      "description": "Auf dem EU-Energielabel ist die Energieeffizienzklasse des jeweiligen Geräts angegeben. Die Skala reicht von Klasse A (höchste Effizienz, dunkelgrüner Farbbalken) bis Klasse G (niedrigste Effizienz, roter Farbbalken). Um die Aussagekraft des Labels zu erhöhen, hat die EU für einige Geräte die Klassen zum März 2021 neu skaliert. Weitere Produkte folgen. Basis der Neuskalierung sind der aktuelle Technikstand und die voraussichtliche Marktentwicklung. Die bisherigen Plusklassen (A+++, A++, A+) entfallen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energieverbrauchskennzeichnung",
+      "description": "Die EU-Energieverbrauchskennzeichnung – auch <a href=\"energylabelapp:pushPage?tab=knowHow&page=whyIsThere&pageArguments=1\">EU-Energielabel</a> genannt – unterstützt Verbraucher*innen in ihrer Kaufentscheidung, indem sie Auskunft über die Energieeffizienz des Geräts gibt. Seit seiner Einführung hat das Energielabel dazu beigetragen, dass Hersteller*innen immer sparsamere Geräte entwickeln. Es muss deutlich sichtbar am Gerät angebracht sein und enthält neben der Energieeffizienzklasse weitere produktspezifische Angaben, etwa zum Wasserverbrauch (Waschmaschine) oder zum Nutzinhalt (Kühlschrank)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Energieverbrauchsrelevante Produkte",
+      "description": "Für die Produktdatenbank EPREL hat die Europäische Kommission eine Liste von 16 Produktgruppen definiert, deren Nutzung im relevanten Maß Energie verbraucht. Dazu zählen u. a. Lampen, Fernseher, Geschirrspüler und Waschmaschinen. Die Produkte müssen laut EU-Rahmenverordnung mit dem EU-Energielabel versehen werden. Zu den Geräten aus den 16 Produktgruppen finden Verbraucher*innen in der Produktdatenbank relevante Informationen wie Energieeffizienzklasse, Herstellerdaten und Modellkennung."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "EU-Energielabel-Rahmenverordnung",
+      "description": "Um die Aussagekraft des EU-Energielabels zu stärken, hat die EU 2017 den Rahmen für das EU-Energielabel neu bestimmt: Statt der vielen Plusklassen besitzt das Label von 2021 an wieder eine leicht verständliche Skala an Energieeffizienzklassen von A bis G. Zudem ergeben sich mit der neuen Rahmenverordnung zusätzliche Pflichten für Händler*innen und Hersteller*innen, zum Beispiel müssen sie in ihrer Werbung stärker auf die Energieeffizienzklasse des Produktes verweisen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Gesamtnutzinhalt",
+      "description": "Bei Kühl- und Gefriergeräten gibt das Energielabel unter entsprechenden Piktogrammen auch den Gesamtnutzinhalt aller Kühlfächer bzw. Gefrierfächer des Geräts in Litern an. Damit finden Verbraucher*innen leichter ein Gerät, das zu ihrer Haushaltsgröße passt."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Jahresenergieverbrauch (AEC)",
+      "description": "Der jährliche Energieverbrauch („annual energy consumption“, kurz AEC) eines Geräts gibt an, wie viel Kilowattstunden Strom dieses im Jahr bei standardmäßigem Betrieb verbraucht. Um den Energieeffizienzindex (EEI) eines Geräts zu ermitteln, wird bei manchen Geräten der jährliche Energieverbrauch mit den Werten eines Referenzgeräts verglichen. Oft wird auch der Verbrauch bei einer bestimmten Anzahl an Zyklen angegeben, z. B. bei Geschirrspülern oder Waschmaschinen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Kilowattstunden",
+      "description": "Eine Kilowattstunde (kWh) entspricht der Energiemenge, die ein Gerät bei einer Leistung von einem Kilowatt (1000 Watt) innerhalb von einer Stunde verbraucht. Zur Orientierung: Mit 1 kWh können Sie etwa eine Ladung Wäsche waschen, eine gute Stunde auf mittlerer Stufe staubsaugen oder 50 Stunden an einem Laptop arbeiten. Der jährliche Energieverbrauch eines Geräts wird in Kilowattstunden angegeben und lässt sich in der Produktdatenbank EPREL recherchieren."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "LED",
+      "description": "LED ist die Abkürzung für licht-emittierende Diode. Leuchtdioden strahlen Licht aus, wenn elektrischer Strom sie durchfließt – und produzieren dabei kaum Wärme. Das macht LED-Lampen im Gegensatz zu früheren Glühlampen sehr energieeffizient und langlebig. Eine Weiterentwicklung sind organische Leuchtdioden (OLED), die auf Kohlenstoff basieren und seit einigen Jahren für den Bau besonders flacher und scharfer Fernsehdisplays genutzt werden."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Mindestanforderungen",
+      "description": "Die Ökodesign-Richtlinie der EU legt verbindliche Mindestanforderungen an die umweltgerechte Gestaltung von Produkten fest. Die Anforderungen betreffen zum Beispiel die Energieeffizienz und die Lebensdauer der Produkte oder den Mindestanteil an Recyclingmaterial, der für ihre Herstellung verwendet werden muss. Nur wenn das betroffene Produkt die Mindestanforderungen erfüllt, darf es die CE-Kennzeichnung tragen und in der EU in den Handel gebracht werden."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Neuskalierung EU-Energieklassen",
+      "description": "Die EU hat ihr Energielabel überarbeitet und die Energieeffizienzklassen neu skaliert: Die Skala reicht seit März 2021 über 7 Klassen von A (beste) bis G (schlechteste), die Plusklassen entfallen. Gleichzeitig wurden die Kriterien, die ein Gerät für eine bestimmte Klasse erfüllen muss, auf den aktuellen Technikstand gebracht. Dadurch werden viele Geräte in eine neue Klasse wechseln: Zum Beispiel kann es sein, dass ein Kühlschrank, der sich nach alter Regelung in der Bestklasse (A+++) befand, jetzt in Klasse B eingeordnet wird. Die Neuskalierung gilt jedoch noch nicht für Wäschetrockner: Diese sind vorerst mit dem alten Label erhältlich und bekommen voraussichtlich im Jahr 2022 das neue Label."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Ökodesign-Richtlinie",
+      "description": "Um Ressourcen zu schonen und die Umwelt zu entlasten, haben die Mitgliedsstaaten und die Kommission der EU die Ökodesign-Richtlinie beschlossen. Sie stellt Mindestanforderungen an die Energieeffizienz und andere Umweltauswirkungen (z. B. Wasserverbrauch) von Produkten, genauso wie an ihre Reparierbarkeit und die Verfügbarkeit von Ersatzteilen. Hersteller sollen einen Anreiz erhalten, langlebigere Produkte zu entwickeln, die sich leichter reparieren und recyceln lassen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Produktdatenbank EPREL",
+      "description": "In der EU-Produktdatenbank <a href=\"https://ec.europa.eu/info/energy-climate-change-environment/standards-tools-and-labels/products-labelling-rules-and-requirements/energy-label-and-ecodesign/product-database_de\">EPREL</a> („European Product Registry for Energy Labelling“) müssen alle Produkte, die der Energieverbrauchskennzeichnung unterliegen, registriert werden, bevor sie in der EU in Verkehr gebracht werden dürfen. Im öffentlichen Bereich der Datenbank erhalten Verbraucher*innen zu den Produkten Informationen wie Produktdatenblätter oder Energielabel. Zusätzlich enthält die Datenbank einen nicht öffentlichen Bereich, er dient der Marktüberwachung."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Produktdatenblatt",
+      "description": "Das Produktdatenblatt beinhaltet relevante Informationen zum Produkt, zum Beispiel zur Energieeffizienzklasse, zum Verbrauch weiterer Ressourcen (z. B. Wasser) und zu weiteren relevanten Merkmalen (Nutzinhalt, Schallemission etc.). Der Inhalt der Produktdatenblätter ist für die verschiedenen Produktgruppen vorgeschrieben. Hersteller sind verpflichtet, ein elektronisches Produktdatenblatt über die Produktdatenbank EPREL zur Verfügung zu stellen."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Programmdauer",
+      "description": "Für Geräte wie Spülmaschinen oder Waschmaschinen informieren das EU-Energielabel und das Produktdatenblatt auch über die standardmäßige Dauer der geregelten Spül- bzw. Waschprogramme (z. B. Eco-Programm)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "QR-Code",
+      "description": "Auf jedem EU-Energielabel findet sich ein QR-Code, der mit einer Smartphone-Kamera gescannt werden kann. Der QR-Code leitet direkt zur Produktdatenbank EPREL weiter, auf der Verbraucher*innen zusätzliche (nicht gewerbliche) Produktinformationen erhalten."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Schallemission",
+      "description": "Viele Verbraucher*innen machen ihre Kaufentscheidung für ein Gerät auch davon abhängig, wie laut oder leise dieses arbeitet. Deshalb informieren das EU-Energielabel und das Produktdatenblatt über die Geräuschemission. Neben der Angabe des gemessenen Werts in Dezibel wird dieser auch einer Geräuschemissionsklasse zugeordnet, von A (geringe Geräuschemission) bis D (hohe Geräuschemission)."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Schleudereffizienzklasse",
+      "description": "Für Waschmaschinen und Waschtrockner informiert das EU-Energielabel über die Schleudereffizienzklasse des Geräts. Sie bemisst sich daran, wie viel Restfeuchte sich nach dem Schleudern in der Wäsche befindet. Auf der Skala kennzeichnet A die beste und G die schlechteste Schleudereffizienzklasse. Für Verbraucher*innen, die ihre Wäsche in einem Trockner trocknen, empfiehlt sich eine Waschmaschine mit hoher Schleudereffizienzklasse."
+    },
+    {
+      "type": "GlossaryEntry",
+      "title": "Stand-by-Betrieb",
+      "description": "Im Stand-by-Betrieb oder Bereitschaftsmodus ist ein Elektrogerät zeitweise deaktiviert, lässt sich aber ohne lange Wartezeit wieder aktivieren. Anders als im komplett ausgeschalteten Zustand verbrauchen Geräte im Stand-by-Betrieb Strom. Inzwischen hat die Europäische Kommission den maximal zulässigen Stand-by-Verbrauch für viele Produkte stark begrenzt. Diese EU-Vorgaben gelten jedoch nur für neue Produkte, ältere Geräte haben oft einen deutlich höheren Verbrauch."
+    }
+  ]
+}

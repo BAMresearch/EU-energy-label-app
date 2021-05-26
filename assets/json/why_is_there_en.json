@@ -1,0 +1,50 @@
+{
+  "type": "WhyIsThere",
+  "why_is_there_entries": [
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Why are there <span>new</span> EU energy labels?</h1>",
+      "field_order": 1,
+      "field_text": "<p>The EU has decided to reduce energy consumption to protect the environment. Energy labels on electric appliances are one contribution. Starting March 2021 some product groups will get new labels. More product groups will follow in the coming years.</p><p>Many appliances have been developed to become more efficient or their typical use profile has changed. These changes are addressed in the new labels.</p>",
+      "field_text_semantic": "The EU has decided to reduce energy consumption to protect the environment. Energy labels on electric appliances are one contribution. Starting March 2021 some product groups will get new labels. More product groups will follow in the coming years. \nMany appliances have been developed to become more efficient or their typical use profile has changed. These changes are addressed in the new labels.",
+      "field_image": null,
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>The new EU energy label</h1>",
+      "field_order": 2,
+      "field_text": "<p>The new EU energy labels bring some benefits to consumers: They give information on energy efficiency, the energy consumption per year or per cycle and other important product details, helping consumers choose the best product for their needs.</p>",
+      "field_text_semantic": "The new EU energy labels bring some benefits to consumers: They give information on energy efficiency, the energy consumption per year or per cycle and other important product details, helping consumers choose the best product for their needs.",
+      "field_image": "energielabel_full.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>More information</h1>",
+      "field_order": 3,
+      "field_text": "The products will have the energy efficiency classes A to G in a new scale, there will be no more plus classes (formerly A+ to A+++).",
+      "field_text_semantic": "The products will have the energy efficiency classes A to G in a new scale, there will be no more plus classes (formerly A+ to A+++).",
+      "field_image": "energielabel_new_1.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>More innovation</h1>",
+      "field_order": 4,
+      "field_text": "Class A will not be occupied at first to leave room for improvements and encourage manufacturers to make their products even more efficient.",
+      "field_text_semantic": "Class A will not be occupied at first to leave room for improvements and encourage manufacturers to make their products even more efficient.",
+      "field_image": "energielabel_new_2.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>More transparency</h1>",
+      "field_order": 5,
+      "field_text": "A QR code leads to the new product database EPREL that can be used to compare products.",
+      "field_text_semantic": "A QR code leads to the new product database EPREL that can be used to compare products.",
+      "field_image": "energielabel_new_3.png",
+      "field_video": null
+    }
+  ]
+}

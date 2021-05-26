@@ -1,0 +1,50 @@
+{
+  "type": "WhyIsThere",
+  "why_is_there_entries": [
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Warum gibt es <span>neue</span> EU-Energielabel?</h1>",
+      "field_order": 1,
+      "field_text": "<p>Die EU will ihren Energieverbrauch weiter reduzieren und einen wichtigen Beitrag zum Umweltschutz leisten. Dabei helfen die neuen EU-Energielabel auf Elektrogeräten. Diese gibt es seit März 2021 für ausgewählte Produktgruppen. Weitere Gerätegruppen folgen in den kommenden Jahren.</p><p>Viele Geräte wurden weiterentwickelt und sind sparsamer geworden oder ihre durchschnittliche Nutzung hat sich verändert. Auch diese Neuerungen werden mit den kommenden Energielabeln aufgenommen.</p>",
+      "field_text_semantic": "Die EU will ihren Energieverbrauch weiter reduzieren und einen wichtigen Beitrag zum Umweltschutz leisten. Dabei helfen die neuen EU-Energielabel auf Elektrogeräten. Diese gibt es seit März 2021 für ausgewählte Produktgruppen. Weitere Gerätegruppen folgen in den kommenden Jahren. \nViele Geräte wurden weiterentwickelt und sind sparsamer geworden oder ihre durchschnittliche Nutzung hat sich verändert. Auch diese Neuerungen werden mit den kommenden Energielabeln aufgenommen.",
+      "field_image": null,
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Das neue EU-Energielabel</h1>",
+      "field_order": 2,
+      "field_text": "<p>Für Verbraucher*innen bringen die EU-Energielabel viele Vorteile: Sie informieren über die Energieeffizienz, den jährlichen Stromverbrauch und weitere Eigenschaften der Geräte. Damit sind sie eine wichtige Entscheidungshilfe beim Neukauf.</p>",
+      "field_text_semantic": "Für Verbraucher*innen bringen die EU-Energielabel viele Vorteile: Sie informieren über die Energieeffizienz, den jährlichen Stromverbrauch und weitere Eigenschaften der Geräte. Damit sind sie eine wichtige Entscheidungshilfe beim Neukauf.",
+      "field_image": "energielabel_full.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Mehr Aussagekraft</h1>",
+      "field_order": 3,
+      "field_text": "Die Produkte werden in die Effizienzklassen A bis G neu eingeordnet, die Plus-Klassen verschwinden.",
+      "field_text_semantic": "Die Produkte werden in die Effizienzklassen A bis G neu eingeordnet, die Plus-Klassen verschwinden.",
+      "field_image": "energielabel_new_1.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Mehr Innovation</h1>",
+      "field_order": 4,
+      "field_text": "Die Klasse A bleibt zunächst frei, als Anreiz für Hersteller*innen, weitere energieeffiziente Neuentwicklungen voranzutreiben.",
+      "field_text_semantic": "Die Klasse A bleibt zunächst frei, als Anreiz für Hersteller*innen, weitere energieeffiziente Neuentwicklungen voranzutreiben.",
+      "field_image": "energielabel_new_2.png",
+      "field_video": null
+    },
+    {
+      "type": "WhyIsThereEntry",
+      "field_title": "<h1>Mehr Transparenz</h1>",
+      "field_order": 5,
+      "field_text": "Ein QR-Code führt Sie direkt zur neuen EU-weiten Produktdatenbank, auf der Sie Geräte vergleichen können.",
+      "field_text_semantic": "Ein QR-Code führt Sie direkt zur neuen EU-weiten Produktdatenbank, auf der Sie Geräte vergleichen können.",
+      "field_image": "energielabel_new_3.png",
+      "field_video": null
+    }
+  ]
+}
