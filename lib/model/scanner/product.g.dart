@@ -8,8 +8,8 @@ part of 'product.dart';
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
   return Product(
-    title: json['title'] as String,
-    url: json['url'] as String,
+    title: json['title'] as String?,
+    url: json['url'] as String?,
   );
 }
 

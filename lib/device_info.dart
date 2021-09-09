@@ -15,7 +15,7 @@ class DeviceInfo {
   final List<Locale> supportedLocales;
 
   Locale get bestMatchedLocale {
-    final preferredDeviceLocale = WidgetsBinding.instance.window.locale;
+    final preferredDeviceLocale = WidgetsBinding.instance!.window.locale;
     if (supportedLocales.any((locale) => locale.languageCode == preferredDeviceLocale.languageCode)) {
       return preferredDeviceLocale;
     } else {
@@ -23,7 +23,7 @@ class DeviceInfo {
     }
   }
 
-  List<Locale> get deviceLocales => WidgetsBinding.instance.window.locales;
+  List<Locale> get deviceLocales => WidgetsBinding.instance!.window.locales;
 
   List<String> get deviceLanguages => deviceLocales.map((locale) => locale.languageCode).toList();
 }

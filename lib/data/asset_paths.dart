@@ -16,6 +16,8 @@ class AssetPaths {
   static final String qrScanImage = 'assets/images/home/qr_scan.png';
   static final String quizImage = 'assets/images/home/quiz.png';
   static final String labelGuideImage = 'assets/images/label_guide.png';
+  static final String logoImage = 'assets/images/home/logo.svg';
+  static final String logoBlackImage = 'assets/images/logo_black.svg';
   static final String newsCloseIcon = 'assets/images/home/ic_news_close_button.svg';
 
   static final String appIconImage = 'assets/images/infothek/appIcon.png';
@@ -40,6 +42,17 @@ class AssetPaths {
   static final String menuFirstStepsIcon = 'assets/images/menu/ic_menu_first_steps.svg';
 
   static final String knowHowLightBulbIcon = 'assets/images/know_how/label_guide/ic_lightbulb.svg';
+  static final String knowHowLightAdviserArrowUpIcon =
+      'assets/images/know_how/label_guide/light_adviser/ic_arrows_up.svg';
+  static final String knowHowLightAdviserArrowDownIcon =
+      'assets/images/know_how/label_guide/light_adviser/ic_arrows_down.svg';
+  static final String knowHowLightAdviserBackground =
+      'assets/images/know_how/label_guide/light_adviser/light_adviser_background.svg';
+  static final String knowHowLightAdviserIconsBasePath = 'assets/images/know_how/label_guide/light_adviser/';
+  static final String knowHowLightAdviserBrightnessLevelIcon =
+      'assets/images/know_how/label_guide/light_adviser/ic_brightness_level.svg';
+  static final String knowHowLightAdviserTemperatureRoomIcon =
+      'assets/images/know_how/label_guide/light_adviser/ic_temperature_room.svg';
 
   static final String knowHowMenuWhyIsThereIcon = 'assets/images/know_how/ic_know_how_why_is_there.svg';
   static final String knowHowMenuGlossaryIcon = 'assets/images/know_how/ic_know_how_glossary.svg';
@@ -52,6 +65,7 @@ class AssetPaths {
   static final String knowHowMenuChecklistIcon = 'assets/images/know_how/label_guide/ic_know_how_checklist.svg';
   static final String knowHowMenuTipsIcon = 'assets/images/know_how/label_guide/ic_know_how_tips.svg';
   static final String knowHowMenuFridgeGuideIcon = 'assets/images/know_how/label_guide/ic_know_how_fridge_guide.svg';
+  static final String knowHowMenuLightAdviserIcon = 'assets/images/know_how/label_guide/ic_know_how_light_adviser.svg';
 
   static final String knowHowFridgeInfoZonesImage =
       'assets/images/know_how/label_guide/fridge_guide/fridge_info_zones.png';
@@ -74,23 +88,35 @@ class AssetPaths {
   static final String favoriteDeleteIcon = 'assets/images/favorites/ic_delete.svg';
   static final String favoriteSortIcon = 'assets/images/favorites/ic_sort.svg';
 
-  static String labelGuideCategoryImage(String imageName) => 'assets/images/know_how/label_guide/$imageName';
+  static String labelGuideCategoryImage(String? imageName) => 'assets/images/know_how/label_guide/$imageName';
 
   static String whyIsThereBackgroundImage(int index) =>
       'assets/images/know_how/why_is_there/whyisthere_bgr_shape_$index.png';
-  static String whyIsThereFrontImage(String imageName) => 'assets/images/know_how/why_is_there/$imageName';
+
+  static String whyIsThereFrontImage(String? imageName) => 'assets/images/know_how/why_is_there/$imageName';
 
   static String onboardingFrontImage(int index) => 'assets/images/onboarding/onboarding_page_$index.png';
+
   static String onboardingBackgroundShape(int index) => 'assets/images/onboarding/onboarding_shape_$index.svg';
 
   // JSON
   static String glossaryJson(Locale locale) => 'assets/json/glossary_${locale.languageCode}.json';
+
   static String regulationDataJson(Locale locale) => 'assets/json/regulation_data_${locale.languageCode}.json';
+
   static String whyIsThereJson(Locale locale) => 'assets/json/why_is_there_${locale.languageCode}.json';
+
   static String labelGuideJson(Locale locale) => 'assets/json/label_guide_${locale.languageCode}.json';
+
   static String quizJson(Locale locale) => 'assets/json/quiz_${locale.languageCode}.json';
 
   // HTML
   static String imprintHtml(Locale locale) => 'assets/html/imprint_${locale.languageCode}.html';
+
   static String privacyPolicyHtml(Locale locale) => 'assets/html/privacy_policy_${locale.languageCode}.html';
+
+  static String aboutBamHtml(Locale locale) => 'assets/html/about_bam_${locale.languageCode}.html';
+
+  // Animations
+  static final String loadingAnimationBinary = 'assets/animations/loading.riv';
 }

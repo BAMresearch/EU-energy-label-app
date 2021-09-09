@@ -11,28 +11,25 @@ import 'dart:convert';
 
 import 'package:energielabel_app/model/localized_quiz.dart';
 import 'package:energielabel_app/model/quiz/quiz.dart';
-import 'package:optional/optional.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QuizDao {
-  QuizDao(SharedPreferences sharedPreferences)
-      : assert(sharedPreferences != null),
-        _sharedPreferences = sharedPreferences;
+  QuizDao(SharedPreferences sharedPreferences) : _sharedPreferences = sharedPreferences;
 
   static const String _quizKey = 'quiz';
   static const String _quizLanguageKey = 'quiz_language';
 
   final SharedPreferences _sharedPreferences;
 
-  Optional<LocalizedQuiz> loadQuiz() {
+  LocalizedQuiz? loadQuiz() {
     final quizJsonString = _sharedPreferences.getString(_quizKey);
     final language = _sharedPreferences.getString(_quizLanguageKey);
 
     if (quizJsonString != null && language != null) {
       final quiz = Quiz.fromJson(jsonDecode(quizJsonString));
-      return Optional.of(LocalizedQuiz(quiz, language));
+      return LocalizedQuiz(quiz, language);
     }
-    return Optional.empty();
+    return null;
   }
 
   Future<void> saveQuiz(Quiz quiz, String language) async {

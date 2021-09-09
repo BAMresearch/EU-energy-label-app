@@ -10,25 +10,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LabelGuideDao {
-  LabelGuideDao(SharedPreferences sharedPreferences)
-      : assert(sharedPreferences != null),
-        _sharedPreferences = sharedPreferences;
+  LabelGuideDao(SharedPreferences sharedPreferences) : _sharedPreferences = sharedPreferences;
 
   static const String _checklistKeyPrefix = 'checklist';
 
   final SharedPreferences _sharedPreferences;
 
-  Future<void> saveChecklistEntryState(bool checked, int checklistEntryId, int checklistId) async {
+  Future<void> saveChecklistEntryState(bool checked, int? checklistEntryId, int? checklistId) async {
     final String key = _createChecklistEntryKey(checklistId, checklistEntryId);
     await _sharedPreferences.setBool(key, checked);
   }
 
-  bool getChecklistEntryState(int checklistEntryId, int checklistId) {
+  bool getChecklistEntryState(int? checklistEntryId, int? checklistId) {
     final String key = _createChecklistEntryKey(checklistId, checklistEntryId);
     return (_sharedPreferences.getBool(key) ?? false);
   }
 
-  String _createChecklistEntryKey(int checklistId, int checklistEntryId) {
+  String _createChecklistEntryKey(int? checklistId, int? checklistEntryId) {
     return '${_checklistKeyPrefix}_${checklistId}_$checklistEntryId';
   }
 }

@@ -12,6 +12,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'label_category_tip_data.g.dart';
 
+// on change class call "flutter packages pub run build_runner build" in project root to generate *.g.dart file
+// alternative use "flutter packages pub run build_runner watch" for continuous building
+
 @JsonSerializable()
 class LabelCategoryTipData {
   LabelCategoryTipData({this.title, this.graphicPath, this.labelTips});
@@ -19,13 +22,13 @@ class LabelCategoryTipData {
   factory LabelCategoryTipData.fromJson(Map<String, dynamic> json) => _$LabelCategoryTipDataFromJson(json);
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_graphics')
-  final String graphicPath;
+  final String? graphicPath;
 
   @JsonKey(name: 'label_tips')
-  final List<LabelTip> labelTips;
+  final List<LabelTip>? labelTips;
 
   Map<String, dynamic> toJson() => _$LabelCategoryTipDataToJson(this);
 }

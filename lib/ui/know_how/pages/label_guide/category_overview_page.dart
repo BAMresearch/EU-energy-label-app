@@ -19,10 +19,11 @@ import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:flutter/material.dart';
 
+import 'category_light_adviser_page.dart';
+
+/// Page showing the details of a given [LabelCategory].
 class CategoryOverviewPage extends StatelessWidget with BasePage {
-  CategoryOverviewPage({@required LabelCategory labelCategory})
-      : assert(labelCategory != null),
-        _labelCategory = labelCategory;
+  CategoryOverviewPage({required LabelCategory labelCategory}) : _labelCategory = labelCategory;
 
   final LabelCategory _labelCategory;
 
@@ -41,8 +42,14 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
             _buildChecklistTile(context),
             SizedBox(height: 16),
             _buildTipsTile(context),
-            if (_labelCategory.guideData != null) SizedBox(height: 16),
-            if (_labelCategory.guideData != null) _buildFridgeTile(context)
+            if (_labelCategory.guideData != null) ...[
+              SizedBox(height: 16),
+              _buildFridgeTile(context),
+            ],
+            if (_labelCategory.lightAdviser != null) ...[
+              SizedBox(height: 16),
+              _buildLightAdviserTile(context),
+            ]
           ],
         ),
       ),
@@ -51,9 +58,9 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
 
   Widget _buildBanner(BuildContext context) {
     return CategoryHeader(
-      title: _labelCategory.productType,
-      backgroundColorHex: _labelCategory.backgroundColorHex,
-      titleColorHex: _labelCategory.textColorHex,
+      title: _labelCategory.productType!,
+      backgroundColorHex: _labelCategory.backgroundColorHex!,
+      titleColorHex: _labelCategory.textColorHex!,
       image: AssetPaths.labelGuideCategoryImage(_labelCategory.graphicPath),
     );
   }
@@ -61,14 +68,14 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
   Widget _buildTooltip(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(_labelCategory.description, style: Theme.of(context).textTheme.bodyText2),
+      child: Text(_labelCategory.description!, style: Theme.of(context).textTheme.bodyText2),
     );
   }
 
   Widget _buildChecklistTile(BuildContext context) {
     return _buildTile(
       context: context,
-      label: _labelCategory.checklistData.title,
+      label: _labelCategory.checklistData!.title!,
       iconAssetPath: AssetPaths.knowHowMenuChecklistIcon,
       onTap: () => Navigator.of(context).pushNamed(
         KnowHowRoutes.labelGuideCategoryChecklists,
@@ -80,7 +87,7 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
   Widget _buildTipsTile(BuildContext context) {
     return _buildTile(
       context: context,
-      label: _labelCategory.tipData.title,
+      label: _labelCategory.tipData!.title!,
       iconAssetPath: AssetPaths.knowHowMenuTipsIcon,
       onTap: () => Navigator.of(context).pushNamed(
         KnowHowRoutes.labelGuideTips,
@@ -92,7 +99,7 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
   Widget _buildFridgeTile(BuildContext context) {
     return _buildTile(
       context: context,
-      label: _labelCategory.guideData.title,
+      label: _labelCategory.guideData!.title!,
       iconAssetPath: AssetPaths.knowHowMenuFridgeGuideIcon,
       onTap: () => Navigator.of(context).pushNamed(
         KnowHowRoutes.labelGuideCategoryGuide,
@@ -101,7 +108,20 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
     );
   }
 
-  Widget _buildTile({BuildContext context, String label, String iconAssetPath, VoidCallback onTap}) {
+  Widget _buildLightAdviserTile(BuildContext context) {
+    return _buildTile(
+      context: context,
+      label: _labelCategory.lightAdviser!.title!,
+      iconAssetPath: AssetPaths.knowHowMenuLightAdviserIcon,
+      onTap: () => Navigator.of(context).pushNamed(
+        KnowHowRoutes.labelGuideCategoryLight,
+        arguments: CategoryLightAdviserPageArguments(labelCategory: _labelCategory),
+      ),
+    );
+  }
+
+  Widget _buildTile(
+      {BuildContext? context, required String label, required String iconAssetPath, required VoidCallback onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ItemButton(label: label, iconAssetPath: iconAssetPath, onTap: onTap),

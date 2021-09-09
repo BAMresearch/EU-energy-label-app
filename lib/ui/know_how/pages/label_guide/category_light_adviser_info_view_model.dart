@@ -7,8 +7,11 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
-import 'package:optional/optional.dart';
+import 'dart:async';
 
-extension OptionalExtensions<T> on Optional<T> {
-  bool get isNotPresent => !isPresent;
+import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
+
+class CategoryLightAdviserInfoViewModel extends BaseViewModel {
+  @override
+  FutureOr<void> onViewStarted() {}
 }

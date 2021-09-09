@@ -18,10 +18,10 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'url')
-  final String url;
+  final String? url;
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 

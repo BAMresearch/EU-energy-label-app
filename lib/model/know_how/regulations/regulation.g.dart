@@ -8,9 +8,9 @@ part of 'regulation.dart';
 
 Regulation _$RegulationFromJson(Map<String, dynamic> json) {
   return Regulation(
-    title: json['title'] as String,
-    pdfPath: json['pdf-path'] as String,
-    orderIndex: json['order-index'] as int,
+    title: json['title'] as String?,
+    pdfPath: json['pdf-path'] as String?,
+    orderIndex: json['order-index'] as int?,
   );
 }
 

@@ -26,14 +26,14 @@ import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesEditArguments {
-  FavoritesEditArguments({@required this.favoriteType, this.categoryId}) : assert(favoriteType != null);
+  FavoritesEditArguments({required this.favoriteType, this.categoryId});
 
   final FavoriteType favoriteType;
-  final int categoryId;
+  final int? categoryId;
 }
 
 class FavoritesEditPage extends StatefulPage {
-  FavoritesEditPage({@required this.favoriteEditArguments}) : assert(favoriteEditArguments != null);
+  FavoritesEditPage({required this.favoriteEditArguments});
 
   final FavoritesEditArguments favoriteEditArguments;
 
@@ -42,25 +42,25 @@ class FavoritesEditPage extends StatefulPage {
 }
 
 class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEditViewModel> {
-  FavoritesEditViewModel _viewModel;
+  FavoritesEditViewModel? _viewModel;
 
   @override
   void initState() {
     _viewModel = createViewModel(context);
-    scheduleMicrotask(_viewModel.onViewStarted);
+    scheduleMicrotask(_viewModel!.onViewStarted);
     super.initState();
   }
 
   @override
   void dispose() {
-    _viewModel.dispose();
+    _viewModel!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FavoritesEditViewModel>.value(
-      value: _viewModel,
+      value: _viewModel!,
       child: Consumer<FavoritesEditViewModel>(
         builder: (context, viewModel, _) {
           return PageScaffold(
@@ -75,11 +75,11 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
   String _determinePageTitle(BuildContext context) {
     switch (widget.favoriteEditArguments.favoriteType) {
       case FavoriteType.products:
-        return Translations.of(context).edit_favorite_products_page_title;
+        return Translations.of(context)!.edit_favorite_products_page_title;
       case FavoriteType.checklists:
-        return Translations.of(context).edit_favorite_checklists_page_title;
+        return Translations.of(context)!.edit_favorite_checklists_page_title;
       case FavoriteType.tips:
-        return Translations.of(context).edit_favorite_tips_page_title;
+        return Translations.of(context)!.edit_favorite_tips_page_title;
       default:
         throw ArgumentError.value(widget.favoriteEditArguments.favoriteType, null, 'Unexpected favorite type.');
     }
@@ -87,7 +87,7 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
 
   Widget _buildList(FavoritesEditViewModel viewModel) {
     if (viewModel.favoriteListItems.isEmpty) {
-      return Center(child: Text(Translations.of(context).edit_favorite_empty_state));
+      return Center(child: Text(Translations.of(context)!.edit_favorite_empty_state));
     }
 
     return Container(
@@ -107,7 +107,7 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
                   ),
                   title: Text(
                     favoriteItem.title,
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlue3),
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlue3),
                   ),
                   trailing: Padding(
                     padding: const EdgeInsets.only(left: 8, right: 20),
@@ -128,25 +128,28 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
     return FavoritesEditViewModel(
       favoriteType: widget.favoriteEditArguments.favoriteType,
       productCategory: widget.favoriteEditArguments.categoryId,
-      favoriteRepository: ServiceLocator().get<FavoriteRepository>(),
-      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>(),
+      favoriteRepository: ServiceLocator().get<FavoriteRepository>()!,
+      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>()!,
       deletionConfirmationCallback: () => _showDeletionConfirmationSnackBar(context),
     );
   }
 
+  // Shows a snackBar as additional visual confirmation that the favorites have been deleted.
+  // While the snackBar is visible the user has the option to 'undo' the deletion. If not invoked,
+  // the view model is told to permanently delete the favorites.
   Future<void> _showDeletionConfirmationSnackBar(BuildContext context) async {
     final snackBar = SnackBar(
-      content: Text(Translations.of(context).edit_favorite_deletion_confirmation),
+      content: Text(Translations.of(context)!.edit_favorite_deletion_confirmation),
       action: SnackBarAction(
-        label: Translations.of(context).edit_favorite_deletion_undo_action,
-        onPressed: () => _viewModel.onUndoDeletionAction(),
+        label: Translations.of(context)!.edit_favorite_deletion_undo_action,
+        onPressed: () => _viewModel!.onUndoDeletionAction(),
       ),
       duration: Duration(seconds: 2),
     );
 
-    final closeReason = await ScaffoldMessenger.maybeOf(context).showSnackBar(snackBar).closed;
+    final closeReason = await ScaffoldMessenger.maybeOf(context)!.showSnackBar(snackBar).closed;
     if (closeReason != SnackBarClosedReason.action) {
-      unawaited(_viewModel.onUndoDeletionOptionIgnored());
+      unawaited(_viewModel!.onUndoDeletionOptionIgnored());
     }
   }
 }

@@ -26,15 +26,14 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
 class CategoryTipsPageArguments {
-  CategoryTipsPageArguments({@required this.labelCategory}) : assert(labelCategory != null);
+  CategoryTipsPageArguments({required this.labelCategory});
 
   final LabelCategory labelCategory;
 }
 
+/// Page showing tips for a specific label guide category (refrigerators, etc.).
 class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
-  CategoryTipsPage({@required CategoryTipsPageArguments argument})
-      : assert(argument != null),
-        _labelCategory = argument.labelCategory;
+  CategoryTipsPage({required CategoryTipsPageArguments argument}) : _labelCategory = argument.labelCategory;
 
   final LabelCategory _labelCategory;
 
@@ -44,15 +43,15 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
       create: (context) => createViewModel(context)..onViewStarted(),
       child: Consumer<CategoryTipsViewModel>(builder: (context, viewModel, _) {
         return PageScaffold(
-          title: Translations.of(context).tips_page_title,
+          title: Translations.of(context)!.tips_page_title,
           actions: [
             IconButton(
               icon: Icon(
                 viewModel.isFavorite ? Icons.star : Icons.star_border,
                 color: BamColorPalette.bamBlack,
                 semanticLabel: viewModel.isFavorite
-                    ? Translations.of(context).label_tips_add_favorite_icon_semantics
-                    : Translations.of(context).label_tips_remove_favorite_icon_semantics,
+                    ? Translations.of(context)!.label_tips_add_favorite_icon_semantics
+                    : Translations.of(context)!.label_tips_remove_favorite_icon_semantics,
               ),
               onPressed: viewModel.onToggleFavoriteAction,
             )
@@ -66,10 +65,10 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
   @override
   CategoryTipsViewModel createViewModel(BuildContext context) {
     return CategoryTipsViewModel(
-      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>(),
+      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>()!,
       context: context,
       labelCategory: _labelCategory,
-      favoriteRepository: ServiceLocator().get<FavoriteRepository>(),
+      favoriteRepository: ServiceLocator().get<FavoriteRepository>()!,
       favoriteActionListener: _FavoriteActionListener(context: context),
     );
   }
@@ -82,10 +81,10 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTipHeader(context),
-            ..._labelCategory.tipData.labelTips
+            ..._labelCategory.tipData!.labelTips!
                 .map((tip) => CategoryTipTile(
                       onLinkTap: viewModel.onLinkTap,
-                      tipNumber: _labelCategory.tipData.labelTips.indexOf(tip) + 1,
+                      tipNumber: _labelCategory.tipData!.labelTips!.indexOf(tip) + 1,
                       labelTip: tip,
                     ))
                 .toList()
@@ -97,44 +96,44 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
 
   Widget _buildTipHeader(BuildContext context) {
     return CategoryHeader(
-      title: _labelCategory.tipData.title,
-      backgroundColorHex: _labelCategory.backgroundColorHex,
-      titleColorHex: _labelCategory.textColorHex,
+      title: _labelCategory.tipData!.title!,
+      backgroundColorHex: _labelCategory.backgroundColorHex!,
+      titleColorHex: _labelCategory.textColorHex!,
       image: AssetPaths.labelGuideCategoryImage(_labelCategory.graphicPath),
     );
   }
 }
 
 class _FavoriteActionListener extends FavoriteActionListener {
-  _FavoriteActionListener({@required this.context}) : assert(context != null);
+  _FavoriteActionListener({required this.context});
 
   final BuildContext context;
 
   @override
   void onAddFavoriteSuccess() {
-    ScaffoldMessenger.maybeOf(context).showSnackBar(
-      SnackBar(content: Text(Translations.of(context).label_tips_add_favorite_success)),
+    ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+      SnackBar(content: Text(Translations.of(context)!.label_tips_add_favorite_success)),
     );
   }
 
   @override
   void onAddFavoriteFailure() {
-    ScaffoldMessenger.maybeOf(context).showSnackBar(
-      SnackBar(content: Text(Translations.of(context).label_tips_add_favorite_failure)),
+    ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+      SnackBar(content: Text(Translations.of(context)!.label_tips_add_favorite_failure)),
     );
   }
 
   @override
   void onRemoveFavoriteSuccess() {
-    ScaffoldMessenger.maybeOf(context).showSnackBar(
-      SnackBar(content: Text(Translations.of(context).label_tips_remove_favorite_success)),
+    ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+      SnackBar(content: Text(Translations.of(context)!.label_tips_remove_favorite_success)),
     );
   }
 
   @override
   void onRemoveFavoriteFailure() {
-    ScaffoldMessenger.maybeOf(context).showSnackBar(
-      SnackBar(content: Text(Translations.of(context).label_tips_remove_favorite_failure)),
+    ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+      SnackBar(content: Text(Translations.of(context)!.label_tips_remove_favorite_failure)),
     );
   }
 }

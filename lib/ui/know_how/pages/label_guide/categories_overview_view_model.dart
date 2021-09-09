@@ -13,16 +13,13 @@ import 'package:energielabel_app/model/know_how/label_guide/label_guide.dart';
 import 'package:energielabel_app/ui/know_how/know_how_routes.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class CategoriesOverviewViewModel extends BaseViewModel {
   CategoriesOverviewViewModel({
-    @required LabelGuideRepository labelGuideRepository,
-    @required BuildContext context,
-  })  : assert(labelGuideRepository != null),
-        assert(context != null),
-        _labelGuideRepository = labelGuideRepository,
+    required LabelGuideRepository labelGuideRepository,
+    required BuildContext context,
+  })   : _labelGuideRepository = labelGuideRepository,
         _context = context;
 
   final LabelGuideRepository _labelGuideRepository;
@@ -31,7 +28,7 @@ class CategoriesOverviewViewModel extends BaseViewModel {
 
   final BuildContext _context;
 
-  LabelGuide _labelGuide;
+  LabelGuide? _labelGuide;
 
   List<LabelCategory> get labelCategories => List.unmodifiable(_labelCategories);
 
@@ -46,14 +43,14 @@ class CategoriesOverviewViewModel extends BaseViewModel {
   Future<void> _loadLabelCategories() async {
     try {
       _labelGuide = await _labelGuideRepository.loadLabelGuide();
-      _labelCategories.addAll(_labelGuide.labelCategories
+      _labelCategories.addAll(_labelGuide!.labelCategories!
           .where((labelCategory) => labelCategory.visible == true && labelCategory.favoriteOnly == false));
       _labelCategories.sort(
-        (labelCategoryA, labelCategoryB) => labelCategoryA.orderIndex.compareTo(labelCategoryB.orderIndex),
+        (labelCategoryA, labelCategoryB) => labelCategoryA.orderIndex!.compareTo(labelCategoryB.orderIndex!),
       );
     } catch (e) {
       Fimber.e('Failed to load the label categories', ex: e);
-      throw Error();
+      throw Error(); // TODO Implement proper error handling
     }
   }
 

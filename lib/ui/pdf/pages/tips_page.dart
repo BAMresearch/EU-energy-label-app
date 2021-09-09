@@ -10,11 +10,10 @@
 import 'package:energielabel_app/model/know_how/label_guide/label_category_tip_data.dart';
 import 'package:energielabel_app/ui/pdf/bam_page.dart';
 import 'package:energielabel_app/ui/pdf/components/tip.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pdf/widgets.dart';
 
 class TipsPage extends StatelessMultiPage {
-  TipsPage({@required this.tipsData}) : assert(tipsData != null);
+  TipsPage({required this.tipsData});
 
   final LabelCategoryTipData tipsData;
 
@@ -22,7 +21,7 @@ class TipsPage extends StatelessMultiPage {
   List<Widget> build() {
     return [
       _TipsHeader(tipsData.title),
-      for (final tip in tipsData.labelTips) Tip(tip),
+      for (final tip in tipsData.labelTips!) Tip(tip),
     ];
   }
 }
@@ -30,13 +29,13 @@ class TipsPage extends StatelessMultiPage {
 class _TipsHeader extends StatelessWidget {
   _TipsHeader(this.title);
 
-  final String title;
+  final String? title;
 
   @override
   Widget build(Context context) {
     return Padding(
       padding: EdgeInsets.only(top: 20, bottom: 4),
-      child: Text(title, style: Theme.of(context).header0),
+      child: Text(title!, style: Theme.of(context).header0),
     );
   }
 }

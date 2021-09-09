@@ -36,12 +36,12 @@ class HomePage extends StatefulPage {
 }
 
 class _HomePageState extends PageState<HomePage, HomeViewModel> {
-  HomeViewModel _viewModel;
+  HomeViewModel? _viewModel;
 
   @override
   void initState() {
     _viewModel = createViewModel(context);
-    scheduleMicrotask(_viewModel.onViewStarted);
+    scheduleMicrotask(_viewModel!.onViewStarted);
     super.initState();
   }
 
@@ -58,7 +58,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
 
   @override
   void dispose() {
-    _viewModel.dispose();
+    _viewModel!.dispose();
     super.dispose();
   }
 
@@ -79,7 +79,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
 
   Widget _buildBody() {
     return ChangeNotifierProvider<HomeViewModel>.value(
-      value: _viewModel,
+      value: _viewModel!,
       child: Consumer<HomeViewModel>(
         builder: (context, viewModel, _) {
           return VisibilityDetector(
@@ -88,12 +88,12 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                 viewModel.onViewVisibilityChanged(visibilityInfo.visibleFraction == 1),
             child: Scrollbar(
               child: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: ClampingScrollPhysics(), //prevents scroll bouncing
                 child: Column(
                   children: [
                     if (viewModel.hasUnreadNews)
                       NewsBanner(
-                        news: viewModel.unreadNews.value,
+                        news: viewModel.unreadNews!,
                         onCloseAction: viewModel.onNewsClosedAction,
                       ),
                     if (viewModel.hasUnreadNews)
@@ -112,7 +112,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _buildImageCard(
-                              Translations.of(context).home_dashboard_qr_code_reader,
+                              Translations.of(context)!.home_dashboard_qr_code_reader,
                               AssetPaths.qrScanImage,
                               backgroundColor: BamColorPalette.bamYellow1,
                               textColor: BamColorPalette.bamBlack,
@@ -120,7 +120,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                             ),
                             Spacer(),
                             _buildImageCard(
-                              Translations.of(context).home_dashboard_energy_quiz,
+                              Translations.of(context)!.home_dashboard_energy_quiz,
                               AssetPaths.quizImage,
                               backgroundColor: BamColorPalette.bamBlue4,
                               textColor: BamColorPalette.bamWhite,
@@ -134,7 +134,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                     FractionallySizedBox(
                       widthFactor: 336 / 375,
                       child: ItemButton(
-                        label: Translations.of(context).home_dashboard_favorites,
+                        label: Translations.of(context)!.home_dashboard_favorites,
                         iconAssetPath: AssetPaths.menuFavoritesIcon,
                         onTap: viewModel.onFavoriteTilePressed,
                       ),
@@ -143,7 +143,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                     FractionallySizedBox(
                       widthFactor: 336 / 375,
                       child: ItemButton(
-                        label: Translations.of(context).home_dashboard_first_steps,
+                        label: Translations.of(context)!.home_dashboard_first_steps,
                         iconAssetPath: AssetPaths.menuFirstStepsIcon,
                         onTap: viewModel.onFirstStepsTilePressed,
                       ),
@@ -159,7 +159,8 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
     );
   }
 
-  Widget _buildImageCard(String title, String image, {Color backgroundColor, Color textColor, VoidCallback onPressed}) {
+  Widget _buildImageCard(String title, String image,
+      {Color? backgroundColor, Color? textColor, VoidCallback? onPressed}) {
     return AspectRatio(
       aspectRatio: 158 / 145,
       child: GestureDetector(
@@ -180,7 +181,7 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   title,
-                  style: Theme.of(context).textTheme.headline3.copyWith(color: textColor),
+                  style: Theme.of(context).textTheme.headline3!.copyWith(color: textColor),
                 ),
               ),
             ],
@@ -194,9 +195,9 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
   HomeViewModel createViewModel(BuildContext context) {
     return HomeViewModel(
       context: context,
-      quizRepository: ServiceLocator().get<QuizRepository>(),
-      newsRepository: ServiceLocator().get<NewsRepository>(),
-      settingsRepository: ServiceLocator().get<SettingsRepository>(),
+      quizRepository: ServiceLocator().get<QuizRepository>()!,
+      newsRepository: ServiceLocator().get<NewsRepository>()!,
+      settingsRepository: ServiceLocator().get<SettingsRepository>()!,
       quizUpdateAvailableCallback: () => _onQuizUpdateAvailable(context),
     );
   }
@@ -205,8 +206,8 @@ class _HomePageState extends PageState<HomePage, HomeViewModel> {
     showDialogWithBlur(
       context: context,
       builder: (context) => QuizUpdateAvailableDialog(
-        onQuizUpdateConfirmed: _viewModel.onQuizUpdateConfirmed,
-        onQuizUpdateDeclined: _viewModel.onQuizUpdateDeclined,
+        onQuizUpdateConfirmed: _viewModel!.onQuizUpdateConfirmed,
+        onQuizUpdateDeclined: _viewModel!.onQuizUpdateDeclined,
       ),
     );
   }

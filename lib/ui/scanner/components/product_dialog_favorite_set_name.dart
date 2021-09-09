@@ -13,12 +13,10 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class ProductDialogFavoriteSetName extends StatefulWidget {
   const ProductDialogFavoriteSetName({
-    Key key,
-    @required this.onConfirmName,
-    @required this.onTapCancel,
-  })  : assert(onConfirmName != null),
-        assert(onTapCancel != null),
-        super(key: key);
+    Key? key,
+    required this.onConfirmName,
+    required this.onTapCancel,
+  }) : super(key: key);
 
   final Function(String name) onConfirmName;
   final VoidCallback onTapCancel;
@@ -43,7 +41,7 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
             autofocus: false,
             onChanged: (input) => setState(() => _title = input),
             decoration: InputDecoration(
-              hintText: Translations.of(context).product_favorite_dialog_set_title_hint,
+              hintText: Translations.of(context)!.product_favorite_dialog_set_title_hint,
               enabledBorder: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Theme.of(context).colorScheme.secondaryVariant),
@@ -52,8 +50,8 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
           ),
           if (!_valid)
             Text(
-              Translations.of(context).product_favorite_dialog_set_title_error,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(color: Theme.of(context).colorScheme.error),
+              Translations.of(context)!.product_favorite_dialog_set_title_error,
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).colorScheme.error),
             ),
           SizedBox(height: 50),
           TextButton(
@@ -70,8 +68,8 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
             child: Text(
-              Translations.of(context).product_favorite_dialog_next,
-              style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+              Translations.of(context)!.product_favorite_dialog_next,
+              style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
           SizedBox(height: 20),
@@ -84,8 +82,8 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
             child: Text(
-              Translations.of(context).qrcode_product_dialog_cancel,
-              style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamBlue1Optimized),
+              Translations.of(context)!.qrcode_product_dialog_cancel,
+              style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamBlue1Optimized),
             ),
           ),
         ],

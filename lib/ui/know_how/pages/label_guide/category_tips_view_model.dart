@@ -20,23 +20,17 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_checklis
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/tab_routes.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:pedantic/pedantic.dart';
 
 class CategoryTipsViewModel extends BaseViewModel {
   CategoryTipsViewModel({
-    @required LabelCategory labelCategory,
-    @required FavoriteRepository favoriteRepository,
-    @required LabelGuideRepository labelGuideRepository,
-    @required FavoriteActionListener favoriteActionListener,
-    @required BuildContext context,
-  })  : assert(labelCategory != null),
-        assert(favoriteRepository != null),
-        assert(favoriteActionListener != null),
-        assert(labelGuideRepository != null),
-        assert(context != null),
-        _categoryTipsFavorite = CategoryTipsFavorite(categoryId: labelCategory.id),
+    required LabelCategory labelCategory,
+    required FavoriteRepository favoriteRepository,
+    required LabelGuideRepository labelGuideRepository,
+    required FavoriteActionListener favoriteActionListener,
+    required BuildContext context,
+  })   : _categoryTipsFavorite = CategoryTipsFavorite(categoryId: labelCategory.id),
         _favoriteRepository = favoriteRepository,
         _favoriteActionListener = favoriteActionListener,
         _labelGuideRepository = labelGuideRepository,
@@ -90,27 +84,28 @@ class CategoryTipsViewModel extends BaseViewModel {
         ..onError(
           (e, stacktrace) {
             Fimber.e('Failed to observe favorite state.', ex: e, stacktrace: stacktrace);
+            // TODO Show error message to user?
           },
         ),
     );
   }
 
-  Future<bool> onLinkTap(String link) async {
-    final Uri uri = Uri.parse(link);
+  Future<bool> onLinkTap(String? link) async {
+    final Uri uri = Uri.parse(link ?? '');
 
     if (uri.isScheme(AppUriSchemes.appScheme) && uri.path == AppUriSchemes.pushPagePath && uri.hasQuery) {
-      final TabRoute tabRoute = TabRoutes.getRoute(
+      final TabRoute? tabRoute = TabRoutes.getRoute(
           uri.queryParameters[AppUriSchemes.queryParameterTab], uri.queryParameters[AppUriSchemes.queryParameterPage]);
       if (tabRoute != null &&
           tabRoute.runtimeType == KnowHowRoutes &&
           tabRoute.route == KnowHowRoutes.labelGuideCategoryChecklists) {
-        final LabelCategory labelCategory = await _labelGuideRepository
-            .getCategoryForId(int.parse(uri.queryParameters[AppUriSchemes.queryParameterArguments]));
+        final LabelCategory labelCategory = await (_labelGuideRepository.getCategoryForId(
+            int.parse(uri.queryParameters[AppUriSchemes.queryParameterArguments]!)) as FutureOr<LabelCategory>);
 
         final CategoryChecklistPageArguments categoryChecklistPageArguments =
             CategoryChecklistPageArguments(labelCategory: labelCategory);
 
-        unawaited(Navigator.of(_context).pushNamed(tabRoute.route, arguments: categoryChecklistPageArguments));
+        unawaited(Navigator.of(_context).pushNamed(tabRoute.route!, arguments: categoryChecklistPageArguments));
 
         return true;
       }

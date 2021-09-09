@@ -16,9 +16,7 @@ import 'package:flutter_html/style.dart';
 import 'package:provider/provider.dart';
 
 class HtmlContentPage extends StatelessPage<HtmlContentViewModel> {
-  HtmlContentPage({@required this.htmlAssetPath, @required this.pageTitle})
-      : assert(htmlAssetPath != null),
-        assert(pageTitle != null);
+  HtmlContentPage({required this.htmlAssetPath, required this.pageTitle});
 
   final String pageTitle;
   final String htmlAssetPath;

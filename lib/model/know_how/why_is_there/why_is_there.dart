@@ -12,6 +12,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'why_is_there.g.dart';
 
+// on change class call "flutter packages pub run build_runner build" in project root to generate *.g.dart file
+// alternative use "flutter packages pub run build_runner watch" for continuous building
+
 @JsonSerializable()
 class WhyIsThere {
   WhyIsThere({this.entries});
@@ -19,7 +22,7 @@ class WhyIsThere {
   factory WhyIsThere.fromJson(Map<String, dynamic> json) => _$WhyIsThereFromJson(json);
 
   @JsonKey(name: 'why_is_there_entries')
-  final List<WhyIsThereEntry> entries;
+  final List<WhyIsThereEntry>? entries;
 
   Map<String, dynamic> toJson() => _$WhyIsThereToJson(this);
 }

@@ -18,13 +18,13 @@ class ChecklistEntry {
   factory ChecklistEntry.fromJson(Map<String, dynamic> json) => _$ChecklistEntryFromJson(json);
 
   @JsonKey(name: 'field_id')
-  final int id;
+  final int? id;
 
   @JsonKey(name: 'text')
-  final String text;
+  final String? text;
 
   @JsonKey(name: 'checked', defaultValue: false)
-  bool checked;
+  bool? checked;
 
   Map<String, dynamic> toJson() => _$ChecklistEntryToJson(this);
 

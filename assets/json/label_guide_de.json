@@ -678,7 +678,7 @@
       "type": "LabelCategory",
       "field_id": 5,
       "field_producttype": "Beleuchtung",
-      "visible": false,
+      "visible": true,
       "favorite_only": false,
       "field_description": "Welche LED-Lampe passt zu Ihnen? Mit welchen Tipps schaffen Sie die richtige Lichtatmosphäre? Hier finden Sie die Antworten.",
       "field_background_color_hex": "FFFAB70D",
@@ -816,6 +816,371 @@
             "field_video": ""
           }
         ]
+      },
+      "label_category_light_adviser": {
+        "intro_text": "Hier finden Sie Ihre passende Lampe. Zwei Faktoren sind entscheidend für eine angenehme Beleuchtung:",
+        "category_brightness_label": "Helligkeit",
+        "category_color_temperature_label": "Farbtemperatur",
+        "bulb_images": [
+          {
+            "image": "BAM_Energielabel-Glühbirne_warm250.png",
+            "brightness_room": [
+              {
+                "brightness": "dark",
+                "room": "bed_room"
+              },
+              {
+                "brightness": "dark",
+                "room": "living_room"
+              },
+              {
+                "brightness": "dark",
+                "room": "childs_room"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_warm470.png",
+            "brightness_room": [
+              {
+                "brightness": "low_light",
+                "room": "bed_room"
+              },
+              {
+                "brightness": "low_light",
+                "room": "living_room"
+              },
+              {
+                "brightness": "low_light",
+                "room": "childs_room"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_warm800.png",
+            "brightness_room": [
+              {
+                "brightness": "bright",
+                "room": "bed_room"
+              },
+              {
+                "brightness": "bright",
+                "room": "living_room"
+              },
+              {
+                "brightness": "bright",
+                "room": "childs_room"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_warm1000.png",
+            "brightness_room": [
+              {
+                "brightness": "very_bright",
+                "room": "bed_room"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "living_room"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "childs_room"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_warm1500.png",
+            "brightness_room": [
+              {
+                "brightness": "ultra_bright",
+                "room": "bed_room"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "living_room"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "childs_room"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_neutral250.png",
+            "brightness_room": [
+              {
+                "brightness": "dark",
+                "room": "kitchen"
+              },
+              {
+                "brightness": "dark",
+                "room": "bath"
+              },
+              {
+                "brightness": "dark",
+                "room": "stairs"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_neutral470.png",
+            "brightness_room": [
+              {
+                "brightness": "low_light",
+                "room": "kitchen"
+              },
+              {
+                "brightness": "low_light",
+                "room": "bath"
+              },
+              {
+                "brightness": "low_light",
+                "room": "stairs"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_neutral800.png",
+            "brightness_room": [
+              {
+                "brightness": "bright",
+                "room": "kitchen"
+              },
+              {
+                "brightness": "bright",
+                "room": "bath"
+              },
+              {
+                "brightness": "bright",
+                "room": "stairs"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_neutral1000.png",
+            "brightness_room": [
+              {
+                "brightness": "very_bright",
+                "room": "kitchen"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "bath"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "stairs"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_neutral1500.png",
+            "brightness_room": [
+              {
+                "brightness": "ultra_bright",
+                "room": "kitchen"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "bath"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "stairs"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_kalt250.png",
+            "brightness_room": [
+              {
+                "brightness": "dark",
+                "room": "study"
+              },
+              {
+                "brightness": "dark",
+                "room": "atelier"
+              },
+              {
+                "brightness": "dark",
+                "room": "mirror"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_kalt470.png",
+            "brightness_room": [
+              {
+                "brightness": "low_light",
+                "room": "study"
+              },
+              {
+                "brightness": "low_light",
+                "room": "atelier"
+              },
+              {
+                "brightness": "low_light",
+                "room": "mirror"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_kalt800.png",
+            "brightness_room": [
+              {
+                "brightness": "bright",
+                "room": "study"
+              },
+              {
+                "brightness": "bright",
+                "room": "atelier"
+              },
+              {
+                "brightness": "bright",
+                "room": "mirror"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_kalt1000.png",
+            "brightness_room": [
+              {
+                "brightness": "very_bright",
+                "room": "study"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "atelier"
+              },
+              {
+                "brightness": "very_bright",
+                "room": "mirror"
+              }
+            ]
+          },
+          {
+            "image": "BAM_Energielabel-Glühbirne_kalt1500.png",
+            "brightness_room": [
+              {
+                "brightness": "ultra_bright",
+                "room": "study"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "atelier"
+              },
+              {
+                "brightness": "ultra_bright",
+                "room": "mirror"
+              }
+            ]
+          }
+        ],
+        "brightness_levels": {
+          "dark": {
+            "description": "Dezentes Licht",
+            "icon_file_name": "ic_brightness_level_1.svg",
+            "brightness": "250",
+            "power": "(früher 25 Watt)"
+          },
+          "low_light": {
+            "description": "Angenehmes Leselicht",
+            "icon_file_name": "ic_brightness_level_2.svg",
+            "brightness": "470",
+            "power": "(früher 40 Watt)"
+          },
+          "bright": {
+            "description": "Neutrales Licht",
+            "icon_file_name": "ic_brightness_level_3.svg",
+            "brightness": "800",
+            "power": "(früher 60 Watt)"
+          },
+          "very_bright": {
+            "description": "Helles Licht",
+            "icon_file_name": "ic_brightness_level_4.svg",
+            "brightness": "1100",
+            "power": "(früher 75 Watt)"
+          },
+          "ultra_bright": {
+            "description": "Sehr helles Licht",
+            "icon_file_name": "ic_brightness_level_5.svg",
+            "brightness": "1500",
+            "power": "(früher 100 Watt)"
+          }
+        },
+        "rooms": {
+          "bed_room": {
+            "label": "Schlafzimmer",
+            "temperature": "2700",
+            "description": "warmweißes, gemütliches Licht",
+            "icon_file_name": "ic_temperature_room_1.svg"
+          },
+          "living_room": {
+            "label": "Wohn- / Esszimmer",
+            "temperature": "2700",
+            "description": "warmweißes, gemütliches Licht",
+            "icon_file_name": "ic_temperature_room_2.svg"
+          },
+          "childs_room": {
+            "label": "Kinderzimmer",
+            "temperature": "2700",
+            "description": "warmweißes, gemütliches Licht",
+            "icon_file_name": "ic_temperature_room_3.svg"
+          },
+          "kitchen": {
+            "label": "Küche",
+            "temperature": "4000",
+            "description": "neutralweißes, sachliches Licht",
+            "icon_file_name": "ic_temperature_room_4.svg"
+          },
+          "bath": {
+            "label": "Bad / WC",
+            "temperature": "4000",
+            "description": "neutralweißes, sachliches Licht",
+            "icon_file_name": "ic_temperature_room_5.svg"
+          },
+          "stairs": {
+            "label": "Treppenhaus",
+            "temperature": "4000",
+            "description": "neutralweißes, sachliches Licht",
+            "icon_file_name": "ic_temperature_room_6.svg"
+          },
+          "study": {
+            "label": "Arbeitszimmer",
+            "temperature": "5000",
+            "description": "kühles, tageslichtweißes Licht",
+            "icon_file_name": "ic_temperature_room_7.svg"
+          },
+          "atelier": {
+            "label": "Werkstatt",
+            "temperature": "5000",
+            "description": "kühles, tageslichtweißes Licht",
+            "icon_file_name": "ic_temperature_room_8.svg"
+          },
+          "mirror": {
+            "label": "Bad-Spiegel",
+            "temperature": "5000",
+            "description": "kühles, tageslichtweißes Licht",
+            "icon_file_name": "ic_temperature_room_9.svg"
+          }
+        },
+        "button_label": "Bitte wählen Sie einen Wert aus!",
+        "selection_hint": "Wählen Sie mit Hilfe der Icons die Werte für die zwei Faktoren aus!",
+        "title": "Beleuchtungsratgeber",
+        "brightness_info_sheet_top_label": "Neue LED",
+        "rooms_title": "Räume",
+        "color_temperature_unit": "Kelvin",
+        "brightness_unit": "Lumen",
+        "approximately_label": "ca.",
+        "info_section": {
+          "top_text": "Sie benötigen eine neue LED-Lampe? Mit dem Ratgeber finden Sie die passende Helligkeit (in Lumen) und Farbtemperatur (in Kelvin) heraus.",
+          "middle_title": "Helligkeit",
+          "middle_text": "Wählen Sie die Helligkeit aus und erfahren Sie, wie viel Lumen Ihre Lampe braucht! Die alten Watt-Angaben geben Orientierung.",
+          "bottom_title": "Farbtemperatur",
+          "bottom_text": "Welche Farbtemperatur benötigen Sie? Über die Raumauswahl sehen Sie, welchen Kelvin-Wert die neue LED-Lampe haben sollte."
+        }
       }
     },
     {

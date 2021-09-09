@@ -10,31 +10,28 @@
 import 'package:energielabel_app/model/quiz/answer.dart';
 import 'package:energielabel_app/model/quiz/level.dart';
 import 'package:energielabel_app/model/quiz/question.dart';
-import 'package:flutter/cupertino.dart';
 
 class QuizState {
-  QuizState({@required this.level, String title})
-      : assert(level != null),
-        _title = title;
+  QuizState({required this.level, String? title}) : _title = title;
 
-  final String _title;
+  final String? _title;
 
-  final List<Answer> selectedAnswers = [];
+  final List<Answer?> selectedAnswers = [];
 
   final Level level;
 
-  bool get isCurrentAnswerCorrect => _currentAnswer.isCorrect;
-  Answer _currentAnswer;
+  bool? get isCurrentAnswerCorrect => _currentAnswer!.isCorrect;
+  Answer? _currentAnswer;
 
-  bool get isQuizOver => selectedAnswers.length == level.questions.length;
+  bool get isQuizOver => selectedAnswers.length == level.questions!.length;
 
-  String get title => _title;
+  String? get title => _title;
 
-  int get correctAnswers => selectedAnswers.where((Answer answerOption) => answerOption.isCorrect).length;
+  int get correctAnswers => selectedAnswers.where((Answer? answerOption) => answerOption!.isCorrect!).length;
 
-  Question get currentQuestion => level.questions[selectedAnswers.length];
+  Question get currentQuestion => level.questions![selectedAnswers.length];
 
-  void checkInAnswer(Answer answerOption) {
+  void checkInAnswer(Answer? answerOption) {
     _currentAnswer = answerOption;
   }
 

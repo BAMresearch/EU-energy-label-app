@@ -1,18 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18.125" height="18.124" viewBox="0 0 18.125 18.124">
-    <g id="Icon-QR-Scan" transform="translate(16410.063 15077.062)">
-        <rect id="Rechteck_1771" data-name="Rechteck 1771" width="1.602" height="1.602" transform="translate(-16401.801 -15076.812)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_564" data-name="Pfad 564" d="M22.4,11.188V17.6h6.409V11.188ZM27.21,16H24V12.8h3.2Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1772" data-name="Rechteck 1772" width="1.602" height="1.602" transform="translate(-16409.813 -15068.801)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_565" data-name="Pfad 565" d="M17.6,17.6V11.188H11.188V17.6Zm-4.81-4.81H16V16H12.8Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1773" data-name="Rechteck 1773" width="1.602" height="1.602" transform="translate(-16406.607 -15068.801)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_566" data-name="Pfad 566" d="M11.188,22.4v6.409H17.6V22.4ZM16,27.209H12.8v-3.2H16Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1774" data-name="Rechteck 1774" width="1.602" height="1.602" transform="translate(-16403.402 -15068.801)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1775" data-name="Rechteck 1775" width="1.602" height="4.806" transform="translate(-16401.801 -15073.607)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_567" data-name="Pfad 567" d="M22.4,22.4H24V20.8H22.4V19.2H20.8v1.6H19.2v1.6h1.6V24H19.2v4.807h1.6v-3.2h1.6Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_568" data-name="Pfad 568" d="M22.4,28.812h3.2v-1.6H24v-1.6H22.4Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1776" data-name="Rechteck 1776" width="1.602" height="1.602" transform="translate(-16396.994 -15068.801)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <path id="Pfad_569" data-name="Pfad 569" d="M25.607,24H24v1.6h3.2V24h1.6V22.4h-1.6V20.8h-1.6Z" transform="translate(-16421 -15088)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1777" data-name="Rechteck 1777" width="1.602" height="1.602" transform="translate(-16393.789 -15068.801)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
-        <rect id="Rechteck_1778" data-name="Rechteck 1778" width="1.602" height="1.602" transform="translate(-16393.789 -15060.791)" fill="#9fadb4" stroke="#fff" stroke-width="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="17.125" height="17.124" viewBox="0 0 17.125 17.124">
+    <g id="Icon-QR-Scan" transform="translate(-803.866 -545.791)">
+        <rect id="Rechteck_2270" data-name="Rechteck 2270" width="1.102" height="1.102"
+              transform="translate(811.878 545.792)" fill="#6c7f89"/>
+        <path id="Pfad_2971" data-name="Pfad 2971"
+              d="M820.987,545.791h-5.909V551.7h5.909Zm-4.808,4.813v-3.7h3.7l.012,3.7Z" fill="#6c7f89"/>
+        <rect id="Rechteck_2271" data-name="Rechteck 2271" width="1.102" height="1.102"
+              transform="translate(803.866 553.803)" fill="#6c7f89"/>
+        <path id="Pfad_2972" data-name="Pfad 2972"
+              d="M803.866,551.7h5.912v-5.912h-5.912Zm4.812-4.809v3.71h-3.7l-.012-3.71Z" fill="#6c7f89"/>
+        <rect id="Rechteck_2272" data-name="Rechteck 2272" width="1.102" height="1.102"
+              transform="translate(807.071 553.803)" fill="#6c7f89"/>
+        <path id="Pfad_2973" data-name="Pfad 2973" d="M803.866,562.912h5.912V557h-5.912Zm1.112-4.8h3.7v3.7h-3.7Z"
+              fill="#6c7f89"/>
+        <rect id="Rechteck_2273" data-name="Rechteck 2273" width="1.102" height="1.102"
+              transform="translate(810.276 553.803)" fill="#6c7f89"/>
+        <rect id="Rechteck_2274" data-name="Rechteck 2274" width="1.102" height="4.306"
+              transform="translate(811.878 548.996)" fill="#6c7f89"/>
+        <path id="Pfad_2974" data-name="Pfad 2974"
+              d="M816.179,555.4h-1.6v-1.6h-1.1v1.6h-1.6v1.1h1.6v2.1h-1.6v4.307h1.1v-3.2h1.6V556.5h1.6Z" fill="#6c7f89"/>
+        <path id="Pfad_2975" data-name="Pfad 2975" d="M816.179,560.216h-1.1v2.7h2.7v-1.1h-1.6Z" fill="#6c7f89"/>
+        <rect id="Rechteck_2275" data-name="Rechteck 2275" width="1.102" height="1.102"
+              transform="translate(816.685 553.803)" fill="#6c7f89"/>
+        <path id="Pfad_2976" data-name="Pfad 2976" d="M820.979,557h-1.6v-1.6h-1.1l.007,3.2h-1.607v1.1h2.7v-1.6h1.6Z"
+              fill="#6c7f89"/>
+        <rect id="Rechteck_2276" data-name="Rechteck 2276" width="1.102" height="1.102"
+              transform="translate(819.89 553.803)" fill="#6c7f89"/>
+        <rect id="Rechteck_2277" data-name="Rechteck 2277" width="1.102" height="1.102"
+              transform="translate(819.89 561.813)" fill="#6c7f89"/>
     </g>
 </svg>

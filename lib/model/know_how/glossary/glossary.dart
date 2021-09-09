@@ -19,7 +19,7 @@ class Glossary {
   factory Glossary.fromJson(Map<String, dynamic> json) => _$GlossaryFromJson(json);
 
   @JsonKey(name: 'glossary-entries')
-  final List<GlossaryEntry> glossaryEntries;
+  final List<GlossaryEntry>? glossaryEntries;
 
   Map<String, dynamic> toJson() => _$GlossaryToJson(this);
 }

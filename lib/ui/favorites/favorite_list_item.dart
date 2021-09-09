@@ -9,14 +9,12 @@
 
 import 'package:energielabel_app/model/favorite.dart';
 import 'package:energielabel_app/ui/favorites/pages/favorite_type.dart';
-import 'package:flutter/material.dart';
 
 abstract class FavoriteListItem {
   FavoriteListItem({
-    @required this.title,
-    @required this.favoriteType,
-  })  : assert(title != null),
-        assert(favoriteType != null);
+    required this.title,
+    required this.favoriteType,
+  });
 
   final String title;
   final FavoriteType favoriteType;
@@ -24,24 +22,22 @@ abstract class FavoriteListItem {
 
 class FavoriteListSection extends FavoriteListItem {
   FavoriteListSection({
-    @required String title,
-    @required FavoriteType favoriteType,
-    @required this.sectionEntries,
+    required String title,
+    required FavoriteType favoriteType,
+    required this.sectionEntries,
     this.productCategory,
-  })  : assert(sectionEntries != null),
-        super(title: title, favoriteType: favoriteType);
+  }) : super(title: title, favoriteType: favoriteType);
 
   final List<FavoriteListSectionEntry> sectionEntries;
-  final int productCategory;
+  final int? productCategory;
 }
 
 class FavoriteListSectionEntry<T extends Favorite> extends FavoriteListItem {
   FavoriteListSectionEntry({
-    @required String title,
-    @required FavoriteType favoriteType,
-    @required this.favorite,
-  })  : assert(favorite != null),
-        super(title: title, favoriteType: favoriteType);
+    required String title,
+    required FavoriteType favoriteType,
+    required this.favorite,
+  }) : super(title: title, favoriteType: favoriteType);
 
   final T favorite;
 }

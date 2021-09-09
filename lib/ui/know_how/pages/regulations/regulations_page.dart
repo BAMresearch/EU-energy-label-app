@@ -45,7 +45,7 @@ class RegulationsPage extends StatelessPage<RegulationsViewModel> {
   RegulationsViewModel createViewModel(BuildContext context) {
     return RegulationsViewModel(
       context: context,
-      regulationDataRepository: ServiceLocator().get<RegulationDataRepository>(),
+      regulationDataRepository: ServiceLocator().get<RegulationDataRepository>()!,
     );
   }
 
@@ -54,10 +54,11 @@ class RegulationsPage extends StatelessPage<RegulationsViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Description
           Padding(
             padding: const EdgeInsets.all(20),
             child: Text(
-              viewModel.pageDescription,
+              viewModel.pageDescription!,
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ),

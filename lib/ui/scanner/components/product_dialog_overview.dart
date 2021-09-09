@@ -13,16 +13,12 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class ProductDialogOverview extends StatelessWidget {
   const ProductDialogOverview({
-    Key key,
-    @required this.message,
-    @required this.onTapOpenBrowser,
-    @required this.onTapFavorite,
-    @required this.onTapCancel,
-  })  : assert(message != null),
-        assert(onTapOpenBrowser != null),
-        assert(onTapFavorite != null),
-        assert(onTapCancel != null),
-        super(key: key);
+    Key? key,
+    required this.message,
+    required this.onTapOpenBrowser,
+    required this.onTapFavorite,
+    required this.onTapCancel,
+  }) : super(key: key);
 
   final String message;
   final VoidCallback onTapOpenBrowser;
@@ -45,8 +41,8 @@ class ProductDialogOverview extends StatelessWidget {
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
             child: Text(
-              Translations.of(context).qrcode_product_dialog_open,
-              style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+              Translations.of(context)!.qrcode_product_dialog_open,
+              style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
           SizedBox(
@@ -60,8 +56,8 @@ class ProductDialogOverview extends StatelessWidget {
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
             child: Text(
-              Translations.of(context).qrcode_product_dialog_favorite,
-              style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+              Translations.of(context)!.qrcode_product_dialog_favorite,
+              style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
           SizedBox(
@@ -76,8 +72,8 @@ class ProductDialogOverview extends StatelessWidget {
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
             child: Text(
-              Translations.of(context).qrcode_product_dialog_cancel,
-              style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamBlue1Optimized),
+              Translations.of(context)!.qrcode_product_dialog_cancel,
+              style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamBlue1Optimized),
             ),
           ),
         ],

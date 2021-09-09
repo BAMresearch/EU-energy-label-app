@@ -8,12 +8,10 @@ part of 'label_guide.dart';
 
 LabelGuide _$LabelGuideFromJson(Map<String, dynamic> json) {
   return LabelGuide(
-    title: json['field_title'] as String,
-    labelCategories: (json['label_categories'] as List)
-        ?.map((e) => e == null
-            ? null
-            : LabelCategory.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    title: json['field_title'] as String?,
+    labelCategories: (json['label_categories'] as List<dynamic>?)
+        ?.map((e) => LabelCategory.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

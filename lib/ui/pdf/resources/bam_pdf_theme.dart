@@ -16,8 +16,8 @@ import 'package:pdf/widgets.dart';
 class BamPdfTheme {
   BamPdfTheme();
 
-  Font regularFont;
-  Font mediumFont;
+  Font? regularFont;
+  Font? mediumFont;
 
   PdfColor bamBlue3 = PdfColor.fromInt(BamColorPalette.bamBlue3.value);
   PdfColor bamBlack80 = PdfColor.fromInt(BamColorPalette.bamBlack80.value);

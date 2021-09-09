@@ -15,7 +15,7 @@ import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:video_player/video_player.dart';
 
 class CategoryTipVideoSection extends StatefulWidget {
-  const CategoryTipVideoSection({@required this.videoUrl}) : assert(videoUrl != null);
+  const CategoryTipVideoSection({required this.videoUrl});
   final String videoUrl;
 
   @override
@@ -23,8 +23,8 @@ class CategoryTipVideoSection extends StatefulWidget {
 }
 
 class _CategoryTipContentVideoSection extends State<CategoryTipVideoSection> {
-  VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
   bool _playerInitialized = false;
   bool _hasError = false;
 

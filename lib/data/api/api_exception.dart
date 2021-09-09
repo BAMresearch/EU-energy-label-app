@@ -10,12 +10,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class ApiException implements Exception {
   ApiException._(this.message, this.cause);
 
-  factory ApiException.from({@required String message, @required Object cause}) {
+  factory ApiException.from({required String message, required Object cause}) {
     if (cause is DioError) {
       if (cause.error is SocketException) {
         return NoConnectionException(message, cause);

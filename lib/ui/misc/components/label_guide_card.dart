@@ -15,10 +15,9 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class LabelGuideCard extends StatelessWidget {
   const LabelGuideCard({
-    Key key,
-    @required this.onPressed,
-  })  : assert(onPressed != null),
-        super(key: key);
+    Key? key,
+    required this.onPressed,
+  }) : super(key: key);
 
   final VoidCallback onPressed;
 
@@ -64,8 +63,8 @@ class LabelGuideCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            Translations.of(context).home_dashboard_label_guide,
-                            style: Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamWhite),
+                            Translations.of(context)!.home_dashboard_label_guide,
+                            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -74,7 +73,7 @@ class LabelGuideCard extends StatelessWidget {
                               color: BamColorPalette.bamBlue2Optimized,
                             ),
                             child: Text(
-                              Translations.of(context).home_dashboard_label_guide_hint.toUpperCase(),
+                              Translations.of(context)!.home_dashboard_label_guide_hint.toUpperCase(),
                               style: BamTextStyles.buttonSpecial.copyWith(color: BamColorPalette.bamWhite),
                             ),
                           )

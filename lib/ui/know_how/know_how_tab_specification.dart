@@ -14,10 +14,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
+/// Tab specification of the Know How section.
 class KnowHowTabSpecification extends TabSpecification {
   KnowHowTabSpecification(BuildContext context)
       : super(
-          label: Translations.of(context).tab_label_know_how,
+          label: Translations.of(context)!.tab_label_know_how,
           iconAssetPath: AssetPaths.menuKnowHowIcon,
           onGenerateRoute: KnowHowRouter.onGenerateRoute,
         );

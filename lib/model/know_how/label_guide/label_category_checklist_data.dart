@@ -27,28 +27,28 @@ class LabelCategoryChecklistData {
   factory LabelCategoryChecklistData.fromJson(Map<String, dynamic> json) => _$LabelCategoryChecklistDataFromJson(json);
 
   @JsonKey(name: 'field_id')
-  final int id;
+  final int? id;
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_graphics')
-  final String graphicPath;
+  final String? graphicPath;
 
   @JsonKey(name: 'field_intro')
-  final String introText;
+  final String? introText;
 
   @JsonKey(name: 'field_order')
-  final int orderIndex;
+  final int? orderIndex;
 
   @JsonKey(name: 'label_category_checklists')
-  final List<LabelCategoryChecklist> checklists;
+  final List<LabelCategoryChecklist>? checklists;
 
   @JsonKey(name: 'field_information_title')
-  final String informationTitle;
+  final String? informationTitle;
 
   @JsonKey(name: 'field_information_text')
-  final String informationText;
+  final String? informationText;
 
   Map<String, dynamic> toJson() => _$LabelCategoryChecklistDataToJson(this);
 

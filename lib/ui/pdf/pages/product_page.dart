@@ -10,13 +10,12 @@
 import 'package:energielabel_app/model/favorite.dart';
 import 'package:energielabel_app/ui/pdf/bam_page.dart';
 import 'package:energielabel_app/ui/pdf/components/product_entry_item.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pdf/widgets.dart';
 
 class ProductPage extends StatelessMultiPage {
   ProductPage({
-    @required this.productData,
-  }) : assert(productData != null);
+    required this.productData,
+  });
 
   final Map<String, List<ProductFavorite>> productData;
 

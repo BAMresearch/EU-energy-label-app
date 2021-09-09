@@ -31,7 +31,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       if (_pageController.hasClients) {
         _pageController.jumpToPage(_initialIndex);
       }
@@ -42,7 +42,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
       child: Consumer<WhyIsThereViewModel>(
         builder: (context, viewModel, _) {
           return PageScaffold(
-            title: Translations.of(context).know_how_item_why_is_there,
+            title: Translations.of(context)!.know_how_item_why_is_there,
             body: _buildContent(context, viewModel),
           );
         },
@@ -61,6 +61,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
   Widget _buildContent(BuildContext context, WhyIsThereViewModel viewModel) {
     return Stack(
       children: [
+        // Cross-fading background shapes.
         MultiCrossFadeAnimation(
           visibleWidgetIndex: viewModel.currentPageIndex,
           children: [
@@ -93,6 +94,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
           ],
         ),
 
+        // Cross-fading energy label info images
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24),
           child: MultiCrossFadeAnimation(
@@ -101,6 +103,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
           ),
         ),
 
+        // Text content
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
           child: PageView.builder(
@@ -147,9 +150,10 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Image space
           if (whyIsThereEntry.imageUri != null)
             Padding(
-              padding: EdgeInsets.only(bottom: 48 + screenHeight * 0.025),
+              padding: EdgeInsets.only(bottom: 48 + screenHeight * 0.025), // Twice the vertical padding of the image
               child: SizedBox(height: screenHeight / 3),
             ),
 
@@ -161,8 +165,10 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
                 controller: scrollController,
                 child: Column(
                   children: [
+                    // Title
                     if (whyIsThereEntry.title != null) _buildTitle(context, index, whyIsThereEntry),
 
+                    // Info text
                     if (whyIsThereEntry.text != null)
                       Semantics(
                         label: whyIsThereEntry.textSemantic,
@@ -184,7 +190,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
       context,
       whyIsThereEntry.title,
       customStyle: {
-        'span': Style.fromTextStyle(Theme.of(context).textTheme.headline1.copyWith(
+        'span': Style.fromTextStyle(Theme.of(context).textTheme.headline1!.copyWith(
               fontWeight: FontWeight.w500,
               color: BamColorPalette.bamBlue3,
             ))

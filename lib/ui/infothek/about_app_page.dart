@@ -21,7 +21,7 @@ class AboutAppPage extends StatelessWidget with BasePage {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      title: Translations.of(context).home_menu_about_app,
+      title: Translations.of(context)!.home_menu_about_app,
       body: _buildBody(context),
     );
   }
@@ -33,17 +33,17 @@ class AboutAppPage extends StatelessWidget with BasePage {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Translations.of(context).about_app_languages,
-            style: Theme.of(context).textTheme.headline2.copyWith(color: BamColorPalette.bamBlue3),
+            Translations.of(context)!.about_app_languages,
+            style: Theme.of(context).textTheme.headline2!.copyWith(color: BamColorPalette.bamBlue3),
           ),
           SizedBox(height: 16),
           Text(
-            Translations.of(context).about_app_languages_detail,
-            style: Theme.of(context).textTheme.headline4.copyWith(color: BamColorPalette.bamBlack80),
+            Translations.of(context)!.about_app_languages_detail,
+            style: Theme.of(context).textTheme.headline4!.copyWith(color: BamColorPalette.bamBlack80),
           ),
           SizedBox(height: 32),
           ItemButton(
-            label: Translations.of(context).about_app_licenses,
+            label: Translations.of(context)!.about_app_licenses,
             iconAssetPath: AssetPaths.shieldIcon,
             onTap: () => _onLicenseItemSelected(context),
           )

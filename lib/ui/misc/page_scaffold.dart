@@ -23,19 +23,19 @@ class PageScaffold extends StatelessWidget {
     this.customAppBarContent,
     this.actions,
     this.hasElevation = true,
-    @required this.body,
+    required this.body,
     this.titleSemanticLabel,
-  }) : assert(body != null);
+  });
 
-  final String title;
-  final String titleSemanticLabel;
-  final Widget drawer;
-  final Widget appBarLeading;
+  final String? title;
+  final String? titleSemanticLabel;
+  final Widget? drawer;
+  final Widget? appBarLeading;
   final bool automaticallyImplyLeading;
   final bool hasElevation;
-  final String drawerIcon;
-  final Widget customAppBarContent;
-  final List<Widget> actions;
+  final String? drawerIcon;
+  final Widget? customAppBarContent;
+  final List<Widget>? actions;
   final Widget body;
 
   @override
@@ -46,20 +46,24 @@ class PageScaffold extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: Container(decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
         centerTitle: isSubTabScreen ? null : false,
+        // When setting the height to 140, Flutter will not draw the elements correctly,
+        // but introduce a horizontal line on some devices, e. g. Nexus 5X. There appear to be some
+        // sweet spots with increasing height values. 138 is the nearest to 140, that doesn't draw a line on other
+        // devices, e. g. 141 will draw a line on Pixel 3 XL.
         toolbarHeight: isSubTabScreen ? kToolbarHeight : 138,
         elevation: hasElevation ? 4 : 0,
         title: customAppBarContent ??
             (title != null
                 ? isSubTabScreen
                     ? AutoSizeText(
-                        title.toUpperCase(),
-                        style: Theme.of(context).textTheme.headline6.copyWith(color: BamColorPalette.bamBlack),
+                        title!.toUpperCase(),
+                        style: Theme.of(context).textTheme.headline6!.copyWith(color: BamColorPalette.bamBlack),
                         semanticsLabel: titleSemanticLabel,
                       )
                     : Text(
-                        title,
+                        title!,
                         maxLines: 2,
-                        style: Theme.of(context).textTheme.headline5.copyWith(color: BamColorPalette.bamBlack),
+                        style: Theme.of(context).textTheme.headline5!.copyWith(color: BamColorPalette.bamBlack),
                         semanticsLabel: titleSemanticLabel,
                       )
                 : null),
@@ -68,8 +72,8 @@ class PageScaffold extends StatelessWidget {
                 builder: (context) => MergeSemantics(
                   child: IconButton(
                     icon: SvgPicture.asset(
-                      drawerIcon,
-                      semanticsLabel: Translations.of(context).semantic_home_dashboard_drawer_menu_open,
+                      drawerIcon!,
+                      semanticsLabel: Translations.of(context)!.semantic_home_dashboard_drawer_menu_open,
                     ),
                     onPressed: () => Scaffold.of(context).openDrawer(),
                   ),

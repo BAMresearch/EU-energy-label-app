@@ -22,13 +22,13 @@ class LabelTipContentImage {
   factory LabelTipContentImage.fromJson(Map<String, dynamic> json) => _$LabelTipContentImageFromJson(json);
 
   @JsonKey(name: 'field_graphics')
-  final String graphicPath;
+  final String? graphicPath;
 
   @JsonKey(name: 'field_description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'field_order')
-  final int orderIndex;
+  final int? orderIndex;
 
   Map<String, dynamic> toJson() => _$LabelTipContentImageToJson(this);
 

@@ -18,24 +18,17 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:energielabel_app/model/know_how/label_guide/label_category_checklist_data.dart';
 import 'package:energielabel_app/ui/know_how/favorite_action_listener.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CategoryChecklistsViewModel extends BaseViewModel {
   CategoryChecklistsViewModel({
-    @required LabelCategoryChecklistData labelCategoryChecklistData,
-    @required LabelCategory labelCategory,
-    @required LabelGuideRepository labelGuideRepository,
-    @required FavoriteRepository favoriteRepository,
-    @required FavoriteActionListener favoriteActionListener,
-  })  : assert(labelCategoryChecklistData != null),
-        assert(labelGuideRepository != null),
-        assert(favoriteRepository != null),
-        assert(favoriteActionListener != null),
-        _labelCategoryChecklistData = labelCategoryChecklistData,
+    required LabelCategoryChecklistData labelCategoryChecklistData,
+    required LabelCategory labelCategory,
+    required LabelGuideRepository labelGuideRepository,
+    required FavoriteRepository favoriteRepository,
+    required FavoriteActionListener favoriteActionListener,
+  })   : _labelCategoryChecklistData = labelCategoryChecklistData,
         _labelCategory = labelCategory,
         _checklistFavorite = ChecklistFavorite(categoryId: labelCategory.id),
         _favoriteRepository = favoriteRepository,
@@ -50,33 +43,33 @@ class CategoryChecklistsViewModel extends BaseViewModel {
   final FavoriteRepository _favoriteRepository;
   final FavoriteActionListener _favoriteActionListener;
   final CompositeSubscription _subscriptions = CompositeSubscription();
-  String _headerBackgroundColorHex = '00FFFFFF';
-  String _headerTextColorHex = '00FFFFFF';
+  String? _headerBackgroundColorHex = '00FFFFFF';
+  String? _headerTextColorHex = '00FFFFFF';
 
   bool _isFavorite = false;
 
-  String get description => _labelCategoryChecklistData.introText;
+  String? get description => _labelCategoryChecklistData.introText;
 
-  String get title => _labelCategoryChecklistData.title;
-  String get graphicPath => _labelCategory.graphicPath;
+  String? get title => _labelCategoryChecklistData.title;
+  String? get graphicPath => _labelCategory.graphicPath;
 
-  String get headerBackgroundColorHex => _headerBackgroundColorHex;
-  String get headerTextColorHex => _headerTextColorHex;
+  String? get headerBackgroundColorHex => _headerBackgroundColorHex;
+  String? get headerTextColorHex => _headerTextColorHex;
 
-  String get informationTitle => _labelCategoryChecklistData.informationTitle;
+  String? get informationTitle => _labelCategoryChecklistData.informationTitle;
 
-  String get informationText => _labelCategoryChecklistData.informationText;
+  String? get informationText => _labelCategoryChecklistData.informationText;
 
-  List<LabelCategoryChecklist> get checklists => _labelCategoryChecklistData.checklists;
+  List<LabelCategoryChecklist>? get checklists => _labelCategoryChecklistData.checklists;
 
   bool get isFavorite => _isFavorite;
 
   @override
   Future<void> onViewStarted() async {
     _headerBackgroundColorHex =
-        (await _labelGuideRepository.getCategoryForChecklistData(_labelCategoryChecklistData)).backgroundColorHex;
+        (await _labelGuideRepository.getCategoryForChecklistData(_labelCategoryChecklistData))!.backgroundColorHex;
     _headerTextColorHex =
-        (await _labelGuideRepository.getCategoryForChecklistData(_labelCategoryChecklistData)).textColorHex;
+        (await _labelGuideRepository.getCategoryForChecklistData(_labelCategoryChecklistData))!.textColorHex;
     await _loadChecklistEntryStates();
     _observeFavoriteUpdates();
     notifyListeners();
@@ -131,8 +124,8 @@ class CategoryChecklistsViewModel extends BaseViewModel {
   }
 
   Future<void> _loadChecklistEntryStates() async {
-    for (final checklist in checklists) {
-      for (final checklistEntry in checklist.checklistEntries) {
+    for (final checklist in checklists!) {
+      for (final checklistEntry in checklist.checklistEntries!) {
         checklistEntry.checked = _labelGuideRepository.getCheckboxEntryState(checklistEntry.id, checklist.id);
       }
     }

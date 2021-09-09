@@ -13,7 +13,6 @@ import 'package:energielabel_app/data/asset_paths.dart';
 import 'package:energielabel_app/service_locator.dart';
 import 'package:energielabel_app/ui/pdf/components/bam_header.dart';
 import 'package:energielabel_app/ui/pdf/resources/svg_asset.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as flutter_widgets;
 import 'package:flutter_gen/gen_l10n/translations.dart';
@@ -35,24 +34,21 @@ abstract class StatelessMultiPage {
 
 class BamPdfPage extends BamPage {
   BamPdfPage({
-    @required this.pageCategory,
+    required this.pageCategory,
     this.titleSubCategory,
-    @required this.preloadedAssets,
-    @required this.build,
-    @required this.buildContext,
-  })  : assert(pageCategory != null),
-        assert(preloadedAssets != null),
-        assert(buildContext != null),
-        assert(build != null);
+    required this.preloadedAssets,
+    required this.build,
+    required this.buildContext,
+  });
 
   final flutter_widgets.BuildContext buildContext;
   final String pageCategory;
-  final String titleSubCategory;
+  final String? titleSubCategory;
   final SvgAssetData preloadedAssets;
   final MultiPageBuilder build;
 
-  Uint8List _appIconData;
-  PackageInfo _packageInfo;
+  Uint8List? _appIconData;
+  PackageInfo? _packageInfo;
 
   @override
   Future<void> initPage() async {
@@ -67,14 +63,15 @@ class BamPdfPage extends BamPage {
       header: (context) => BamHeader(
         pageCategory: pageCategory,
         titleSubCategory: titleSubCategory,
+        svgLogo: preloadedAssets.getSvgAsset(AssetPaths.logoBlackImage)!,
       ),
       footer: (context) => Footer(
         leading: Row(
           children: [
-            if (_appIconData != null) Image(MemoryImage(_appIconData), height: 20, width: 20),
+            if (_appIconData != null) Image(MemoryImage(_appIconData!), height: 20, width: 20),
             UrlLink(
-                destination: Translations.of(buildContext).pdf_footer_link,
-                child: Text('${_packageInfo.appName} (${_packageInfo.version}+${_packageInfo.buildNumber})')),
+                destination: Translations.of(buildContext)!.pdf_footer_link,
+                child: Text('${_packageInfo!.appName} (${_packageInfo!.version}+${_packageInfo!.buildNumber})')),
           ],
         ),
         trailing: Text('${context.pageNumber}'),

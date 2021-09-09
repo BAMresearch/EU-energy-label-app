@@ -19,13 +19,13 @@ class LabelCategoryChecklist {
   factory LabelCategoryChecklist.fromJson(Map<String, dynamic> json) => _$LabelCategoryChecklistFromJson(json);
 
   @JsonKey(name: 'field_id')
-  final int id;
+  final int? id;
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_checklist_entries')
-  final List<ChecklistEntry> checklistEntries;
+  final List<ChecklistEntry>? checklistEntries;
 
   Map<String, dynamic> toJson() => _$LabelCategoryChecklistToJson(this);
 

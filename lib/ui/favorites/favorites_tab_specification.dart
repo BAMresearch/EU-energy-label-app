@@ -14,10 +14,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
+/// Tab specification of the Favorites section.
 class FavoritesTabSpecification extends TabSpecification {
   FavoritesTabSpecification(BuildContext context)
       : super(
-          label: Translations.of(context).tab_label_favorites,
+          label: Translations.of(context)!.tab_label_favorites,
           iconAssetPath: AssetPaths.menuFavoritesIcon,
           onGenerateRoute: FavoritesRouter.onGenerateRoute,
         );

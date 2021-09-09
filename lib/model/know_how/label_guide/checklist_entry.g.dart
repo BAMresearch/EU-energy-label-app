@@ -8,9 +8,9 @@ part of 'checklist_entry.dart';
 
 ChecklistEntry _$ChecklistEntryFromJson(Map<String, dynamic> json) {
   return ChecklistEntry(
-    id: json['field_id'] as int,
-    text: json['text'] as String,
-    checked: json['checked'] as bool ?? false,
+    id: json['field_id'] as int?,
+    text: json['text'] as String?,
+    checked: json['checked'] as bool? ?? false,
   );
 }
 

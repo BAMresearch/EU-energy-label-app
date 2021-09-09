@@ -25,21 +25,17 @@ enum PathType { assetPath, documentFolderPath }
 
 class PdfViewPage extends StatelessPage<PdfViewViewModel> {
   PdfViewPage._({
-    @required this.pageTitle,
-    @required this.pathType,
-    @required this.pdfPath,
+    required this.pageTitle,
+    required this.pathType,
+    required this.pdfPath,
     this.isShareActionAllowed = false,
-  })  : assert(pageTitle != null),
-        assert(pathType != null),
-        assert(pdfPath != null);
+  });
 
   factory PdfViewPage.fromAssetPath({
-    @required String pageTitle,
-    @required String pdfAssetPath,
+    required String pageTitle,
+    required String pdfAssetPath,
     bool isShareActionAllowed = false,
   }) {
-    assert(pageTitle != null);
-    assert(pdfAssetPath != null);
     return PdfViewPage._(
       pageTitle: pageTitle,
       pdfPath: pdfAssetPath,
@@ -49,12 +45,10 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
   }
 
   factory PdfViewPage.fromPath({
-    @required String pageTitle,
-    @required String pdfDocumentFolderPath,
+    required String pageTitle,
+    required String pdfDocumentFolderPath,
     bool isShareActionAllowed = true,
   }) {
-    assert(pageTitle != null);
-    assert(pdfDocumentFolderPath != null);
     return PdfViewPage._(
       pageTitle: pageTitle,
       pdfPath: pdfDocumentFolderPath,
@@ -82,7 +76,7 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
                 key: _shareButtonKey,
                 icon: SvgPicture.asset(
                   AssetPaths.shareIcon,
-                  semanticsLabel: Translations.of(context).share_page_share_button,
+                  semanticsLabel: Translations.of(context)!.share_page_share_button,
                 ),
                 onPressed: () => viewModel.onShareContent(context),
               )
@@ -116,7 +110,7 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
     return PdfViewViewModel(
       pdfPath: pdfPath,
       pathType: pathType,
-      assetBundle: ServiceLocator().get<AssetBundle>(),
+      assetBundle: ServiceLocator().get<AssetBundle>()!,
       shareButtonKey: _shareButtonKey,
     );
   }

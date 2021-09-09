@@ -13,10 +13,11 @@ import 'package:energielabel_app/ui/misc/tab_specification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
+/// Tab specification of the Home section.
 class HomeTabSpecification extends TabSpecification {
   HomeTabSpecification(BuildContext context)
       : super(
-          label: Translations.of(context).tab_label_home,
+          label: Translations.of(context)!.tab_label_home,
           iconAssetPath: AssetPaths.menuHomeIcon,
           onGenerateRoute: HomeRouter.onGenerateRoute,
         );

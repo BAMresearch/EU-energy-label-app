@@ -9,14 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+/// Specification for a tab in the main navigation bar (e.g. Scanner, Quiz, ...).
+///
+/// Each specific implementation of this class provides a label and icon for the tab
+/// and a [RouteResolver] function for the [TabNavigator].
 abstract class TabSpecification {
   TabSpecification({
-    @required this.label,
-    @required this.iconAssetPath,
-    @required this.onGenerateRoute,
-  })  : assert(label != null),
-        assert(iconAssetPath != null),
-        assert(onGenerateRoute != null);
+    required this.label,
+    required this.iconAssetPath,
+    required this.onGenerateRoute,
+  });
 
   final GlobalKey<NavigatorState> tabNavigatorKey = GlobalKey<NavigatorState>();
   final String label;

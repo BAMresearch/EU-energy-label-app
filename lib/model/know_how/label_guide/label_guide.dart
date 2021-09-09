@@ -19,10 +19,10 @@ class LabelGuide {
   factory LabelGuide.fromJson(Map<String, dynamic> json) => _$LabelGuideFromJson(json);
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'label_categories')
-  final List<LabelCategory> labelCategories;
+  final List<LabelCategory>? labelCategories;
 
   Map<String, dynamic> toJson() => _$LabelGuideToJson(this);
 

@@ -17,9 +17,7 @@ import 'package:flutter/services.dart';
 
 class RegulationDataRepository {
   RegulationDataRepository(AssetBundle assetBundle, DeviceInfo deviceInfo)
-      : assert(assetBundle != null),
-        assert(deviceInfo != null),
-        _assetBundle = assetBundle,
+      : _assetBundle = assetBundle,
         _deviceInfo = deviceInfo;
 
   final AssetBundle _assetBundle;

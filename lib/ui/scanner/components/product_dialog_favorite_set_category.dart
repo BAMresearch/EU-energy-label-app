@@ -15,17 +15,14 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class ProductDialogFavoriteSetCategory extends StatefulWidget {
   const ProductDialogFavoriteSetCategory({
-    Key key,
-    @required this.labelCategories,
-    @required this.onConfirmCategory,
-    @required this.onTapCancel,
-  })  : assert(labelCategories != null),
-        assert(onConfirmCategory != null),
-        assert(onTapCancel != null),
-        super(key: key);
+    Key? key,
+    required this.labelCategories,
+    required this.onConfirmCategory,
+    required this.onTapCancel,
+  }) : super(key: key);
 
   final List<LabelCategory> labelCategories;
-  final Function(LabelCategory category) onConfirmCategory;
+  final Function(LabelCategory? category) onConfirmCategory;
   final VoidCallback onTapCancel;
 
   @override
@@ -33,7 +30,7 @@ class ProductDialogFavoriteSetCategory extends StatefulWidget {
 }
 
 class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavoriteSetCategory> {
-  LabelCategory _selectedCategory;
+  LabelCategory? _selectedCategory;
   bool _valid = true;
 
   @override
@@ -50,7 +47,7 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: BamRadioListTile(
-                title: Text(labelCategory.productType),
+                title: Text(labelCategory.productType!),
                 onChanged: (category) => setState(() => _selectedCategory = labelCategory),
                 value: _selectedCategory == labelCategory,
               ),
@@ -58,8 +55,8 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
           }),
           if (!_valid)
             Text(
-              Translations.of(context).product_favorite_dialog_set_category_error,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(color: Theme.of(context).colorScheme.error),
+              Translations.of(context)!.product_favorite_dialog_set_category_error,
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).colorScheme.error),
             ),
           SizedBox(height: 30),
           Padding(
@@ -78,8 +75,8 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
                 padding: const EdgeInsets.only(top: 18, bottom: 14),
               ),
               child: Text(
-                Translations.of(context).product_favorite_dialog_confirmation_button,
-                style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+                Translations.of(context)!.product_favorite_dialog_confirmation_button,
+                style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
               ),
             ),
           ),
@@ -95,8 +92,8 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
                 padding: const EdgeInsets.only(top: 18, bottom: 14),
               ),
               child: Text(
-                Translations.of(context).qrcode_product_dialog_cancel,
-                style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamBlue1Optimized),
+                Translations.of(context)!.qrcode_product_dialog_cancel,
+                style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamBlue1Optimized),
               ),
             ),
           ),

@@ -27,9 +27,9 @@ class Checklist extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
-            child: Text(checklist.title, style: Theme.of(context).header2),
+            child: Text(checklist.title!, style: Theme.of(context).header2),
           ),
-          for (final checklistEntry in checklist.checklistEntries) ChecklistEntryItem(checklistEntry),
+          for (final checklistEntry in checklist.checklistEntries!) ChecklistEntryItem(checklistEntry),
           SizedBox(height: 8),
           Divider(color: PdfColor.fromInt(BamColorPalette.bamBlack10.value)),
         ],

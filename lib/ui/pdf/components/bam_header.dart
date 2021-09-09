@@ -8,18 +8,19 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
 class BamHeader extends StatelessWidget {
   BamHeader({
-    @required this.pageCategory,
+    required this.pageCategory,
     this.titleSubCategory,
-  })  : assert(pageCategory != null);
+    required this.svgLogo,
+  });
 
   final String pageCategory;
-  final String titleSubCategory;
+  final String? titleSubCategory;
+  final String svgLogo;
 
   @override
   Widget build(Context context) {
@@ -41,11 +42,12 @@ class BamHeader extends StatelessWidget {
               ),
               if (titleSubCategory != null)
                 Text(
-                  titleSubCategory.toUpperCase(),
+                  titleSubCategory!.toUpperCase(),
                   style: Theme.of(context).header3,
                 ),
             ],
           ),
+          SvgImage(svg: svgLogo, height: 40)
         ],
       ),
     );

@@ -10,6 +10,9 @@
 import 'package:flutter/painting.dart';
 
 extension ColorExtensions on Color {
+  /// Parses a Color from the given hex value.
+  ///
+  /// The hex value is expected to be in format AARRGGBB.
   static Color fromHex(String hexColorValue) {
     try {
       return Color(int.parse(hexColorValue, radix: 16));

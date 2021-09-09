@@ -29,7 +29,7 @@ class PdfHtmlUtils {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: _buildPdfWidgetsFromNodeList(document.body.nodes),
+      children: _buildPdfWidgetsFromNodeList(document.body!.nodes),
     );
   }
 
@@ -59,7 +59,7 @@ class PdfHtmlUtils {
         nodes.removeRange(0, nodes.indexOf(otherNodes.last) + 1);
 
         otherNodes.forEach((node) {
-          pdfWidgets.add(_renderWidgetsFromNodes(node));
+          pdfWidgets.add(_renderWidgetsFromNodes(node as dom.Element));
         });
       }
     } while (nodes.isNotEmpty);
@@ -69,7 +69,7 @@ class PdfHtmlUtils {
 
   static Widget _renderWidgetsFromNodes(dom.Element element) {
     if (htmlRenderers.containsKey(element.localName)) {
-      return htmlRenderers[element.localName].render(element, _buildPdfWidgetsFromNodeList, _renderRichText);
+      return htmlRenderers[element.localName!]!.render(element, _buildPdfWidgetsFromNodeList, _renderRichText);
     } else {
       return _renderText(element);
     }
@@ -77,7 +77,7 @@ class PdfHtmlUtils {
 
   static Widget _renderText(dom.Node node) {
     return Text(
-      node.text.replaceAll('<br />', '\n'),
+      node.text!.replaceAll('<br />', '\n'),
       textAlign: TextAlign.left,
     );
   }
@@ -89,17 +89,17 @@ class PdfHtmlUtils {
       if (childNode.runtimeType == dom.Element) {
         final childElement = childNode as dom.Element;
 
-        if (childElement.localName == 'a' && childElement.attributes['href'].startsWith('http')) {
+        if (childElement.localName == 'a' && childElement.attributes['href']!.startsWith('http')) {
           inlineSpans.add(TextSpan(
             text: childElement.text.replaceAll('<br />', '\n'),
             style: TextStyle(decoration: TextDecoration.underline),
-            annotation: AnnotationUrl(childElement.attributes['href']),
+            annotation: AnnotationUrl(childElement.attributes['href']!),
           ));
         } else {
           inlineSpans.add(TextSpan(text: childElement.text.replaceAll('<br />', '\n')));
         }
       } else {
-        inlineSpans.add(TextSpan(text: childNode.text.replaceAll('<br />', '\n')));
+        inlineSpans.add(TextSpan(text: childNode.text!.replaceAll('<br />', '\n')));
       }
     }
 

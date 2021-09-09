@@ -16,6 +16,7 @@ class PdfAssets {
     AssetPaths.checkedIcon,
     AssetPaths.uncheckedIcon,
     AssetPaths.knowHowLightBulbIcon,
+    AssetPaths.logoBlackImage,
     AssetPaths.externalLinkIcon,
   ];
 }

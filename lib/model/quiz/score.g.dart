@@ -8,9 +8,9 @@ part of 'score.dart';
 
 Score _$ScoreFromJson(Map<String, dynamic> json) {
   return Score(
-    positive: json['positive-response'] as String,
-    negative: json['negative-response'] as String,
-    minPositiveScore: json['min-positive-score'] as int,
+    positive: json['positive-response'] as String?,
+    negative: json['negative-response'] as String?,
+    minPositiveScore: json['min-positive-score'] as int?,
   );
 }
 

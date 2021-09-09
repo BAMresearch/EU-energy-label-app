@@ -29,12 +29,13 @@ import 'package:get_it/get_it.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Convenience wrapper around GetIt.
 class ServiceLocator {
   factory ServiceLocator() => _instance ??= ServiceLocator._();
 
   ServiceLocator._();
 
-  static ServiceLocator _instance;
+  static ServiceLocator? _instance;
 
   Future<void> registerDependencies(BuildContext context) async {
     final preferences = await SharedPreferences.getInstance();
@@ -44,28 +45,31 @@ class ServiceLocator {
     GetIt.I.registerLazySingleton(() => DeviceInfo(Translations.supportedLocales));
     GetIt.I.registerLazySingleton(() => packageInfo);
 
+    // API
     GetIt.I.registerLazySingleton(() => BamApiClient(baseUrl: AppConfig.backendURL, apiKey: AppConfig.apiKey));
 
+    // DAOs
     GetIt.I.registerLazySingleton(() => QuizDao(preferences));
     GetIt.I.registerLazySingleton(() => NewsDao(preferences));
     GetIt.I.registerLazySingleton(() => LabelGuideDao(preferences));
     GetIt.I.registerLazySingleton(() => FavoriteDao(preferences));
 
+    // Repositories
     GetIt.I.registerLazySingleton(() => SettingsRepository(preferences));
-    GetIt.I.registerLazySingleton(() => WhyIsThereRepository(get<AssetBundle>(), get<DeviceInfo>()));
-    GetIt.I
-        .registerLazySingleton(() => LabelGuideRepository(get<AssetBundle>(), get<DeviceInfo>(), get<LabelGuideDao>()));
-    GetIt.I.registerLazySingleton(() => GlossaryRepository(get<AssetBundle>(), get<DeviceInfo>()));
-    GetIt.I.registerLazySingleton(() => RegulationDataRepository(get<AssetBundle>(), get<DeviceInfo>()));
-    GetIt.I.registerLazySingleton(() => NewsRepository(get<NewsDao>(), get<BamApiClient>(), get<DeviceInfo>()));
+    GetIt.I.registerLazySingleton(() => WhyIsThereRepository(get<AssetBundle>()!, get<DeviceInfo>()!));
+    GetIt.I.registerLazySingleton(
+        () => LabelGuideRepository(get<AssetBundle>()!, get<DeviceInfo>()!, get<LabelGuideDao>()));
+    GetIt.I.registerLazySingleton(() => GlossaryRepository(get<AssetBundle>()!, get<DeviceInfo>()!));
+    GetIt.I.registerLazySingleton(() => RegulationDataRepository(get<AssetBundle>()!, get<DeviceInfo>()!));
+    GetIt.I.registerLazySingleton(() => NewsRepository(get<NewsDao>()!, get<BamApiClient>()!, get<DeviceInfo>()!));
     GetIt.I.registerLazySingleton(() => QuizRepository(
-        get<SettingsRepository>(), get<QuizDao>(), get<BamApiClient>(), get<AssetBundle>(), get<DeviceInfo>()));
-    GetIt.I.registerLazySingleton(() => FavoriteRepository(get<FavoriteDao>()));
+        get<SettingsRepository>()!, get<QuizDao>()!, get<BamApiClient>()!, get<AssetBundle>()!, get<DeviceInfo>()!));
+    GetIt.I.registerLazySingleton(() => FavoriteRepository(get<FavoriteDao>()!));
 
     return GetIt.I.allReady();
   }
 
-  T call<T>() => GetIt.I<T>();
+  T? call<T extends Object>() => GetIt.I.call<T>();
 
-  T get<T>() => GetIt.I<T>();
+  T? get<T extends Object>() => GetIt.I.get<T>();
 }

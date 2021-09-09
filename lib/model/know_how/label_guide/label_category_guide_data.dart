@@ -26,25 +26,25 @@ class LabelCategoryGuideData {
   factory LabelCategoryGuideData.fromJson(Map<String, dynamic> json) => _$LabelCategoryGuideDataFromJson(json);
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_intro')
-  final String introText;
+  final String? introText;
 
   @JsonKey(name: 'field_outro')
-  final String outroText;
+  final String? outroText;
 
   @JsonKey(name: 'field_information_title')
-  final String informationTitle;
+  final String? informationTitle;
 
   @JsonKey(name: 'field_information_text')
-  final String informationText;
+  final String? informationText;
 
   @JsonKey(name: 'fridge_left_info_zones')
-  final List<FridgeInfoZoneData> fridgeLeftSideInfoZones;
+  final List<FridgeInfoZoneData>? fridgeLeftSideInfoZones;
 
   @JsonKey(name: 'fridge_right_info_zones')
-  final List<FridgeInfoZoneData> fridgeRightSideInfoZones;
+  final List<FridgeInfoZoneData>? fridgeRightSideInfoZones;
 
   Map<String, dynamic> toJson() => _$LabelCategoryGuideDataToJson(this);
 
@@ -61,10 +61,10 @@ class FridgeInfoZoneData {
   factory FridgeInfoZoneData.fromJson(Map<String, dynamic> json) => _$FridgeInfoZoneDataFromJson(json);
 
   @JsonKey(name: 'field_zone')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'field_tooltip')
-  final String tooltipHtml;
+  final String? tooltipHtml;
 
   Map<String, dynamic> toJson() => _$FridgeInfoZoneDataToJson(this);
 }

@@ -12,31 +12,28 @@ import 'package:energielabel_app/model/know_how/regulations/regulation.dart';
 import 'package:energielabel_app/ui/know_how/know_how_routes.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class RegulationsViewModel extends BaseViewModel {
   RegulationsViewModel({
-    @required BuildContext context,
-    @required RegulationDataRepository regulationDataRepository,
-  })  : assert(context != null),
-        assert(regulationDataRepository != null),
-        _context = context,
+    required BuildContext context,
+    required RegulationDataRepository regulationDataRepository,
+  })   : _context = context,
         _regulationDataRepository = regulationDataRepository;
 
   final BuildContext _context;
   final RegulationDataRepository _regulationDataRepository;
   ViewState _viewState = ViewState.uninitialized;
-  String _pageTitle;
-  String _pageDescription;
+  String? _pageTitle;
+  String? _pageDescription;
   final List<Regulation> _regulations = [];
 
   ViewState get viewState => _viewState;
 
-  String get pageTitle => _pageTitle;
+  String? get pageTitle => _pageTitle;
 
-  String get pageDescription => _pageDescription;
+  String? get pageDescription => _pageDescription;
 
   List<Regulation> get regulations => List.unmodifiable(_regulations);
 
@@ -64,6 +61,6 @@ class RegulationsViewModel extends BaseViewModel {
     final regulationsData = await _regulationDataRepository.loadRegulationData();
     _pageTitle = regulationsData.title;
     _pageDescription = regulationsData.description;
-    _regulations.addAll(regulationsData.regulations);
+    _regulations.addAll(regulationsData.regulations!);
   }
 }

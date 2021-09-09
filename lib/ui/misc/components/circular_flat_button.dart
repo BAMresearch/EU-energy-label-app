@@ -11,15 +11,15 @@ import 'package:flutter/material.dart';
 
 class CircularFlatButton extends StatelessWidget {
   const CircularFlatButton({
-    Key key,
+    Key? key,
     this.onPressed,
     this.child,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
   }) : super(key: key);
 
   final EdgeInsets padding;
-  final VoidCallback onPressed;
-  final Widget child;
+  final VoidCallback? onPressed;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

@@ -34,11 +34,9 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
                 switch (layoutSize.size) {
                   case LayoutSize.mobile:
                     return _buildMobileLayout(context, viewModel);
-                    break;
                   case LayoutSize.tablet:
                   case LayoutSize.desktop:
                     return _buildTabletLayout(context, viewModel);
-                    break;
                   default:
                     throw ArgumentError('ScreenSize not supported: ${layoutSize.size}');
                 }
@@ -72,7 +70,7 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
   CategoriesOverviewViewModel createViewModel(BuildContext context) {
     return CategoriesOverviewViewModel(
       context: context,
-      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>(),
+      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>()!,
     );
   }
 
@@ -89,7 +87,7 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: ColorExtensions.fromHex(labelCategory.backgroundColorHex),
+              color: ColorExtensions.fromHex(labelCategory.backgroundColorHex!),
             ),
             child: Row(
               children: [
@@ -100,11 +98,11 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
                     child: Padding(
                       padding: const EdgeInsets.all(19.0),
                       child: Text(
-                        labelCategory.productType,
+                        labelCategory.productType!,
                         style: Theme.of(context)
                             .textTheme
-                            .headline3
-                            .copyWith(color: ColorExtensions.fromHex(labelCategory.textColorHex)),
+                            .headline3!
+                            .copyWith(color: ColorExtensions.fromHex(labelCategory.textColorHex!)),
                       ),
                     ),
                   ),

@@ -24,7 +24,6 @@ import 'package:energielabel_app/ui/misc/components/bam_dialog.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:energielabel_app/ui/pdf/pdf_exporter.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
@@ -40,13 +39,10 @@ enum FavoritesTab { products, knowHow }
 
 class FavoritesViewModel extends BaseViewModel {
   FavoritesViewModel({
-    @required BuildContext context,
-    @required FavoriteRepository favoriteRepository,
-    @required LabelGuideRepository labelGuideRepository,
-  })  : assert(context != null),
-        assert(favoriteRepository != null),
-        assert(labelGuideRepository != null),
-        _context = context,
+    required BuildContext context,
+    required FavoriteRepository favoriteRepository,
+    required LabelGuideRepository labelGuideRepository,
+  })   : _context = context,
         _favoriteRepository = favoriteRepository,
         _labelGuideRepository = labelGuideRepository;
 
@@ -94,11 +90,12 @@ class FavoritesViewModel extends BaseViewModel {
     switch (entry.favoriteType) {
       case FavoriteType.products:
         final typedFavorite = entry.favorite as ProductFavorite;
-        final String url = typedFavorite.product.url;
+        final String url = typedFavorite.product!.url!;
         if (await canLaunch(url)) {
           unawaited(launch(url, forceSafariVC: false));
         } else {
           Fimber.e('Failed to open browser for product.');
+          // TODO Show a hint to the user, e.g. a snackBar.
         }
         break;
       case FavoriteType.checklists:
@@ -108,7 +105,7 @@ class FavoritesViewModel extends BaseViewModel {
         unawaited(
           Navigator.of(_context).pushNamed(
             FavoritesRoutes.checklistDetails,
-            arguments: CategoryChecklistPageArguments(labelCategory: labelCategory.value),
+            arguments: CategoryChecklistPageArguments(labelCategory: labelCategory!),
           ),
         );
         break;
@@ -116,11 +113,11 @@ class FavoritesViewModel extends BaseViewModel {
         final typedFavorite = entry.favorite as CategoryTipsFavorite;
         final labelCategory = await _labelGuideRepository.getCategory(typedFavorite.categoryId);
 
-        if (labelCategory.isPresent) {
+        if (labelCategory != null) {
           unawaited(
             Navigator.of(_context).pushNamed(
               FavoritesRoutes.tipDetail,
-              arguments: CategoryTipsPageArguments(labelCategory: labelCategory.value),
+              arguments: CategoryTipsPageArguments(labelCategory: labelCategory),
             ),
           );
         } else {
@@ -130,41 +127,44 @@ class FavoritesViewModel extends BaseViewModel {
     }
   }
 
-  void onEditFavoriteSection(FavoriteType favoriteType, int categoryId) {
+  dynamic onEditFavoriteSection(FavoriteType favoriteType, int? categoryId) {
     Navigator.of(_context).pushNamed(FavoritesRoutes.editFavorites,
         arguments: FavoritesEditArguments(
           favoriteType: favoriteType,
           categoryId: categoryId,
         ));
+    return null;
   }
 
   void _observeFavoriteProducts() {
     _subscriptions
-        .add(_favoriteRepository.favoriteProductsUpdates.listen(_handleProductFavoritesUpdates))
+        .add(_favoriteRepository.favoriteProductsUpdates!.listen(_handleProductFavoritesUpdates))
         .onError((error, stacktrace) {
+      // TODO Show error to the user.
       Fimber.e('Failed to observe product favorites.', ex: error, stacktrace: stacktrace);
     });
   }
 
-  void _handleProductFavoritesUpdates(Map<int, List<ProductFavorite>> favoriteProducts) async {
+  // rxdart calls this method multiply times without considering async. To archive a sync call, the method needs a lock.
+  void _handleProductFavoritesUpdates(Map<int?, List<ProductFavorite>> favoriteProducts) async {
     await _productListUpdateLock.synchronized(() async {
       _favoriteProductListSections.clear();
 
-      final List<int> categoryIds = favoriteProducts.keys.toList();
-      categoryIds.sort((categoryId1, categoryId2) => categoryId1.compareTo(categoryId2));
+      final List<int?> categoryIds = favoriteProducts.keys.toList();
+      categoryIds.sort((categoryId1, categoryId2) => categoryId1!.compareTo(categoryId2!));
 
       for (final categoryId in categoryIds) {
-        final LabelCategory category = await _labelGuideRepository.getCategoryForId(categoryId);
-        if (favoriteProducts[categoryId].isNotEmpty) {
+        final LabelCategory? category = await _labelGuideRepository.getCategoryForId(categoryId);
+        if (favoriteProducts[categoryId]!.isNotEmpty) {
           _favoriteProductListSections.add(
             FavoriteListSection(
-              title: category.productType,
+              title: category!.productType!,
               favoriteType: FavoriteType.products,
               productCategory: category.id,
               sectionEntries: [
-                for (final favoriteProduct in favoriteProducts[categoryId])
+                for (final favoriteProduct in favoriteProducts[categoryId]!)
                   FavoriteListSectionEntry(
-                    title: favoriteProduct.title,
+                    title: favoriteProduct.title!,
                     favoriteType: FavoriteType.products,
                     favorite: favoriteProduct,
                   ),
@@ -189,10 +189,12 @@ class FavoritesViewModel extends BaseViewModel {
             await combineResultFuture;
             notifyListeners();
           } catch (e, stacktrace) {
+            // TODO Show error to the user.
             Fimber.e('Failed to combine know-how favorites.', ex: e, stacktrace: stacktrace);
           }
         },
         onError: (error, stacktrace) {
+          // TODO Show error to the user.
           Fimber.e('Failed to observe know-how favorites.', ex: error, stacktrace: stacktrace);
         },
       ),
@@ -206,7 +208,9 @@ class FavoritesViewModel extends BaseViewModel {
     _favoriteKnowHowListSections.clear();
     final allCategories = await _labelGuideRepository.getCategories();
 
+    // Checklists
     if (favoriteChecklists.isNotEmpty) {
+      // List of all categories containing checklist favorites
       final List<LabelCategory> favoriteCategories = favoriteChecklists
           .where((ChecklistFavorite favorite) => favorite.categoryId != null)
           .map((ChecklistFavorite favorite) =>
@@ -215,12 +219,12 @@ class FavoritesViewModel extends BaseViewModel {
 
       _favoriteKnowHowListSections.add(
         FavoriteListSection(
-          title: Translations.of(_context).favorites_know_how_checklists_section_title,
+          title: Translations.of(_context)!.favorites_know_how_checklists_section_title,
           favoriteType: FavoriteType.checklists,
           sectionEntries: [
             for (final category in favoriteCategories)
               FavoriteListSectionEntry(
-                title: category.productType,
+                title: category.productType!,
                 favoriteType: FavoriteType.checklists,
                 favorite: favoriteChecklists
                     .singleWhere((categoryChecklistFavorite) => categoryChecklistFavorite.categoryId == category.id),
@@ -230,6 +234,7 @@ class FavoritesViewModel extends BaseViewModel {
       );
     }
 
+    // Tips entries
     if (favoriteCategoryTips.isNotEmpty) {
       final List<LabelCategory> favoriteCategories = favoriteCategoryTips
           .map((favorite) => allCategories.firstWhere((tip) => favorite.categoryId == tip.id))
@@ -237,12 +242,12 @@ class FavoritesViewModel extends BaseViewModel {
 
       _favoriteKnowHowListSections.add(
         FavoriteListSection(
-          title: Translations.of(_context).favorites_label_tips_section_title,
+          title: Translations.of(_context)!.favorites_label_tips_section_title,
           favoriteType: FavoriteType.tips,
           sectionEntries: [
             for (final category in favoriteCategories)
               FavoriteListSectionEntry(
-                title: category.productType,
+                title: category.productType!,
                 favoriteType: FavoriteType.tips,
                 favorite: favoriteCategoryTips
                     .singleWhere((categoryTipFavorite) => categoryTipFavorite.categoryId == category.id),
@@ -264,57 +269,58 @@ class FavoritesViewModel extends BaseViewModel {
     );
   }
 
-  Future<void> _onExportConfirmed({bool productsChecked = false, bool knowHowChecked = false}) async {
+  Future<void> _onExportConfirmed({bool? productsChecked = false, bool? knowHowChecked = false}) async {
     final List<PdfPageData> pagesToExport = [];
     final allCategories = await _labelGuideRepository.getCategories();
 
-    if (productsChecked) {
+    if (productsChecked!) {
       final Map<String, List<ProductFavorite>> productsForCategories = {};
-      for (final entry in _favoriteRepository.latestProductList.entries) {
-        final category = (await _labelGuideRepository.getCategory(entry.key)).value;
+      for (final entry in _favoriteRepository.latestProductList!.entries) {
+        final category = (await _labelGuideRepository.getCategory(entry.key));
 
-        final categoryTitle = category.productType.replaceAll('\u00AD', '');
+        final categoryTitle = category!.productType!.replaceAll('\u00AD', '');
         productsForCategories[categoryTitle] = entry.value;
       }
 
       pagesToExport.add(ProductsPdfPageData(
-        Translations.of(_context).pdf_products_category_title,
+        Translations.of(_context)!.pdf_products_category_title,
         productsForCategories,
       ));
     }
 
-    if (knowHowChecked) {
-      final checkListPdfPages = _favoriteRepository.latestChecklistsList.map((checklist) async {
-        final category = allCategories.where((element) => element.checklistData.id == checklist.categoryId).first;
-        final checklistData = category.checklistData;
-        final categoryTitle = category.productType.replaceAll('\u00AD', '');
+    if (knowHowChecked!) {
+      final checkListPdfPages = _favoriteRepository.latestChecklistsList!.map((checklist) async {
+        final category = allCategories.where((element) => element.checklistData!.id == checklist.categoryId).first;
+        final checklistData = category.checklistData!;
+        final categoryTitle = category.productType!.replaceAll('\u00AD', '');
 
-        for (final labelCategoryChecklist in checklistData.checklists) {
-          for (final checklistEntry in labelCategoryChecklist.checklistEntries) {
+        for (final labelCategoryChecklist in checklistData.checklists!) {
+          for (final checklistEntry in labelCategoryChecklist.checklistEntries!) {
             checklistEntry.checked =
                 _labelGuideRepository.getCheckboxEntryState(checklistEntry.id, labelCategoryChecklist.id);
           }
         }
 
-        return ChecklistPdfPageData(Translations.of(_context).pdf_know_how_category_title,
-            Translations.of(_context).pdf_know_how_checklists_category(categoryTitle), checklistData);
+        return ChecklistPdfPageData(Translations.of(_context)!.pdf_know_how_category_title,
+            Translations.of(_context)!.pdf_know_how_checklists_category(categoryTitle), checklistData);
       });
       pagesToExport.addAll(await Future.wait(checkListPdfPages));
 
-      pagesToExport.addAll(_favoriteRepository.latestCategoryTipsFavoriteList.map((tip) {
-        final category = allCategories.where((element) => element.checklistData.id == tip.categoryId).first;
-        final categoryTitle = category.productType.replaceAll('\u00AD', '');
+      pagesToExport.addAll(_favoriteRepository.latestCategoryTipsFavoriteList!.map((tip) {
+        final category = allCategories.where((element) => element.checklistData!.id == tip.categoryId).first;
+        final categoryTitle = category.productType!.replaceAll('\u00AD', '');
 
-        return TipsPdfPageData(Translations.of(_context).pdf_know_how_category_title,
-            Translations.of(_context).pdf_know_how_tips_category(categoryTitle), category.tipData);
+        return TipsPdfPageData(Translations.of(_context)!.pdf_know_how_category_title,
+            Translations.of(_context)!.pdf_know_how_tips_category(categoryTitle), category.tipData);
       }));
     }
 
     final PdfExporter pdfExporter = PdfExporter(
-        targetFileName: '${Translations.of(_context).pdf_filename}.pdf',
+        targetFileName: '${Translations.of(_context)!.pdf_filename}.pdf',
         pagesData: pagesToExport,
         buildContext: _context);
 
+    //generate pdf and show in preview
     final String pdfPath = await pdfExporter.exportPdf();
     unawaited(Navigator.of(_context).pushNamed(FavoritesRoutes.exportPreview, arguments: pdfPath));
   }

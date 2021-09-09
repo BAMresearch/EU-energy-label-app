@@ -16,10 +16,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NewsBanner extends StatelessWidget {
   const NewsBanner({
-    @required this.news,
-    @required this.onCloseAction,
-  })  : assert(news != null),
-        assert(onCloseAction != null);
+    required this.news,
+    required this.onCloseAction,
+  });
 
   final News news;
   final VoidCallback onCloseAction;
@@ -48,13 +47,13 @@ class NewsBanner extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            news.title,
-                            style: Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamBlack),
+                            news.title!,
+                            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamBlack),
                           ),
                           SizedBox(height: 8),
                           Text(
-                            news.description,
-                            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            news.description!,
+                            style: Theme.of(context).textTheme.bodyText2!.copyWith(
                                   color: BamColorPalette.bamBlack80,
                                 ),
                           ),
@@ -67,7 +66,7 @@ class NewsBanner extends StatelessWidget {
                   child: IconButton(
                     icon: SvgPicture.asset(
                       AssetPaths.newsCloseIcon,
-                      semanticsLabel: Translations.of(context).semantic_home_dashboard_close_news,
+                      semanticsLabel: Translations.of(context)!.semantic_home_dashboard_close_news,
                     ),
                     onPressed: onCloseAction,
                   ),

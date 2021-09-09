@@ -11,6 +11,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'regulation.g.dart';
 
+// on change class call "flutter packages pub run build_runner build" in project root to generate *.g.dart file
+// alternatively use "flutter packages pub run build_runner watch" for continuous building
+
 @JsonSerializable()
 class Regulation {
   Regulation({this.title, this.pdfPath, this.orderIndex});
@@ -18,13 +21,13 @@ class Regulation {
   factory Regulation.fromJson(Map<String, dynamic> json) => _$RegulationFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'pdf-path')
-  final String pdfPath;
+  final String? pdfPath;
 
   @JsonKey(name: 'order-index')
-  final int orderIndex;
+  final int? orderIndex;
 
   Map<String, dynamic> toJson() => _$RegulationToJson(this);
 

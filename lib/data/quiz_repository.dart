@@ -19,7 +19,6 @@ import 'package:energielabel_app/model/localized_quiz.dart';
 import 'package:energielabel_app/model/quiz/quiz.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:optional/optional.dart';
 
 class QuizRepository {
   QuizRepository(
@@ -28,12 +27,7 @@ class QuizRepository {
     BamApiClient apiClient,
     AssetBundle assetBundle,
     DeviceInfo deviceInfo,
-  )   : assert(settingsRepository != null),
-        assert(quizDao != null),
-        assert(apiClient != null),
-        assert(assetBundle != null),
-        assert(deviceInfo != null),
-        _settingsRepository = settingsRepository,
+  )   : _settingsRepository = settingsRepository,
         _quizDao = quizDao,
         _apiClient = apiClient,
         _assetBundle = assetBundle,
@@ -46,8 +40,10 @@ class QuizRepository {
   final DeviceInfo _deviceInfo;
 
   Future<bool> isUpdateAvailable() async {
+    // Check if the user previously deferred an update.
     final bool deferredUpdateAvailable = _settingsRepository.isDeferredQuizUpdateAvailable();
 
+    // If previously no update has been deferred, check the API.
     if (!deferredUpdateAvailable) {
       final String quizUpdateHash = await _apiClient.fetchQuizUpdatableInfo(_deviceInfo.bestMatchedLocale.languageCode);
       final localQuizUpdateHash = _settingsRepository.getQuizVersionHash() ?? '';
@@ -60,16 +56,19 @@ class QuizRepository {
     try {
       final deviceLanguage = _deviceInfo.bestMatchedLocale.languageCode;
 
-      final Optional<LocalizedQuiz> storedQuiz = _quizDao.loadQuiz();
-      if (storedQuiz.isPresent) {
-        if (storedQuiz.value.language == deviceLanguage) {
-          return storedQuiz.value.quiz;
+      final LocalizedQuiz? storedQuiz = _quizDao.loadQuiz();
+      if (storedQuiz != null) {
+        if (storedQuiz.language == deviceLanguage) {
+          return storedQuiz.quiz;
         }
 
+        // The user seems to have changed the device language.
+        // So we need to fetch the quiz again for this language.
         try {
           final syncedQuiz = await syncQuiz();
           return syncedQuiz;
         } catch (e) {
+          // Syncing failed, so we continue with a quiz from the local assets.
           Fimber.w('Failed to sync quiz.', ex: e);
         }
       }

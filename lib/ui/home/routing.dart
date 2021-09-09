@@ -36,7 +36,7 @@ class HomeRouter {
       case HomeRoutes.imprint:
         return MaterialPageRoute(
           builder: (context) => HtmlContentPage(
-              htmlAssetPath: settings.arguments, pageTitle: Translations.of(context).imprint_page_title),
+              htmlAssetPath: settings.arguments as String, pageTitle: Translations.of(context)!.imprint_page_title),
         );
       case HomeRoutes.aboutApp:
         return MaterialPageRoute(builder: (context) => AboutAppPage());
@@ -45,7 +45,7 @@ class HomeRouter {
       case HomeRoutes.privacyPolicy:
         return MaterialPageRoute(
           builder: (context) => HtmlContentPage(
-              htmlAssetPath: settings.arguments, pageTitle: Translations.of(context).privacy_policy_title),
+              htmlAssetPath: settings.arguments as String, pageTitle: Translations.of(context)!.privacy_policy_title),
         );
       case HomeRoutes.firstSteps:
         return MaterialPageRoute(builder: (context) => FirstSteps());

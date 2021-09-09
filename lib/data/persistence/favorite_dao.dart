@@ -14,9 +14,7 @@ import 'package:energielabel_app/model/favorite.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteDao {
-  FavoriteDao(SharedPreferences sharedPreferences)
-      : assert(sharedPreferences != null),
-        _sharedPreferences = sharedPreferences;
+  FavoriteDao(SharedPreferences sharedPreferences) : _sharedPreferences = sharedPreferences;
 
   static const String _favoriteProductsKey = 'favorite_products';
   static const String _favoriteChecklistsKey = 'favorite_checklists';
@@ -25,33 +23,33 @@ class FavoriteDao {
   final SharedPreferences _sharedPreferences;
 
   List<ProductFavorite> _getProductFavoritesAsList() {
-    return _getFavorites(_favoriteProductsKey, (favoriteJson) => ProductFavorite.fromJson(favoriteJson));
+    return _getFavorites(_favoriteProductsKey, (favoriteJson) => ProductFavorite.fromJson(favoriteJson!));
   }
 
-  Map<int, List<ProductFavorite>> getProductFavorites({List<ProductFavorite> favorites}) {
-    return groupBy<ProductFavorite, int>(favorites ?? _getProductFavoritesAsList(), (product) => product.categoryId);
+  Map<int?, List<ProductFavorite>> getProductFavorites({List<ProductFavorite>? favorites}) {
+    return groupBy<ProductFavorite, int?>(favorites ?? _getProductFavoritesAsList(), (product) => product.categoryId);
   }
 
-  Future<Map<int, List<ProductFavorite>>> addProductFavorite(ProductFavorite favorite, int categoryId) async {
+  Future<Map<int?, List<ProductFavorite>>> addProductFavorite(ProductFavorite favorite, int? categoryId) async {
     final List<ProductFavorite> favorites = _getProductFavoritesAsList();
     favorites.add(favorite);
     await _saveFavorites(_favoriteProductsKey, favorites);
     return getProductFavorites(favorites: favorites);
   }
 
-  Future<Map<int, List<ProductFavorite>>> removeProductFavorite(ProductFavorite favorite, int categoryId) async {
+  Future<Map<int?, List<ProductFavorite>>> removeProductFavorite(ProductFavorite favorite, int? categoryId) async {
     final List<ProductFavorite> favorites = _getProductFavoritesAsList();
     favorites.remove(favorite);
     await _saveFavorites(_favoriteProductsKey, favorites);
     return getProductFavorites(favorites: favorites);
   }
 
-  Future<void> updateProductFavorites(Map<int, List<ProductFavorite>> favorites) async {
+  Future<void> updateProductFavorites(Map<int?, List<ProductFavorite>> favorites) async {
     await _saveFavorites(_favoriteProductsKey, favorites.values.expand((element) => element).toList());
   }
 
   List<ChecklistFavorite> getChecklistFavorites() {
-    return _getFavorites(_favoriteChecklistsKey, (favoriteJson) => ChecklistFavorite.fromJson(favoriteJson));
+    return _getFavorites(_favoriteChecklistsKey, (favoriteJson) => ChecklistFavorite.fromJson(favoriteJson!));
   }
 
   Future<List<ChecklistFavorite>> addChecklistFavorite(ChecklistFavorite favorite) async {
@@ -75,7 +73,7 @@ class FavoriteDao {
   List<CategoryTipsFavorite> getCategoryTipsFavorites() {
     return _getFavorites(
       _favoriteCategoryTipsKey,
-      (favoriteJson) => CategoryTipsFavorite.fromJson(favoriteJson),
+      (favoriteJson) => CategoryTipsFavorite.fromJson(favoriteJson!),
     );
   }
 
@@ -97,7 +95,7 @@ class FavoriteDao {
     return favorites;
   }
 
-  List<T> _getFavorites<T extends Favorite>(String key, T Function(Map<String, dynamic> favoriteJson) fromJson) {
+  List<T> _getFavorites<T extends Favorite>(String key, T Function(Map<String, dynamic>? favoriteJson) fromJson) {
     final jsonFavorites = _sharedPreferences.getStringList(key);
 
     if (jsonFavorites != null) {

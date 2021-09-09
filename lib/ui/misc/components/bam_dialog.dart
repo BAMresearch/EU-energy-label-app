@@ -13,14 +13,13 @@ import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<T> showDialogWithBlur<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
+/// Function to display a Dialog on screen with a blurred background.
+/// [scaffoldBodyKey] is a [GlobalKey] required to calculate the background blur height.
+/// The Key must be the First Child in a Scaffolds Body
+Future<T?> showDialogWithBlur<T>({
+  required BuildContext context,
+  required WidgetBuilder builder,
 }) async {
-  assert(context != null);
-  assert(builder != null);
-  assert(Scaffold.of(context) != null);
-
   return showDialog<T>(
     context: context,
     barrierColor: Colors.transparent,
@@ -41,29 +40,25 @@ Future<T> showDialogWithBlur<T>({
 
 class BamDialog extends StatelessWidget {
   const BamDialog.message({
-    Key key,
-    @required this.title,
-    @required this.message,
+    Key? key,
+    required this.title,
+    required String this.message,
     this.confirmButtonText,
     this.denyButtonText,
     this.onPressConfirm,
     this.onPressDeny,
-  })  : assert(title != null),
-        assert(message != null),
-        child = null,
+  })  : child = null,
         isScrollable = null,
         customButtons = null,
         builder = null,
         super(key: key);
 
   const BamDialog.customMessage({
-    Key key,
-    @required this.title,
-    @required this.message,
+    Key? key,
+    required this.title,
+    required String this.message,
     this.customButtons,
-  })  : assert(title != null),
-        assert(message != null),
-        child = null,
+  })  : child = null,
         isScrollable = null,
         confirmButtonText = null,
         denyButtonText = null,
@@ -73,29 +68,25 @@ class BamDialog extends StatelessWidget {
         super(key: key);
 
   const BamDialog.widget({
-    Key key,
-    @required this.title,
-    @required this.child,
+    Key? key,
+    required this.title,
+    required Widget this.child,
     this.confirmButtonText,
     this.denyButtonText,
     this.onPressConfirm,
     this.onPressDeny,
-  })  : assert(title != null),
-        assert(child != null),
-        message = null,
+  })  : message = null,
         isScrollable = null,
         customButtons = null,
         builder = null,
         super(key: key);
 
   const BamDialog.customWidget({
-    Key key,
-    @required this.title,
-    @required this.child,
+    Key? key,
+    required this.title,
+    required Widget this.child,
     this.customButtons,
-  })  : assert(title != null),
-        assert(child != null),
-        message = null,
+  })  : message = null,
         isScrollable = null,
         confirmButtonText = null,
         denyButtonText = null,
@@ -105,12 +96,11 @@ class BamDialog extends StatelessWidget {
         super(key: key);
 
   const BamDialog.custom({
-    Key key,
-    @required this.title,
-    @required this.builder,
+    Key? key,
+    required this.title,
+    required this.builder,
     this.isScrollable = false,
-  })  : assert(title != null),
-        assert(builder != null),
+  })  : assert(builder != null),
         customButtons = null,
         child = null,
         message = null,
@@ -121,15 +111,15 @@ class BamDialog extends StatelessWidget {
         super(key: key);
 
   final String title;
-  final String message;
-  final Widget child;
-  final String confirmButtonText;
-  final String denyButtonText;
-  final VoidCallback onPressConfirm;
-  final VoidCallback onPressDeny;
-  final List<Widget> customButtons;
-  final WidgetBuilder builder;
-  final bool isScrollable;
+  final String? message;
+  final Widget? child;
+  final String? confirmButtonText;
+  final String? denyButtonText;
+  final VoidCallback? onPressConfirm;
+  final VoidCallback? onPressDeny;
+  final List<Widget>? customButtons;
+  final WidgetBuilder? builder;
+  final bool? isScrollable;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +136,7 @@ class BamDialog extends StatelessWidget {
               padding: const EdgeInsets.only(top: 32, bottom: 8, left: 16, right: 16),
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.headline1.copyWith(color: BamColorPalette.bamBlue3),
+                style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
               ),
             ),
             if (child != null || message != null)
@@ -154,7 +144,7 @@ class BamDialog extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8, bottom: 32, left: 16, right: 16),
                 child: child ??
                     Text(
-                      message,
+                      message!,
                       style: Theme.of(context).textTheme.bodyText2,
                       textAlign: TextAlign.center,
                     ),
@@ -167,7 +157,7 @@ class BamDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (customButtons != null)
-                      ...customButtons
+                      ...customButtons!
                     else ...[
                       if (confirmButtonText != null)
                         TextButton(
@@ -178,8 +168,8 @@ class BamDialog extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 18, bottom: 14),
                           ),
                           child: Text(
-                            confirmButtonText.toUpperCase(),
-                            style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+                            confirmButtonText!.toUpperCase(),
+                            style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
                           ),
                         ),
                       if (denyButtonText != null) SizedBox(height: 20),
@@ -193,9 +183,9 @@ class BamDialog extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 18, bottom: 14),
                           ),
                           child: Text(
-                            denyButtonText.toUpperCase(),
+                            denyButtonText!.toUpperCase(),
                             style:
-                                Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamBlue1Optimized),
+                                Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamBlue1Optimized),
                           ),
                         ),
                     ]
@@ -211,16 +201,16 @@ class BamDialog extends StatelessWidget {
   }
 
   Widget _buildCustom(BuildContext context) {
-    if (isScrollable) {
+    if (isScrollable!) {
       return Expanded(
         child: Scrollbar(
           child: SingleChildScrollView(
-            child: builder(context),
+            child: builder!(context),
           ),
         ),
       );
     } else {
-      return builder(context);
+      return builder!(context);
     }
   }
 }

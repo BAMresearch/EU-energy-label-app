@@ -23,11 +23,9 @@ import 'package:provider/provider.dart';
 
 class ProductDialog extends StatelessPage<ProductDialogViewModel> {
   ProductDialog({
-    @required Product product,
-    @required Function(ProductDialogFinishAction) onFinish,
-  })  : assert(product != null),
-        assert(onFinish != null),
-        _product = product,
+    required Product product,
+    required Function(ProductDialogFinishAction) onFinish,
+  })   : _product = product,
         _onFinish = onFinish;
 
   final Product _product;
@@ -45,7 +43,7 @@ class ProductDialog extends StatelessPage<ProductDialogViewModel> {
             switch (viewModel.visiblePage) {
               case ProductDialogPage.dialogOverview:
                 return ProductDialogOverview(
-                  message: Translations.of(context).qrcode_product_dialog_message,
+                  message: Translations.of(context)!.qrcode_product_dialog_message,
                   onTapOpenBrowser: viewModel.onBrowserOpenAction,
                   onTapFavorite: viewModel.onShowFavoriteSetNamePage,
                   onTapCancel: viewModel.onCancelDialog,
@@ -73,11 +71,11 @@ class ProductDialog extends StatelessPage<ProductDialogViewModel> {
   String _buildTitle(BuildContext context, ProductDialogViewModel viewModel) {
     switch (viewModel.visiblePage) {
       case ProductDialogPage.dialogOverview:
-        return Translations.of(context).qrcode_product_dialog_title;
+        return Translations.of(context)!.qrcode_product_dialog_title;
       case ProductDialogPage.favoriteSetName:
-        return Translations.of(context).product_favorite_dialog_set_title;
+        return Translations.of(context)!.product_favorite_dialog_set_title;
       case ProductDialogPage.favoriteSetCategory:
-        return Translations.of(context).product_favorite_dialog_set_category;
+        return Translations.of(context)!.product_favorite_dialog_set_category;
       default:
         throw ArgumentError.notNull('visiblePage');
     }
@@ -89,8 +87,8 @@ class ProductDialog extends StatelessPage<ProductDialogViewModel> {
       context: context,
       product: _product,
       onFinishDialog: _onFinish,
-      favoriteRepository: ServiceLocator().get<FavoriteRepository>(),
-      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>(),
+      favoriteRepository: ServiceLocator().get<FavoriteRepository>()!,
+      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>()!,
     );
   }
 }

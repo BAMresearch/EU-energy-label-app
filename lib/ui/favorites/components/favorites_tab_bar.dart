@@ -11,27 +11,27 @@ import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesTabBar<T> extends StatelessWidget {
-  const FavoritesTabBar({Key key, this.children, this.groupValue, this.onValueChanged}) : super(key: key);
+  const FavoritesTabBar({Key? key, this.children, this.groupValue, this.onValueChanged}) : super(key: key);
 
-  final Map<T, String> children;
-  final T groupValue;
-  final Function(T tab) onValueChanged;
+  final Map<T, String>? children;
+  final T? groupValue;
+  final Function(T tab)? onValueChanged;
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      for (final entry in children.entries)
+      for (final entry in children!.entries)
         Expanded(
           child: Material(
             color: groupValue == entry.key ? Theme.of(context).colorScheme.background : BamColorPalette.bamLightGrey,
             child: InkWell(
-              onTap: () => onValueChanged(entry.key),
+              onTap: () => onValueChanged!(entry.key),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Text(
                   entry.value,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: groupValue == entry.key ? BamColorPalette.bamBlue1Optimized : BamColorPalette.bamBlack30,
                       ),
                 ),

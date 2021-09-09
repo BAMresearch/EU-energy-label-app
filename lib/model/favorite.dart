@@ -12,33 +12,34 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'favorite.g.dart';
 
+/// Contract interface class for favorites.
 abstract class Favorite {}
 
 @JsonSerializable()
 class ProductFavorite extends Favorite {
-  ProductFavorite({this.product, this.title, this.categoryId, List<String> comments = const []});
+  ProductFavorite({this.product, this.title, this.categoryId, List<String>? comments = const []});
 
   factory ProductFavorite.fromJson(Map<String, dynamic> json) => _$ProductFavoriteFromJson(json);
 
   @JsonKey(name: 'product')
-  final Product product;
+  final Product? product;
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'category_id')
-  final int categoryId;
+  final int? categoryId;
 
   @JsonKey(name: 'comments', defaultValue: [])
-  List<String> comments;
+  List<String>? comments;
 
   Map<String, dynamic> toJson() => _$ProductFavoriteToJson(this);
 
   ProductFavorite copyWith({
-    Product product,
-    String title,
-    int categoryId,
-    List<String> comments,
+    Product? product,
+    String? title,
+    int? categoryId,
+    List<String>? comments,
   }) {
     return ProductFavorite(
       product: product ?? this.product,
@@ -69,7 +70,7 @@ class ChecklistFavorite extends Favorite {
   factory ChecklistFavorite.fromJson(Map<String, dynamic> json) => _$ChecklistFavoriteFromJson(json);
 
   @JsonKey(name: 'category_id')
-  final int categoryId;
+  final int? categoryId;
 
   Map<String, dynamic> toJson() => _$ChecklistFavoriteToJson(this);
 
@@ -89,7 +90,7 @@ class CategoryTipsFavorite extends Favorite {
   factory CategoryTipsFavorite.fromJson(Map<String, dynamic> json) => _$CategoryTipsFavoriteFromJson(json);
 
   @JsonKey(name: 'category_id')
-  final int categoryId;
+  final int? categoryId;
 
   Map<String, dynamic> toJson() => _$CategoryTipsFavoriteToJson(this);
 

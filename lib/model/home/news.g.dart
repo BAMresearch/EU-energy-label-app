@@ -8,13 +8,13 @@ part of 'news.dart';
 
 News _$NewsFromJson(Map<String, dynamic> json) {
   return News(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    language: json['language'] as String,
+    title: json['title'] as String?,
+    description: json['description'] as String?,
+    language: json['language'] as String?,
     publicationDate: json['pubDate'] == null
         ? null
         : DateTime.parse(json['pubDate'] as String),
-    markedRead: json['markedRead'] as bool,
+    markedRead: json['markedRead'] as bool?,
   );
 }
 

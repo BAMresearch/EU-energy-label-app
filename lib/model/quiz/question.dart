@@ -19,16 +19,16 @@ class Question {
   factory Question.fromJson(Map<String, dynamic> json) => _$QuestionFromJson(json);
 
   @JsonKey(name: 'view-type')
-  final String viewType;
+  final String? viewType;
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'explanation')
-  final String explanation;
+  final String? explanation;
 
   @JsonKey(name: 'answers')
-  final List<Answer> answers;
+  final List<Answer>? answers;
 
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 

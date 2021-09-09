@@ -33,17 +33,17 @@ class FavoritesRouter {
       case FavoritesRoutes.root:
         return MaterialPageRoute(builder: (context) => FavoritesPage());
       case FavoritesRoutes.editFavorites:
-        return MaterialPageRoute(builder: (context) => FavoritesEditPage(favoriteEditArguments: settings.arguments));
+        return MaterialPageRoute(builder: (context) => FavoritesEditPage(favoriteEditArguments: settings.arguments as FavoritesEditArguments));
       case FavoritesRoutes.checklistDetails:
         return MaterialPageRoute(
-            builder: (context) => CategoryChecklistsPage(categoryChecklistPageArguments: settings.arguments));
+            builder: (context) => CategoryChecklistsPage(categoryChecklistPageArguments: settings.arguments as CategoryChecklistPageArguments));
       case FavoritesRoutes.tipDetail:
-        return MaterialPageRoute(builder: (context) => CategoryTipsPage(argument: settings.arguments));
+        return MaterialPageRoute(builder: (context) => CategoryTipsPage(argument: settings.arguments as CategoryTipsPageArguments));
       case FavoritesRoutes.exportPreview:
         return MaterialPageRoute(
           builder: (context) => PdfViewPage.fromPath(
-              pageTitle: Translations.of(context).favorites_page_export_preview_title,
-              pdfDocumentFolderPath: settings.arguments),
+              pageTitle: Translations.of(context)!.favorites_page_export_preview_title,
+              pdfDocumentFolderPath: settings.arguments as String),
         );
       default:
         throw ArgumentError.value(settings.name, null, 'Unexpected favorites route name.');

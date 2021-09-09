@@ -17,7 +17,7 @@ class FirstSteps extends StatelessWidget with BasePage {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      title: Translations.of(context).home_menu_first_steps,
+      title: Translations.of(context)!.home_menu_first_steps,
       body: _buildBody(context),
     );
   }

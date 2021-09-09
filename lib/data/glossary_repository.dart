@@ -18,9 +18,7 @@ import 'package:flutter/services.dart';
 
 class GlossaryRepository {
   GlossaryRepository(AssetBundle assetBundle, DeviceInfo deviceInfo)
-      : assert(assetBundle != null),
-        assert(deviceInfo != null),
-        _assetBundle = assetBundle,
+      : _assetBundle = assetBundle,
         _deviceInfo = deviceInfo;
 
   final AssetBundle _assetBundle;
@@ -34,8 +32,8 @@ class GlossaryRepository {
     try {
       final assetJson = await _assetBundle.loadString(AssetPaths.glossaryJson(_deviceInfo.bestMatchedLocale));
       final glossary = Glossary.fromJson(jsonDecode(assetJson));
-      glossary.glossaryEntries.sort((glossaryEntry1, glossaryEntry2) =>
-          removeDiacritics(glossaryEntry1.title).compareTo(removeDiacritics(glossaryEntry2.title)));
+      glossary.glossaryEntries!.sort((glossaryEntry1, glossaryEntry2) =>
+          removeDiacritics(glossaryEntry1.title!).compareTo(removeDiacritics(glossaryEntry2.title!)));
       return glossary;
     } catch (e) {
       throw RepositoryException('Failed to load glossary from local assets.', e);

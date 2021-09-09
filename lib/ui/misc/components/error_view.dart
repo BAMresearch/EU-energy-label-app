@@ -19,9 +19,9 @@ class ErrorView extends StatelessWidget {
         children: [
           Icon(Icons.warning_amber_sharp, color: Colors.red, size: 96),
           Text(
-            Translations.of(context).error_unknown,
+            Translations.of(context)!.error_unknown,
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-          ),
+          ), // TODO Design: Reference error theme or error color
         ],
       ),
     );

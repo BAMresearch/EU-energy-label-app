@@ -7,26 +7,24 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
-import 'package:flutter/foundation.dart';
 import 'package:pdf/widgets.dart';
 
 class SvgAsset extends StatelessWidget {
   SvgAsset({
-    @required this.data,
-    @required this.child,
-  })  : assert(data != null),
-        assert(child != null);
+    required this.data,
+    required this.child,
+  });
 
   final SvgAssetData data;
 
   final Widget child;
 
-  static SvgAssetData of(Context context) {
+  static SvgAssetData? of(Context context) {
     return context.dependsOn<SvgAssetData>();
   }
 
-  static String getSvgString(Context context, String asset) {
-    final SvgAssetData data = context.dependsOn<SvgAssetData>();
+  static String? getSvgString(Context context, String asset) {
+    final SvgAssetData data = context.dependsOn<SvgAssetData>()!;
     return data.getSvgAsset(asset);
   }
 
@@ -44,7 +42,7 @@ class SvgAssetData extends Inherited {
 
   final Map<String, String> data;
 
-  String getSvgAsset(String asset) {
+  String? getSvgAsset(String asset) {
     return data[asset];
   }
 }

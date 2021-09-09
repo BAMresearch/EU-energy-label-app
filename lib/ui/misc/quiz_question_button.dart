@@ -14,18 +14,15 @@ import 'package:flutter/widgets.dart';
 
 class RadioButton<T> extends StatefulWidget {
   RadioButton({
-    Key key,
-    @required this.value,
-    @required this.caption,
-    @required this.onChanged,
+    Key? key,
+    required this.value,
+    required this.caption,
+    required this.onChanged,
     this.groupValue,
-  })  : assert(value != null),
-        assert(caption != null),
-        assert(onChanged != null),
-        super(key: key);
+  }) : super(key: key);
 
   final T value;
-  final T groupValue;
+  final T? groupValue;
   final String caption;
   final Function onChanged;
 
@@ -54,7 +51,7 @@ class _RadioButtonState extends State<RadioButton> {
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
-                .button
+                .button!
                 .copyWith(color: selected ? BamColorPalette.bamWhite : BamColorPalette.bamBlack80),
           ),
         ),

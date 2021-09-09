@@ -11,34 +11,32 @@ import 'package:energielabel_app/data/glossary_repository.dart';
 import 'package:energielabel_app/model/know_how/glossary/glossary_entry.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:pedantic/pedantic.dart';
 
 class GlossaryViewModel extends BaseViewModel {
   GlossaryViewModel(
-      {@required GlossaryRepository glossaryRepository,
-      GlossaryEntry initialSelectedGlossaryEntry,
-      String initialFilterInput})
-      : assert(glossaryRepository != null),
-        _initialSelectedGlossaryEntry = initialSelectedGlossaryEntry,
+      {required GlossaryRepository glossaryRepository,
+      GlossaryEntry? initialSelectedGlossaryEntry,
+      String? initialFilterInput})
+      : _initialSelectedGlossaryEntry = initialSelectedGlossaryEntry,
         _glossaryRepository = glossaryRepository,
         _filterInput = initialFilterInput ?? '';
 
-  final GlossaryEntry _initialSelectedGlossaryEntry;
+  final GlossaryEntry? _initialSelectedGlossaryEntry;
   final GlossaryRepository _glossaryRepository;
   ViewState _viewState = ViewState.uninitialized;
-  final List<GlossaryEntry> _allGlossaryEntries = [];
+  final List<GlossaryEntry?> _allGlossaryEntries = [];
   String get filterInput => _filterInput;
   String _filterInput;
 
   ViewState get viewState => _viewState;
 
-  List<GlossaryEntry> get glossaryEntries {
+  List<GlossaryEntry?> get glossaryEntries {
     if (_filterInput.isNotEmpty) {
       return _allGlossaryEntries.where((glossaryEntry) {
-        final titleMatches = glossaryEntry.title.toLowerCase().contains(_filterInput.toLowerCase());
-        final descriptionMatches = glossaryEntry.description.toLowerCase().contains(_filterInput.toLowerCase());
+        final titleMatches = glossaryEntry!.title!.toLowerCase().contains(_filterInput.toLowerCase());
+        final descriptionMatches = glossaryEntry.description!.toLowerCase().contains(_filterInput.toLowerCase());
         return titleMatches || descriptionMatches;
       }).toList();
     }
@@ -69,7 +67,7 @@ class GlossaryViewModel extends BaseViewModel {
       notifyListeners();
 
       final glossary = await _glossaryRepository.loadGlossary();
-      _allGlossaryEntries.addAll(glossary.glossaryEntries);
+      _allGlossaryEntries.addAll(glossary.glossaryEntries!);
       _viewState = ViewState.initialized;
     } catch (e) {
       Fimber.e('Failed to load the glossary entries', ex: e);
@@ -79,12 +77,12 @@ class GlossaryViewModel extends BaseViewModel {
     }
   }
 
-  String highlightString(String text) {
-    if (filterInput == null || filterInput.isEmpty) {
+  String? highlightString(String? text) {
+    if (filterInput.isEmpty) {
       return text;
     }
 
-    final String lowerCaseText = text.toLowerCase();
+    final String lowerCaseText = text!.toLowerCase();
 
     final List<String> textComponents = [];
     final List<Match> matches = [];

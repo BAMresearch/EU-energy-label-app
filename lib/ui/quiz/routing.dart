@@ -11,6 +11,7 @@ import 'package:energielabel_app/ui/quiz/pages/quiz_answer_page.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_entry_page.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_question_page.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_result_page.dart';
+import 'package:energielabel_app/ui/quiz/quiz_state.dart';
 import 'package:flutter/material.dart';
 
 class QuizRoutes {
@@ -30,11 +31,11 @@ class QuizRouter {
       case QuizRoutes.quizEntry:
         return MaterialPageRoute(builder: (context) => QuizEntryPage());
       case QuizRoutes.question:
-        return MaterialPageRoute(builder: (context) => QuizQuestionPage(quizState: settings.arguments));
+        return MaterialPageRoute(builder: (context) => QuizQuestionPage(quizState: settings.arguments as QuizState));
       case QuizRoutes.answer:
-        return MaterialPageRoute(builder: (context) => QuizAnswerPage(quizState: settings.arguments));
+        return MaterialPageRoute(builder: (context) => QuizAnswerPage(quizState: settings.arguments as QuizState));
       case QuizRoutes.results:
-        return MaterialPageRoute(builder: (context) => QuizResultPage(quizState: settings.arguments));
+        return MaterialPageRoute(builder: (context) => QuizResultPage(quizState: settings.arguments as QuizState));
       default:
         throw ArgumentError.value(settings.name, null, 'Unexpected quiz route name.');
     }

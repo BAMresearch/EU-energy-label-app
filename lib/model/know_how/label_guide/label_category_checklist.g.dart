@@ -9,13 +9,11 @@ part of 'label_category_checklist.dart';
 LabelCategoryChecklist _$LabelCategoryChecklistFromJson(
     Map<String, dynamic> json) {
   return LabelCategoryChecklist(
-    checklistEntries: (json['field_checklist_entries'] as List)
-        ?.map((e) => e == null
-            ? null
-            : ChecklistEntry.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    id: json['field_id'] as int,
-    title: json['field_title'] as String,
+    checklistEntries: (json['field_checklist_entries'] as List<dynamic>?)
+        ?.map((e) => ChecklistEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    id: json['field_id'] as int?,
+    title: json['field_title'] as String?,
   );
 }
 

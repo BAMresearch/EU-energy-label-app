@@ -19,7 +19,6 @@ import 'package:energielabel_app/ui/pdf/resources/bam_pdf_theme.dart';
 import 'package:energielabel_app/ui/pdf/resources/pdf_assets.dart';
 import 'package:energielabel_app/ui/pdf/resources/svg_asset.dart';
 import 'package:energielabel_app/ui/pdf/utils/document_extension.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as flutter_widgets;
 import 'package:path/path.dart';
@@ -29,10 +28,9 @@ import 'package:pdf/widgets.dart';
 class PdfExporter {
   PdfExporter({
     this.targetFileName = 'PDFExport.pdf',
-    @required this.pagesData,
-    @required this.buildContext,
-  })  : assert(pagesData != null),
-        assert(buildContext != null);
+    required this.pagesData,
+    required this.buildContext,
+  });
 
   final String targetFileName;
   final List<PdfPageData> pagesData;
@@ -60,6 +58,7 @@ class PdfExporter {
       ));
     }
 
+    //export pdf file
     final file = File(join(appDocDir.path, targetFileName));
     final bytes = await pdf.save();
     final File generatedPdfFile = await file.writeAsBytes(bytes);
@@ -78,11 +77,11 @@ class PdfExporter {
   StatelessMultiPage _buildPages(PdfPageData pageData) {
     switch (pageData.runtimeType) {
       case ChecklistPdfPageData:
-        return _buildChecklists(pageData);
+        return _buildChecklists(pageData as ChecklistPdfPageData);
       case TipsPdfPageData:
-        return _buildTips(pageData);
+        return _buildTips(pageData as TipsPdfPageData);
       case ProductsPdfPageData:
-        return _buildProducts(pageData);
+        return _buildProducts(pageData as ProductsPdfPageData);
       default:
         throw ArgumentError('PageType does not exist!');
     }
@@ -95,7 +94,7 @@ class PdfExporter {
   }
 
   StatelessMultiPage _buildTips(TipsPdfPageData pageData) {
-    final data = pageData.tipsData;
+    final data = pageData.tipsData!;
 
     return TipsPage(tipsData: data);
   }

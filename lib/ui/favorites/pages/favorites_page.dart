@@ -36,7 +36,7 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
             hasElevation: false,
             actions: [
               Semantics(
-                label: Translations.of(context).favorites_page_export_dialog_title,
+                label: Translations.of(context)!.favorites_page_export_dialog_title,
                 excludeSemantics: true,
                 button: true,
                 onTap: viewModel.exportPdf,
@@ -49,7 +49,7 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
                 ),
               ),
             ],
-            title: Translations.of(context).favorites_page_title,
+            title: Translations.of(context)!.favorites_page_title,
             body: Builder(
               builder: (context) {
                 switch (viewModel.viewState) {
@@ -72,8 +72,8 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
   FavoritesViewModel createViewModel(BuildContext context) {
     return FavoritesViewModel(
       context: context,
-      favoriteRepository: ServiceLocator().get<FavoriteRepository>(),
-      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>(),
+      favoriteRepository: ServiceLocator().get<FavoriteRepository>()!,
+      labelGuideRepository: ServiceLocator().get<LabelGuideRepository>()!,
     );
   }
 
@@ -94,8 +94,8 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
   Widget _buildTabBar(BuildContext context, FavoritesViewModel viewModel) {
     return FavoritesTabBar<FavoritesTab>(
       children: {
-        FavoritesTab.products: Translations.of(context).favorites_tab_products,
-        FavoritesTab.knowHow: Translations.of(context).favorites_tab_know_how,
+        FavoritesTab.products: Translations.of(context)!.favorites_tab_products,
+        FavoritesTab.knowHow: Translations.of(context)!.favorites_tab_know_how,
       },
       groupValue: viewModel.selectedFavoritesTab,
       onValueChanged: viewModel.onTabSelected,
@@ -138,9 +138,9 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Text(
-            Translations.of(context).favorites_no_favorite,
+            Translations.of(context)!.favorites_no_favorite,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline1.copyWith(
+            style: Theme.of(context).textTheme.headline1!.copyWith(
                   color: BamColorPalette.bamBlue3,
                 ),
           ),

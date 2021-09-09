@@ -15,14 +15,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BamRadioListTile extends ListTile {
   BamRadioListTile({
-    @required Function(bool checked) onChanged,
-    @required bool value,
-    @required Text title,
+    required Function(bool checked) onChanged,
+    required bool value,
+    required Text title,
     bool enabled = true,
-  })  : assert(onChanged != null),
-        assert(value != null),
-        assert(title != null),
-        _onChanged = onChanged,
+  })  : _onChanged = onChanged,
         _value = value,
         _title = title,
         super(enabled: enabled);

@@ -14,10 +14,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
+/// Tab specification of the Scanner section.
 class ScannerTabSpecification extends TabSpecification {
   ScannerTabSpecification(BuildContext context)
       : super(
-          label: Translations.of(context).tab_label_qr_scan,
+          label: Translations.of(context)!.tab_label_qr_scan,
           iconAssetPath: AssetPaths.menuQrScanIcon,
           onGenerateRoute: ScannerRouter.onGenerateRoute,
         );

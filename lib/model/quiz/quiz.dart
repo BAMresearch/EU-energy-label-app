@@ -19,13 +19,13 @@ class Quiz {
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'levels')
-  final List<Level> levels;
+  final List<Level>? levels;
 
   Map<String, dynamic> toJson() => _$QuizToJson(this);
 

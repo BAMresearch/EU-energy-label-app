@@ -13,20 +13,17 @@ import 'package:energielabel_app/data/why_is_there_repository.dart';
 import 'package:energielabel_app/model/know_how/why_is_there/why_is_there.dart';
 import 'package:energielabel_app/model/know_how/why_is_there/why_is_there_entry.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class WhyIsThereViewModel extends BaseViewModel {
-  WhyIsThereViewModel({@required WhyIsThereRepository whyIsThereRepository, @required int initialIndex})
-      : assert(WhyIsThereRepository != null),
-        _whyIsThereRepository = whyIsThereRepository,
+  WhyIsThereViewModel({required WhyIsThereRepository? whyIsThereRepository, required int initialIndex})
+      : _whyIsThereRepository = whyIsThereRepository,
         _currentPageIndex = initialIndex;
 
-  final WhyIsThereRepository _whyIsThereRepository;
+  final WhyIsThereRepository? _whyIsThereRepository;
   final List<WhyIsThereEntry> _whyIsThereEntries = [];
 
-  WhyIsThere _whyIsThere;
+  late WhyIsThere _whyIsThere;
 
   int _currentPageIndex;
 
@@ -40,14 +37,14 @@ class WhyIsThereViewModel extends BaseViewModel {
 
   Future<void> _loadEntries() async {
     try {
-      _whyIsThere = await _whyIsThereRepository.loadWhyIsThere();
-      _whyIsThereEntries.addAll(_whyIsThere.entries);
+      _whyIsThere = await _whyIsThereRepository!.loadWhyIsThere();
+      _whyIsThereEntries.addAll(_whyIsThere.entries!);
       _whyIsThereEntries.sort(
-        (whyIsThereEntryA, whyIsThereEntryB) => whyIsThereEntryA.orderIndex.compareTo(whyIsThereEntryB.orderIndex),
+        (whyIsThereEntryA, whyIsThereEntryB) => whyIsThereEntryA.orderIndex!.compareTo(whyIsThereEntryB.orderIndex!),
       );
     } catch (e) {
       Fimber.e('Failed to load the why is there entries', ex: e);
-      throw Error();
+      throw Error(); // TODO Implement proper error handling
     } finally {
       notifyListeners();
     }

@@ -14,13 +14,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class CategoryTipImageSection extends StatelessWidget {
-  const CategoryTipImageSection({@required this.imageData}) : assert(imageData != null);
+  const CategoryTipImageSection({required this.imageData});
 
   final String imageData;
 
   @override
   Widget build(BuildContext context) {
-    if (imageData != null && imageData.isNotEmpty) {
+    if (imageData.isNotEmpty) {
       try {
         return Image.memory(
           Base64Decoder().convert(imageData),
@@ -34,7 +34,7 @@ class CategoryTipImageSection extends StatelessWidget {
     return SizedBox.shrink();
   }
 
-  Widget _buildErrorState(BuildContext context, Object error, StackTrace stacktrace) {
+  Widget _buildErrorState(BuildContext context, Object error, StackTrace? stacktrace) {
     Fimber.e('Failed to load image data.', ex: error, stacktrace: stacktrace);
     return MediaErrorWidget.image();
   }

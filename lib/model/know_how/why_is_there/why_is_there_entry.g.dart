@@ -8,12 +8,12 @@ part of 'why_is_there_entry.dart';
 
 WhyIsThereEntry _$WhyIsThereEntryFromJson(Map<String, dynamic> json) {
   return WhyIsThereEntry(
-    title: json['field_title'] as String,
-    orderIndex: json['field_order'] as int,
-    text: json['field_text'] as String,
-    textSemantic: json['field_text_semantic'] as String,
-    imageUri: json['field_image'] as String,
-    videoUri: json['field_video'] as String,
+    title: json['field_title'] as String?,
+    orderIndex: json['field_order'] as int?,
+    text: json['field_text'] as String?,
+    textSemantic: json['field_text_semantic'] as String?,
+    imageUri: json['field_image'] as String?,
+    videoUri: json['field_video'] as String?,
   );
 }
 

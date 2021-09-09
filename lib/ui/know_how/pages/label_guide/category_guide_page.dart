@@ -28,26 +28,25 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
 class CategoryGuidePageArguments {
-  const CategoryGuidePageArguments({@required this.labelCategory}) : assert(labelCategory != null);
+  const CategoryGuidePageArguments({required this.labelCategory});
 
   final LabelCategory labelCategory;
 }
 
 class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
-  CategoryGuidePage({@required CategoryGuidePageArguments initialArguments})
-      : assert(initialArguments != null),
-        _labelCategory = initialArguments.labelCategory;
+  CategoryGuidePage({required CategoryGuidePageArguments initialArguments})
+      : _labelCategory = initialArguments.labelCategory;
 
   final LabelCategory _labelCategory;
 
-  LabelCategoryGuideData get _labelGuide => _labelCategory.guideData;
+  LabelCategoryGuideData? get _labelGuide => _labelCategory.guideData;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CategoryGuideViewModel>(
       create: (context) => createViewModel(context)..onViewStarted(),
       child: PageScaffold(
-        title: Translations.of(context).guide_page_title,
+        title: Translations.of(context)!.guide_page_title,
         body: _buildBody(context),
       ),
     );
@@ -71,12 +70,12 @@ class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
               const SizedBox(height: 27),
               _buildInfoZone(context, verticalScrollController),
               const SizedBox(height: 42),
-              _PaddedGuideWidget(child: Text(_labelGuide.outroText)),
+              _PaddedGuideWidget(child: Text(_labelGuide!.outroText!)),
               const SizedBox(height: 27),
               _PaddedGuideWidget(
                 child: GeneralInformationWidget(
-                  informationTitle: _labelGuide.informationTitle,
-                  informationText: _labelGuide.informationText,
+                  informationTitle: _labelGuide!.informationTitle,
+                  informationText: _labelGuide!.informationText!,
                 ),
               ),
               const SizedBox(height: 123),
@@ -89,22 +88,22 @@ class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
 
   Widget _buildGuideHeader(BuildContext context) {
     return CategoryHeader(
-      title: _labelGuide.title,
-      backgroundColorHex: _labelCategory.backgroundColorHex,
-      titleColorHex: _labelCategory.textColorHex,
+      title: _labelGuide!.title!,
+      backgroundColorHex: _labelCategory.backgroundColorHex!,
+      titleColorHex: _labelCategory.textColorHex!,
       image: AssetPaths.labelGuideCategoryImage(_labelCategory.graphicPath),
     );
   }
 
   Widget _buildGuideIntro(BuildContext context) {
-    return _PaddedGuideWidget(child: Text(_labelGuide.introText));
+    return _PaddedGuideWidget(child: Text(_labelGuide!.introText!));
   }
 
   Widget _buildInfoZone(BuildContext context, ScrollController verticalScrollController) {
     return Padding(
       padding: const EdgeInsets.only(left: 5),
       child: FridgeInfoZone(
-        guideData: _labelGuide,
+        guideData: _labelGuide!,
         enclosingScrollController: verticalScrollController,
       ),
     );
@@ -118,11 +117,10 @@ class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
 
 class _PaddedGuideWidget extends StatelessWidget {
   const _PaddedGuideWidget({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.horizontalPaddingValue = 20,
-  })  : assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget child;
   final double horizontalPaddingValue;
@@ -138,14 +136,13 @@ class _PaddedGuideWidget extends StatelessWidget {
 
 class FridgeInfoZone extends StatefulWidget {
   const FridgeInfoZone({
-    Key key,
-    @required this.guideData,
+    Key? key,
+    required this.guideData,
     this.enclosingScrollController,
-  })  : assert(guideData != null),
-        super(key: key);
+  }) : super(key: key);
 
   final LabelCategoryGuideData guideData;
-  final ScrollController enclosingScrollController;
+  final ScrollController? enclosingScrollController;
 
   @override
   _FridgeInfoZoneState createState() => _FridgeInfoZoneState();
@@ -165,7 +162,7 @@ double _getScaledToDisplayWithReference(double size) {
   }
 }
 
-Size get _getWindowSize => MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
+Size get _getWindowSize => MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size;
 
 bool get _runsOnTablet => _getWindowSize.shortestSide >= 600;
 
@@ -183,6 +180,7 @@ double _getLeftPosition(BoxConstraints constraints, double bubbleRight) =>
 double get _tooltipWidth {
   final widthConstraint = math.min(
     _getScaledToDisplayWithReference(300.0),
+    // for smaller screens, an adjustment in width has to be made
     (_getWindowSize.width - tooltipMarginToLeftSideOfScreen) * 0.9,
   );
   return widthConstraint;
@@ -192,8 +190,8 @@ final double tooltipMarginToLeftSideOfScreen = _getScaledToDisplayWithReference(
 
 class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProviderStateMixin {
   final ValueNotifier<bool> _showLeftFridgeSide = ValueNotifier(true);
-  ScrollController _fridgeScrollController;
-  AnimationController _switchFridgeSideAnimationController;
+  ScrollController? _fridgeScrollController;
+  late AnimationController _switchFridgeSideAnimationController;
 
   @override
   void initState() {
@@ -220,14 +218,14 @@ class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProvid
                 scrollDirection: Axis.horizontal,
                 child: _FridgeBackgroundSwitcher(
                   switchSideNotifier: _showLeftFridgeSide,
-                  duration: _switchFridgeSideAnimationController.duration,
+                  duration: _switchFridgeSideAnimationController.duration!,
                 ),
               ),
               FridgeInfoButtons(
                 guideData: widget.guideData,
                 showLeftFridgeSide: _showLeftFridgeSide,
                 constraints: constraints,
-                duration: _switchFridgeSideAnimationController.duration,
+                duration: _switchFridgeSideAnimationController.duration!,
                 enclosingScrollController: widget.enclosingScrollController,
               ),
               _FridgeSideSwitchButton(
@@ -238,9 +236,9 @@ class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProvid
                   _showLeftFridgeSide.value
                       ? _switchFridgeSideAnimationController.reverse()
                       : _switchFridgeSideAnimationController.forward();
-                  _fridgeScrollController.animateTo(
-                    _showLeftFridgeSide.value ? 0 : _fridgeScrollController.position.maxScrollExtent,
-                    duration: _switchFridgeSideAnimationController.duration,
+                  _fridgeScrollController!.animateTo(
+                    _showLeftFridgeSide.value ? 0 : _fridgeScrollController!.position.maxScrollExtent,
+                    duration: _switchFridgeSideAnimationController.duration!,
                     curve: Curves.easeOut,
                   );
                 },
@@ -254,7 +252,7 @@ class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProvid
 
   @override
   void dispose() {
-    _fridgeScrollController.dispose();
+    _fridgeScrollController!.dispose();
     _switchFridgeSideAnimationController.dispose();
 
     super.dispose();
@@ -263,12 +261,10 @@ class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProvid
 
 class _FridgeBackgroundSwitcher extends StatelessWidget {
   const _FridgeBackgroundSwitcher({
-    Key key,
-    @required this.switchSideNotifier,
-    @required this.duration,
-  })  : assert(switchSideNotifier != null),
-        assert(duration != null),
-        super(key: key);
+    Key? key,
+    required this.switchSideNotifier,
+    required this.duration,
+  }) : super(key: key);
 
   final ValueNotifier<bool> switchSideNotifier;
   final Duration duration;
@@ -291,14 +287,11 @@ class _FridgeBackgroundSwitcher extends StatelessWidget {
 
 class _FridgeSideSwitchButton extends StatelessWidget {
   const _FridgeSideSwitchButton({
-    Key key,
-    @required this.onPressed,
-    @required this.switchSideAnimation,
-    @required this.constraints,
-  })  : assert(switchSideAnimation != null),
-        assert(onPressed != null),
-        assert(constraints != null),
-        super(key: key);
+    Key? key,
+    required this.onPressed,
+    required this.switchSideAnimation,
+    required this.constraints,
+  }) : super(key: key);
 
   final BoxConstraints constraints;
   final VoidCallback onPressed;
@@ -345,9 +338,9 @@ class _FridgeSideSwitchButton extends StatelessWidget {
       animation: switchSideAnimation,
       builder: (context, child) {
         return PositionedTransition(
-          rect: positionedTween.animate(switchSideAnimation),
+          rect: positionedTween.animate(switchSideAnimation as Animation<double>),
           child: RotationTransition(
-            turns: rotationTween.animate(switchSideAnimation),
+            turns: rotationTween.animate(switchSideAnimation as Animation<double>),
             child: child,
           ),
         );
@@ -359,29 +352,25 @@ class _FridgeSideSwitchButton extends StatelessWidget {
 
 class FridgeInfoButtons extends StatelessWidget {
   const FridgeInfoButtons({
-    Key key,
-    @required this.showLeftFridgeSide,
-    @required this.constraints,
-    @required this.duration,
-    @required this.guideData,
+    Key? key,
+    required this.showLeftFridgeSide,
+    required this.constraints,
+    required this.duration,
+    required this.guideData,
     this.enclosingScrollController,
-  })  : assert(showLeftFridgeSide != null),
-        assert(constraints != null),
-        assert(duration != null),
-        assert(guideData != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ValueNotifier<bool> showLeftFridgeSide;
   final BoxConstraints constraints;
   final Duration duration;
   final LabelCategoryGuideData guideData;
-  final ScrollController enclosingScrollController;
+  final ScrollController? enclosingScrollController;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: showLeftFridgeSide,
-      builder: (context, showLeft, child) {
+      builder: (context, dynamic showLeft, child) {
         final stack = ConstrainedBox(
           constraints: constraints,
           child: Stack(
@@ -389,13 +378,13 @@ class FridgeInfoButtons extends StatelessWidget {
               if (showLeft)
                 ..._buildLeftSideInfoBubbles(
                   constraints,
-                  guideData.fridgeLeftSideInfoZones,
+                  guideData.fridgeLeftSideInfoZones!,
                   enclosingScrollController: enclosingScrollController,
                 )
               else
                 ..._buildRightSideInfoBubbles(
                   constraints,
-                  guideData.fridgeRightSideInfoZones,
+                  guideData.fridgeRightSideInfoZones!,
                   enclosingScrollController: enclosingScrollController,
                 ),
             ],
@@ -412,7 +401,7 @@ class FridgeInfoButtons extends StatelessWidget {
             return TweenAnimationBuilder(
               tween: Tween(begin: 0.0, end: 1.0),
               duration: duration,
-              builder: (context, opacity, child) {
+              builder: (context, dynamic opacity, child) {
                 return Opacity(
                   opacity: opacity,
                   child: stack,
@@ -428,9 +417,9 @@ class FridgeInfoButtons extends StatelessWidget {
   List<Widget> _buildLeftSideInfoBubbles(
     BoxConstraints constraints,
     List<FridgeInfoZoneData> leftZones, {
-    ScrollController enclosingScrollController,
+    ScrollController? enclosingScrollController,
   }) {
-    assert((leftZones ?? []).length >= 4);
+    assert((leftZones).length >= 4);
 
     const double _firstBubbleTop = 0.0;
     final double _firstBubbleLeft = _getScaledToDisplayWithReference(191.8);
@@ -479,9 +468,9 @@ class FridgeInfoButtons extends StatelessWidget {
   List<Widget> _buildRightSideInfoBubbles(
     BoxConstraints constraints,
     List<FridgeInfoZoneData> rightZones, {
-    ScrollController enclosingScrollController,
+    ScrollController? enclosingScrollController,
   }) {
-    assert((rightZones ?? []).length >= 3);
+    assert((rightZones).length >= 3);
 
     const _firstBubbleTop = 0.0;
     final _firstBubbleRight = _getScaledToDisplayWithReference(166.83);
@@ -520,36 +509,37 @@ class FridgeInfoButtons extends StatelessWidget {
 
 class _InfoZoneBubble extends StatefulWidget {
   _InfoZoneBubble({
-    @required this.infoZone,
+    required this.infoZone,
     this.enclosingScrollController,
-  })  : assert(infoZone != null),
-        assert(infoZone.description != null),
+  })  : assert(infoZone.description != null),
         assert(infoZone.tooltipHtml != null),
         super(key: GlobalKey());
 
   final FridgeInfoZoneData infoZone;
-  final ScrollController enclosingScrollController;
+  final ScrollController? enclosingScrollController;
 
   @override
   _InfoZoneBubbleState createState() => _InfoZoneBubbleState();
 }
 
 class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
-  OverlayEntry _enclosingOverlayEntry;
-  _Tooltip _tooltip;
+  OverlayEntry? _enclosingOverlayEntry;
+  _Tooltip? _tooltip;
 
-  _Tooltip get tooltip => _tooltip;
+  _Tooltip? get tooltip => _tooltip;
 
   bool _tooltipShouldBeRemoved = false;
-  RestartableTimer _afterEnclosingScrollEndedTimer;
+  late RestartableTimer _afterEnclosingScrollEndedTimer;
 
+  // The "ghost" is a trick to get measure the actual height of the later rendered html content in the tooltip.
+  // The same html content is added within an Offstage widget to be accessible via GlobalKey while not being visible
+  // to the user. As the Offstage widget has to be added to the widget tree, it is added to the Overlay-layer.
   bool _createGhost = true;
-  OverlayEntry _ghostInOverlay;
-  bool _ghostShouldBeRemoved = false;
+  OverlayEntry? _ghostInOverlay;
   final _ghostKey = GlobalKey();
 
   double get ghostHeight {
-    final RenderBox renderBox = _ghostKey.currentContext?.findRenderObject();
+    final RenderBox? renderBox = _ghostKey.currentContext?.findRenderObject() as RenderBox?;
     final ghostSize = renderBox?.size;
     return ghostSize?.height ?? 0;
   }
@@ -562,14 +552,18 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
       _createGhost = false;
       _ghostInOverlay = OverlayEntry(
         builder: (context) {
-          final RenderBox zoneButtonRenderBox = (widget.key as GlobalKey).currentContext?.findRenderObject();
-          final Offset zoneButtonCoordinates = zoneButtonRenderBox?.localToGlobal(Offset.zero);
+          final RenderBox? zoneButtonRenderBox =
+              (widget.key as GlobalKey).currentContext?.findRenderObject() as RenderBox?;
+          final Offset? zoneButtonCoordinates = zoneButtonRenderBox?.localToGlobal(Offset.zero);
 
           final triangleOffset = _Tooltip.tooltipTriangleOffset(zoneButtonCoordinates?.dx);
           final moveTooltipToTheRight = _Tooltip.hasToMoveTooltipToTheRight(triangleOffset);
           final moveToRightSideDistance = _Tooltip.moveToTheRightDistance(triangleOffset);
 
           return Offstage(
+            // create a custom version of the tooltip to just measure the html content size within the
+            // later applied constraints. Center will prevent the CustomPaint from using up the whole screen. It will
+            // instead be sized to the intrinsic height.
             child: Center(
               child: CustomPaint(
                 painter: _TooltipPainter(
@@ -606,19 +600,22 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
         },
       );
 
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Overlay.of(context).insert(_ghostInOverlay);
-        SchedulerBinding.instance.addPostFrameCallback((_) => _resetTooltip());
+      SchedulerBinding.instance!.addPostFrameCallback((_) {
+        Overlay.of(context)!.insert(_ghostInOverlay!);
+        SchedulerBinding.instance!.addPostFrameCallback((_) => _resetTooltip());
       });
     }
 
     if (enclosingScrollController != null) {
-      enclosingScrollController.addListener(_onEnclosingScrollControllerScrolled);
+      // the tooltip's start position depends on global coordinates on the screen. If the enclosing scrollview
+      // is scrolled, these coordinates change accordingly. Hence, after the scrolling ended, a callback is updating
+      // the global coordinates on which a tooltip will appear
+      enclosingScrollController!.addListener(_onEnclosingScrollControllerScrolled);
       _afterEnclosingScrollEndedTimer = RestartableTimer(const Duration(milliseconds: 200), _resetTooltip);
     }
   }
 
-  ScrollController get enclosingScrollController => widget?.enclosingScrollController;
+  ScrollController? get enclosingScrollController => widget.enclosingScrollController;
 
   @override
   void dispose() {
@@ -629,16 +626,16 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
   }
 
   void _resetTooltip() {
-    final RenderBox zoneButtonRenderBox = (widget.key as GlobalKey).currentContext.findRenderObject();
+    final RenderBox zoneButtonRenderBox = (widget.key as GlobalKey).currentContext!.findRenderObject() as RenderBox;
     final Offset zoneButtonCoordinates = zoneButtonRenderBox.localToGlobal(Offset.zero);
 
     _removeTooltip();
 
-    _enclosingOverlayEntry = OverlayEntry(builder: (context) => tooltip);
+    _enclosingOverlayEntry = OverlayEntry(builder: (context) => tooltip!);
     _tooltip = _Tooltip(
       onPressedClose: _removeTooltip,
       pressedInfoZoneButtonOffset: zoneButtonCoordinates,
-      tooltipHtml: widget.infoZone.tooltipHtml,
+      tooltipHtml: widget.infoZone.tooltipHtml!,
       heightOfHtmlContent: ghostHeight,
     );
   }
@@ -655,22 +652,17 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
   }
 
   void _removeGhost() {
-    if (_ghostShouldBeRemoved != null) {
-      return;
-    }
-
-    _ghostShouldBeRemoved = false;
-    _ghostInOverlay?.remove();
+    return;
   }
 
   @override
   Widget build(BuildContext context) {
-    final bubbleText = widget.infoZone.description;
+    final bubbleText = widget.infoZone.description!;
     final onlyOneCharacterShown = bubbleText.characters.length <= 2;
     return _RoundedInfoZoneButton(
       height: _bubbleHeight,
       onPressed: () {
-        Overlay.of(context).insert(_enclosingOverlayEntry);
+        Overlay.of(context)!.insert(_enclosingOverlayEntry!);
         _tooltipShouldBeRemoved = true;
       },
       child: Stack(
@@ -683,7 +675,7 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
                 bubbleText,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2
+                    .bodyText2!
                     .copyWith(color: BamColorPalette.bamWhite, fontSize: onlyOneCharacterShown ? 24 : 16),
               ),
             ),
@@ -696,16 +688,12 @@ class _InfoZoneBubbleState extends State<_InfoZoneBubble> {
 
 class _Tooltip extends StatelessWidget {
   const _Tooltip({
-    Key key,
-    @required this.pressedInfoZoneButtonOffset,
-    @required this.onPressedClose,
-    @required this.tooltipHtml,
-    @required this.heightOfHtmlContent,
-  })  : assert(onPressedClose != null),
-        assert(pressedInfoZoneButtonOffset != null),
-        assert(tooltipHtml != null),
-        assert(heightOfHtmlContent != null),
-        super(key: key);
+    Key? key,
+    required this.pressedInfoZoneButtonOffset,
+    required this.onPressedClose,
+    required this.tooltipHtml,
+    required this.heightOfHtmlContent,
+  }) : super(key: key);
 
   final Offset pressedInfoZoneButtonOffset;
   final VoidCallback onPressedClose;
@@ -721,15 +709,20 @@ class _Tooltip extends StatelessWidget {
     final double infoBoxHeight = heightOfHtmlContent + infoBoxTriangleHeight;
     final double closeIconWidth = _getScaledToDisplayWithReference(24);
 
+    // if the zoneButtonCoordinates.dx value is greater than the width of the whole tooltip,
+    // then we have to move the tooltip to the right side, as otherwise the triangle indicator
+    // would be displaced.
     final triangleOffset = tooltipTriangleOffset(zoneButtonCoordinates.dx);
     final moveTooltipToTheRight = hasToMoveTooltipToTheRight(triangleOffset);
     final moveToRightSideDistance = moveToTheRightDistance(triangleOffset);
 
+    // if the tooltip wouldn't fit above the InfoButton, it should be placed below
     final neededVerticalSpace = zoneButtonCoordinates.dy - marginTooltipToButton - infoBoxHeight;
     final hasEnoughSpaceOnTop = neededVerticalSpace >= 0;
 
     final overlayFacingStack = Stack(
       children: [
+        // Prevent interaction with background while tooltip is open
         Positioned.fill(
           child: ModalBarrier(
             dismissible: false,
@@ -751,7 +744,7 @@ class _Tooltip extends StatelessWidget {
           child: TweenAnimationBuilder(
               tween: Tween(begin: 0.0, end: 1.0),
               duration: const Duration(milliseconds: 250),
-              builder: (context, value, child) {
+              builder: (context, dynamic value, child) {
                 return Opacity(
                   opacity: value,
                   child: Stack(
@@ -829,7 +822,7 @@ class _Tooltip extends StatelessWidget {
     return hasToMoveTooltipToTheRight;
   }
 
-  static double tooltipTriangleOffset(double leftCoordinateOfToolbox) {
+  static double tooltipTriangleOffset(double? leftCoordinateOfToolbox) {
     final triangleOffset = (leftCoordinateOfToolbox ?? 0.0) + _bubbleHeight / 2 - _tooltipWidth;
     return triangleOffset;
   }
@@ -837,14 +830,12 @@ class _Tooltip extends StatelessWidget {
 
 class _TooltipPainter extends CustomPainter {
   _TooltipPainter({
-    @required double triggeringBubbleLeftPosition,
-    @required this.width,
-    @required this.triangleHeight,
+    required double triggeringBubbleLeftPosition,
+    required this.width,
+    required this.triangleHeight,
     this.paddingLeft = 0,
     this.willFitOnTop = true,
-  })  : assert(triggeringBubbleLeftPosition != null),
-        triggeringBubbleLeftPosition = triggeringBubbleLeftPosition + triangleHeight,
-        assert(width != null);
+  }) : triggeringBubbleLeftPosition = triggeringBubbleLeftPosition + triangleHeight;
 
   final double triggeringBubbleLeftPosition;
   final double width;
@@ -860,21 +851,25 @@ class _TooltipPainter extends CustomPainter {
       ..color = BamColorPalette.bamBlack;
 
     final height = size.height;
+    // draw rounded tooltip rectangle
     canvas.drawRRect(
       RRect.fromRectAndRadius(Rect.fromLTWH(paddingLeft, 0, width, height), Radius.circular(8.0)),
       paint,
     );
     final double triangleYStartPosition = willFitOnTop ? height - paint.strokeWidth : 0;
 
+    // draw triangle next to the tooltip rectangle
     canvas.drawPath(
       Path()
         ..addPolygon(
           willFitOnTop
+              // v
               ? [
                   Offset(triggeringBubbleLeftPosition, triangleYStartPosition),
                   Offset(triggeringBubbleLeftPosition - triangleHeight, triangleYStartPosition + triangleHeight),
                   Offset(triggeringBubbleLeftPosition - triangleHeight * 2, triangleYStartPosition),
                 ]
+              // ^
               : [
                   Offset(triggeringBubbleLeftPosition, 0),
                   Offset(triggeringBubbleLeftPosition - triangleHeight, triangleYStartPosition - triangleHeight),
@@ -891,11 +886,8 @@ class _TooltipPainter extends CustomPainter {
 }
 
 class _RoundedInfoZoneButton extends StatelessWidget {
-  const _RoundedInfoZoneButton({Key key, @required this.height, @required this.onPressed, @required this.child})
-      : assert(height != null),
-        assert(onPressed != null),
-        assert(child != null),
-        super(key: key);
+  const _RoundedInfoZoneButton({Key? key, required this.height, required this.onPressed, required this.child})
+      : super(key: key);
 
   final double height;
   final VoidCallback onPressed;

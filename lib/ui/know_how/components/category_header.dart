@@ -13,14 +13,11 @@ import 'package:flutter/material.dart';
 
 class CategoryHeader extends StatelessWidget {
   const CategoryHeader({
-    @required this.title,
-    @required this.backgroundColorHex,
-    @required this.titleColorHex,
-    @required this.image,
-  })  : assert(title != null),
-        assert(backgroundColorHex != null),
-        assert(titleColorHex != null),
-        assert(image != null);
+    required this.title,
+    required this.backgroundColorHex,
+    required this.titleColorHex,
+    required this.image,
+  });
 
   final String backgroundColorHex;
   final String title;
@@ -42,7 +39,7 @@ class CategoryHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16, top: 16),
                   child: Text(title,
                       softWrap: true,
-                      style: BamTextTheme.textTheme.headline2.copyWith(color: ColorExtensions.fromHex(titleColorHex))),
+                      style: BamTextTheme.textTheme.headline2!.copyWith(color: ColorExtensions.fromHex(titleColorHex))),
                 ),
               ),
               Align(

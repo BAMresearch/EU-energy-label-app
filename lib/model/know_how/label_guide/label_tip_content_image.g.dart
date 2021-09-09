@@ -8,9 +8,9 @@ part of 'label_tip_content_image.dart';
 
 LabelTipContentImage _$LabelTipContentImageFromJson(Map<String, dynamic> json) {
   return LabelTipContentImage(
-    graphicPath: json['field_graphics'] as String,
-    orderIndex: json['field_order'] as int,
-    description: json['field_description'] as String,
+    graphicPath: json['field_graphics'] as String?,
+    orderIndex: json['field_order'] as int?,
+    description: json['field_description'] as String?,
   );
 }
 

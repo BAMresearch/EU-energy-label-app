@@ -9,21 +9,18 @@ part of 'label_category_guide_data.dart';
 LabelCategoryGuideData _$LabelCategoryGuideDataFromJson(
     Map<String, dynamic> json) {
   return LabelCategoryGuideData(
-    title: json['field_title'] as String,
-    introText: json['field_intro'] as String,
-    outroText: json['field_outro'] as String,
-    informationTitle: json['field_information_title'] as String,
-    informationText: json['field_information_text'] as String,
-    fridgeLeftSideInfoZones: (json['fridge_left_info_zones'] as List)
-        ?.map((e) => e == null
-            ? null
-            : FridgeInfoZoneData.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    fridgeRightSideInfoZones: (json['fridge_right_info_zones'] as List)
-        ?.map((e) => e == null
-            ? null
-            : FridgeInfoZoneData.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    title: json['field_title'] as String?,
+    introText: json['field_intro'] as String?,
+    outroText: json['field_outro'] as String?,
+    informationTitle: json['field_information_title'] as String?,
+    informationText: json['field_information_text'] as String?,
+    fridgeLeftSideInfoZones: (json['fridge_left_info_zones'] as List<dynamic>?)
+        ?.map((e) => FridgeInfoZoneData.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    fridgeRightSideInfoZones:
+        (json['fridge_right_info_zones'] as List<dynamic>?)
+            ?.map((e) => FridgeInfoZoneData.fromJson(e as Map<String, dynamic>))
+            .toList(),
   );
 }
 
@@ -41,8 +38,8 @@ Map<String, dynamic> _$LabelCategoryGuideDataToJson(
 
 FridgeInfoZoneData _$FridgeInfoZoneDataFromJson(Map<String, dynamic> json) {
   return FridgeInfoZoneData(
-    description: json['field_zone'] as String,
-    tooltipHtml: json['field_tooltip'] as String,
+    description: json['field_zone'] as String?,
+    tooltipHtml: json['field_tooltip'] as String?,
   );
 }
 

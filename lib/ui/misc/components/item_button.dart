@@ -13,14 +13,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemButton extends StatelessWidget {
   const ItemButton({
-    Key key,
-    @required this.label,
-    @required this.iconAssetPath,
-    @required this.onTap,
-  })  : assert(label != null),
-        assert(iconAssetPath != null),
-        assert(onTap != null),
-        super(key: key);
+    Key? key,
+    required this.label,
+    required this.iconAssetPath,
+    required this.onTap,
+  }) : super(key: key);
 
   final String label;
   final String iconAssetPath;
@@ -43,7 +40,7 @@ class ItemButton extends StatelessWidget {
             flex: 8,
             child: Text(
               label,
-              style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlue3),
+              style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlue3),
             ),
           ),
           Expanded(

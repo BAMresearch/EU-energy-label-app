@@ -17,15 +17,12 @@ import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/tab_scaffold.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog_view_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class ScannerViewModel extends BaseViewModel {
-  ScannerViewModel({@required BuildContext context})
-      : assert(context != null),
-        _context = context;
+  ScannerViewModel({required BuildContext context}) : _context = context;
 
   final BuildContext _context;
   bool _dialogOpen = false;
@@ -36,8 +33,6 @@ class ScannerViewModel extends BaseViewModel {
   FutureOr<void> onViewStarted() {}
 
   void onScanResult(String scanResult, Function onInvalidQrCode, Function onFinish) {
-    assert(scanResult != null);
-
     Fimber.i('OPEN SCAN DIALOG');
     if (_isValidUrl(scanResult)) {
       _dialogOpen = true;
@@ -48,17 +43,22 @@ class ScannerViewModel extends BaseViewModel {
           onFinish: (ProductDialogFinishAction action) {
             _dialogOpen = false;
             if (action == ProductDialogFinishAction.favorite) {
-              TabScaffold.of(_context).navigateIntoTab(FavoritesTabSpecification, FavoritesRoutes.root);
+              TabScaffold.of(_context)?.navigateIntoTab(FavoritesTabSpecification, FavoritesRoutes.root);
             }
             onFinish();
           },
         ),
       );
     } else {
-      onInvalidQrCode?.call();
+      onInvalidQrCode.call();
     }
   }
 
+  /// RegEx Explanation
+  /// The expression has 2 Parts:
+  /// ^(...) signals that the string has to start with the substring https://eprel.ec.europa.eu/qr/ as defined in documentation.
+  /// +\d{1,12} marks that after the first part needs to be only digits with at least 1 character and at most 12.
+  /// With \z it marks the end and there should be no other characters following.
   bool _isValidUrl(String url) {
     final regEx = RegExp(r'^(https:\/\/eprel.ec.europa.eu\/qr\/)+\d{1,12}$');
     return regEx.hasMatch(url);

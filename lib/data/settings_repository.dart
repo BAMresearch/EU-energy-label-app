@@ -10,9 +10,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsRepository {
-  SettingsRepository(SharedPreferences preferences)
-      : assert(preferences != null),
-        _preferences = preferences;
+  SettingsRepository(SharedPreferences preferences) : _preferences = preferences;
 
   static const String _onboardingFinishedKey = 'onboarding_finished';
   static const String _deferredQuizUpdateKey = 'quiz_update_pending';
@@ -40,7 +38,7 @@ class SettingsRepository {
     await _preferences.setString(_quizVersionHashKey, versionHash);
   }
 
-  String getQuizVersionHash() {
+  String? getQuizVersionHash() {
     return _preferences.getString(_quizVersionHashKey);
   }
 }

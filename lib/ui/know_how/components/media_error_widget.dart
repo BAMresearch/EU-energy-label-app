@@ -12,14 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class MediaErrorWidget extends StatelessWidget {
-  const MediaErrorWidget._({Key key, @required _MediaType mediaType})
-      : assert(mediaType != null),
-        _mediaType = mediaType,
+  const MediaErrorWidget._({Key? key, required _MediaType mediaType})
+      : _mediaType = mediaType,
         super(key: key);
 
-  factory MediaErrorWidget.image({Key key}) => MediaErrorWidget._(key: key, mediaType: _MediaType.image);
+  factory MediaErrorWidget.image({Key? key}) => MediaErrorWidget._(key: key, mediaType: _MediaType.image);
 
-  factory MediaErrorWidget.video({Key key}) => MediaErrorWidget._(key: key, mediaType: _MediaType.video);
+  factory MediaErrorWidget.video({Key? key}) => MediaErrorWidget._(key: key, mediaType: _MediaType.video);
 
   final _MediaType _mediaType;
 
@@ -41,7 +40,7 @@ class MediaErrorWidget extends StatelessWidget {
             SizedBox(height: 16),
             Text(
               _getErrorMessage(context),
-              style: Theme.of(context).textTheme.subtitle2.copyWith(color: BamColorPalette.bamBlack30),
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack30),
             ),
           ],
         ),
@@ -52,9 +51,9 @@ class MediaErrorWidget extends StatelessWidget {
   String _getErrorMessage(BuildContext context) {
     switch (_mediaType) {
       case _MediaType.image:
-        return Translations.of(context).error_image_loading;
+        return Translations.of(context)!.error_image_loading;
       case _MediaType.video:
-        return Translations.of(context).error_video_loading;
+        return Translations.of(context)!.error_video_loading;
       default:
         throw ArgumentError.value(_mediaType);
     }

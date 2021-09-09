@@ -16,16 +16,13 @@ import 'package:energielabel_app/data/api/api_exception.dart';
 import 'package:energielabel_app/model/home/news.dart';
 import 'package:energielabel_app/model/quiz/quiz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:optional/optional.dart';
 import 'package:system_proxy/system_proxy.dart';
 
 class BamApiClient {
   BamApiClient({
-    @required String baseUrl,
-    @required String apiKey,
-  })  : assert(baseUrl != null),
-        assert(apiKey != null),
-        _baseUrl = baseUrl,
+    required String baseUrl,
+    required String apiKey,
+  })   : _baseUrl = baseUrl,
         _apiKey = apiKey {
     _configureDioClient();
   }
@@ -40,15 +37,18 @@ class BamApiClient {
 
   Dio get dio => _dio;
 
-  Future<Optional<News>> fetchNews(String languageCode) async {
+  Future<News?> fetchNews(String languageCode) async {
     try {
+      // When news are available, the response body will be JSON represented as a Map<String, dynamic>.
+      // When no news are available, the response body will represented as an empty String.
+      // To simplify handling both cases we always work with the string response.
       final response = await _dio.get<String>(_newsApiPath, queryParameters: {'language': languageCode});
 
-      News news;
-      if (response.data.isNotEmpty) {
-        news = News.fromJson(jsonDecode(response.data));
+      News? news;
+      if (response.data!.isNotEmpty) {
+        news = News.fromJson(jsonDecode(response.data!));
       }
-      return Optional.ofNullable(news);
+      return news;
     } catch (e) {
       throw ApiException.from(message: 'Failed to fetch news.', cause: e);
     }
@@ -57,7 +57,7 @@ class BamApiClient {
   Future<String> fetchQuizUpdatableInfo(String languageCode) async {
     try {
       final response = await dio.head(_quizApiPath, queryParameters: {'language': languageCode});
-      return response.headers['etag'].first;
+      return response.headers['etag']!.first;
     } catch (e) {
       throw ApiException.from(message: 'Failed to fetch the quiz.', cause: e);
     }
@@ -66,7 +66,7 @@ class BamApiClient {
   Future<Quiz> fetchQuiz(String languageCode, Function(String etag) onResponse) async {
     try {
       final response = await dio.get(_quizApiPath, queryParameters: {'language': languageCode});
-      await onResponse(response.headers['etag'].first);
+      await onResponse(response.headers['etag']!.first);
       return Quiz.fromJson(response.data);
     } catch (e) {
       throw ApiException.from(message: 'Failed to fetch the quiz.', cause: e);
@@ -91,7 +91,7 @@ class BamApiClient {
   }
 
   Future<String> _getDeviceProxySetting() async {
-    final Map<String, String> proxy = await SystemProxy.getProxySettings();
+    final Map<String, String>? proxy = await SystemProxy.getProxySettings();
     if (proxy != null) {
       final proxyHost = proxy['host'];
       final proxyPort = proxy['port'];

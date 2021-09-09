@@ -40,7 +40,7 @@ class HomeDrawer extends StatelessWidget {
                         onPressed: () => _closeDrawer(context),
                         child: SvgPicture.asset(
                           AssetPaths.drawerCloseIcon,
-                          semanticsLabel: Translations.of(context).semantic_home_dashboard_drawer_menu_close,
+                          semanticsLabel: Translations.of(context)!.semantic_home_dashboard_drawer_menu_close,
                         ),
                       ),
                     ),
@@ -50,32 +50,32 @@ class HomeDrawer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsDirectional.only(start: 32, bottom: 12),
                     child: Text(
-                      Translations.of(context).home_menu_infothek,
+                      Translations.of(context)!.home_menu_infothek,
                       style: BamTextStyles.subtitle3.copyWith(color: BamColorPalette.bamYellow1),
                     ),
                   ),
 
                   // First steps
                   _NavItem(
-                    label: Translations.of(context).home_menu_first_steps,
+                    label: Translations.of(context)!.home_menu_first_steps,
                     onTap: () => _onFirstStepsItemTapped(context),
                   ),
 
                   // About the app
                   _NavItem(
-                    label: Translations.of(context).home_menu_about_app,
+                    label: Translations.of(context)!.home_menu_about_app,
                     onTap: () => _onAboutAppItemTapped(context),
                   ),
 
                   // Privacy Policy
                   _NavItem(
-                    label: Translations.of(context).home_menu_privacy_policy,
+                    label: Translations.of(context)!.home_menu_privacy_policy,
                     onTap: () => _onPrivacyPolicyItemTapped(context),
                   ),
 
                   // Imprint
                   _NavItem(
-                    label: Translations.of(context).home_menu_imprint,
+                    label: Translations.of(context)!.home_menu_imprint,
                     onTap: () => _onImprintItemTapped(context),
                   ),
 
@@ -83,7 +83,7 @@ class HomeDrawer extends StatelessWidget {
 
                   // Share
                   _NavItem(
-                    label: Translations.of(context).home_menu_share,
+                    label: Translations.of(context)!.home_menu_share,
                     onTap: () => _onShareItemTapped(context),
                   ),
                 ],
@@ -114,7 +114,7 @@ class HomeDrawer extends StatelessWidget {
   Future<void> _onPrivacyPolicyItemTapped(BuildContext context) async {
     _closeDrawer(context);
 
-    final deviceInfo = ServiceLocator().get<DeviceInfo>();
+    final deviceInfo = ServiceLocator().get<DeviceInfo>()!;
     final privacyPolicyAssetPath = AssetPaths.privacyPolicyHtml(deviceInfo.bestMatchedLocale);
 
     unawaited(
@@ -125,7 +125,7 @@ class HomeDrawer extends StatelessWidget {
   Future<void> _onImprintItemTapped(BuildContext context) async {
     _closeDrawer(context);
 
-    final deviceInfo = ServiceLocator().get<DeviceInfo>();
+    final deviceInfo = ServiceLocator().get<DeviceInfo>()!;
     final imprintAssetPath = AssetPaths.imprintHtml(deviceInfo.bestMatchedLocale);
     unawaited(
       Navigator.of(context).pushNamed(HomeRoutes.imprint, arguments: imprintAssetPath),
@@ -136,8 +136,8 @@ class HomeDrawer extends StatelessWidget {
     _closeDrawer(context);
 
     Share.share(
-      Translations.of(context).share_page_body,
-      subject: Translations.of(context).share_page_subject,
+      Translations.of(context)!.share_page_body,
+      subject: Translations.of(context)!.share_page_subject,
     );
   }
 
@@ -147,10 +147,10 @@ class HomeDrawer extends StatelessWidget {
 }
 
 class _NavItem extends StatelessWidget {
-  const _NavItem({Key key, this.label, this.onTap}) : super(key: key);
+  const _NavItem({Key? key, this.label, this.onTap}) : super(key: key);
 
-  final String label;
-  final VoidCallback onTap;
+  final String? label;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +162,8 @@ class _NavItem extends StatelessWidget {
         child: ListTile(
           dense: true,
           title: Text(
-            label,
-            style: Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamWhite80, fontSize: 20),
+            label!,
+            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite80, fontSize: 20),
           ),
           contentPadding: EdgeInsetsDirectional.only(start: 16),
         ),

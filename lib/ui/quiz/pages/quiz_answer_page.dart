@@ -20,7 +20,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
-  QuizAnswerPage({@required this.quizState}) : assert(quizState != null);
+  QuizAnswerPage({required this.quizState});
 
   final QuizState quizState;
 
@@ -38,7 +38,7 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                 value: viewModel.progress,
                 backgroundColor: BamColorPalette.bamWhite,
                 minHeight: 8,
-                semanticsValue: Translations.of(context).quiz_answer_count_label(
+                semanticsValue: Translations.of(context)!.quiz_answer_count_label(
                   viewModel.currentIndex.toString(),
                   viewModel.maxIndex.toString(),
                 ),
@@ -58,7 +58,7 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8),
                                 child: Text(
-                                  Translations.of(context)
+                                  Translations.of(context)!
                                       .quiz_answer_count_label(
                                         viewModel.currentIndex.toString(),
                                         viewModel.maxIndex.toString(),
@@ -66,7 +66,7 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                                       .toUpperCase(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText2
+                                      .bodyText2!
                                       .copyWith(color: BamColorPalette.bamBlack45Optimized),
                                 ),
                               ),
@@ -75,23 +75,23 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      viewModel.isCurrentAnswerCorrect
-                                          ? Translations.of(context).quiz_answer_congratulation_label
-                                          : Translations.of(context).quiz_answer_you_are_wrong_label,
+                                      viewModel.isCurrentAnswerCorrect!
+                                          ? Translations.of(context)!.quiz_answer_congratulation_label
+                                          : Translations.of(context)!.quiz_answer_you_are_wrong_label,
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.headline1.copyWith(
-                                          color: viewModel.isCurrentAnswerCorrect
+                                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                                          color: viewModel.isCurrentAnswerCorrect!
                                               ? BamColorPalette.bamGreen3
                                               : BamColorPalette.bamRed1),
                                     ),
                                     SizedBox(height: 16),
                                     SvgPicture.asset(
-                                      viewModel.isCurrentAnswerCorrect
+                                      viewModel.isCurrentAnswerCorrect!
                                           ? AssetPaths.quizCorrectAnswerIcon
                                           : AssetPaths.quizWrongAnswerIcon,
-                                      semanticsLabel: viewModel.isCurrentAnswerCorrect
-                                          ? Translations.of(context).quiz_answer_congratulation_image_semantics
-                                          : Translations.of(context).quiz_answer_you_are_wrong_image_semantics,
+                                      semanticsLabel: viewModel.isCurrentAnswerCorrect!
+                                          ? Translations.of(context)!.quiz_answer_congratulation_image_semantics
+                                          : Translations.of(context)!.quiz_answer_you_are_wrong_image_semantics,
                                     ),
                                   ],
                                 ),
@@ -102,13 +102,13 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32),
                           child: Text(
-                            Translations.of(context).quiz_answer_explanation_header_label,
-                            style: Theme.of(context).textTheme.subtitle1.copyWith(color: BamColorPalette.bamBlack80),
+                            Translations.of(context)!.quiz_answer_explanation_header_label,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(color: BamColorPalette.bamBlack80),
                           ),
                         ),
                         Text(
-                          viewModel.answerText,
-                          style: Theme.of(context).textTheme.subtitle1.copyWith(color: BamColorPalette.bamBlack80),
+                          viewModel.answerText!,
+                          style: Theme.of(context).textTheme.subtitle1!.copyWith(color: BamColorPalette.bamBlack80),
                         ),
                       ],
                     ),
@@ -125,8 +125,8 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                   viewModel.onNextButtonTapped(context);
                 },
                 child: Text(
-                  Translations.of(context).quiz_next_button.toUpperCase(),
-                  style: Theme.of(context).textTheme.button.copyWith(color: BamColorPalette.bamWhite),
+                  Translations.of(context)!.quiz_next_button.toUpperCase(),
+                  style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
                 ),
               )
             ],

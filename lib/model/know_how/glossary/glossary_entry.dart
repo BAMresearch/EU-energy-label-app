@@ -18,10 +18,10 @@ class GlossaryEntry {
   factory GlossaryEntry.fromJson(Map<String, dynamic> json) => _$GlossaryEntryFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'description')
-  final String description;
+  final String? description;
 
   Map<String, dynamic> toJson() => _$GlossaryEntryToJson(this);
 

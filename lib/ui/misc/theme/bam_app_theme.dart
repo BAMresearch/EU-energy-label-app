@@ -17,14 +17,18 @@ class BamTheme {
   BamTheme._();
 
   static final ThemeData themeData = ThemeData.from(colorScheme: BamColorScheme.colorScheme).copyWith(
+    // App bar
     appBarTheme: AppBarTheme(iconTheme: IconThemeData(color: BamColorPalette.bamBlack)),
 
+    // Texts
     textTheme: BamTextTheme.textTheme,
 
+    // Buttons
     textButtonTheme: BamButtonThemes.textButtonTheme,
     elevatedButtonTheme: BamButtonThemes.elevatedButtonTheme,
     outlinedButtonTheme: BamButtonThemes.outlinedButtonTheme,
 
+    // Icons
     iconTheme: IconThemeData(color: BamColorScheme.colorScheme.secondary),
   );
 }

@@ -13,7 +13,6 @@ import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/pdf_view_page.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,15 +20,11 @@ import 'package:share/share.dart';
 
 class PdfViewViewModel extends BaseViewModel {
   PdfViewViewModel({
-    @required String pdfPath,
-    @required PathType pathType,
-    @required AssetBundle assetBundle,
-    @required GlobalKey shareButtonKey,
-  })  : assert(pdfPath != null),
-        assert(pathType != null),
-        assert(assetBundle != null),
-        assert(shareButtonKey != null),
-        _pdfAssetPath = pdfPath,
+    required String pdfPath,
+    required PathType pathType,
+    required AssetBundle assetBundle,
+    required GlobalKey shareButtonKey,
+  })   : _pdfAssetPath = pdfPath,
         _pathType = pathType,
         _assetBundle = assetBundle,
         _shareButtonKey = shareButtonKey;
@@ -40,11 +35,11 @@ class PdfViewViewModel extends BaseViewModel {
   final GlobalKey _shareButtonKey;
 
   ViewState _viewState = ViewState.uninitialized;
-  String _contentUrl;
+  String? _contentUrl;
 
   ViewState get viewState => _viewState;
 
-  String get contentUrl => _contentUrl;
+  String? get contentUrl => _contentUrl;
 
   @override
   void onViewStarted() {
@@ -85,8 +80,8 @@ class PdfViewViewModel extends BaseViewModel {
     );
   }
 
-  Rect _shareButtonRect() {
-    final RenderBox renderBox = _shareButtonKey.currentContext?.findRenderObject();
+  Rect? _shareButtonRect() {
+    final RenderBox? renderBox = _shareButtonKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) return null;
 
     final Size size = renderBox.size;

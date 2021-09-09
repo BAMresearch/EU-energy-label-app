@@ -12,15 +12,15 @@ import 'package:flutter/material.dart';
 
 extension TextSpanExtension on TextSpan {
   static TextSpan searchMatch(
-    String match,
+    String? match,
     String search, {
     TextStyle negativeResultTextStyle = const TextStyle(color: Colors.black),
     TextStyle positiveResultTextStyle = const TextStyle(color: Colors.blue),
   }) {
-    if (search == null || search == '') {
+    if (search.isEmpty) {
       return TextSpan(text: match, style: negativeResultTextStyle);
     }
-    final refinedMatch = match.toLowerCase();
+    final refinedMatch = match!.toLowerCase();
     final refinedSearch = search.toLowerCase();
     if (refinedMatch.contains(refinedSearch)) {
       if (refinedMatch.substring(0, refinedSearch.length) == refinedSearch) {

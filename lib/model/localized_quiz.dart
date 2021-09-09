@@ -10,9 +10,7 @@
 import 'package:energielabel_app/model/quiz/quiz.dart';
 
 class LocalizedQuiz {
-  LocalizedQuiz(this.quiz, this.language)
-      : assert(quiz != null),
-        assert(language != null);
+  LocalizedQuiz(this.quiz, this.language);
 
   final Quiz quiz;
   final String language;

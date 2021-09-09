@@ -12,15 +12,10 @@ import 'package:energielabel_app/data/persistence/news_dao.dart';
 import 'package:energielabel_app/data/repository_exception.dart';
 import 'package:energielabel_app/device_info.dart';
 import 'package:energielabel_app/model/home/news.dart';
-import 'package:energielabel_app/utils/optional_extensions.dart';
-import 'package:optional/optional.dart';
 
 class NewsRepository {
   NewsRepository(NewsDao newsDao, BamApiClient apiClient, DeviceInfo deviceInfo)
-      : assert(newsDao != null),
-        assert(apiClient != null),
-        assert(deviceInfo != null),
-        _newsDao = newsDao,
+      : _newsDao = newsDao,
         _apiClient = apiClient,
         _deviceInfo = deviceInfo;
 
@@ -36,7 +31,7 @@ class NewsRepository {
     }
   }
 
-  Optional<News> loadNews() {
+  News? loadNews() {
     try {
       return _newsDao.loadNews();
     } catch (e) {
@@ -47,11 +42,12 @@ class NewsRepository {
   Future<void> syncNews() async {
     try {
       final fetchedNews = await _apiClient.fetchNews(_deviceInfo.bestMatchedLocale.languageCode);
-      if (fetchedNews.isPresent) {
+      if (fetchedNews != null) {
         final storedNews = loadNews();
 
-        if (storedNews.isNotPresent || fetchedNews.value.publicationDate.isAfter(storedNews.value.publicationDate)) {
-          await saveNews(fetchedNews.value.copyWith(markedRead: false));
+        // Storing the fetched news if none have been stored before, or if the news are newer than the previously stored ones.
+        if (storedNews == null || fetchedNews.publicationDate!.isAfter(storedNews.publicationDate!)) {
+          await saveNews(fetchedNews.copyWith(markedRead: false));
         }
       }
     } catch (e) {

@@ -16,9 +16,9 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RegulationsCardView extends StatelessWidget {
-  const RegulationsCardView({@required this.regulation, this.viewModel}) : assert(regulation != null);
+  const RegulationsCardView({required this.regulation, this.viewModel});
   final Regulation regulation;
-  final RegulationsViewModel viewModel;
+  final RegulationsViewModel? viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,14 @@ class RegulationsCardView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Text(
-                regulation.title,
-                style: Theme.of(context).textTheme.headline4.copyWith(color: BamColorPalette.bamBlue3),
+                regulation.title!,
+                style: Theme.of(context).textTheme.headline4!.copyWith(color: BamColorPalette.bamBlue3),
               ),
             ),
           ),
           Divider(),
           TextButton(
-            onPressed: () => viewModel.onRegulationSelected(regulation),
+            onPressed: () => viewModel!.onRegulationSelected(regulation),
             child: Row(
               children: [
                 SvgPicture.asset(
@@ -52,8 +52,8 @@ class RegulationsCardView extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      Translations.of(context).regulations_page_pdf_label,
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlue1),
+                      Translations.of(context)!.regulations_page_pdf_label,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlue1),
                     ),
                   ),
                 )

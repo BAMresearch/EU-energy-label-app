@@ -21,7 +21,7 @@ class KnowHowPage extends StatelessWidget with BasePage {
   Widget build(BuildContext context) {
     return PageScaffold(
       hasElevation: false,
-      title: Translations.of(context).know_how_page_title,
+      title: Translations.of(context)!.know_how_page_title,
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Align(
@@ -36,19 +36,19 @@ class KnowHowPage extends StatelessWidget with BasePage {
                     children: [
                       _buildDivider(),
                       ItemButton(
-                        label: Translations.of(context).know_how_item_why_is_there,
+                        label: Translations.of(context)!.know_how_item_why_is_there,
                         iconAssetPath: AssetPaths.knowHowMenuWhyIsThereIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.whyIsThere),
                       ),
                       _buildDivider(),
                       ItemButton(
-                        label: Translations.of(context).know_how_item_glossary,
+                        label: Translations.of(context)!.know_how_item_glossary,
                         iconAssetPath: AssetPaths.knowHowMenuGlossaryIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.glossary),
                       ),
                       _buildDivider(),
                       ItemButton(
-                        label: Translations.of(context).know_how_item_regulations,
+                        label: Translations.of(context)!.know_how_item_regulations,
                         iconAssetPath: AssetPaths.knowHowMenuRegulationsIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.regulations),
                       ),

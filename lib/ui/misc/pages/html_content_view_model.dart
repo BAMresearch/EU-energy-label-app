@@ -8,22 +8,19 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class HtmlContentViewModel extends BaseViewModel {
-  HtmlContentViewModel({@required String htmlAssetPath})
-      : _htmlAssetPath = htmlAssetPath,
-        assert(htmlAssetPath != null);
+  HtmlContentViewModel({required String htmlAssetPath}) : _htmlAssetPath = htmlAssetPath;
 
   final String _htmlAssetPath;
-  String _htmlContent;
+  String? _htmlContent;
 
-  bool get isContentUrlAvailable => _htmlAssetPath != null;
+  bool get isContentUrlAvailable => true;
 
   bool get isContentLoaded => _htmlContent != null;
 
-  String get htmlContent => _htmlContent;
+  String? get htmlContent => _htmlContent;
 
   @override
   Future<void> onViewStarted() async {

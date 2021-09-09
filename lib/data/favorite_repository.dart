@@ -17,37 +17,35 @@ final bool Function(List, List) compareListFunction = const ListEquality().equal
 final bool Function(Map, Map) compareMapFunction = const DeepCollectionEquality().equals;
 
 class FavoriteRepository {
-  FavoriteRepository(FavoriteDao favoriteDao)
-      : assert(favoriteDao != null),
-        _favoriteDao = favoriteDao {
+  FavoriteRepository(FavoriteDao favoriteDao) : _favoriteDao = favoriteDao {
     _initFavoriteProductsUpdates();
     _initFavoriteChecklistsUpdates();
     _initFavoriteLabelTipsUpdates();
   }
 
   final FavoriteDao _favoriteDao;
-  BehaviorSubject<Map<int, List<ProductFavorite>>> _favoriteProductsSubject;
-  BehaviorSubject<List<ChecklistFavorite>> _favoriteChecklistsSubject;
-  BehaviorSubject<List<CategoryTipsFavorite>> _favoriteCategoryTipsSubject;
+  BehaviorSubject<Map<int?, List<ProductFavorite>>>? _favoriteProductsSubject;
+  late BehaviorSubject<List<ChecklistFavorite>> _favoriteChecklistsSubject;
+  late BehaviorSubject<List<CategoryTipsFavorite>> _favoriteCategoryTipsSubject;
 
-  Stream<Map<int, List<ProductFavorite>>> get favoriteProductsUpdates => _favoriteProductsSubject;
+  Stream<Map<int?, List<ProductFavorite>>>? get favoriteProductsUpdates => _favoriteProductsSubject;
 
-  Map<int, List<ProductFavorite>> get latestProductList => _favoriteProductsSubject.value;
+  Map<int?, List<ProductFavorite>>? get latestProductList => _favoriteProductsSubject!.value;
 
   Stream<List<ChecklistFavorite>> get favoriteChecklistsUpdates =>
       _favoriteChecklistsSubject.distinct(compareListFunction);
 
-  List<ChecklistFavorite> get latestChecklistsList => _favoriteChecklistsSubject.value;
+  List<ChecklistFavorite>? get latestChecklistsList => _favoriteChecklistsSubject.value;
 
   Stream<List<CategoryTipsFavorite>> get favoriteCategoryTipsUpdates =>
       _favoriteCategoryTipsSubject.distinct(compareListFunction);
 
-  List<CategoryTipsFavorite> get latestCategoryTipsFavoriteList => _favoriteCategoryTipsSubject.value;
+  List<CategoryTipsFavorite>? get latestCategoryTipsFavoriteList => _favoriteCategoryTipsSubject.value;
 
   Future<void> addProductFavorite(ProductFavorite favorite) async {
     try {
       final favorites = await _favoriteDao.addProductFavorite(favorite, favorite.categoryId);
-      _favoriteProductsSubject.add(favorites);
+      _favoriteProductsSubject!.add(favorites);
     } catch (e) {
       throw RepositoryException('Failed to add product favorite.', e);
     }
@@ -56,16 +54,16 @@ class FavoriteRepository {
   Future<void> removeProductFavorite(ProductFavorite favorite) async {
     try {
       final updatedFavorites = await _favoriteDao.removeProductFavorite(favorite, favorite.categoryId);
-      _favoriteProductsSubject.add(updatedFavorites);
+      _favoriteProductsSubject!.add(updatedFavorites);
     } catch (e) {
       throw RepositoryException('Failed to remove product favorite.', e);
     }
   }
 
-  Future<void> updateProductFavorites(Map<int, List<ProductFavorite>> favorites) async {
+  Future<void> updateProductFavorites(Map<int?, List<ProductFavorite>> favorites) async {
     try {
       await _favoriteDao.updateProductFavorites(favorites);
-      _favoriteProductsSubject.add(favorites);
+      _favoriteProductsSubject!.add(favorites);
     } catch (e) {
       throw RepositoryException('Failed to update product favorites.', e);
     }
@@ -126,9 +124,9 @@ class FavoriteRepository {
   }
 
   void _initFavoriteProductsUpdates() {
-    _favoriteProductsSubject = BehaviorSubject<Map<int, List<ProductFavorite>>>(onListen: () {
+    _favoriteProductsSubject = BehaviorSubject<Map<int?, List<ProductFavorite>>>(onListen: () {
       final favorites = _favoriteDao.getProductFavorites();
-      _favoriteProductsSubject.add(favorites);
+      _favoriteProductsSubject!.add(favorites);
     });
   }
 

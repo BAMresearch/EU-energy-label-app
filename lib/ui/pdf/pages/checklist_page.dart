@@ -11,11 +11,10 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:energielabel_app/ui/pdf/bam_page.dart';
 import 'package:energielabel_app/ui/pdf/components/checklist.dart';
 import 'package:energielabel_app/ui/pdf/components/general_info_box.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pdf/widgets.dart';
 
 class ChecklistPage extends StatelessMultiPage {
-  ChecklistPage({@required this.checklistData}) : assert(checklistData != null);
+  ChecklistPage({required this.checklistData});
 
   final LabelCategoryChecklistData checklistData;
 
@@ -23,8 +22,8 @@ class ChecklistPage extends StatelessMultiPage {
   List<Widget> build() {
     return [
       _ChecklistHeader(checklistData.title, checklistData.introText),
-      for (final checklist in checklistData.checklists) Checklist(checklist),
-      GeneralInfoBox(title: checklistData.informationTitle, content: checklistData.informationText),
+      for (final checklist in checklistData.checklists!) Checklist(checklist),
+      GeneralInfoBox(title: checklistData.informationTitle, content: checklistData.informationText!),
     ];
   }
 }
@@ -32,8 +31,8 @@ class ChecklistPage extends StatelessMultiPage {
 class _ChecklistHeader extends StatelessWidget {
   _ChecklistHeader(this.title, this.introText);
 
-  final String title;
-  final String introText;
+  final String? title;
+  final String? introText;
 
   @override
   Widget build(Context context) {
@@ -44,9 +43,9 @@ class _ChecklistHeader extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(title, style: Theme.of(context).header0),
+            child: Text(title!, style: Theme.of(context).header0),
           ),
-          Text(introText),
+          Text(introText!),
         ],
       ),
     );

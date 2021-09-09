@@ -11,10 +11,12 @@ ProductFavorite _$ProductFavoriteFromJson(Map<String, dynamic> json) {
     product: json['product'] == null
         ? null
         : Product.fromJson(json['product'] as Map<String, dynamic>),
-    title: json['title'] as String,
-    categoryId: json['category_id'] as int,
-    comments:
-        (json['comments'] as List)?.map((e) => e as String)?.toList() ?? [],
+    title: json['title'] as String?,
+    categoryId: json['category_id'] as int?,
+    comments: (json['comments'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
   );
 }
 
@@ -28,7 +30,7 @@ Map<String, dynamic> _$ProductFavoriteToJson(ProductFavorite instance) =>
 
 ChecklistFavorite _$ChecklistFavoriteFromJson(Map<String, dynamic> json) {
   return ChecklistFavorite(
-    categoryId: json['category_id'] as int,
+    categoryId: json['category_id'] as int?,
   );
 }
 
@@ -39,7 +41,7 @@ Map<String, dynamic> _$ChecklistFavoriteToJson(ChecklistFavorite instance) =>
 
 CategoryTipsFavorite _$CategoryTipsFavoriteFromJson(Map<String, dynamic> json) {
   return CategoryTipsFavorite(
-    categoryId: json['category_id'] as int,
+    categoryId: json['category_id'] as int?,
   );
 }
 

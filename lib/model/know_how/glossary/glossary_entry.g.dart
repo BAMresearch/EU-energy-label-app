@@ -8,12 +8,13 @@ part of 'glossary_entry.dart';
 
 GlossaryEntry _$GlossaryEntryFromJson(Map<String, dynamic> json) {
   return GlossaryEntry(
-    title: json['title'] as String,
-    description: json['description'] as String,
+    title: json['title'] as String?,
+    description: json['description'] as String?,
   );
 }
 
-Map<String, dynamic> _$GlossaryEntryToJson(GlossaryEntry instance) => <String, dynamic>{
+Map<String, dynamic> _$GlossaryEntryToJson(GlossaryEntry instance) =>
+    <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
     };

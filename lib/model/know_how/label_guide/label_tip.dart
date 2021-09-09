@@ -31,34 +31,34 @@ class LabelTip {
   factory LabelTip.fromJson(Map<String, dynamic> json) => _$LabelTipFromJson(json);
 
   @JsonKey(name: 'field_id')
-  final int id;
+  final int? id;
 
   @JsonKey(name: 'field_information_title')
-  final String informationTitle;
+  final String? informationTitle;
 
   @JsonKey(name: 'field_information_text')
-  final String informationText;
+  final String? informationText;
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'field_order')
-  final int orderIndex;
+  final int? orderIndex;
 
   @JsonKey(name: 'field_view_type')
-  final LabelTipViewType viewType;
+  final LabelTipViewType? viewType;
 
   @JsonKey(name: 'field_graphics')
-  final String graphicData;
+  final String? graphicData;
 
   @JsonKey(name: 'field_video')
-  final String videoPath;
+  final String? videoPath;
 
   @JsonKey(name: 'label_tip_content_images')
-  final List<LabelTipContentImage> labelTipContentImages;
+  final List<LabelTipContentImage>? labelTipContentImages;
 
   Map<String, dynamic> toJson() => _$LabelTipToJson(this);
 

@@ -11,13 +11,12 @@ import 'package:flutter/material.dart';
 
 class MultiCrossFadeAnimation extends StatelessWidget {
   MultiCrossFadeAnimation({
-    Key key,
-    @required this.children,
+    Key? key,
+    required this.children,
     this.visibleWidgetIndex = 0,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.linear,
-  })  : assert(children != null),
-        super(key: key);
+  }) : super(key: key);
 
   final List<Widget> children;
   final int visibleWidgetIndex;

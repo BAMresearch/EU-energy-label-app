@@ -10,8 +10,8 @@
 import 'package:energielabel_app/ui/misc/tab_routes.dart';
 
 class KnowHowRoutes implements TabRoute {
-  KnowHowRoutes.withName(String routeName) {
-    route = withName[routeName];
+  KnowHowRoutes.withName(String? routeName) {
+    route = withName![routeName!];
   }
 
   static const root = '/';
@@ -22,12 +22,15 @@ class KnowHowRoutes implements TabRoute {
       '/label_guide_categories_overview/label_guide_category_overview/checklists';
   static const labelGuideTips = '/label_guide_categories_overview/label_guide_category_overview/tips';
   static const labelGuideCategoryGuide = '/label_guide_categories_overview/label_guide_category_overview/guide';
+  static const labelGuideCategoryLight = '/label_guide_categories_overview/label_guide_category_overview/light';
+  static const labelGuideCategoryLightInfo =
+      '/label_guide_categories_overview/label_guide_category_overview/light/info';
   static const String whyIsThere = '/why_is_there';
   static const String regulations = '/regulations';
   static const String regulationDetails = '/regulations/details';
 
   @override
-  Map<String, String> withName = {
+  Map<String, String>? withName = {
     'glossary': glossary,
     'whyIsThere': whyIsThere,
     'labelGuideCategoriesOverview': labelGuideCategoriesOverview,
@@ -35,5 +38,5 @@ class KnowHowRoutes implements TabRoute {
   };
 
   @override
-  String route;
+  String? route;
 }

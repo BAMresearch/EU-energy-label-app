@@ -26,15 +26,15 @@ class ProductEntryItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(productFavorite.title ?? productFavorite.product.title, style: Theme.of(context).header1),
+          Text(productFavorite.title ?? productFavorite.product!.title!, style: Theme.of(context).header1),
           UrlLink(
-            destination: productFavorite.product.url,
+            destination: productFavorite.product!.url!,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
               child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.externalLinkIcon), height: 12),
+                SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.externalLinkIcon)!, height: 12),
                 SizedBox(width: 8),
-                Text(productFavorite.product.url,
+                Text(productFavorite.product!.url!,
                     style: Theme.of(context)
                         .defaultTextStyle
                         .copyWith(color: PdfColor.fromInt(BamColorPalette.bamBlue1Optimized.value))),

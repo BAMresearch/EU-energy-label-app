@@ -28,8 +28,8 @@ class ScannerPage extends StatefulPage {
 
 class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with WidgetsBindingObserver {
   final GlobalKey _qrViewKey = GlobalKey();
-  QRViewController _qrViewController;
-  ScannerViewModel _viewModel;
+  QRViewController? _qrViewController;
+  late ScannerViewModel _viewModel;
   bool _ignoreScannerEvents = false;
 
   @override
@@ -37,7 +37,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     _viewModel = createViewModel(context);
     scheduleMicrotask(() => _viewModel.onViewStarted());
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -45,19 +45,21 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     return ScannerViewModel(context: context);
   }
 
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-      _qrViewController.pauseCamera();
+      _qrViewController!.pauseCamera();
     }
     Fimber.i('resumeCamera(): CALLED');
-    _qrViewController.resumeCamera();
+    _qrViewController!.resumeCamera();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (_qrViewController != null && _qrViewController.hasPermissions != null && _qrViewController.hasPermissions) {
+    if (_qrViewController != null && _qrViewController!.hasPermissions) {
       if (state == AppLifecycleState.paused) {
         _pauseScanner();
       } else if (state == AppLifecycleState.resumed) {
@@ -74,7 +76,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     final cutOutSize = 230.0;
 
     return PageScaffold(
-      title: Translations.of(context).qrcode_page_title,
+      title: Translations.of(context)!.qrcode_page_title,
       body: VisibilityDetector(
         key: ValueKey('Scanner-Visibility-Detector'),
         onVisibilityChanged: _onVisibilityChanged,
@@ -102,6 +104,17 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
                     ),
                   ),
                 ),
+                // Actually, the size of the shape below should be measured and
+                // positioned by a Flexible, but due to:
+                // https://github.com/flutter/flutter/issues/14288
+                // there is a bug in the calculation when AntiAliasing is applied.
+                // Hence, a SizedBox is used, which constraints to a manually calculated
+                // and non-fractional height. While the height stays without any
+                // fractional numbers, no AntiAliasing is applied and the bug is
+                // omitted. The positioning should be the same as with a Flexible (+/- 5px).
+                // Eventually, when the bug is fixed, this workaround can be changed back
+                // to using a Flexible instead of a wrapping SizedBox.
+                // https://issues.init.de/browse/BAMENERGIE-107
                 SizedBox(
                   height: (MediaQuery.of(context).size.height * 0.23).ceilToDouble(),
                   child: DecoratedBox(
@@ -119,7 +132,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Text(
-                    Translations.of(context).scanner_instructions,
+                    Translations.of(context)!.scanner_instructions,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -134,9 +147,9 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
 
   @override
   void dispose() {
-    _qrViewController.dispose();
+    _qrViewController!.dispose();
     _viewModel.dispose();
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -149,12 +162,15 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
       _qrViewController = qrViewController;
     });
 
-    _qrViewController.scannedDataStream
+    // When a scan result comes in pause the camera and ignore the following events
+    // until the user closed the dialog or comes back from the details page.
+    _qrViewController!.scannedDataStream
         .where((_) => !_ignoreScannerEvents)
         .where((scanResult) => scanResult.format == BarcodeFormat.qrcode)
         .listen(
       (scanResult) async {
-        _qrViewController.dispose();
+        // await _pauseScanner(); // Is needed in order to resume camera on pushReplacement
+        _qrViewController!.dispose();
         if (!_viewModel.isDialogOpen) {
           _viewModel.onScanResult(scanResult.code.toLowerCase(), _onQRCodeInvalid, () {
             Navigator.pushReplacementNamed(context, '/');
@@ -177,12 +193,12 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
       context: context,
       builder: (context) {
         return BamDialog.message(
-          title: Translations.of(context).qrcode_invalid_dialog_title,
-          message: Translations.of(context).qrcode_invalid_dialog_message,
-          confirmButtonText: Translations.of(context).qrcode_invalid_dialog_button,
+          title: Translations.of(context)!.qrcode_invalid_dialog_title,
+          message: Translations.of(context)!.qrcode_invalid_dialog_message,
+          confirmButtonText: Translations.of(context)!.qrcode_invalid_dialog_button,
           onPressConfirm: () {
             Navigator.of(context).pop();
-            Navigator.pushReplacementNamed(this.context, '/');
+            Navigator.pushReplacementNamed(this.context, '/'); // this is needed to get the right tab navigation context
           },
         );
       },
@@ -191,7 +207,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
 
   Future<void> _pauseScanner() async {
     Fimber.i('pauseCamera(): CALLED');
-    await _qrViewController.pauseCamera();
+    await _qrViewController!.pauseCamera();
     _ignoreScannerEvents = true;
   }
 
@@ -206,7 +222,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     }
 
     Fimber.i('resumeCamera(): CALLED');
-    await _qrViewController.resumeCamera();
+    await _qrViewController!.resumeCamera();
     _ignoreScannerEvents = false;
   }
 }

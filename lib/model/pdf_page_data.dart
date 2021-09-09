@@ -3,11 +3,10 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:energielabel_app/model/know_how/label_guide/label_category_tip_data.dart';
 
 abstract class PdfPageData {
-  PdfPageData(this.pageCategory, this.titleProductCategory)
-      : assert(pageCategory != null);
+  PdfPageData(this.pageCategory, this.titleProductCategory);
 
   final String pageCategory;
-  final String titleProductCategory;
+  final String? titleProductCategory;
 }
 
 class ChecklistPdfPageData extends PdfPageData {
@@ -27,7 +26,7 @@ class TipsPdfPageData extends PdfPageData {
     this.tipsData,
   ) : super(pageCategory, titleProductCategory);
 
-  final LabelCategoryTipData tipsData;
+  final LabelCategoryTipData? tipsData;
 }
 
 class ProductsPdfPageData extends PdfPageData {

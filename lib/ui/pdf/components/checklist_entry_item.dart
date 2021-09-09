@@ -25,12 +25,12 @@ class ChecklistEntryItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgImage(
-            svg: entry.checked
-                ? SvgAsset.getSvgString(context, AssetPaths.checkedIcon)
-                : SvgAsset.getSvgString(context, AssetPaths.uncheckedIcon),
+            svg: entry.checked!
+                ? SvgAsset.getSvgString(context, AssetPaths.checkedIcon)!
+                : SvgAsset.getSvgString(context, AssetPaths.uncheckedIcon)!,
           ),
           SizedBox(width: 16),
-          Expanded(child: Text(entry.text)),
+          Expanded(child: Text(entry.text!)),
         ],
       ),
     );

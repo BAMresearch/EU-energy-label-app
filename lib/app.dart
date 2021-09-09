@@ -24,7 +24,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
+/// The BAM application.
+///
+/// Shows [SplashPage] while the upfront initialization is in progress and replaces
+/// it with the actual MaterialApp once finished.
 class App extends StatefulWidget {
+  // Holding the list of TabSpecifications so that they're build just once.
+  // Otherwise, whenever a new TabSpecification is created, a new GlobalKey is created for
+  // each TabNavigator, which makes Flutter think these are different widgets and recreates their state.
   @override
   _AppState createState() => _AppState();
 }
@@ -35,7 +42,7 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _appModel.onAppStarted(context);
     });
     super.initState();
@@ -56,8 +63,9 @@ class _AppState extends State<App> {
             supportedLocales: Translations.supportedLocales,
             initialRoute: appModel.isOnboardingFinished ? AppEntryRoutes.main : AppEntryRoutes.onboarding,
             builder: (context, widget) {
+              // Create the tab specifications with the localization-aware context.
               _createTabSpecifications(context);
-              return widget;
+              return widget!;
             },
             routes: {
               AppEntryRoutes.onboarding: (context) => OnboardingPage(showSkipButton: true),

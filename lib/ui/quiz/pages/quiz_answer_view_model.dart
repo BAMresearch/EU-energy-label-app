@@ -15,19 +15,19 @@ import 'package:energielabel_app/ui/quiz/routing.dart';
 import 'package:flutter/cupertino.dart';
 
 class QuizAnswerViewModel extends BaseViewModel {
-  QuizAnswerViewModel({@required this.quizState}) : assert(quizState != null);
+  QuizAnswerViewModel({required this.quizState});
 
   final QuizState quizState;
 
-  int get currentIndex => quizState.level.questions.indexOf(quizState.currentQuestion) + 1;
+  int get currentIndex => quizState.level.questions!.indexOf(quizState.currentQuestion) + 1;
 
-  int get maxIndex => quizState.level.questions.length;
+  int get maxIndex => quizState.level.questions!.length;
 
   double get progress => currentIndex / maxIndex;
 
-  bool get isCurrentAnswerCorrect => quizState.isCurrentAnswerCorrect;
+  bool? get isCurrentAnswerCorrect => quizState.isCurrentAnswerCorrect;
 
-  String get answerText => quizState.currentQuestion.explanation;
+  String? get answerText => quizState.currentQuestion.explanation;
 
   @override
   FutureOr<void> onViewStarted() {}

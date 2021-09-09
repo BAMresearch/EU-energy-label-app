@@ -12,12 +12,12 @@ import 'dart:ui';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 
+/// Overlay for the QR scanner which draws the full area with the given color.
 class ScannerOverlayShape extends ShapeBorder {
   ScannerOverlayShape({
-    @required this.overlayColor,
-    @required this.opacity,
-  })  : assert(overlayColor != null),
-        assert(opacity != null);
+    required this.overlayColor,
+    required this.opacity,
+  });
 
   final Color overlayColor;
   final double opacity;
@@ -26,14 +26,14 @@ class ScannerOverlayShape extends ShapeBorder {
   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) {
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
       ..fillType = PathFillType.evenOdd
       ..addPath(getOuterPath(rect), Offset.zero);
   }
 
   @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     Path _getLeftTopPath(Rect rect) {
       return Path()
         ..moveTo(rect.left, rect.bottom)
@@ -48,7 +48,7 @@ class ScannerOverlayShape extends ShapeBorder {
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     final backgroundPaint = Paint()
       ..shader = LinearGradient(
         colors: [

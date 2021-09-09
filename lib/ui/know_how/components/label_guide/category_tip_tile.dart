@@ -19,16 +19,14 @@ import 'package:flutter/material.dart';
 
 class CategoryTipTile extends StatelessWidget {
   CategoryTipTile({
-    @required this.tipNumber,
-    @required this.labelTip,
-    @required this.onLinkTap,
-  })  : assert(tipNumber != null),
-        assert(labelTip != null),
-        assert(onLinkTap != null);
+    required this.tipNumber,
+    required this.labelTip,
+    required this.onLinkTap,
+  });
 
   final int tipNumber;
   final LabelTip labelTip;
-  final Future<bool> Function(String url) onLinkTap;
+  final Future<bool> Function(String? url) onLinkTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +35,12 @@ class CategoryTipTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Header
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               '$tipNumber. ${labelTip.title}',
-              style: Theme.of(context).textTheme.headline2.copyWith(color: BamColorPalette.bamBlue3),
+              style: Theme.of(context).textTheme.headline2!.copyWith(color: BamColorPalette.bamBlue3),
             ),
           ),
 
@@ -66,13 +65,13 @@ class CategoryTipTile extends StatelessWidget {
           ),
 
           if (labelTip.informationText != null)
-            _buildGeneralInformationWidget(context, labelTip.informationTitle, labelTip.informationText)
+            _buildGeneralInformationWidget(context, labelTip.informationTitle, labelTip.informationText!)
         ],
       ),
     );
   }
 
-  Widget _buildGeneralInformationWidget(BuildContext context, String title, String informationText) {
+  Widget _buildGeneralInformationWidget(BuildContext context, String? title, String informationText) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: GeneralInformationWidget(informationTitle: title, informationText: informationText),
@@ -93,20 +92,20 @@ class CategoryTipTile extends StatelessWidget {
   }
 
   Widget _buildTipContentImageTexts() {
-    labelTip.labelTipContentImages
-        .sort((contentImage1, contentImage2) => contentImage1.orderIndex.compareTo(contentImage2.orderIndex));
+    labelTip.labelTipContentImages!
+        .sort((contentImage1, contentImage2) => contentImage1.orderIndex!.compareTo(contentImage2.orderIndex!));
     return Column(
-      children: labelTip.labelTipContentImages
+      children: labelTip.labelTipContentImages!
           .map((contentImage) => CategoryTipImageTextSection(content: contentImage))
           .toList(),
     );
   }
 
   Widget _buildTipContentImage() {
-    return CategoryTipImageSection(imageData: labelTip.graphicData);
+    return CategoryTipImageSection(imageData: labelTip.graphicData!);
   }
 
   Widget _buildTipContentVideo() {
-    return CategoryTipVideoSection(videoUrl: labelTip.videoPath);
+    return CategoryTipVideoSection(videoUrl: labelTip.videoPath!);
   }
 }

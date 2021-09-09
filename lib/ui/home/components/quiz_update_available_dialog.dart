@@ -13,10 +13,9 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class QuizUpdateAvailableDialog extends StatelessWidget {
   const QuizUpdateAvailableDialog({
-    @required this.onQuizUpdateConfirmed,
-    @required this.onQuizUpdateDeclined,
-  })  : assert(onQuizUpdateConfirmed != null),
-        assert(onQuizUpdateDeclined != null);
+    required this.onQuizUpdateConfirmed,
+    required this.onQuizUpdateDeclined,
+  });
 
   final VoidCallback onQuizUpdateConfirmed;
   final VoidCallback onQuizUpdateDeclined;
@@ -24,14 +23,14 @@ class QuizUpdateAvailableDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BamDialog.message(
-      title: Translations.of(context).quiz_update_available_dialog_title,
-      message: Translations.of(context).quiz_update_available_dialog_message,
-      denyButtonText: Translations.of(context).quiz_update_available_dialog_cancel_button,
+      title: Translations.of(context)!.quiz_update_available_dialog_title,
+      message: Translations.of(context)!.quiz_update_available_dialog_message,
+      denyButtonText: Translations.of(context)!.quiz_update_available_dialog_cancel_button,
       onPressDeny: () {
         onQuizUpdateDeclined();
         Navigator.of(context).pop();
       },
-      confirmButtonText: Translations.of(context).quiz_update_available_dialog_update_button,
+      confirmButtonText: Translations.of(context)!.quiz_update_available_dialog_update_button,
       onPressConfirm: () {
         onQuizUpdateConfirmed();
         Navigator.of(context).pop();

@@ -12,6 +12,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'regulation_data.g.dart';
 
+// on change class call "flutter packages pub run build_runner build" in project root to generate *.g.dart file
+// alternatively use "flutter packages pub run build_runner watch" for continuous building
+
 @JsonSerializable()
 class RegulationData {
   RegulationData({this.title, this.description, this.regulations});
@@ -19,13 +22,13 @@ class RegulationData {
   factory RegulationData.fromJson(Map<String, dynamic> json) => _$RegulationDataFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'regulations')
-  final List<Regulation> regulations;
+  final List<Regulation>? regulations;
 
   Map<String, dynamic> toJson() => _$RegulationDataToJson(this);
 

@@ -19,7 +19,7 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
 class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
-  QuizQuestionPage({@required this.quizState}) : assert(quizState != null);
+  QuizQuestionPage({required this.quizState});
 
   final QuizState quizState;
 
@@ -37,7 +37,7 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
                 backgroundColor: BamColorPalette.bamWhite,
                 value: viewModel.progress,
                 minHeight: 8,
-                semanticsValue: Translations.of(context)
+                semanticsValue: Translations.of(context)!
                     .quiz_question_label(viewModel.currentIndex.toString(), viewModel.maxIndex.toString()),
               ),
               Expanded(
@@ -47,38 +47,41 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        //replace with progress lines
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: Text(
-                            Translations.of(context)
+                            Translations.of(context)!
                                 .quiz_question_label(viewModel.currentIndex.toString(), viewModel.maxIndex.toString())
                                 .toUpperCase(),
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText2
+                                .bodyText2!
                                 .copyWith(color: BamColorPalette.bamBlack45Optimized),
                           ),
                         ),
                         SizedBox(height: 16),
                         Text(
-                          viewModel.questionText,
+                          viewModel.questionText!,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline1.copyWith(color: BamColorPalette.bamBlue3),
+                          style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
                         ),
+                        //image component
                         Visibility(
-                          visible: false,
+                          visible: false, //todo replace with value
                           child: Image.network(''),
                         ),
+                        //video component
                         Visibility(
-                          visible: false,
-                          child: Image.network(''),
+                          visible: false, //todo replace with value
+                          child: Image.network(''), //todo replace with Video
                         ),
                         SizedBox(height: 16),
-                        ...viewModel.quizState.currentQuestion.answers
+                        ...viewModel.quizState.currentQuestion.answers!
                             .map((answerOption) => Padding(
                                   padding: EdgeInsets.symmetric(vertical: 8),
                                   child: RadioButton(
-                                      caption: answerOption.title,
+                                      caption: answerOption.title!,
                                       value: answerOption,
                                       groupValue: viewModel.selectedAnswer,
                                       onChanged: viewModel.onAnswerSelected),
@@ -98,8 +101,8 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
                 ),
                 onPressed: viewModel.selectedAnswer == null ? null : () => viewModel.onTouchNextButton(context),
                 child: Text(
-                  Translations.of(context).quiz_next_button.toUpperCase(),
-                  style: Theme.of(context).textTheme.button.copyWith(
+                  Translations.of(context)!.quiz_next_button.toUpperCase(),
+                  style: Theme.of(context).textTheme.button!.copyWith(
                       color: viewModel.selectedAnswer == null
                           ? BamColorPalette.bamWhite.withOpacity(0.5)
                           : BamColorPalette.bamWhite),

@@ -8,12 +8,11 @@ part of 'quiz.dart';
 
 Quiz _$QuizFromJson(Map<String, dynamic> json) {
   return Quiz(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    levels: (json['levels'] as List)
-        ?.map(
-            (e) => e == null ? null : Level.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    title: json['title'] as String?,
+    description: json['description'] as String?,
+    levels: (json['levels'] as List<dynamic>?)
+        ?.map((e) => Level.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

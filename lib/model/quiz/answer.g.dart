@@ -8,8 +8,8 @@ part of 'answer.dart';
 
 Answer _$AnswerFromJson(Map<String, dynamic> json) {
   return Answer(
-    title: json['title'] as String,
-    isCorrect: json['correct'] as bool,
+    title: json['title'] as String?,
+    isCorrect: json['correct'] as bool?,
   );
 }
 

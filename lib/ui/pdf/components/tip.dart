@@ -31,7 +31,7 @@ class Tip extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              '${labelTip.orderIndex + 1}. ${labelTip.title}',
+              '${labelTip.orderIndex! + 1}. ${labelTip.title}',
               style: Theme.of(context).header2,
             ),
           ),
@@ -43,13 +43,13 @@ class Tip extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: PdfHtmlUtils.htmlStringToPdfWidget(context, labelTip.description),
+                  child: PdfHtmlUtils.htmlStringToPdfWidget(context, labelTip.description!),
                 ),
               )
             ],
           ),
           SizedBox(height: 8),
-          if (labelTip.informationText != null) GeneralInfoBox(content: labelTip.informationText),
+          if (labelTip.informationText != null) GeneralInfoBox(content: labelTip.informationText!),
           SizedBox(height: 8),
         ],
       ),

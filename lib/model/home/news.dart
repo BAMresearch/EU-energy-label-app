@@ -17,27 +17,27 @@ class News {
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'language')
-  final String language;
+  final String? language;
 
   @JsonKey(name: 'pubDate')
-  final DateTime publicationDate;
+  final DateTime? publicationDate;
 
-  final bool markedRead;
+  final bool? markedRead;
 
   Map<String, dynamic> toJson() => _$NewsToJson(this);
 
   News copyWith({
-    String title,
-    String description,
-    String language,
-    String publicationDate,
-    bool markedRead,
+    String? title,
+    String? description,
+    String? language,
+    DateTime? publicationDate,
+    bool? markedRead,
   }) {
     return News(
       title: title ?? this.title,

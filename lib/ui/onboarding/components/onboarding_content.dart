@@ -14,9 +14,9 @@ class OnboardingItem {
   OnboardingItem(this.title, this.semanticTitle, this.description, this.imageAsset);
 
   final String title;
-  final String semanticTitle;
+  final String? semanticTitle;
   final String description;
-  final String imageAsset;
+  final String? imageAsset;
 }
 
 class OnboardingContent extends StatelessWidget {
@@ -48,7 +48,7 @@ class OnboardingContent extends StatelessWidget {
                   width: width,
                   child: Text(
                     item.title,
-                    style: Theme.of(context).textTheme.headline1.copyWith(color: BamColorPalette.bamBlue3),
+                    style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
                     textAlign: TextAlign.center,
                     semanticsLabel: item.semanticTitle,
                   ),
@@ -59,7 +59,7 @@ class OnboardingContent extends StatelessWidget {
                   child: Text(
                     item.description,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlack80),
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlack80),
                   ),
                 ),
               ],

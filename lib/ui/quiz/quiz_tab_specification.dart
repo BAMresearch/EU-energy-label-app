@@ -14,10 +14,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
+/// Tab specification of the Quiz section.
 class QuizTabSpecification extends TabSpecification {
   QuizTabSpecification(BuildContext context)
       : super(
-          label: Translations.of(context).tab_label_quiz,
+          label: Translations.of(context)!.tab_label_quiz,
           iconAssetPath: AssetPaths.menuQuizIcon,
           onGenerateRoute: QuizRouter.onGenerateRoute,
         );

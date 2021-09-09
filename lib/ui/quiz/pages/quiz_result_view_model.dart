@@ -14,22 +14,20 @@ import 'package:energielabel_app/ui/quiz/quiz_state.dart';
 import 'package:flutter/cupertino.dart';
 
 class QuizResultViewModel extends BaseViewModel {
-  QuizResultViewModel({@required this.quizState, @required this.context})
-      : assert(quizState != null),
-        assert(context != null);
+  QuizResultViewModel({required this.quizState, required this.context});
 
   final QuizState quizState;
   final BuildContext context;
 
-  int get maxIndex => quizState.level.questions.length;
+  int get maxIndex => quizState.level.questions!.length;
 
   int get correctAnswers => quizState.correctAnswers;
 
-  String get positiveResult => quizState.level.score.positive;
+  String? get positiveResult => quizState.level.score!.positive;
 
-  String get negativeResult => quizState.level.score.negative;
+  String? get negativeResult => quizState.level.score!.negative;
 
-  bool get isResultPositive => correctAnswers >= quizState.level.score.minPositiveScore;
+  bool get isResultPositive => correctAnswers >= quizState.level.score!.minPositiveScore!;
 
   @override
   FutureOr<void> onViewStarted() {}

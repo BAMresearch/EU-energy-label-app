@@ -21,17 +21,13 @@ import 'package:pedantic/pedantic.dart';
 
 class FavoritesEditViewModel extends BaseViewModel {
   FavoritesEditViewModel({
-    @required FavoriteType favoriteType,
-    @required int productCategory,
-    @required FavoriteRepository favoriteRepository,
-    @required LabelGuideRepository labelGuideRepository,
-    @required VoidCallback deletionConfirmationCallback,
-  })  : assert(favoriteType != null),
-        assert((favoriteType == FavoriteType.products && productCategory != null) ||
+    required FavoriteType favoriteType,
+    required int? productCategory,
+    required FavoriteRepository favoriteRepository,
+    required LabelGuideRepository labelGuideRepository,
+    required VoidCallback deletionConfirmationCallback,
+  })  : assert((favoriteType == FavoriteType.products && productCategory != null) ||
             (favoriteType != FavoriteType.products && productCategory == null)),
-        assert(favoriteRepository != null),
-        assert(labelGuideRepository != null),
-        assert(deletionConfirmationCallback != null),
         _favoriteType = favoriteType,
         _productCategory = productCategory,
         _favoriteRepository = favoriteRepository,
@@ -39,7 +35,7 @@ class FavoritesEditViewModel extends BaseViewModel {
         _deletionConfirmationCallback = deletionConfirmationCallback;
 
   final FavoriteType _favoriteType;
-  final int _productCategory;
+  final int? _productCategory;
   final FavoriteRepository _favoriteRepository;
   final LabelGuideRepository _labelGuideRepository;
   final VoidCallback _deletionConfirmationCallback;
@@ -54,11 +50,14 @@ class FavoritesEditViewModel extends BaseViewModel {
   }
 
   void onDeleteFavoritesAction(FavoriteListSectionEntry listItem) {
+    // Keep a backup in case the user wants to restore the items.
     _restorableItems.addAll(List.of(_favoriteListSectionEntries));
 
+    // Remove them from the UI state.
     _favoriteListSectionEntries.removeWhere((favoriteListItem) => favoriteListItem == listItem);
     notifyListeners();
 
+    // Show a snackBar with undo action.
     _deletionConfirmationCallback.call();
   }
 
@@ -67,11 +66,13 @@ class FavoritesEditViewModel extends BaseViewModel {
       await _saveEditedFavorites();
       _restorableItems.clear();
     } catch (error, stacktrace) {
+      // TODO Should the user be informed and the items be visible in the UI again?
       Fimber.e('Failed to permanently delete favorites.', ex: error, stacktrace: stacktrace);
     }
   }
 
   void onUndoDeletionAction() {
+    // Restore the favorites
     _favoriteListSectionEntries.clear();
     _favoriteListSectionEntries.addAll(List.from(_restorableItems));
     _restorableItems.clear();
@@ -89,10 +90,10 @@ class FavoritesEditViewModel extends BaseViewModel {
     unawaited(_saveEditedFavorites());
   }
 
-  Future<String> _resolveTitleForCategory(int categoryId) async {
+  Future<String?> _resolveTitleForCategory(int? categoryId) async {
     final category = await _labelGuideRepository.getCategory(categoryId);
-    if (category.isPresent) {
-      return category.value.productType;
+    if (category != null) {
+      return category.productType;
     } else {
       Fimber.e('Category lookup failed with ID: $categoryId');
       return '';
@@ -100,15 +101,17 @@ class FavoritesEditViewModel extends BaseViewModel {
   }
 
   void _observeFavorites() {
-    Stream<List<Favorite>> favoritesStream;
-    FutureOr<String> Function(Favorite) titleResolver;
+    late Stream<List<Favorite>?> favoritesStream;
+    late FutureOr<String?> Function(Favorite) titleResolver;
 
     switch (_favoriteType) {
       case FavoriteType.products:
-        favoritesStream = _favoriteRepository.favoriteProductsUpdates
+        favoritesStream = _favoriteRepository.favoriteProductsUpdates!
             .map((productsForCategories) => productsForCategories[_productCategory]);
         titleResolver = (favorite) {
           final productFavorite = favorite as ProductFavorite;
+          // A ProductFavorite might be created without an attached Product object (QR scanner input).
+          // In that case, we fall back to the ProductFavorite's title.
           return productFavorite.product?.title ?? productFavorite.title;
         };
         break;
@@ -125,10 +128,10 @@ class FavoritesEditViewModel extends BaseViewModel {
     subscriptions.add(favoritesStream.listen((favorites) async {
       _favoriteListSectionEntries.clear();
 
-      for (final favorite in favorites) {
+      for (final favorite in favorites!) {
         _favoriteListSectionEntries.add(
           FavoriteListSectionEntry(
-            title: await titleResolver(favorite),
+            title: (await (titleResolver(favorite)) ?? ''),
             favoriteType: _favoriteType,
             favorite: favorite,
           ),
@@ -136,6 +139,7 @@ class FavoritesEditViewModel extends BaseViewModel {
       }
       notifyListeners();
     })).onError((error, stacktrace) {
+      // TODO Show error to the user.
       Fimber.e('Failed to observe the favorites.', ex: error, stacktrace: stacktrace);
     });
   }
@@ -144,22 +148,27 @@ class FavoritesEditViewModel extends BaseViewModel {
     try {
       switch (_favoriteType) {
         case FavoriteType.products:
-          final favorites = _favoriteListSectionEntries.map<ProductFavorite>((listItem) => listItem.favorite).toList();
-          _favoriteRepository.latestProductList[_productCategory] = favorites;
-          await _favoriteRepository.updateProductFavorites(_favoriteRepository.latestProductList);
+          final favorites = _favoriteListSectionEntries
+              .map<ProductFavorite>((listItem) => listItem.favorite as ProductFavorite)
+              .toList();
+          _favoriteRepository.latestProductList![_productCategory] = favorites;
+          await _favoriteRepository.updateProductFavorites(_favoriteRepository.latestProductList!);
           break;
         case FavoriteType.checklists:
-          final favorites =
-              _favoriteListSectionEntries.map<ChecklistFavorite>((listItem) => listItem.favorite).toList();
+          final favorites = _favoriteListSectionEntries
+              .map<ChecklistFavorite>((listItem) => listItem.favorite as ChecklistFavorite)
+              .toList();
           await _favoriteRepository.updateChecklistFavorites(favorites);
           break;
         case FavoriteType.tips:
-          final favorites =
-              _favoriteListSectionEntries.map<CategoryTipsFavorite>((listItem) => listItem.favorite).toList();
+          final favorites = _favoriteListSectionEntries
+              .map<CategoryTipsFavorite>((listItem) => listItem.favorite as CategoryTipsFavorite)
+              .toList();
           await _favoriteRepository.updateCategoryTipsFavorites(favorites);
           break;
       }
     } catch (e, stacktrace) {
+      // TODO Should we show an error message? Should we restore the previous list state?
       Fimber.e('Failed to save the updated favorites.', ex: e, stacktrace: stacktrace);
     }
   }

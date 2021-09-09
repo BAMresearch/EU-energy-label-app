@@ -23,25 +23,18 @@ import 'package:energielabel_app/ui/quiz/quiz_tab_specification.dart';
 import 'package:energielabel_app/ui/quiz/routing.dart';
 import 'package:energielabel_app/ui/scanner/routing.dart';
 import 'package:energielabel_app/ui/scanner/scanner_tab_specification.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:optional/optional.dart';
 import 'package:pedantic/pedantic.dart';
 
 class HomeViewModel extends BaseViewModel {
   HomeViewModel({
-    @required BuildContext context,
-    @required QuizRepository quizRepository,
-    @required NewsRepository newsRepository,
-    @required SettingsRepository settingsRepository,
-    @required QuizUpdateAvailableCallback quizUpdateAvailableCallback,
-  })  : assert(context != null),
-        assert(quizRepository != null),
-        assert(newsRepository != null),
-        assert(settingsRepository != null),
-        assert(quizUpdateAvailableCallback != null),
-        _context = context,
+    required BuildContext context,
+    required QuizRepository quizRepository,
+    required NewsRepository newsRepository,
+    required SettingsRepository settingsRepository,
+    required QuizUpdateAvailableCallback quizUpdateAvailableCallback,
+  })   : _context = context,
         _quizRepository = quizRepository,
         _newsRepository = newsRepository,
         _settingsRepository = settingsRepository,
@@ -52,11 +45,11 @@ class HomeViewModel extends BaseViewModel {
   final QuizRepository _quizRepository;
   final SettingsRepository _settingsRepository;
   final QuizUpdateAvailableCallback _quizUpdateAvailableCallback;
-  Optional<News> _unreadNews = Optional.empty();
+  News? _unreadNews;
 
-  bool get hasUnreadNews => _unreadNews.isPresent;
+  bool get hasUnreadNews => _unreadNews != null;
 
-  Optional<News> get unreadNews => _unreadNews;
+  News? get unreadNews => _unreadNews;
 
   @override
   void onViewStarted() {
@@ -70,8 +63,8 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void onNewsClosedAction() {
-    unawaited(_newsRepository.saveNews(_unreadNews.value.copyWith(markedRead: true)));
-    _unreadNews = Optional.empty();
+    unawaited(_newsRepository.saveNews(_unreadNews!.copyWith(markedRead: true)));
+    _unreadNews = null;
     notifyListeners();
   }
 
@@ -81,6 +74,7 @@ class HomeViewModel extends BaseViewModel {
       unawaited(_settingsRepository.setDeferredQuizUpdateAvailable(false));
     } catch (e) {
       Fimber.e('Failed to sync the quiz.', ex: e);
+      // TODO Notify the user?
     }
   }
 
@@ -89,37 +83,40 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void onLabelGuideTilePressed() {
-    TabScaffold.of(_context).navigateIntoTab(KnowHowTabSpecification, KnowHowRoutes.labelGuideCategoriesOverview);
+    TabScaffold.of(_context)!.navigateIntoTab(KnowHowTabSpecification, KnowHowRoutes.labelGuideCategoriesOverview);
   }
 
   void onScannerTilePressed() {
-    TabScaffold.of(_context).navigateIntoTab(ScannerTabSpecification, ScannerRoutes.root);
+    TabScaffold.of(_context)!.navigateIntoTab(ScannerTabSpecification, ScannerRoutes.root);
   }
 
   void onFavoriteTilePressed() {
-    TabScaffold.of(_context).navigateIntoTab(FavoritesTabSpecification, FavoritesRoutes.root);
+    TabScaffold.of(_context)!.navigateIntoTab(FavoritesTabSpecification, FavoritesRoutes.root);
   }
 
   void onFirstStepsTilePressed() {
-    TabScaffold.of(_context).navigateIntoTab(HomeTabSpecification, HomeRoutes.firstSteps);
+    TabScaffold.of(_context)!.navigateIntoTab(HomeTabSpecification, HomeRoutes.firstSteps);
   }
 
   void onQuizTilePressed() {
-    TabScaffold.of(_context).navigateIntoTab(QuizTabSpecification, QuizRoutes.quizEntry);
+    TabScaffold.of(_context)!.navigateIntoTab(QuizTabSpecification, QuizRoutes.quizEntry);
   }
 
   Future<void> _loadUnreadNews() async {
     try {
+      // Sync the news.
       await _newsRepository.syncNews();
 
+      // Check if there are some unread news.
       final news = _newsRepository.loadNews();
-      if (news.isPresent && !news.value.markedRead) {
+      if (news != null && !news.markedRead!) {
         _unreadNews = news;
       } else {
-        _unreadNews = Optional.empty();
+        _unreadNews = null;
       }
     } catch (e) {
       Fimber.e('Failed to load unread news.', ex: e);
+      // TODO Notify user?
     } finally {
       notifyListeners();
     }
@@ -132,6 +129,7 @@ class HomeViewModel extends BaseViewModel {
         _quizUpdateAvailableCallback();
       }
     } catch (e) {
+      // TODO Proper error handling
       Fimber.e('Failed to determine if quiz updates are available.', ex: e);
     }
   }

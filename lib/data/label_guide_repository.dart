@@ -9,6 +9,7 @@
 
 import 'dart:convert';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:energielabel_app/data/asset_paths.dart';
 import 'package:energielabel_app/data/persistence/label_guide_dao.dart';
 import 'package:energielabel_app/data/repository_exception.dart';
@@ -18,35 +19,30 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:energielabel_app/model/know_how/label_guide/label_category_tip_data.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_guide.dart';
 import 'package:flutter/services.dart';
-import 'package:optional/optional.dart';
 
 class LabelGuideRepository {
-  LabelGuideRepository(AssetBundle assetBundle, DeviceInfo deviceInfo, LabelGuideDao labelGuideDao)
-      : assert(assetBundle != null),
-        assert(deviceInfo != null),
-        _assetBundle = assetBundle,
+  LabelGuideRepository(AssetBundle assetBundle, DeviceInfo deviceInfo, LabelGuideDao? labelGuideDao)
+      : _assetBundle = assetBundle,
         _deviceInfo = deviceInfo,
         _labelGuideDao = labelGuideDao;
 
   final AssetBundle _assetBundle;
   final DeviceInfo _deviceInfo;
-  final LabelGuideDao _labelGuideDao;
+  final LabelGuideDao? _labelGuideDao;
 
   Future<List<LabelCategory>> getCategories() async {
     final labelGuide = await loadLabelGuide();
-    return List.unmodifiable(labelGuide.labelCategories);
+    return List.unmodifiable(labelGuide.labelCategories!);
   }
 
-  Future<Optional<LabelCategory>> getCategory(int categoryId) async {
+  Future<LabelCategory?> getCategory(int? categoryId) async {
     final labelGuide = await loadLabelGuide();
-    return Optional.ofNullable(
-      labelGuide.labelCategories.singleWhere((category) => category.id == categoryId, orElse: () => null),
-    );
+    return labelGuide.labelCategories!.singleWhereOrNull((category) => category.id == categoryId);
   }
 
-  Future<LabelCategory> getCategoryForId(int categoryId) async {
+  Future<LabelCategory?> getCategoryForId(int? categoryId) async {
     final labelGuide = await loadLabelGuide();
-    for (final category in labelGuide.labelCategories) {
+    for (final category in labelGuide.labelCategories!) {
       if (categoryId == category.id) {
         return category;
       }
@@ -54,9 +50,9 @@ class LabelGuideRepository {
     return null;
   }
 
-  Future<LabelCategory> getCategoryForChecklistData(LabelCategoryChecklistData labelCategoryChecklistData) async {
+  Future<LabelCategory?> getCategoryForChecklistData(LabelCategoryChecklistData labelCategoryChecklistData) async {
     final labelGuide = await loadLabelGuide();
-    for (final category in labelGuide.labelCategories) {
+    for (final category in labelGuide.labelCategories!) {
       if (category.checklistData == labelCategoryChecklistData) {
         return category;
       }
@@ -64,9 +60,9 @@ class LabelGuideRepository {
     return null;
   }
 
-  Future<LabelCategory> getCategoryForTips(LabelCategoryTipData tipData) async {
+  Future<LabelCategory?> getCategoryForTips(LabelCategoryTipData tipData) async {
     final labelGuide = await loadLabelGuide();
-    for (final category in labelGuide.labelCategories) {
+    for (final category in labelGuide.labelCategories!) {
       if (category.tipData == tipData) {
         return category;
       }
@@ -87,11 +83,11 @@ class LabelGuideRepository {
     }
   }
 
-  Future<void> saveCheckboxEntryState(bool checked, int checklistEntryId, int checklistId) async {
-    await _labelGuideDao.saveChecklistEntryState(checked, checklistEntryId, checklistId);
+  Future<void> saveCheckboxEntryState(bool checked, int? checklistEntryId, int? checklistId) async {
+    await _labelGuideDao!.saveChecklistEntryState(checked, checklistEntryId, checklistId);
   }
 
-  bool getCheckboxEntryState(int checklistEntryId, int checklistId) {
-    return _labelGuideDao.getChecklistEntryState(checklistEntryId, checklistId);
+  bool getCheckboxEntryState(int? checklistEntryId, int? checklistId) {
+    return _labelGuideDao!.getChecklistEntryState(checklistEntryId, checklistId);
   }
 }

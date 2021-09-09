@@ -8,13 +8,12 @@ part of 'question.dart';
 
 Question _$QuestionFromJson(Map<String, dynamic> json) {
   return Question(
-    viewType: json['view-type'] as String,
-    title: json['title'] as String,
-    explanation: json['explanation'] as String,
-    answers: (json['answers'] as List)
-        ?.map((e) =>
-            e == null ? null : Answer.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    viewType: json['view-type'] as String?,
+    title: json['title'] as String?,
+    explanation: json['explanation'] as String?,
+    answers: (json['answers'] as List<dynamic>?)
+        ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

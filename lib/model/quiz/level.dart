@@ -20,16 +20,16 @@ class Level {
   factory Level.fromJson(Map<String, dynamic> json) => _$LevelFromJson(json);
 
   @JsonKey(name: 'title')
-  final String name;
+  final String? name;
 
   @JsonKey(name: 'icon-svg')
-  final String icon;
+  final String? icon;
 
   @JsonKey(name: 'questions')
-  final List<Question> questions;
+  final List<Question>? questions;
 
   @JsonKey(name: 'score')
-  final Score score;
+  final Score? score;
 
   Map<String, dynamic> toJson() => _$LevelToJson(this);
 

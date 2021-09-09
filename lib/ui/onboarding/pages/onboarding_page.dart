@@ -24,39 +24,39 @@ import 'package:provider/provider.dart';
 import 'package:responsive_layout_builder/responsive_layout_builder.dart';
 
 class OnboardingPage extends StatelessPage<OnboardingViewModel> {
-  OnboardingPage({Key key, this.showSkipButton = true});
+  OnboardingPage({Key? key, this.showSkipButton = true});
 
   final bool showSkipButton;
 
   List<OnboardingItem> _onBoardingContent(BuildContext context) => [
         OnboardingItem(
-          Translations.of(context).onboarding_page_1_title,
+          Translations.of(context)!.onboarding_page_1_title,
           null,
-          Translations.of(context).onboarding_page_1_description,
-          null,
-        ),
-        OnboardingItem(
-          Translations.of(context).onboarding_page_2_title,
-          null,
-          Translations.of(context).onboarding_page_2_description,
+          Translations.of(context)!.onboarding_page_1_description,
           null,
         ),
         OnboardingItem(
-          Translations.of(context).onboarding_page_3_title,
-          Translations.of(context).onboarding_page_3_title_semantic,
-          Translations.of(context).onboarding_page_3_description,
+          Translations.of(context)!.onboarding_page_2_title,
+          null,
+          Translations.of(context)!.onboarding_page_2_description,
           null,
         ),
         OnboardingItem(
-          Translations.of(context).onboarding_page_4_title,
-          null,
-          Translations.of(context).onboarding_page_4_description,
+          Translations.of(context)!.onboarding_page_3_title,
+          Translations.of(context)!.onboarding_page_3_title_semantic,
+          Translations.of(context)!.onboarding_page_3_description,
           null,
         ),
         OnboardingItem(
-          Translations.of(context).onboarding_page_5_title,
+          Translations.of(context)!.onboarding_page_4_title,
           null,
-          Translations.of(context).onboarding_page_5_description,
+          Translations.of(context)!.onboarding_page_4_description,
+          null,
+        ),
+        OnboardingItem(
+          Translations.of(context)!.onboarding_page_5_title,
+          null,
+          Translations.of(context)!.onboarding_page_5_description,
           null,
         ),
       ];
@@ -88,7 +88,7 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
   OnboardingViewModel createViewModel(BuildContext context) {
     return OnboardingViewModel(
       context: context,
-      settingsRepository: ServiceLocator().get<SettingsRepository>(),
+      settingsRepository: ServiceLocator().get<SettingsRepository>()!,
     );
   }
 
@@ -103,8 +103,8 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
           ),
           onPressed: viewModel.onCompleteAction,
           child: Text(viewModel.isLastPage
-              ? Translations.of(context).onboarding_finish_button
-              : Translations.of(context).onboarding_skip_button),
+              ? Translations.of(context)!.onboarding_finish_button
+              : Translations.of(context)!.onboarding_skip_button),
         ),
       ),
     );

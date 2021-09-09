@@ -17,11 +17,9 @@ import 'package:pedantic/pedantic.dart';
 
 class OnboardingViewModel extends BaseViewModel {
   OnboardingViewModel({
-    @required BuildContext context,
-    @required SettingsRepository settingsRepository,
-  })  : assert(context != null),
-        assert(settingsRepository != null),
-        _context = context,
+    required BuildContext context,
+    required SettingsRepository settingsRepository,
+  })   : _context = context,
         _settingsRepository = settingsRepository;
 
   static const int _pageCount = 5;

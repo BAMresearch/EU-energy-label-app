@@ -8,11 +8,9 @@ part of 'why_is_there.dart';
 
 WhyIsThere _$WhyIsThereFromJson(Map<String, dynamic> json) {
   return WhyIsThere(
-    entries: (json['why_is_there_entries'] as List)
-        ?.map((e) => e == null
-            ? null
-            : WhyIsThereEntry.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    entries: (json['why_is_there_entries'] as List<dynamic>?)
+        ?.map((e) => WhyIsThereEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

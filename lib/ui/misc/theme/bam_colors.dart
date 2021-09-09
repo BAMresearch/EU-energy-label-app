@@ -28,6 +28,9 @@ class BamColorPalette {
   static const Color bamBlack80 = Color(0xFF325463);
 
   static const Color bamLightGrey = Color(0xffd3dfe9);
+  static const Color bamGradientGrey = Color(0xFFE3EBF0);
+  static const Color bamGradientLightGrey = Color(0xfff4f7f9);
+  static const Color bamGradientVeryLightGrey = Color(0xfff6f8fa);
 
   static const Color bamYellow1 = Color(0xFFFFDE02);
   static const Color bamYellow2 = Color(0xFFFAB70D);
@@ -45,6 +48,7 @@ class BamColorPalette {
   static const Color bamGreen4 = Color(0xFF2C7C3A);
 
   static const Color bamBlue1 = Color(0xFF00AFF0);
+  static const Color bamBlue1Variant = Color(0xff199EE3);
   static const Color bamBlue1Optimized = Color(0xFF189CD3);
   static const Color bamBlue2 = Color(0xFF048FBF);
   static const Color bamBlue2Optimized = Color(0xFF0089BB);
@@ -54,13 +58,18 @@ class BamColorPalette {
   static const LinearGradient bamGrayGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.topRight,
-    colors: [Color(0xFFB8CADC), Color(0xFFE3EBF0)],
+    colors: [Color(0xFFB8CADC), bamGradientGrey],
   );
 
   static const LinearGradient bamSplashGrayGradient = LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
-    colors: [Color(0xFF99AFC0), Color(0xFFB8CADC), Color(0xFFE3EBF0), Color(0xFFE3EBF0)],
+    colors: [Color(0xFF99AFC0), Color(0xFFB8CADC), bamGradientGrey, bamGradientGrey],
+  );
+
+  static const LinearGradient bamLightAdviserGrayGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    colors: [Color(0xFFB8CADC), bamGradientGrey],
   );
 }
 
@@ -70,19 +79,23 @@ class BamColorScheme {
   static final ColorScheme colorScheme = ColorScheme(
     brightness: Brightness.light,
 
+    // Backgrounds
     background: BamColorPalette.bamBlack10Intensity50,
     onBackground: BamColorPalette.bamBlack,
     surface: Colors.white,
     onSurface: BamColorPalette.bamBlack,
 
+    // e.g. AppBar Background Color
     primary: BamColorPalette.bamBlack,
     onPrimary: BamColorPalette.bamWhite,
     primaryVariant: BamColorPalette.bamBlack,
 
+    // Accent color (CTA buttons, etc.)
     secondary: BamColorPalette.bamBlue1,
     onSecondary: Colors.white,
     secondaryVariant: BamColorPalette.bamBlue2,
 
+    // Errors
     error: BamColorPalette.bamRed1,
     onError: Colors.white,
   );

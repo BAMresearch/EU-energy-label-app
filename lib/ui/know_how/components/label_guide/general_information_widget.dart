@@ -16,13 +16,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class GeneralInformationWidget extends StatelessWidget {
   const GeneralInformationWidget({
-    Key key,
+    Key? key,
     this.informationTitle,
-    @required this.informationText,
-  })  : assert(informationText != null),
-        super(key: key);
+    required this.informationText,
+  }) : super(key: key);
 
-  final String informationTitle;
+  final String? informationTitle;
   final String informationText;
 
   @override
@@ -40,14 +39,15 @@ class GeneralInformationWidget extends StatelessWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Header
                     Row(
                       children: [
                         SvgPicture.asset(AssetPaths.knowHowLightBulbIcon, color: BamColorPalette.bamYellow3),
                         SizedBox(width: 20),
                         Expanded(
                           child: Text(
-                            informationTitle,
-                            style: Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamYellow3),
+                            informationTitle!,
+                            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamYellow3),
                           ),
                         ),
                       ],
@@ -55,6 +55,8 @@ class GeneralInformationWidget extends StatelessWidget {
 
                     SizedBox(height: 16),
 
+                    // Content
+                    // TODO Add more spacing between bullets and make bullets smaller
                     HtmlUtils.stringToHtml(context, informationText),
                   ],
                 )

@@ -17,10 +17,10 @@ class Answer {
   factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
 
   @JsonKey(name: 'title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'correct')
-  final bool isCorrect;
+  final bool? isCorrect;
 
   Map<String, dynamic> toJson() => _$AnswerToJson(this);
 

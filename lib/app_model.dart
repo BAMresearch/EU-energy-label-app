@@ -15,6 +15,11 @@ import 'package:energielabel_app/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
+/// 'View model'-like state class for the application.
+///
+/// On first build, the app calls [onAppStarted()] which triggers all upfront initialization.
+/// Once all initialization is done AND the minimum initialization duration has passed,
+/// the initialization is marked as finished. The actual app is now ready to run.
 class AppModel extends ChangeNotifier {
   static const int _minInitializationDurationInSecs = 3;
   bool _initializationInProgress = true;
@@ -54,12 +59,12 @@ class AppModel extends ChangeNotifier {
   }
 
   Future<void> _checkOnboarding() async {
-    _onboardingFinished = ServiceLocator().get<SettingsRepository>().isOnboardingFinished();
+    _onboardingFinished = ServiceLocator().get<SettingsRepository>()!.isOnboardingFinished();
   }
 
   Future<void> _initializeNews() async {
     try {
-      await ServiceLocator().get<NewsRepository>().syncNews();
+      await ServiceLocator().get<NewsRepository>()!.syncNews();
     } catch (e) {
       throw InitializationException('Failed to initialize the news.', e);
     }
@@ -67,7 +72,7 @@ class AppModel extends ChangeNotifier {
 
   Future<void> _initializeQuiz() async {
     try {
-      await ServiceLocator().get<QuizRepository>().loadQuiz();
+      await ServiceLocator().get<QuizRepository>()!.loadQuiz();
     } catch (e) {
       throw InitializationException('Failed to initialize the quiz.', e);
     }

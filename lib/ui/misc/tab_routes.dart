@@ -15,9 +15,9 @@ abstract class TabRoutes {
 
   static const String knowHow = 'knowHow';
 
-  static Map<String, String> withName;
+  static Map<String, String>? withName;
 
-  static TabRoute getRoute(String tabName, String pageName) {
+  static TabRoute? getRoute(String? tabName, String? pageName) {
     switch (tabName) {
       case knowHow:
         return KnowHowRoutes.withName(pageName);
@@ -26,7 +26,7 @@ abstract class TabRoutes {
     }
   }
 
-  static Type getSpecification(String tabName) {
+  static Type? getSpecification(String? tabName) {
     switch (tabName) {
       case knowHow:
         return KnowHowTabSpecification;
@@ -39,6 +39,6 @@ abstract class TabRoutes {
 abstract class TabRoute {
   TabRoute._();
 
-  String route;
-  Map<String, String> withName;
+  String? route;
+  Map<String, String>? withName;
 }

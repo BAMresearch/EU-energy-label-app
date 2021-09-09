@@ -8,12 +8,11 @@ part of 'regulation_data.dart';
 
 RegulationData _$RegulationDataFromJson(Map<String, dynamic> json) {
   return RegulationData(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    regulations: (json['regulations'] as List)
-        ?.map((e) =>
-            e == null ? null : Regulation.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    title: json['title'] as String?,
+    description: json['description'] as String?,
+    regulations: (json['regulations'] as List<dynamic>?)
+        ?.map((e) => Regulation.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

@@ -8,12 +8,11 @@ part of 'label_category_tip_data.dart';
 
 LabelCategoryTipData _$LabelCategoryTipDataFromJson(Map<String, dynamic> json) {
   return LabelCategoryTipData(
-    title: json['field_title'] as String,
-    graphicPath: json['field_graphics'] as String,
-    labelTips: (json['label_tips'] as List)
-        ?.map((e) =>
-            e == null ? null : LabelTip.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    title: json['field_title'] as String?,
+    graphicPath: json['field_graphics'] as String?,
+    labelTips: (json['label_tips'] as List<dynamic>?)
+        ?.map((e) => LabelTip.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

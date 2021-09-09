@@ -11,17 +11,16 @@ import 'package:energielabel_app/data/asset_paths.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/pdf/resources/svg_asset.dart';
 import 'package:energielabel_app/ui/pdf/utils/pdf_html_utils.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
 class GeneralInfoBox extends StatelessWidget {
   GeneralInfoBox({
-    @required this.content,
+    required this.content,
     this.title,
-  }) : assert(content != null);
+  });
 
-  final String title;
+  final String? title;
   final String content;
 
   @override
@@ -44,11 +43,11 @@ class GeneralInfoBox extends StatelessWidget {
     return Column(children: [
       Row(
         children: [
-          SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.knowHowLightBulbIcon)),
+          SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.knowHowLightBulbIcon)!),
           SizedBox(width: 20),
           Expanded(
             child: Text(
-              title,
+              title!,
               style: Theme.of(context).header2.copyWith(color: PdfColor.fromInt(BamColorPalette.bamYellow2.value)),
             ),
           ),
@@ -63,7 +62,7 @@ class GeneralInfoBox extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.knowHowLightBulbIcon)),
+        SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.knowHowLightBulbIcon)!),
         SizedBox(width: 20),
         Expanded(
           child: Text(content),

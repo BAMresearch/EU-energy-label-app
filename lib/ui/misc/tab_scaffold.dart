@@ -13,25 +13,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Scaffold providing the application's tab-based root layout.
+///
+/// The scaffold provides a bottom navigation bar and an area for the tab views.
+/// Both, the navigation bar and the content area are filled with data provided
+/// by the given list of [TabSpecification].
+///
+/// In order to programmatically navigate from one tab the another callers can use
+/// TabScaffold.of(context).navigateIntoTab().
 class TabScaffold extends StatefulWidget {
-  const TabScaffold({@required this.tabSpecifications}) : assert(tabSpecifications != null);
+  const TabScaffold({required this.tabSpecifications});
 
   final List<TabSpecification> tabSpecifications;
 
   @override
   State<StatefulWidget> createState() => TabScaffoldState();
 
-  static TabScaffoldState of(BuildContext context) {
+  static TabScaffoldState? of(BuildContext context) {
     return context.findAncestorStateOfType<TabScaffoldState>();
   }
 }
 
 class TabScaffoldState extends State<TabScaffold> {
   int _currentIndex = 0;
-  List<Widget> _tabNavigators;
+  late List<Widget> _tabNavigators;
 
   @override
   void initState() {
+    // The tab pages shall only be build once first accessed.
+    // Therefore, initially the list is filled up with placeholder widgets.
     _tabNavigators = List.filled(widget.tabSpecifications.length, SizedBox.shrink());
     _tabNavigators[0] = Navigator(
       key: widget.tabSpecifications[0].tabNavigatorKey,
@@ -82,9 +92,10 @@ class TabScaffoldState extends State<TabScaffold> {
           )
           .toList(),
       onTap: (index) {
+        // If the user tapped the already active tab, pop its stack to the root page.
         if (_currentIndex == index) {
           Fimber.d('tabNavigator.popToRoot');
-          widget.tabSpecifications[_currentIndex].tabNavigatorKey.currentState.popUntil((route) => route.isFirst);
+          widget.tabSpecifications[_currentIndex].tabNavigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
 
         if (_tabNavigators[index] is! Navigator) {
@@ -97,15 +108,19 @@ class TabScaffoldState extends State<TabScaffold> {
   }
 
   Future<bool> _onWillPop() async {
-    final tabNavigator = widget.tabSpecifications[_currentIndex].tabNavigatorKey.currentState;
+    final tabNavigator = widget.tabSpecifications[_currentIndex].tabNavigatorKey.currentState!;
     if (tabNavigator.canPop()) {
       tabNavigator.pop();
       return false;
     }
 
     if (_currentIndex == 0) {
+      // We are on start already. We will exit the app.
       return true;
     }
+
+    // we are not yet on the start page. As the navigation stack of the current tab is empty, we will
+    // switch to the start page tab.
 
     setState(() {
       _currentIndex = 0;
@@ -118,14 +133,18 @@ class TabScaffoldState extends State<TabScaffold> {
     return widget.tabSpecifications[_currentIndex];
   }
 
-  void navigateIntoTab(Type tabSpecification, String routeName, {Object routeArguments}) {
+  /// Switches the tab selection to the given TabSpecification and navigates in that tab to
+  /// the location specified as
+  void navigateIntoTab(Type? tabSpecification, String? routeName, {Object? routeArguments}) {
     final newTabIndex = widget.tabSpecifications.indexWhere((tabElement) => tabElement.runtimeType == tabSpecification);
 
+    // Remove the previous navigator from the tree so that the new one is treated as a new one, meaning
+    // that the new navigator's initState is executed and the initial route interpreted again.
     setState(() {
       _tabNavigators[newTabIndex] = SizedBox();
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _initializeTab(newTabIndex, routeName: routeName, routeArguments: routeArguments);
 
       setState(() {
@@ -134,48 +153,44 @@ class TabScaffoldState extends State<TabScaffold> {
     });
   }
 
-  void _initializeTab(int index, {String routeName = Navigator.defaultRouteName, Object routeArguments}) {
+  void _initializeTab(int index, {String? routeName = Navigator.defaultRouteName, Object? routeArguments}) {
+    // Replace it with the tab's navigator now.
     _tabNavigators[index] = Navigator(
       key: widget.tabSpecifications[index].tabNavigatorKey,
       initialRoute: routeName,
       onGenerateInitialRoutes: (NavigatorState navigator, String initialRoute) {
         final List<Route<dynamic>> result = <Route<dynamic>>[];
 
-        if (routeName.startsWith(Navigator.defaultRouteName) && routeName.length > 1) {
-          routeName = routeName.substring(1);
+        if (routeName!.startsWith(Navigator.defaultRouteName) && routeName!.length > 1) {
+          routeName = routeName!.substring(1); // strip leading '/'
           result.add(widget.tabSpecifications[index]
-              .onGenerateRoute(RouteSettings(name: Navigator.defaultRouteName, arguments: routeArguments)));
+              .onGenerateRoute(RouteSettings(name: Navigator.defaultRouteName, arguments: routeArguments))!);
 
-          final List<String> routeParts = routeName.split('/');
-          if (routeName.isNotEmpty) {
+          final List<String> routeParts = routeName!.split('/');
+          if (routeName!.isNotEmpty) {
             String routeName = '';
             for (final String part in routeParts) {
               routeName += '/$part';
               result.add(widget.tabSpecifications[index]
-                  .onGenerateRoute(RouteSettings(name: routeName, arguments: routeArguments)));
+                  .onGenerateRoute(RouteSettings(name: routeName, arguments: routeArguments))!);
             }
           }
-          if (result.last == null) {
-            assert(() {
-              FlutterError.reportError(
-                FlutterErrorDetails(
-                    exception: 'Could not navigate to initial route.\n'
-                        'The requested route name was: "/$routeName"\n'
-                        'There was no corresponding route in the app, and therefore the initial route specified will be '
-                        'ignored and "${Navigator.defaultRouteName}" will be used instead.'),
-              );
-              return true;
-            }());
-            result.clear();
-          }
         } else if (routeName != Navigator.defaultRouteName) {
+          // If routeName wasn't '/', then we try to get it with allowNull:true, so that if that fails,
+          // we fall back to '/' (without allowNull:true, see below).
           result.add(widget.tabSpecifications[index]
-              .onGenerateRoute(RouteSettings(name: routeName, arguments: routeArguments)));
+              .onGenerateRoute(RouteSettings(name: routeName, arguments: routeArguments))!);
         }
-        result.removeWhere((Route<dynamic> route) => route == null);
+        // Null route might be a result of gap in routeName
+        //
+        // For example, routes = ['A', 'A/B/C'], and routeName = 'A/B/C'
+        // This should result in result = ['A', null,'A/B/C'] where 'A/B' produces
+        // the null. In this case, we want to filter out the null and return
+        // result = ['A', 'A/B/C'].
+        result.removeWhere((Route<dynamic>? route) => route == null);
         if (result.isEmpty) {
           result.add(widget.tabSpecifications[index]
-              .onGenerateRoute(RouteSettings(name: Navigator.defaultRouteName, arguments: routeArguments)));
+              .onGenerateRoute(RouteSettings(name: Navigator.defaultRouteName, arguments: routeArguments))!);
         }
         return result;
       },

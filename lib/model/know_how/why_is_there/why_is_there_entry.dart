@@ -18,22 +18,22 @@ class WhyIsThereEntry {
   factory WhyIsThereEntry.fromJson(Map<String, dynamic> json) => _$WhyIsThereEntryFromJson(json);
 
   @JsonKey(name: 'field_title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'field_text')
-  final String text;
+  final String? text;
 
   @JsonKey(name: 'field_text_semantic')
-  final String textSemantic;
+  final String? textSemantic;
 
   @JsonKey(name: 'field_image')
-  final String imageUri;
+  final String? imageUri;
 
   @JsonKey(name: 'field_video')
-  final String videoUri;
+  final String? videoUri;
 
   @JsonKey(name: 'field_order')
-  final int orderIndex;
+  final int? orderIndex;
 
   Map<String, dynamic> toJson() => _$WhyIsThereEntryToJson(this);
 

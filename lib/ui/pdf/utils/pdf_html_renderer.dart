@@ -30,15 +30,16 @@ class ListsRenderer extends PdfHtmlRenderer {
 class LiRenderer extends PdfHtmlRenderer {
   @override
   Widget render(dom.Node node, NodeBuilder childAsNodeBuilder, TextBuilder childAsTextBuilder) {
-    String elementPrefix;
-    if (node.parent.localName == 'ol') {
-      final index = node.parent.nodes.indexWhere((liElement) => liElement == node) + 1;
+    late String elementPrefix;
+    if (node.parent!.localName == 'ol') {
+      // Get index of current li element in ol parent
+      final index = node.parent!.nodes.indexWhere((liElement) => liElement == node) + 1;
       elementPrefix = '$index.';
 
-      if (node.parent.attributes.containsKey('type') && node.parent.attributes['type'] == 'a') {
+      if (node.parent!.attributes.containsKey('type') && node.parent!.attributes['type'] == 'a') {
         elementPrefix = String.fromCharCode(('a'.codeUnitAt(0)) + index - 1) + '.';
       }
-    } else if (node.parent.localName == 'ul') {
+    } else if (node.parent!.localName == 'ul') {
       elementPrefix = '*';
     }
 

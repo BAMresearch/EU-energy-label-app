@@ -10,26 +10,23 @@
 import 'dart:convert';
 
 import 'package:energielabel_app/model/home/news.dart';
-import 'package:optional/optional.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NewsDao {
-  NewsDao(SharedPreferences sharedPreferences)
-      : assert(sharedPreferences != null),
-        _sharedPreferences = sharedPreferences;
+  NewsDao(SharedPreferences sharedPreferences) : _sharedPreferences = sharedPreferences;
 
   static const String _newsKey = 'news';
 
   final SharedPreferences _sharedPreferences;
 
-  Optional<News> loadNews() {
+  News? loadNews() {
     final jsonString = _sharedPreferences.getString(_newsKey);
 
-    News news;
+    News? news;
     if (jsonString != null) {
       news = News.fromJson(jsonDecode(jsonString));
     }
-    return Optional.ofNullable(news);
+    return news;
   }
 
   Future<void> saveNews(News news) async {

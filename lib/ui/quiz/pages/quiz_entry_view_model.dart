@@ -14,27 +14,24 @@ import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/quiz/quiz_state.dart';
 import 'package:energielabel_app/ui/quiz/routing.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pedantic/pedantic.dart';
 
 class QuizEntryViewModel extends BaseViewModel {
   QuizEntryViewModel({
-    @required BuildContext context,
-    @required QuizRepository quizRepository,
-  })  : assert(context != null),
-        assert(quizRepository != null),
-        _context = context,
+    required BuildContext context,
+    required QuizRepository quizRepository,
+  })   : _context = context,
         _quizRepository = quizRepository;
 
   final BuildContext _context;
   final QuizRepository _quizRepository;
-  Quiz _quizData;
+  Quiz? _quizData;
 
   String get quizTitle => _quizData?.title ?? '';
 
   String get quizDescription => _quizData?.description ?? '';
 
-  List<Level> get levels => _quizData != null ? _quizData.levels : [];
+  List<Level>? get levels => _quizData != null ? _quizData!.levels : [];
 
   @override
   void onViewStarted() {
@@ -42,7 +39,7 @@ class QuizEntryViewModel extends BaseViewModel {
   }
 
   void onLevelSelected(Level level) {
-    Navigator.of(_context).pushNamed(QuizRoutes.question, arguments: QuizState(level: level, title: _quizData.title));
+    Navigator.of(_context).pushNamed(QuizRoutes.question, arguments: QuizState(level: level, title: _quizData!.title));
   }
 
   Future<void> _loadQuizData() async {

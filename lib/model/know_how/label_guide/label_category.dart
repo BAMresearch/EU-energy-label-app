@@ -11,9 +11,13 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:json_annotation/json_annotation.dart';
 
 import 'label_category_guide_data.dart';
+import 'label_category_light_adviser.dart';
 import 'label_category_tip_data.dart';
 
 part 'label_category.g.dart';
+
+// on change class call "flutter packages pub run build_runner build" in project root to generate *.g.dart file
+// alternative use "flutter packages pub run build_runner watch" for continuous building
 
 @JsonSerializable()
 class LabelCategory {
@@ -28,6 +32,7 @@ class LabelCategory {
     this.checklistData,
     this.tipData,
     this.guideData,
+    this.lightAdviser,
     this.visible,
     this.favoriteOnly,
   });
@@ -35,40 +40,43 @@ class LabelCategory {
   factory LabelCategory.fromJson(Map<String, dynamic> json) => _$LabelCategoryFromJson(json);
 
   @JsonKey(name: 'field_id')
-  final int id;
+  final int? id;
 
   @JsonKey(name: 'field_producttype')
-  final String productType;
+  final String? productType;
 
   @JsonKey(name: 'field_description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'field_background_color_hex')
-  final String backgroundColorHex;
+  final String? backgroundColorHex;
 
   @JsonKey(name: 'field_text_color_hex')
-  final String textColorHex;
+  final String? textColorHex;
 
   @JsonKey(name: 'field_graphics')
-  final String graphicPath;
+  final String? graphicPath;
 
   @JsonKey(name: 'field_order')
-  final int orderIndex;
+  final int? orderIndex;
 
   @JsonKey(name: 'label_category_checklist_data')
-  final LabelCategoryChecklistData checklistData;
+  final LabelCategoryChecklistData? checklistData;
 
   @JsonKey(name: 'label_category_tips')
-  final LabelCategoryTipData tipData;
+  final LabelCategoryTipData? tipData;
 
   @JsonKey(name: 'label_category_guide')
-  final LabelCategoryGuideData guideData;
+  final LabelCategoryGuideData? guideData;
+
+  @JsonKey(name: 'label_category_light_adviser')
+  final LabelCategoryLightAdviser? lightAdviser;
 
   @JsonKey(name: 'visible')
-  final bool visible;
+  final bool? visible;
 
   @JsonKey(name: 'favorite_only')
-  final bool favoriteOnly;
+  final bool? favoriteOnly;
 
   Map<String, dynamic> toJson() => _$LabelCategoryToJson(this);
 

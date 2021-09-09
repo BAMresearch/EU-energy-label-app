@@ -9,18 +9,16 @@ part of 'label_category_checklist_data.dart';
 LabelCategoryChecklistData _$LabelCategoryChecklistDataFromJson(
     Map<String, dynamic> json) {
   return LabelCategoryChecklistData(
-    id: json['field_id'] as int,
-    title: json['field_title'] as String,
-    graphicPath: json['field_graphics'] as String,
-    orderIndex: json['field_order'] as int,
-    checklists: (json['label_category_checklists'] as List)
-        ?.map((e) => e == null
-            ? null
-            : LabelCategoryChecklist.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    introText: json['field_intro'] as String,
-    informationText: json['field_information_text'] as String,
-    informationTitle: json['field_information_title'] as String,
+    id: json['field_id'] as int?,
+    title: json['field_title'] as String?,
+    graphicPath: json['field_graphics'] as String?,
+    orderIndex: json['field_order'] as int?,
+    checklists: (json['label_category_checklists'] as List<dynamic>?)
+        ?.map((e) => LabelCategoryChecklist.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    introText: json['field_intro'] as String?,
+    informationText: json['field_information_text'] as String?,
+    informationTitle: json['field_information_title'] as String?,
   );
 }
 

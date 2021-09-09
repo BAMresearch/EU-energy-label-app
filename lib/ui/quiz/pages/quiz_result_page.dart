@@ -22,7 +22,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class QuizResultPage extends StatelessPage<QuizResultViewModel> {
-  QuizResultPage({@required this.quizState}) : assert(quizState != null);
+  QuizResultPage({required this.quizState});
 
   final QuizState quizState;
 
@@ -50,7 +50,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                         children: [
                           SizedBox(height: 30),
                           Text(
-                            Translations.of(context)
+                            Translations.of(context)!
                                 .quiz_result_score_label(
                                   viewModel.correctAnswers.toString(),
                                   viewModel.maxIndex.toString(),
@@ -58,7 +58,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                                 .toUpperCase(),
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText2
+                                .bodyText2!
                                 .copyWith(color: BamColorPalette.bamBlack45Optimized),
                           ),
                           SizedBox(height: 24),
@@ -66,10 +66,10 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
                               viewModel.isResultPositive
-                                  ? Translations.of(context).quiz_result_label_good
-                                  : Translations.of(context).quiz_result_label_bad,
+                                  ? Translations.of(context)!.quiz_result_label_good
+                                  : Translations.of(context)!.quiz_result_label_bad,
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline1.copyWith(color: BamColorPalette.bamGreen4),
+                              style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamGreen4),
                             ),
                           ),
                           SizedBox(height: 24),
@@ -82,7 +82,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                             child: HtmlUtils.stringToHtml(context,
                                 viewModel.isResultPositive ? viewModel.positiveResult : viewModel.negativeResult,
                                 customStyle: {
-                                  '*': Style.fromTextStyle(Theme.of(context).textTheme.subtitle1)
+                                  '*': Style.fromTextStyle(Theme.of(context).textTheme.subtitle1!)
                                       .copyWith(color: BamColorPalette.bamBlack80),
                                 }),
                           ),
@@ -97,7 +97,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder()),
                     ),
                     onPressed: viewModel.onReplyButtonTapped,
-                    child: Text(Translations.of(context).quiz_replay_button.toUpperCase()),
+                    child: Text(Translations.of(context)!.quiz_replay_button.toUpperCase()),
                   )
                 ],
               )

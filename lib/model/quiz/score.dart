@@ -18,13 +18,13 @@ class Score {
   factory Score.fromJson(Map<String, dynamic> json) => _$ScoreFromJson(json);
 
   @JsonKey(name: 'positive-response')
-  final String positive;
+  final String? positive;
 
   @JsonKey(name: 'negative-response')
-  final String negative;
+  final String? negative;
 
   @JsonKey(name: 'min-positive-score')
-  final int minPositiveScore;
+  final int? minPositiveScore;
 
   Map<String, dynamic> toJson() => _$ScoreToJson(this);
 

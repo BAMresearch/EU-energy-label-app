@@ -16,30 +16,49 @@ class BamTextTheme {
   BamTextTheme._();
 
   static final TextTheme textTheme = const TextTheme(
+    /// Extremely large text.
     headline1: BamTextStyles.headline1,
 
+    /// Very, very large text.
+    ///
+    /// Used for the date in the dialog shown by [showDatePicker].
     headline2: BamTextStyles.headline2,
 
+    /// Very large text.
     headline3: BamTextStyles.headline3,
 
+    /// Large text.
     headline4: BamTextStyles.headline4,
 
+    /// Used for large text in dialogs (e.g., the month and year in the dialog
+    /// shown by [showDatePicker]).
     headline5: BamTextStyles.headline5,
 
+    /// Used for the primary text in app bars and dialogs (e.g., [AppBar.title]
+    /// and [AlertDialog.title]).
     headline6: BamTextStyles.headline6,
 
+    /// Used for the primary text in lists (e.g., [ListTile.title]).
     subtitle1: BamTextStyles.subtitle1,
 
+    /// For medium emphasis text that's a little smaller than [subtitle1].
     subtitle2: BamTextStyles.subtitle2,
 
+    /// Used for emphasizing text that would otherwise be [bodyText2].
     bodyText1: BamTextStyles.body1,
 
+    /// The default text style for [Material].
     bodyText2: BamTextStyles.body2,
 
+    /// Used for auxiliary text associated with images.
     caption: BamTextStyles.caption,
 
+    /// Used for text on [ElevatedButton], [TextButton] and [OutlinedButton].
     button: BamTextStyles.button,
 
+    /// The smallest style.
+    ///
+    /// Typically used for captions or to introduce a (larger) headline.
     overline: BamTextStyles.label,
   );
 }

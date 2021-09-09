@@ -35,6 +35,7 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
                 children: [
                   SizedBox(height: 16),
 
+                  // The quiz description
                   Html(
                     data: viewModel.quizDescription,
                     style: {
@@ -44,7 +45,8 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
 
                   SizedBox(height: 32),
 
-                  ...viewModel.levels
+                  // The level buttons
+                  ...viewModel.levels!
                       .map((level) => Column(
                             children: [
                               ElevatedButton(
@@ -55,7 +57,7 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
                                   backgroundColor: MaterialStateProperty.all(BamColorPalette.bamWhite),
                                   foregroundColor: MaterialStateProperty.all(BamColorPalette.bamBlue3),
                                   textStyle: MaterialStateProperty.all(
-                                    Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamBlue3),
+                                    Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamBlue3),
                                   ),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -65,10 +67,10 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        level.name,
+                                        level.name ?? '',
                                       ),
                                     ),
-                                    SvgPicture.string(level.icon),
+                                    SvgPicture.string(level.icon!),
                                   ],
                                 ),
                               ),
@@ -87,6 +89,6 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
 
   @override
   QuizEntryViewModel createViewModel(BuildContext context) {
-    return QuizEntryViewModel(context: context, quizRepository: ServiceLocator().get<QuizRepository>());
+    return QuizEntryViewModel(context: context, quizRepository: ServiceLocator().get<QuizRepository>()!);
   }
 }

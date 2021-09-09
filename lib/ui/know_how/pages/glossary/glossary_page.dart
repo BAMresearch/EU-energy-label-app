@@ -29,7 +29,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 class GlossaryPage extends StatefulPage {
   GlossaryPage({this.initialSearchText});
 
-  final String initialSearchText;
+  final String? initialSearchText;
 
   @override
   _GlossaryPageState createPageState() => _GlossaryPageState();
@@ -43,14 +43,14 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
   void initState() {
     super.initState();
 
-    _searchFieldController.text = widget.initialSearchText;
+    _searchFieldController.text = widget.initialSearchText ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      title: Translations.of(context).glossary_page_title,
-      titleSemanticLabel: Translations.of(context).glossary_page_title_semantic,
+      title: Translations.of(context)!.glossary_page_title,
+      titleSemanticLabel: Translations.of(context)!.glossary_page_title_semantic,
       body: _buildBody(),
     );
   }
@@ -96,7 +96,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
   @override
   GlossaryViewModel createViewModel(BuildContext context) {
     return GlossaryViewModel(
-        glossaryRepository: ServiceLocator().get<GlossaryRepository>(), initialFilterInput: widget.initialSearchText);
+        glossaryRepository: ServiceLocator().get<GlossaryRepository>()!, initialFilterInput: widget.initialSearchText);
   }
 
   Widget _buildFilterField(GlossaryViewModel viewModel) {
@@ -114,7 +114,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
           cursorColor: Theme.of(context).colorScheme.secondary,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: Translations.of(context).glossary_page_search_hint,
+            hintText: Translations.of(context)!.glossary_page_search_hint,
             hintStyle: Theme.of(context).textTheme.bodyText2,
             icon: Icon(
               Icons.search,
@@ -123,7 +123,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
             ),
             suffixIcon: _searchFieldController.text.isNotEmpty
                 ? Semantics(
-                    label: Translations.of(context).glossary_page_search_clear_button_semantics,
+                    label: Translations.of(context)!.glossary_page_search_clear_button_semantics,
                     onTap: () => _clearFilterField(viewModel),
                     button: true,
                     excludeSemantics: true,
@@ -153,7 +153,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
       return ScrollablePositionedList.separated(
         padding: const EdgeInsets.symmetric(vertical: 16),
         itemBuilder: (context, index) =>
-            _buildGlossaryEntry(viewModel.glossaryEntries[index], viewModel.filterInput, viewModel),
+            _buildGlossaryEntry(viewModel.glossaryEntries[index]!, viewModel.filterInput, viewModel),
         separatorBuilder: (context, index) => SizedBox(height: 32),
         itemCount: viewModel.glossaryEntries.length,
         itemScrollController: _itemScrollController,
@@ -161,7 +161,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
       );
     } else {
       return Center(
-        child: Text(Translations.of(context).glossary_page_search_no_matches),
+        child: Text(Translations.of(context)!.glossary_page_search_no_matches),
       );
     }
   }
@@ -172,18 +172,21 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Header
           RichText(
             text: TextSpanExtension.searchMatch(
               glossaryEntry.title,
               filterInput,
-              negativeResultTextStyle: Theme.of(context).textTheme.headline3.copyWith(color: BamColorPalette.bamBlue3),
-              positiveResultTextStyle: Theme.of(context).textTheme.headline3.copyWith(
+              negativeResultTextStyle: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamBlue3),
+              positiveResultTextStyle: Theme.of(context).textTheme.headline3!.copyWith(
                     color: Theme.of(context).iconTheme.color,
                   ),
             ),
           ),
 
           SizedBox(height: 8),
+
+          // Content
 
           HtmlUtils.stringToHtml(context, viewModel.highlightString(glossaryEntry.description),
               customStyle: {'span': Style(color: Theme.of(context).iconTheme.color)})

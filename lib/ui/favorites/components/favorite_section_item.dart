@@ -18,16 +18,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class FavoriteSectionItem extends StatelessWidget {
   const FavoriteSectionItem({
-    Key key,
-    @required this.favoriteListSection,
+    Key? key,
+    required this.favoriteListSection,
     this.onEntryPressed,
     this.onEditPressed,
-  })  : assert(favoriteListSection != null),
-        super(key: key);
+  }) : super(key: key);
 
   final FavoriteListSection favoriteListSection;
-  final Function(FavoriteListSectionEntry sectionEntry) onEntryPressed;
-  final Function(FavoriteType favoriteTyp, int categoryId) onEditPressed;
+  final Function(FavoriteListSectionEntry sectionEntry)? onEntryPressed;
+  final Function(FavoriteType favoriteTyp, int? categoryId)? onEditPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +52,13 @@ class FavoriteSectionItem extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 16, bottom: 8, left: 16, right: 16),
                       child: Text(
                         favoriteListSection.title,
-                        style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlue3),
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlue3),
                       ),
                     ),
                   ),
                 ),
                 Semantics(
-                  label: Translations.of(context).favorites_edit_list_button_semantics(favoriteListSection.title),
+                  label: Translations.of(context)!.favorites_edit_list_button_semantics(favoriteListSection.title),
                   excludeSemantics: true,
                   inMutuallyExclusiveGroup: true,
                   button: true,
@@ -97,7 +96,8 @@ class FavoriteSectionItem extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       child: Text(
                         sectionEntry.title,
-                        style: Theme.of(context).textTheme.bodyText2.copyWith(color: BamColorPalette.bamBlue1Optimized),
+                        style:
+                            Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlue1Optimized),
                       ),
                     ),
                   ),
