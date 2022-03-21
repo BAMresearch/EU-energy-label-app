@@ -16,9 +16,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NewsBanner extends StatelessWidget {
   const NewsBanner({
+    Key? key,
     required this.news,
     required this.onCloseAction,
-  });
+  }) : super(key: key);
 
   final News news;
   final VoidCallback onCloseAction;
@@ -26,14 +27,14 @@ class NewsBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient),
+      padding: const EdgeInsets.only(top: 20),
+      decoration: const BoxDecoration(gradient: BamColorPalette.bamGrayGradient),
       width: double.maxFinite,
       child: FractionallySizedBox(
         widthFactor: 336 / 375,
         child: Container(
           decoration: BoxDecoration(color: BamColorPalette.bamWhite20, borderRadius: BorderRadius.circular(8)),
-          constraints: BoxConstraints(minHeight: 56),
+          constraints: const BoxConstraints(minHeight: 56),
           child: Material(
             color: Colors.transparent,
             child: Row(
@@ -50,7 +51,7 @@ class NewsBanner extends StatelessWidget {
                             news.title!,
                             style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamBlack),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             news.description!,
                             style: Theme.of(context).textTheme.bodyText2!.copyWith(

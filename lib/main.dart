@@ -8,23 +8,8 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'package:energielabel_app/app.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-
-/// Class holding the basic app configuration.
-///
-/// To run the app, specify the following environment variables:
-///
-/// - --dart-define=ENVIRONMENT=(one of dev, int, staging, prod)
-/// - --dart-define=BACKEND_URL=...  (urlEncoded)
-/// - --dart-define=API_KEY=... (urlEncoded)
-class AppConfig {
-  static const environment = String.fromEnvironment('ENVIRONMENT');
-  static const backendURL = String.fromEnvironment('BACKEND_URL');
-  static const apiKey = String.fromEnvironment('API_KEY');
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,14 +17,6 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  _setupLogging();
 
-  runApp(App());
-}
-
-void _setupLogging() {
-  if (kDebugMode) {
-    final logLevels = List.of(DebugTree.defaultLevels)..add('V');
-    Fimber.plantTree(DebugTree(logLevels: logLevels));
-  }
+  runApp(const App());
 }

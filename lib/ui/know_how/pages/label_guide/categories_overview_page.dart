@@ -21,6 +21,8 @@ import 'package:provider/provider.dart';
 import 'package:responsive_layout_builder/responsive_layout_builder.dart';
 
 class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> {
+  const CategoriesOverviewPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CategoriesOverviewViewModel>(
@@ -59,8 +61,8 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
   Widget _buildTabletLayout(BuildContext context, CategoriesOverviewViewModel viewModel) {
     return GridView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 1.9, mainAxisSpacing: 16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, childAspectRatio: 1.9, mainAxisSpacing: 16),
       itemCount: viewModel.labelCategories.length,
       itemBuilder: (context, index) => _listItemAtIndex(context, index, viewModel),
     );
@@ -113,7 +115,8 @@ class CategoriesOverviewPage extends StatelessPage<CategoriesOverviewViewModel> 
                     alignment: Alignment.bottomCenter,
                     child: Image.asset(
                       AssetPaths.labelGuideCategoryImage(labelCategory.graphicPath),
-                      errorBuilder: (context, error, stacktrace) => Align(
+                      excludeFromSemantics: true,
+                      errorBuilder: (context, error, stacktrace) => const Align(
                         alignment: Alignment.center,
                         child: Opacity(
                           opacity: 0.5,

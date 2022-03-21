@@ -14,11 +14,10 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_light_ad
 import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class CategoryLightAdviserPageArguments {
   const CategoryLightAdviserPageArguments({required this.labelCategory});
@@ -27,8 +26,9 @@ class CategoryLightAdviserPageArguments {
 }
 
 class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewModel> {
-  CategoryLightAdviserPage({required CategoryLightAdviserPageArguments initialArguments})
-      : _labelCategory = initialArguments.labelCategory;
+  CategoryLightAdviserPage({Key? key, required CategoryLightAdviserPageArguments initialArguments})
+      : _labelCategory = initialArguments.labelCategory,
+        super(key: key);
 
   final int _animationDuration = 300;
   final LabelCategory _labelCategory;
@@ -48,7 +48,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
           body: _buildBody(context, viewModel),
           actions: [
             IconButton(
-              icon: Icon(Icons.info_outline, color: BamColorPalette.bamBlack),
+              icon: const Icon(Icons.info_outline, color: BamColorPalette.bamBlack),
               onPressed: () => viewModel.onInfoButtonTapped(CategoryLightAdviserInfoPageArguments(
                   labelCategory: _labelCategory, buildListCallback: _buildSelectionSheetEntries)),
             )
@@ -61,7 +61,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
   Widget _buildBody(BuildContext context, CategoryLightAdviserViewModel viewModel) {
     return Container(
       height: double.maxFinite,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: BamColorPalette.bamLightAdviserGrayGradient,
       ),
       child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
@@ -100,7 +100,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
                       ],
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Column(
                     children: [
                       AnimatedOpacity(
@@ -121,7 +121,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
                                 ),
                               ],
                             ),
-                            Divider(color: Colors.white, height: 1),
+                            const Divider(color: Colors.white, height: 1),
                             Stack(
                               alignment: Alignment.topCenter,
                               children: [
@@ -160,34 +160,41 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
       required BottomSheetData bottomSheetData,
       required CategoryLightAdviserViewModel viewModel,
       required double maxHeight}) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: BamColorPalette.bamGradientVeryLightGrey,
+    return Semantics(
+      button: true,
+      label: (bottomSheetData == BottomSheetData.brightnessLevels
+          ? _labelCategory.lightAdviser!.categoryBrightnessLabel
+          : _labelCategory.lightAdviser!.categoryColorTemeratureLabel),
+      excludeSemantics: true,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            DecoratedBox(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: BamColorPalette.bamGradientVeryLightGrey,
+              ),
+              child: IconButton(
+                padding: const EdgeInsets.all(16),
+                onPressed: () => !viewModel.isSelectionSheetVisible
+                    ? _onTapSelectionButton(viewModel, context, bottomSheetData, maxHeight)
+                    : Navigator.pop(context),
+                color: BamColorPalette.bamBlue1Variant,
+                icon: SvgPicture.asset(bottomSheetData == BottomSheetData.colorTemperature
+                    ? AssetPaths.knowHowLightAdviserTemperatureRoomIcon
+                    : AssetPaths.knowHowLightAdviserBrightnessLevelIcon),
+              ),
             ),
-            child: IconButton(
-              padding: EdgeInsets.all(16),
-              onPressed: () => !viewModel.isSelectionSheetVisible
-                  ? _onTapSelectionButton(viewModel, context, bottomSheetData, maxHeight)
-                  : Navigator.pop(context),
-              color: BamColorPalette.bamBlue1Variant,
-              icon: SvgPicture.asset(bottomSheetData == BottomSheetData.colorTemperature
-                  ? AssetPaths.knowHowLightAdviserTemperatureRoomIcon
-                  : AssetPaths.knowHowLightAdviserBrightnessLevelIcon),
-            ),
-          ),
-          if (showButtonText) SizedBox(height: 16),
-          if (showButtonText)
-            Text(
-              _labelCategory.lightAdviser!.buttonLabel,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
-            )
-        ],
+            if (showButtonText) const SizedBox(height: 16),
+            if (showButtonText)
+              Text(
+                _labelCategory.lightAdviser!.buttonLabel,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
+              )
+          ],
+        ),
       ),
     );
   }
@@ -219,7 +226,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
             ),
             Expanded(
               child: DecoratedBox(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   boxShadow: [BoxShadow(spreadRadius: 1, blurRadius: 5, color: BamColorPalette.bamBlack15)],
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -233,7 +240,7 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
                       child: Scrollbar(
                         isAlwaysShown: true,
                         child: SingleChildScrollView(
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           child: Column(
                             children: _buildSelectionSheetEntries(sheetCategory, context, viewModel: viewModel),
                           ),
@@ -258,27 +265,41 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: viewModel == null
-                          ? null
-                          : () {
-                              viewModel.selectedBrightnessLevel = viewModel.selectedBrightnessLevel != key ? key : null;
-                              Navigator.pop(context);
-                            },
-                      child: ListTile(
-                        selected: viewModel?.selectedBrightnessLevel == key,
-                        selectedTileColor: BamColorPalette.bamWhite,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 32),
-                        leading: SvgPicture.asset(AssetPaths.knowHowLightAdviserIconsBasePath +
-                            _labelCategory.lightAdviser!.brightnessLevels[key]!.iconFileName),
-                        title: Text(
-                          _labelCategory.lightAdviser!.brightnessLevels[key]!.description,
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(color: BamColorPalette.bamBlack80),
+                  Semantics(
+                    button: true,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: viewModel == null
+                            ? null
+                            : () {
+                                viewModel.selectedBrightnessLevel =
+                                    viewModel.selectedBrightnessLevel != key ? key : null;
+                                Navigator.pop(context);
+                              },
+                        child: Semantics(
+                          label: _labelCategory.lightAdviser!.brightnessLevels[key]!.description +
+                              '. ' +
+                              _labelCategory.lightAdviser!.brightnessLevels[key]!.power,
+                          excludeSemantics: true,
+                          child: ListTile(
+                            selected: viewModel?.selectedBrightnessLevel == key,
+                            selectedTileColor: BamColorPalette.bamWhite,
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 32),
+                            leading: SvgPicture.asset(
+                              AssetPaths.knowHowLightAdviserIconsBasePath +
+                                  _labelCategory.lightAdviser!.brightnessLevels[key]!.iconFileName,
+                              excludeFromSemantics: true,
+                            ),
+                            title: Text(
+                              _labelCategory.lightAdviser!.brightnessLevels[key]!.description,
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(color: BamColorPalette.bamBlack80),
+                            ),
+                            subtitle: Text(_labelCategory.lightAdviser!.brightnessLevels[key]!.power,
+                                style:
+                                    Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80)),
+                          ),
                         ),
-                        subtitle: Text(_labelCategory.lightAdviser!.brightnessLevels[key]!.power,
-                            style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80)),
                       ),
                     ),
                   ),
@@ -291,24 +312,30 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
       return _labelCategory.lightAdviser!.rooms.keys
           .map((key) => Column(
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: viewModel == null
-                          ? null
-                          : () {
-                              viewModel.selectedRoom = viewModel.selectedRoom != key ? key : null;
-                              Navigator.pop(context);
-                            },
-                      child: ListTile(
-                        selected: viewModel?.selectedRoom == key,
-                        selectedTileColor: BamColorPalette.bamWhite,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 32),
-                        leading: SvgPicture.asset(AssetPaths.knowHowLightAdviserIconsBasePath +
-                            _labelCategory.lightAdviser!.rooms[key]!.iconFileName),
-                        title: Text(
-                          _labelCategory.lightAdviser!.rooms[key]!.label,
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(color: BamColorPalette.bamBlack80),
+                  Semantics(
+                    button: true,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: viewModel == null
+                            ? null
+                            : () {
+                                viewModel.selectedRoom = viewModel.selectedRoom != key ? key : null;
+                                Navigator.pop(context);
+                              },
+                        child: ListTile(
+                          selected: viewModel?.selectedRoom == key,
+                          selectedTileColor: BamColorPalette.bamWhite,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 32),
+                          leading: SvgPicture.asset(
+                            AssetPaths.knowHowLightAdviserIconsBasePath +
+                                _labelCategory.lightAdviser!.rooms[key]!.iconFileName,
+                            excludeFromSemantics: true,
+                          ),
+                          title: Text(
+                            _labelCategory.lightAdviser!.rooms[key]!.label,
+                            style: Theme.of(context).textTheme.bodyText1!.copyWith(color: BamColorPalette.bamBlack80),
+                          ),
                         ),
                       ),
                     ),
@@ -358,69 +385,75 @@ class CategoryLightAdviserPage extends StatelessPage<CategoryLightAdviserViewMod
           required BuildContext context,
           required double maxHeight}) =>
       Expanded(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () => _onTapSelectionButton(viewModel, context, bottomSheetData, maxHeight),
-                icon: SvgPicture.asset(
-                    AssetPaths.knowHowLightAdviserIconsBasePath + viewModel.sheetIcon(bottomSheetData)),
+        child: Semantics(
+          button: true,
+          hint: Translations.of(context)!.know_how_light_advisor_semantics_hint,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () => _onTapSelectionButton(viewModel, context, bottomSheetData, maxHeight),
+                  icon: SvgPicture.asset(
+                      AssetPaths.knowHowLightAdviserIconsBasePath + viewModel.sheetIcon(bottomSheetData)),
+                ),
               ),
-            ),
-            Text(
-              viewModel.topInfo(bottomSheetData),
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
-            ),
-            AnimatedContainer(
-                duration: Duration(milliseconds: _animationDuration), height: viewModel.isExpandedLayout ? 8 : 0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                if (bottomSheetData == BottomSheetData.colorTemperature)
-                  Flexible(
-                    child: Text(
-                      _labelCategory.lightAdviser!.approximatelyLabel,
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
+              Text(
+                viewModel.topInfo(bottomSheetData),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
+              ),
+              AnimatedContainer(
+                  duration: Duration(milliseconds: _animationDuration), height: viewModel.isExpandedLayout ? 8 : 0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  if (bottomSheetData == BottomSheetData.colorTemperature)
+                    Flexible(
+                      child: Text(
+                        _labelCategory.lightAdviser!.approximatelyLabel,
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
+                      ),
+                    ),
+                  AnimatedDefaultTextStyle(
+                    duration: Duration(milliseconds: _animationDuration),
+                    curve: Curves.easeInOut,
+                    style: Theme.of(context).textTheme.headline1!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: BamColorPalette.bamBlack80,
+                        fontSize: viewModel.isExpandedLayout ? 32 : 28),
+                    child: Flexible(
+                      child: Text(viewModel.middleInfo(bottomSheetData)),
                     ),
                   ),
-                AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: _animationDuration),
+                ],
+              ),
+              Text(
+                viewModel.bottomInfo(bottomSheetData),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
+              ),
+              const SizedBox(height: 8),
+              AnimatedContainer(
+                height: viewModel.isExpandedLayout ? 40 : 0,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: _animationDuration),
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
-                  style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: BamColorPalette.bamBlack80,
-                      fontSize: viewModel.isExpandedLayout ? 32 : 28),
-                  child: Flexible(
-                    child: Text(viewModel.middleInfo(bottomSheetData)),
+                  opacity: !viewModel.isExpandedLayout ? 0 : 1,
+                  child: Text(
+                    viewModel.additionalInfo(bottomSheetData),
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle2!
+                        .copyWith(color: BamColorPalette.bamBlack80, fontSize: 15),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-              ],
-            ),
-            Text(
-              viewModel.bottomInfo(bottomSheetData),
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80),
-            ),
-            SizedBox(height: 8),
-            AnimatedContainer(
-              height: viewModel.isExpandedLayout ? 40 : 0,
-              curve: Curves.easeInOut,
-              duration: Duration(milliseconds: _animationDuration),
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                opacity: !viewModel.isExpandedLayout ? 0 : 1,
-                child: Text(
-                  viewModel.additionalInfo(bottomSheetData),
-                  style:
-                      Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack80, fontSize: 15),
-                  textAlign: TextAlign.center,
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 

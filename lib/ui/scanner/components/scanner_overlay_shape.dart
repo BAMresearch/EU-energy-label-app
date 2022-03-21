@@ -7,14 +7,12 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
-import 'dart:ui';
-
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Overlay for the QR scanner which draws the full area with the given color.
 class ScannerOverlayShape extends ShapeBorder {
-  ScannerOverlayShape({
+  const ScannerOverlayShape({
     required this.overlayColor,
     required this.opacity,
   });

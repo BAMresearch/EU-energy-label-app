@@ -8,12 +8,15 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:csv/csv.dart';
 import 'package:energielabel_app/data/favorite_repository.dart';
 import 'package:energielabel_app/data/label_guide_repository.dart';
 import 'package:energielabel_app/model/favorite.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_category.dart';
 import 'package:energielabel_app/model/pdf_page_data.dart';
+import 'package:energielabel_app/ui/csv/csv_exporter.dart';
 import 'package:energielabel_app/ui/favorites/components/favorite_export_dialog.dart';
 import 'package:energielabel_app/ui/favorites/favorite_list_item.dart';
 import 'package:energielabel_app/ui/favorites/favorites_routes.dart';
@@ -22,13 +25,12 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_checklis
 import 'package:energielabel_app/ui/know_how/pages/label_guide/category_tips_page.dart';
 import 'package:energielabel_app/ui/misc/components/bam_dialog.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
+import 'package:energielabel_app/ui/misc/pages/csv_view_page.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:energielabel_app/ui/pdf/pdf_exporter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -42,7 +44,7 @@ class FavoritesViewModel extends BaseViewModel {
     required BuildContext context,
     required FavoriteRepository favoriteRepository,
     required LabelGuideRepository labelGuideRepository,
-  })   : _context = context,
+  })  : _context = context,
         _favoriteRepository = favoriteRepository,
         _labelGuideRepository = labelGuideRepository;
 
@@ -94,7 +96,7 @@ class FavoritesViewModel extends BaseViewModel {
         if (await canLaunch(url)) {
           unawaited(launch(url, forceSafariVC: false));
         } else {
-          Fimber.e('Failed to open browser for product.');
+          log('Failed to open browser for product.');
           // TODO Show a hint to the user, e.g. a snackBar.
         }
         break;
@@ -121,7 +123,7 @@ class FavoritesViewModel extends BaseViewModel {
             ),
           );
         } else {
-          Fimber.e('Label category not found for ID ${typedFavorite.categoryId}');
+          log('Label category not found for ID ${typedFavorite.categoryId}');
         }
         break;
     }
@@ -141,7 +143,7 @@ class FavoritesViewModel extends BaseViewModel {
         .add(_favoriteRepository.favoriteProductsUpdates!.listen(_handleProductFavoritesUpdates))
         .onError((error, stacktrace) {
       // TODO Show error to the user.
-      Fimber.e('Failed to observe product favorites.', ex: error, stacktrace: stacktrace);
+      log('Failed to observe product favorites.', error: error, stackTrace: stacktrace);
     });
   }
 
@@ -165,6 +167,7 @@ class FavoritesViewModel extends BaseViewModel {
                 for (final favoriteProduct in favoriteProducts[categoryId]!)
                   FavoriteListSectionEntry(
                     title: favoriteProduct.title!,
+                    comments: favoriteProduct.comments,
                     favoriteType: FavoriteType.products,
                     favorite: favoriteProduct,
                   ),
@@ -190,12 +193,12 @@ class FavoritesViewModel extends BaseViewModel {
             notifyListeners();
           } catch (e, stacktrace) {
             // TODO Show error to the user.
-            Fimber.e('Failed to combine know-how favorites.', ex: e, stacktrace: stacktrace);
+            log('Failed to combine know-how favorites.', error: e, stackTrace: stacktrace);
           }
         },
         onError: (error, stacktrace) {
           // TODO Show error to the user.
-          Fimber.e('Failed to observe know-how favorites.', ex: error, stacktrace: stacktrace);
+          log('Failed to observe know-how favorites.', error: error, stackTrace: stacktrace);
         },
       ),
     );
@@ -269,7 +272,10 @@ class FavoritesViewModel extends BaseViewModel {
     );
   }
 
-  Future<void> _onExportConfirmed({bool? productsChecked = false, bool? knowHowChecked = false}) async {
+  Future<void> _exportPDF({
+    bool? productsChecked = false,
+    bool? knowHowChecked = false,
+  }) async {
     final List<PdfPageData> pagesToExport = [];
     final allCategories = await _labelGuideRepository.getCategories();
 
@@ -322,6 +328,53 @@ class FavoritesViewModel extends BaseViewModel {
 
     //generate pdf and show in preview
     final String pdfPath = await pdfExporter.exportPdf();
-    unawaited(Navigator.of(_context).pushNamed(FavoritesRoutes.exportPreview, arguments: pdfPath));
+    unawaited(Navigator.of(_context).pushNamed(FavoritesRoutes.exportPdfPreview, arguments: pdfPath));
+  }
+
+  Future<void> _exportCSV() async {
+    final Map<String, List<ProductFavorite>> productsForCategories = {};
+
+    final List<List<String>> csvList = [
+      [
+        Translations.of(_context)!.csv_title_product,
+        Translations.of(_context)!.csv_title_category,
+        Translations.of(_context)!.csv_title_link,
+        Translations.of(_context)!.csv_title_comment,
+      ],
+    ];
+
+    for (final entry in _favoriteRepository.latestProductList!.entries) {
+      final category = (await _labelGuideRepository.getCategory(entry.key));
+
+      final categoryTitle = category!.productType!.replaceAll('\u00AD', '');
+      productsForCategories[categoryTitle] = entry.value;
+    }
+
+    productsForCategories.forEach((key, value) {
+      value.toList().forEach((ProductFavorite element) {
+        csvList.add([element.title ?? '', key, element.product?.url ?? '', element.comments?.first ?? '']);
+      });
+    });
+    final String csvText = const ListToCsvConverter().convert(csvList);
+
+    final CsvExporter csvExporter =
+        CsvExporter(targetFileName: '${Translations.of(_context)!.csv_filename}.csv', csvData: csvText);
+
+    //generate csv and show in preview
+    final String csvPath = await csvExporter.exportCsv();
+    unawaited(Navigator.of(_context).pushNamed(FavoritesRoutes.exportCsvPreview,
+        arguments: CsvViewPageArguments(csvPath: csvPath, previewContent: csvList)));
+  }
+
+  Future<void> _onExportConfirmed({
+    bool? productsChecked = false,
+    bool? knowHowChecked = false,
+    required ExportFileType fileType,
+  }) async {
+    if (fileType == ExportFileType.pdf) {
+      await _exportPDF(productsChecked: productsChecked, knowHowChecked: knowHowChecked);
+    } else {
+      await _exportCSV();
+    }
   }
 }

@@ -69,6 +69,24 @@ class FavoriteRepository {
     }
   }
 
+  Future<void> updateProductFavorite(ProductFavorite newFavorite, ProductFavorite favorite) async {
+    try {
+      final Map<int?, List<ProductFavorite>> newProductListMap = Map.from(latestProductList!);
+      latestProductList!.forEach((key, List<ProductFavorite> list) {
+        if (list.contains(favorite)) {
+          final int index = list.indexOf(favorite);
+          final List<ProductFavorite> newProductList = List.from(list);
+          newProductList.removeAt(index);
+          newProductList.insert(index, newFavorite);
+          newProductListMap[key] = newProductList;
+          updateProductFavorites(newProductListMap);
+        }
+      });
+    } catch (e) {
+      throw RepositoryException('Failed to update product favorites.', e);
+    }
+  }
+
   Future<void> addChecklistFavorite(ChecklistFavorite checklistFavorite) async {
     try {
       final updatedFavorites = await _favoriteDao.addChecklistFavorite(checklistFavorite);

@@ -28,12 +28,16 @@ class FavoritesTabBar<T> extends StatelessWidget {
               onTap: () => onValueChanged!(entry.key),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text(
-                  entry.value,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: groupValue == entry.key ? BamColorPalette.bamBlue1Optimized : BamColorPalette.bamBlack30,
-                      ),
+                child: Semantics(
+                  button: true,
+                  child: Text(
+                    entry.value,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color:
+                              groupValue == entry.key ? BamColorPalette.bamBlue1Optimized : BamColorPalette.bamBlack30,
+                        ),
+                  ),
                 ),
               ),
             ),

@@ -12,8 +12,6 @@ import 'package:json_annotation/json_annotation.dart';
 enum LabelTipViewType {
   @JsonValue('graphics')
   graphics,
-  @JsonValue('video')
-  video,
   @JsonValue('graphics_text')
   grahpcisText
 }

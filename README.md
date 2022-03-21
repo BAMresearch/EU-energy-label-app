@@ -32,7 +32,9 @@ As a dealer of energy using products, you can use the app to help your customers
 Required Software:
 - Android Studio
 - Flutter SDK
-- Android Studio Plugin Flutter Intl
+
+## Recommendations
+- FVM to choose the correct Flutter Version
 
 For help getting started with Flutter, view the [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
 

@@ -10,7 +10,6 @@
 import 'package:energielabel_app/ui/misc/theme/bam_button_themes.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BamTheme {
@@ -18,7 +17,7 @@ class BamTheme {
 
   static final ThemeData themeData = ThemeData.from(colorScheme: BamColorScheme.colorScheme).copyWith(
     // App bar
-    appBarTheme: AppBarTheme(iconTheme: IconThemeData(color: BamColorPalette.bamBlack)),
+    appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: BamColorPalette.bamBlack)),
 
     // Texts
     textTheme: BamTextTheme.textTheme,

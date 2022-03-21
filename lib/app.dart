@@ -19,7 +19,6 @@ import 'package:energielabel_app/ui/onboarding/pages/onboarding_page.dart';
 import 'package:energielabel_app/ui/quiz/quiz_tab_specification.dart';
 import 'package:energielabel_app/ui/scanner/scanner_tab_specification.dart';
 import 'package:energielabel_app/ui/splash/splash_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +28,8 @@ import 'package:provider/provider.dart';
 /// Shows [SplashPage] while the upfront initialization is in progress and replaces
 /// it with the actual MaterialApp once finished.
 class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
   // Holding the list of TabSpecifications so that they're build just once.
   // Otherwise, whenever a new TabSpecification is created, a new GlobalKey is created for
   // each TabNavigator, which makes Flutter think these are different widgets and recreates their state.
@@ -55,7 +56,7 @@ class _AppState extends State<App> {
       child: Consumer<AppModel>(
         builder: (context, appModel, _) {
           if (appModel.isInitializing) {
-            return SplashPage();
+            return const SplashPage();
           }
           return MaterialApp(
             theme: BamTheme.themeData,
@@ -68,7 +69,7 @@ class _AppState extends State<App> {
               return widget!;
             },
             routes: {
-              AppEntryRoutes.onboarding: (context) => OnboardingPage(showSkipButton: true),
+              AppEntryRoutes.onboarding: (context) => const OnboardingPage(showSkipButton: true),
               AppEntryRoutes.main: (context) => TabScaffold(tabSpecifications: _tabSpecifications),
             },
           );

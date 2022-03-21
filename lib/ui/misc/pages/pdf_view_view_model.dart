@@ -13,10 +13,10 @@ import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/pdf_view_page.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:native_pdf_view/native_pdf_view.dart' as pdfview;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PdfViewViewModel extends BaseViewModel {
   PdfViewViewModel({
@@ -24,7 +24,7 @@ class PdfViewViewModel extends BaseViewModel {
     required PathType pathType,
     required AssetBundle assetBundle,
     required GlobalKey shareButtonKey,
-  })   : _pdfAssetPath = pdfPath,
+  })  : _pdfAssetPath = pdfPath,
         _pathType = pathType,
         _assetBundle = assetBundle,
         _shareButtonKey = shareButtonKey;
@@ -33,6 +33,7 @@ class PdfViewViewModel extends BaseViewModel {
   final PathType _pathType;
   final AssetBundle _assetBundle;
   final GlobalKey _shareButtonKey;
+  late final pdfview.PdfController pdfController;
 
   ViewState _viewState = ViewState.uninitialized;
   String? _contentUrl;
@@ -44,6 +45,11 @@ class PdfViewViewModel extends BaseViewModel {
   @override
   void onViewStarted() {
     _viewState = ViewState.initializing;
+    pdfController = pdfview.PdfController(
+      document: _pathType == PathType.assetPath
+          ? pdfview.PdfDocument.openAsset(_pdfAssetPath)
+          : pdfview.PdfDocument.openFile(_pdfAssetPath),
+    );
     notifyListeners();
 
     _contentUrl = _pdfAssetPath;

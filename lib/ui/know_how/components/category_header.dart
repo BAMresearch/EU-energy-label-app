@@ -13,11 +13,12 @@ import 'package:flutter/material.dart';
 
 class CategoryHeader extends StatelessWidget {
   const CategoryHeader({
+    Key? key,
     required this.title,
     required this.backgroundColorHex,
     required this.titleColorHex,
     required this.image,
-  });
+  }) : super(key: key);
 
   final String backgroundColorHex;
   final String title;

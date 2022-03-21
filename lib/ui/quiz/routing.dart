@@ -29,7 +29,7 @@ class QuizRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case QuizRoutes.quizEntry:
-        return MaterialPageRoute(builder: (context) => QuizEntryPage());
+        return MaterialPageRoute(builder: (context) => const QuizEntryPage());
       case QuizRoutes.question:
         return MaterialPageRoute(builder: (context) => QuizQuestionPage(quizState: settings.arguments as QuizState));
       case QuizRoutes.answer:

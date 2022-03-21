@@ -14,10 +14,11 @@ import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class AboutAppPage extends StatelessWidget with BasePage {
+  const AboutAppPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
@@ -36,13 +37,13 @@ class AboutAppPage extends StatelessWidget with BasePage {
             Translations.of(context)!.about_app_languages,
             style: Theme.of(context).textTheme.headline2!.copyWith(color: BamColorPalette.bamBlue3),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             Translations.of(context)!.about_app_languages_detail,
             style: Theme.of(context).textTheme.headline4!.copyWith(color: BamColorPalette.bamBlack80),
           ),
-          SizedBox(height: 32),
-          ItemButton(
+          const SizedBox(height: 32),
+          ItemButton.fromIconAsset(
             label: Translations.of(context)!.about_app_licenses,
             iconAssetPath: AssetPaths.shieldIcon,
             onTap: () => _onLicenseItemSelected(context),

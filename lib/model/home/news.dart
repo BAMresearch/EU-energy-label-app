@@ -14,6 +14,7 @@ part 'news.g.dart';
 @JsonSerializable()
 class News {
   News({this.title, this.description, this.language, this.publicationDate, this.markedRead});
+
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 
   @JsonKey(name: 'title')

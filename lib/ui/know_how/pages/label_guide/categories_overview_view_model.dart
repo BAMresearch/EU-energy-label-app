@@ -7,19 +7,20 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:developer';
+
 import 'package:energielabel_app/data/label_guide_repository.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_category.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_guide.dart';
 import 'package:energielabel_app/ui/know_how/know_how_routes.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 class CategoriesOverviewViewModel extends BaseViewModel {
   CategoriesOverviewViewModel({
     required LabelGuideRepository labelGuideRepository,
     required BuildContext context,
-  })   : _labelGuideRepository = labelGuideRepository,
+  })  : _labelGuideRepository = labelGuideRepository,
         _context = context;
 
   final LabelGuideRepository _labelGuideRepository;
@@ -49,7 +50,7 @@ class CategoriesOverviewViewModel extends BaseViewModel {
         (labelCategoryA, labelCategoryB) => labelCategoryA.orderIndex!.compareTo(labelCategoryB.orderIndex!),
       );
     } catch (e) {
-      Fimber.e('Failed to load the label categories', ex: e);
+      log('Failed to load the label categories', error: e);
       throw Error(); // TODO Implement proper error handling
     }
   }

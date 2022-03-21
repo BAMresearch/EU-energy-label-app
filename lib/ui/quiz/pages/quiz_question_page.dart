@@ -13,13 +13,12 @@ import 'package:energielabel_app/ui/misc/quiz_question_button.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_question_view_model.dart';
 import 'package:energielabel_app/ui/quiz/quiz_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
 class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
-  QuizQuestionPage({required this.quizState});
+  const QuizQuestionPage({Key? key, required this.quizState}) : super(key: key);
 
   final QuizState quizState;
 
@@ -60,7 +59,7 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
                                 .copyWith(color: BamColorPalette.bamBlack45Optimized),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
                           viewModel.questionText!,
                           textAlign: TextAlign.center,
@@ -76,15 +75,18 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
                           visible: false, //todo replace with value
                           child: Image.network(''), //todo replace with Video
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         ...viewModel.quizState.currentQuestion.answers!
                             .map((answerOption) => Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: RadioButton(
-                                      caption: answerOption.title!,
-                                      value: answerOption,
-                                      groupValue: viewModel.selectedAnswer,
-                                      onChanged: viewModel.onAnswerSelected),
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: Semantics(
+                                    button: true,
+                                    child: RadioButton(
+                                        caption: answerOption.title!,
+                                        value: answerOption,
+                                        groupValue: viewModel.selectedAnswer,
+                                        onChanged: viewModel.onAnswerSelected),
+                                  ),
                                 ))
                             .toList(),
                       ],
@@ -94,8 +96,8 @@ class QuizQuestionPage extends StatelessPage<QuizQuestionViewModel> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(double.maxFinite, 60)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder()),
+                  minimumSize: MaterialStateProperty.all(const Size(double.maxFinite, 60)),
+                  shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
                   backgroundColor: MaterialStateProperty.all(
                       viewModel.selectedAnswer == null ? BamColorPalette.bamBlue3 : BamColorPalette.bamBlue1),
                 ),

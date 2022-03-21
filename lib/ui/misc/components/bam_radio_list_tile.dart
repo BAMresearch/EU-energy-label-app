@@ -9,12 +9,13 @@
 
 import 'package:energielabel_app/data/asset_paths.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class BamRadioListTile extends ListTile {
-  BamRadioListTile({
+  const BamRadioListTile({
+    Key? key,
     required Function(bool checked) onChanged,
     required bool value,
     required Text title,
@@ -22,7 +23,7 @@ class BamRadioListTile extends ListTile {
   })  : _onChanged = onChanged,
         _value = value,
         _title = title,
-        super(enabled: enabled);
+        super(key: key, enabled: enabled);
 
   final Function(bool checked) _onChanged;
   final bool _value;
@@ -30,23 +31,33 @@ class BamRadioListTile extends ListTile {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: enabled ? () => _onChanged(!_value) : null,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8, right: 0, bottom: 8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (_value)
-              SvgPicture.asset(AssetPaths.checkedIcon)
-            else
-              SvgPicture.asset(
-                AssetPaths.uncheckedIcon,
-                color: enabled ? null : BamColorPalette.bamWhite80,
-              ),
-            SizedBox(width: 16),
-            Expanded(child: _title),
-          ],
+    return Semantics(
+      button: true,
+      hint: _value
+          ? Translations.of(context)!.know_how_checklist_selected_semantics_hint
+          : Translations.of(context)!.know_how_checklist_deselected_semantics_hint,
+      label: _value
+          ? Translations.of(context)!.know_how_checklist_selected_semantics(_title.data ?? '')
+          : Translations.of(context)!.know_how_checklist_deselected_semantics(_title.data ?? ''),
+      excludeSemantics: true,
+      child: InkWell(
+        onTap: enabled ? () => _onChanged(!_value) : null,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, right: 0, bottom: 8),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (_value)
+                SvgPicture.asset(AssetPaths.checkedIcon)
+              else
+                SvgPicture.asset(
+                  AssetPaths.uncheckedIcon,
+                  color: enabled ? null : BamColorPalette.bamWhite80,
+                ),
+              const SizedBox(width: 16),
+              Expanded(child: _title),
+            ],
+          ),
         ),
       ),
     );

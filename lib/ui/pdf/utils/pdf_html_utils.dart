@@ -58,9 +58,9 @@ class PdfHtmlUtils {
       if (otherNodes.isNotEmpty) {
         nodes.removeRange(0, nodes.indexOf(otherNodes.last) + 1);
 
-        otherNodes.forEach((node) {
+        for (var node in otherNodes) {
           pdfWidgets.add(_renderWidgetsFromNodes(node as dom.Element));
-        });
+        }
       }
     } while (nodes.isNotEmpty);
 
@@ -92,7 +92,7 @@ class PdfHtmlUtils {
         if (childElement.localName == 'a' && childElement.attributes['href']!.startsWith('http')) {
           inlineSpans.add(TextSpan(
             text: childElement.text.replaceAll('<br />', '\n'),
-            style: TextStyle(decoration: TextDecoration.underline),
+            style: const TextStyle(decoration: TextDecoration.underline),
             annotation: AnnotationUrl(childElement.attributes['href']!),
           ));
         } else {

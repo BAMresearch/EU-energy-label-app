@@ -8,12 +8,12 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:energielabel_app/model/know_how/label_guide/label_tip.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_tip_view_type.dart';
 import 'package:energielabel_app/ui/pdf/components/general_info_box.dart';
 import 'package:energielabel_app/ui/pdf/utils/pdf_html_utils.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:pdf/widgets.dart';
 
 class Tip extends StatelessWidget {
@@ -24,12 +24,12 @@ class Tip extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               '${labelTip.orderIndex! + 1}. ${labelTip.title}',
               style: Theme.of(context).header2,
@@ -42,7 +42,7 @@ class Tip extends StatelessWidget {
               if (labelTip.viewType == LabelTipViewType.graphics) _buildTipContentImage(),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: PdfHtmlUtils.htmlStringToPdfWidget(context, labelTip.description!),
                 ),
               )
@@ -62,14 +62,14 @@ class Tip extends StatelessWidget {
     if (imageData != null && imageData.isNotEmpty) {
       try {
         return Padding(
-          padding: EdgeInsets.only(right: 16),
+          padding: const EdgeInsets.only(right: 16),
           child: Image(
-            MemoryImage(Base64Decoder().convert(imageData)),
+            MemoryImage(const Base64Decoder().convert(imageData)),
             width: 200,
           ),
         );
       } catch (error, stacktrace) {
-        Fimber.e('Failed to load image data.', ex: error, stacktrace: stacktrace);
+        log('Failed to load image data.', error: error, stackTrace: stacktrace);
         return SizedBox.shrink();
       }
     }

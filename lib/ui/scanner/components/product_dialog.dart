@@ -13,6 +13,7 @@ import 'package:energielabel_app/model/scanner/product.dart';
 import 'package:energielabel_app/service_locator.dart';
 import 'package:energielabel_app/ui/misc/components/bam_dialog.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
+import 'package:energielabel_app/ui/scanner/components/product_dialog_favorite_add_comment.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog_favorite_set_category.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog_favorite_set_name.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog_overview.dart';
@@ -22,11 +23,13 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
 class ProductDialog extends StatelessPage<ProductDialogViewModel> {
-  ProductDialog({
+  const ProductDialog({
+    Key? key,
     required Product product,
     required Function(ProductDialogFinishAction) onFinish,
-  })   : _product = product,
-        _onFinish = onFinish;
+  })  : _product = product,
+        _onFinish = onFinish,
+        super(key: key);
 
   final Product _product;
   final Function(ProductDialogFinishAction) _onFinish;
@@ -56,7 +59,13 @@ class ProductDialog extends StatelessPage<ProductDialogViewModel> {
               case ProductDialogPage.favoriteSetCategory:
                 return ProductDialogFavoriteSetCategory(
                   labelCategories: viewModel.labelCategories,
-                  onConfirmCategory: viewModel.onFavoriteConfirmationAction,
+                  onConfirmCategory: viewModel.onCategoryConfirmationAction,
+                  onTapCancel: viewModel.onCancelDialog,
+                );
+              case ProductDialogPage.favoriteAddComment:
+                return ProductDialogFavoriteAddComment(
+                  onConfirm: viewModel.onFavoriteConfirmationAction,
+                  onAddComment: viewModel.onAddComment,
                   onTapCancel: viewModel.onCancelDialog,
                 );
               default:
@@ -76,6 +85,8 @@ class ProductDialog extends StatelessPage<ProductDialogViewModel> {
         return Translations.of(context)!.product_favorite_dialog_set_title;
       case ProductDialogPage.favoriteSetCategory:
         return Translations.of(context)!.product_favorite_dialog_set_category;
+      case ProductDialogPage.favoriteAddComment:
+        return Translations.of(context)!.product_favorite_dialog_add_comment;
       default:
         throw ArgumentError.notNull('visiblePage');
     }

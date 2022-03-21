@@ -27,7 +27,7 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class GlossaryPage extends StatefulPage {
-  GlossaryPage({this.initialSearchText});
+  const GlossaryPage({Key? key, this.initialSearchText}) : super(key: key);
 
   final String? initialSearchText;
 
@@ -81,7 +81,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
                       case ViewState.error:
                         return _buildErrorState();
                       default:
-                        return SizedBox.shrink();
+                        return const SizedBox.shrink();
                     }
                   },
                 ),
@@ -145,7 +145,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
   }
 
   Widget _buildProgressState() {
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 
   Widget _buildGlossaryList(GlossaryViewModel viewModel) {
@@ -154,7 +154,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
         padding: const EdgeInsets.symmetric(vertical: 16),
         itemBuilder: (context, index) =>
             _buildGlossaryEntry(viewModel.glossaryEntries[index]!, viewModel.filterInput, viewModel),
-        separatorBuilder: (context, index) => SizedBox(height: 32),
+        separatorBuilder: (context, index) => const SizedBox(height: 32),
         itemCount: viewModel.glossaryEntries.length,
         itemScrollController: _itemScrollController,
         initialScrollIndex: viewModel.initialSelectedGlossaryEntry,
@@ -184,7 +184,7 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
             ),
           ),
 
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
 
           // Content
 
@@ -196,6 +196,6 @@ class _GlossaryPageState extends PageState<GlossaryPage, GlossaryViewModel> {
   }
 
   Widget _buildErrorState() {
-    return ErrorView();
+    return const ErrorView();
   }
 }

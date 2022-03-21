@@ -15,11 +15,15 @@ mixin BasePage on Widget {}
 
 /// Base class for our stateless pages.
 abstract class StatelessPage<T extends BaseViewModel> extends StatelessWidget with BasePage {
+  const StatelessPage({Key? key}) : super(key: key);
+
   T createViewModel(BuildContext context);
 }
 
 /// Base class for our stateful pages.
 abstract class StatefulPage extends StatefulWidget with BasePage {
+  const StatefulPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return createPageState();

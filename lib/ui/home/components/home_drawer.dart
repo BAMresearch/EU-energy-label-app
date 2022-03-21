@@ -7,9 +7,9 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:async';
+
 import 'package:energielabel_app/data/asset_paths.dart';
-import 'package:energielabel_app/device_info.dart';
-import 'package:energielabel_app/service_locator.dart';
 import 'package:energielabel_app/ui/home/routing.dart';
 import 'package:energielabel_app/ui/misc/components/circular_flat_button.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
@@ -17,10 +17,11 @@ import 'package:energielabel_app/ui/misc/theme/bam_text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeDrawer extends StatelessWidget {
+  const HomeDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -48,7 +49,7 @@ class HomeDrawer extends StatelessWidget {
 
                   // Infothek
                   Padding(
-                    padding: EdgeInsetsDirectional.only(start: 32, bottom: 12),
+                    padding: const EdgeInsetsDirectional.only(start: 32, bottom: 12),
                     child: Text(
                       Translations.of(context)!.home_menu_infothek,
                       style: BamTextStyles.subtitle3.copyWith(color: BamColorPalette.bamYellow1),
@@ -65,18 +66,6 @@ class HomeDrawer extends StatelessWidget {
                   _NavItem(
                     label: Translations.of(context)!.home_menu_about_app,
                     onTap: () => _onAboutAppItemTapped(context),
-                  ),
-
-                  // Privacy Policy
-                  _NavItem(
-                    label: Translations.of(context)!.home_menu_privacy_policy,
-                    onTap: () => _onPrivacyPolicyItemTapped(context),
-                  ),
-
-                  // Imprint
-                  _NavItem(
-                    label: Translations.of(context)!.home_menu_imprint,
-                    onTap: () => _onImprintItemTapped(context),
                   ),
 
                   SizedBox(height: 24),
@@ -111,27 +100,6 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 
-  Future<void> _onPrivacyPolicyItemTapped(BuildContext context) async {
-    _closeDrawer(context);
-
-    final deviceInfo = ServiceLocator().get<DeviceInfo>()!;
-    final privacyPolicyAssetPath = AssetPaths.privacyPolicyHtml(deviceInfo.bestMatchedLocale);
-
-    unawaited(
-      Navigator.of(context).pushNamed(HomeRoutes.privacyPolicy, arguments: privacyPolicyAssetPath),
-    );
-  }
-
-  Future<void> _onImprintItemTapped(BuildContext context) async {
-    _closeDrawer(context);
-
-    final deviceInfo = ServiceLocator().get<DeviceInfo>()!;
-    final imprintAssetPath = AssetPaths.imprintHtml(deviceInfo.bestMatchedLocale);
-    unawaited(
-      Navigator.of(context).pushNamed(HomeRoutes.imprint, arguments: imprintAssetPath),
-    );
-  }
-
   void _onShareItemTapped(BuildContext context) {
     _closeDrawer(context);
 
@@ -161,11 +129,14 @@ class _NavItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         child: ListTile(
           dense: true,
-          title: Text(
-            label!,
-            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite80, fontSize: 20),
+          title: Semantics(
+            button: true,
+            child: Text(
+              label!,
+              style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite80, fontSize: 20),
+            ),
           ),
-          contentPadding: EdgeInsetsDirectional.only(start: 16),
+          contentPadding: const EdgeInsetsDirectional.only(start: 16),
         ),
       ),
     );

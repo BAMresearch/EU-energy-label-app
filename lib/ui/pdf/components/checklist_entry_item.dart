@@ -20,7 +20,7 @@ class ChecklistEntryItem extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

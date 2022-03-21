@@ -24,7 +24,9 @@ import 'package:flutter_html/style.dart';
 import 'package:provider/provider.dart';
 
 class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
-  WhyIsTherePage({int initialIndex = 0}) : _initialIndex = initialIndex;
+  WhyIsTherePage({Key? key, int initialIndex = 0})
+      : _initialIndex = initialIndex,
+        super(key: key);
 
   final PageController _pageController = PageController();
   final int _initialIndex;
@@ -204,7 +206,7 @@ class WhyIsTherePage extends StatelessPage<WhyIsThereViewModel> {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: viewModel.pageCount == 0
-            ? SizedBox.shrink()
+            ? const SizedBox.shrink()
             : DotsIndicator(
                 dotsCount: viewModel.pageCount,
                 position: viewModel.currentPageIndex.toDouble(),

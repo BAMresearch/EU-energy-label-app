@@ -17,7 +17,7 @@ abstract class Favorite {}
 
 @JsonSerializable()
 class ProductFavorite extends Favorite {
-  ProductFavorite({this.product, this.title, this.categoryId, List<String>? comments = const []});
+  ProductFavorite({this.product, this.title, this.categoryId, this.comments});
 
   factory ProductFavorite.fromJson(Map<String, dynamic> json) => _$ProductFavoriteFromJson(json);
 
@@ -30,7 +30,7 @@ class ProductFavorite extends Favorite {
   @JsonKey(name: 'category_id')
   final int? categoryId;
 
-  @JsonKey(name: 'comments', defaultValue: [])
+  @JsonKey(name: 'comments')
   List<String>? comments;
 
   Map<String, dynamic> toJson() => _$ProductFavoriteToJson(this);

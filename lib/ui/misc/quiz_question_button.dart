@@ -8,12 +8,10 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class RadioButton<T> extends StatefulWidget {
-  RadioButton({
+  const RadioButton({
     Key? key,
     required this.value,
     required this.caption,

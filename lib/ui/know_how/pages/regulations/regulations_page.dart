@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegulationsPage extends StatelessPage<RegulationsViewModel> {
+  const RegulationsPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<RegulationsViewModel>(
@@ -33,7 +35,7 @@ class RegulationsPage extends StatelessPage<RegulationsViewModel> {
               case ViewState.error:
                 return _buildErrorState();
               default:
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
             }
           }),
         );
@@ -71,6 +73,6 @@ class RegulationsPage extends StatelessPage<RegulationsViewModel> {
   }
 
   Widget _buildErrorState() {
-    return ErrorView();
+    return const ErrorView();
   }
 }

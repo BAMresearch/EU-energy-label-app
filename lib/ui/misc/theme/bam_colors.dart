@@ -76,7 +76,7 @@ class BamColorPalette {
 class BamColorScheme {
   BamColorScheme._();
 
-  static final ColorScheme colorScheme = ColorScheme(
+  static const ColorScheme colorScheme = ColorScheme(
     brightness: Brightness.light,
 
     // Backgrounds
@@ -88,12 +88,12 @@ class BamColorScheme {
     // e.g. AppBar Background Color
     primary: BamColorPalette.bamBlack,
     onPrimary: BamColorPalette.bamWhite,
-    primaryVariant: BamColorPalette.bamBlack,
+    primaryContainer: BamColorPalette.bamBlack,
 
     // Accent color (CTA buttons, etc.)
     secondary: BamColorPalette.bamBlue1,
     onSecondary: Colors.white,
-    secondaryVariant: BamColorPalette.bamBlue2,
+    secondaryContainer: BamColorPalette.bamBlue2,
 
     // Errors
     error: BamColorPalette.bamRed1,

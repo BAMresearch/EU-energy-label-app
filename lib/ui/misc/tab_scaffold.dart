@@ -7,10 +7,11 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:developer';
+
 import 'package:energielabel_app/ui/misc/tab_specification.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// Scaffold providing the application's tab-based root layout.
@@ -22,7 +23,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// In order to programmatically navigate from one tab the another callers can use
 /// TabScaffold.of(context).navigateIntoTab().
 class TabScaffold extends StatefulWidget {
-  const TabScaffold({required this.tabSpecifications});
+  const TabScaffold({Key? key, required this.tabSpecifications}) : super(key: key);
 
   final List<TabSpecification> tabSpecifications;
 
@@ -42,7 +43,7 @@ class TabScaffoldState extends State<TabScaffold> {
   void initState() {
     // The tab pages shall only be build once first accessed.
     // Therefore, initially the list is filled up with placeholder widgets.
-    _tabNavigators = List.filled(widget.tabSpecifications.length, SizedBox.shrink());
+    _tabNavigators = List.filled(widget.tabSpecifications.length, const SizedBox.shrink());
     _tabNavigators[0] = Navigator(
       key: widget.tabSpecifications[0].tabNavigatorKey,
       onGenerateRoute: widget.tabSpecifications[0].onGenerateRoute,
@@ -73,7 +74,7 @@ class TabScaffoldState extends State<TabScaffold> {
       backgroundColor: BamColorPalette.bamWhite,
       unselectedItemColor: BamColorPalette.bamBlack60Optimized,
       selectedItemColor: BamColorPalette.bamBlue1Optimized,
-      selectedIconTheme: IconThemeData(color: BamColorPalette.bamBlue1Optimized),
+      selectedIconTheme: const IconThemeData(color: BamColorPalette.bamBlue1Optimized),
       unselectedFontSize: fontSize,
       selectedFontSize: fontSize,
       items: widget.tabSpecifications
@@ -94,7 +95,7 @@ class TabScaffoldState extends State<TabScaffold> {
       onTap: (index) {
         // If the user tapped the already active tab, pop its stack to the root page.
         if (_currentIndex == index) {
-          Fimber.d('tabNavigator.popToRoot');
+          log('tabNavigator.popToRoot');
           widget.tabSpecifications[_currentIndex].tabNavigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
 
@@ -141,7 +142,7 @@ class TabScaffoldState extends State<TabScaffold> {
     // Remove the previous navigator from the tree so that the new one is treated as a new one, meaning
     // that the new navigator's initState is executed and the initial route interpreted again.
     setState(() {
-      _tabNavigators[newTabIndex] = SizedBox();
+      _tabNavigators[newTabIndex] = const SizedBox();
     });
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {

@@ -11,16 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class ErrorView extends StatelessWidget {
+  const ErrorView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.warning_amber_sharp, color: Colors.red, size: 96),
+          const Icon(Icons.warning_amber_sharp, color: Colors.red, size: 96),
           Text(
             Translations.of(context)!.error_unknown,
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ), // TODO Design: Reference error theme or error color
         ],
       ),

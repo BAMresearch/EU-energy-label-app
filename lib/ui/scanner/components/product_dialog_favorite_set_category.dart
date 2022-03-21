@@ -58,7 +58,7 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
               Translations.of(context)!.product_favorite_dialog_set_category_error,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).colorScheme.error),
             ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: TextButton(
@@ -66,28 +66,28 @@ class _ProductDialogFavoriteSetCategoryState extends State<ProductDialogFavorite
                 _valid = _selectedCategory != null;
                 setState(() {});
                 if (_valid) {
-                  return widget.onConfirmCategory(_selectedCategory);
+                  widget.onConfirmCategory(_selectedCategory);
                 }
               },
               style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 padding: const EdgeInsets.only(top: 18, bottom: 14),
               ),
               child: Text(
-                Translations.of(context)!.product_favorite_dialog_confirmation_button,
+                Translations.of(context)!.product_favorite_dialog_next,
                 style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: OutlinedButton(
               onPressed: widget.onTapCancel,
               style: OutlinedButton.styleFrom(
                 primary: Theme.of(context).colorScheme.surface,
-                side: BorderSide(color: BamColorPalette.bamBlue1Optimized),
+                side: const BorderSide(color: BamColorPalette.bamBlue1Optimized),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 padding: const EdgeInsets.only(top: 18, bottom: 14),
               ),

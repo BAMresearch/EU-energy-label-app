@@ -11,19 +11,12 @@ import 'package:energielabel_app/ui/favorites/pages/favorites_edit_page.dart';
 import 'package:energielabel_app/ui/favorites/pages/favorites_page.dart';
 import 'package:energielabel_app/ui/know_how/pages/label_guide/category_checklists_page.dart';
 import 'package:energielabel_app/ui/know_how/pages/label_guide/category_tips_page.dart';
+import 'package:energielabel_app/ui/misc/pages/csv_view_page.dart';
 import 'package:energielabel_app/ui/misc/pages/pdf_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
-class FavoritesRoutes {
-  FavoritesRoutes._();
-
-  static const String root = '/';
-  static const String editFavorites = '/edit_favorites';
-  static const String tipDetail = '/tips';
-  static const String checklistDetails = '/checklist';
-  static const String exportPreview = '/export_preview';
-}
+import 'favorites_routes.dart';
 
 class FavoritesRouter {
   FavoritesRouter._();
@@ -31,19 +24,30 @@ class FavoritesRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case FavoritesRoutes.root:
-        return MaterialPageRoute(builder: (context) => FavoritesPage());
+        return MaterialPageRoute(builder: (context) => const FavoritesPage());
       case FavoritesRoutes.editFavorites:
-        return MaterialPageRoute(builder: (context) => FavoritesEditPage(favoriteEditArguments: settings.arguments as FavoritesEditArguments));
+        return MaterialPageRoute(
+            builder: (context) =>
+                FavoritesEditPage(favoriteEditArguments: settings.arguments as FavoritesEditArguments));
       case FavoritesRoutes.checklistDetails:
         return MaterialPageRoute(
-            builder: (context) => CategoryChecklistsPage(categoryChecklistPageArguments: settings.arguments as CategoryChecklistPageArguments));
+            builder: (context) => CategoryChecklistsPage(
+                categoryChecklistPageArguments: settings.arguments as CategoryChecklistPageArguments));
       case FavoritesRoutes.tipDetail:
-        return MaterialPageRoute(builder: (context) => CategoryTipsPage(argument: settings.arguments as CategoryTipsPageArguments));
-      case FavoritesRoutes.exportPreview:
+        return MaterialPageRoute(
+            builder: (context) => CategoryTipsPage(argument: settings.arguments as CategoryTipsPageArguments));
+      case FavoritesRoutes.exportPdfPreview:
         return MaterialPageRoute(
           builder: (context) => PdfViewPage.fromPath(
-              pageTitle: Translations.of(context)!.favorites_page_export_preview_title,
+              pageTitle: Translations.of(context)!.favorites_page_export_pdf_preview_title,
               pdfDocumentFolderPath: settings.arguments as String),
+        );
+      case FavoritesRoutes.exportCsvPreview:
+        return MaterialPageRoute(
+          builder: (context) => CsvViewPage(
+            pageTitle: Translations.of(context)!.favorites_page_export_csv_preview_title,
+            arguments: settings.arguments as CsvViewPageArguments,
+          ),
         );
       default:
         throw ArgumentError.value(settings.name, null, 'Unexpected favorites route name.');

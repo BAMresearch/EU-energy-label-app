@@ -13,14 +13,13 @@ import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_answer_view_model.dart';
 import 'package:energielabel_app/ui/quiz/quiz_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
-  QuizAnswerPage({required this.quizState});
+  const QuizAnswerPage({Key? key, required this.quizState}) : super(key: key);
 
   final QuizState quizState;
 
@@ -70,7 +69,7 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                                       .copyWith(color: BamColorPalette.bamBlack45Optimized),
                                 ),
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               MergeSemantics(
                                 child: Column(
                                   children: [
@@ -84,7 +83,7 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
                                               ? BamColorPalette.bamGreen3
                                               : BamColorPalette.bamRed1),
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     SvgPicture.asset(
                                       viewModel.isCurrentAnswerCorrect!
                                           ? AssetPaths.quizCorrectAnswerIcon
@@ -117,8 +116,8 @@ class QuizAnswerPage extends StatelessPage<QuizAnswerViewModel> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(double.maxFinite, 60)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder()),
+                  minimumSize: MaterialStateProperty.all(const Size(double.maxFinite, 60)),
+                  shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
                   backgroundColor: MaterialStateProperty.all(BamColorPalette.bamBlue1),
                 ),
                 onPressed: () {

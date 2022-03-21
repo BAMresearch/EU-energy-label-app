@@ -1,19 +1,21 @@
-#1.0.1 - 2021-06-01#
+## 1.1.1 - 2022-03-02
 
-Initial Version.
+- Accessibility optimization
+- new features:
+  - extended export function (CSV)
+  - new comments function
+  - offline mode
 
-##Added##
+## 1.1.0 - 2021-09-01
 
-- All.
+- New category lighting
 
-##Deprecated##
+## 1.0.1 - 2021-05-11
 
-- Nothing.
+- New design
+- New regulations
+- Small bug fixes
 
-##Removed##
+## 1.0.0 - 2021-03-01
 
-- Nothing.
-
-##Fixed##
-
-- Nothing.
+- Initial version

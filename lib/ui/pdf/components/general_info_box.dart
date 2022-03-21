@@ -26,7 +26,7 @@ class GeneralInfoBox extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: PdfColor.fromInt(BamColorPalette.bamWhite.value),
@@ -34,7 +34,8 @@ class GeneralInfoBox extends StatelessWidget {
           border: Border.all(width: 2, color: PdfColor.fromInt(BamColorPalette.bamYellow2.value)),
         ),
         child: Padding(
-            padding: EdgeInsets.all(20), child: title != null ? _buildWithTitle(context) : _buildWithoutTitle(context)),
+            padding: const EdgeInsets.all(20),
+            child: title != null ? _buildWithTitle(context) : _buildWithoutTitle(context)),
       ),
     );
   }

@@ -10,7 +10,6 @@
 import 'dart:ui';
 
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// Function to display a Dialog on screen with a blurred background.
@@ -123,78 +122,84 @@ class BamDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.white.withOpacity(0.9),
-      insetPadding: const EdgeInsets.all(32),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width > 500 ? 500 : double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 32, bottom: 8, left: 16, right: 16),
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
-              ),
-            ),
-            if (child != null || message != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 32, left: 16, right: 16),
-                child: child ??
-                    Text(
-                      message!,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      textAlign: TextAlign.center,
-                    ),
-              ),
-            if (builder == null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40, left: 48, right: 48),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (customButtons != null)
-                      ...customButtons!
-                    else ...[
-                      if (confirmButtonText != null)
-                        TextButton(
-                          onPressed: onPressConfirm,
-                          style: TextButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            padding: const EdgeInsets.only(top: 18, bottom: 14),
-                          ),
-                          child: Text(
-                            confirmButtonText!.toUpperCase(),
-                            style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
-                          ),
-                        ),
-                      if (denyButtonText != null) SizedBox(height: 20),
-                      if (denyButtonText != null)
-                        OutlinedButton(
-                          onPressed: onPressDeny,
-                          style: OutlinedButton.styleFrom(
-                            primary: Theme.of(context).colorScheme.surface,
-                            side: BorderSide(color: BamColorPalette.bamBlue1Optimized),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            padding: const EdgeInsets.only(top: 18, bottom: 14),
-                          ),
-                          child: Text(
-                            denyButtonText!.toUpperCase(),
-                            style:
-                                Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamBlue1Optimized),
-                          ),
-                        ),
-                    ]
-                  ],
+    return Center(
+      child: IntrinsicHeight(
+        child: Dialog(
+          backgroundColor: Colors.white.withOpacity(0.9),
+          insetPadding: const EdgeInsets.all(32),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width > 500 ? 500 : double.infinity,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, bottom: 8, left: 16, right: 16),
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
+                  ),
                 ),
-              )
-            else
-              _buildCustom(context),
-          ],
+                if (child != null || message != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 32, left: 16, right: 16),
+                    child: child ??
+                        Text(
+                          message!,
+                          style: Theme.of(context).textTheme.bodyText2,
+                          textAlign: TextAlign.center,
+                        ),
+                  ),
+                if (builder == null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 40, left: 48, right: 48),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (customButtons != null)
+                          ...customButtons!
+                        else ...[
+                          if (confirmButtonText != null)
+                            TextButton(
+                              onPressed: onPressConfirm,
+                              style: TextButton.styleFrom(
+                                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                padding: const EdgeInsets.only(top: 18, bottom: 14),
+                              ),
+                              child: Text(
+                                confirmButtonText!.toUpperCase(),
+                                style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
+                              ),
+                            ),
+                          if (denyButtonText != null) const SizedBox(height: 20),
+                          if (denyButtonText != null)
+                            OutlinedButton(
+                              onPressed: onPressDeny,
+                              style: OutlinedButton.styleFrom(
+                                primary: Theme.of(context).colorScheme.surface,
+                                side: const BorderSide(color: BamColorPalette.bamBlue1Optimized),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                padding: const EdgeInsets.only(top: 18, bottom: 14),
+                              ),
+                              child: Text(
+                                denyButtonText!.toUpperCase(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .button!
+                                    .copyWith(color: BamColorPalette.bamBlue1Optimized),
+                              ),
+                            ),
+                        ]
+                      ],
+                    ),
+                  )
+                else
+                  _buildCustom(context),
+              ],
+            ),
+          ),
         ),
       ),
     );

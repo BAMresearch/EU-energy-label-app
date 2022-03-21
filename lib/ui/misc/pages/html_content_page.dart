@@ -16,7 +16,7 @@ import 'package:flutter_html/style.dart';
 import 'package:provider/provider.dart';
 
 class HtmlContentPage extends StatelessPage<HtmlContentViewModel> {
-  HtmlContentPage({required this.htmlAssetPath, required this.pageTitle});
+  const HtmlContentPage({Key? key, required this.htmlAssetPath, required this.pageTitle}) : super(key: key);
 
   final String pageTitle;
   final String htmlAssetPath;
@@ -48,7 +48,7 @@ class HtmlContentPage extends StatelessPage<HtmlContentViewModel> {
                 ],
               );
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         ),

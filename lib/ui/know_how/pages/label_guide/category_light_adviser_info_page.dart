@@ -13,7 +13,6 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_light_ad
 import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,9 +27,10 @@ class CategoryLightAdviserInfoPageArguments {
 }
 
 class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInfoViewModel> {
-  CategoryLightAdviserInfoPage({required CategoryLightAdviserInfoPageArguments initialArguments})
+  CategoryLightAdviserInfoPage({Key? key, required CategoryLightAdviserInfoPageArguments initialArguments})
       : _labelCategory = initialArguments.labelCategory,
-        _buildListCallback = initialArguments.buildListCallback;
+        _buildListCallback = initialArguments.buildListCallback,
+        super(key: key);
 
   final BuildListCallback _buildListCallback;
   final LabelCategory _labelCategory;
@@ -49,18 +49,18 @@ class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInf
   Widget _buildBody(BuildContext context) {
     return Scrollbar(
       child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 _labelCategory.lightAdviser!.infoSection.topText,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlack80),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               Text(
                 _labelCategory.lightAdviser!.infoSection.middleTitle,
                 style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
@@ -69,7 +69,7 @@ class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInf
                 _labelCategory.lightAdviser!.infoSection.middleText,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlack80),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               DecoratedBox(
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
                 child: Column(
@@ -77,7 +77,7 @@ class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInf
                       dividerColor: BamColorPalette.bamBlack10),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               Text(
                 _labelCategory.lightAdviser!.infoSection.bottomTitle,
                 style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamBlue3),
@@ -86,7 +86,7 @@ class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInf
                 _labelCategory.lightAdviser!.infoSection.bottomText,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(color: BamColorPalette.bamBlack80),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               DecoratedBox(
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
                 child: Column(
@@ -94,7 +94,7 @@ class CategoryLightAdviserInfoPage extends StatelessPage<CategoryLightAdviserInf
                       dividerColor: BamColorPalette.bamBlack10),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
           ),
         ),

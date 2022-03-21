@@ -10,24 +10,31 @@
 import 'package:energielabel_app/ui/misc/components/bam_dialog.dart';
 import 'package:energielabel_app/ui/misc/components/bam_radio_list_tile.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 enum FavoriteExportDialogVisualState { selection, loading }
+enum ExportFileType { pdf, csv }
+
+typedef ExportConfirmedHandler = Future<void> Function(
+    {bool? productsChecked, bool? knowHowChecked, required ExportFileType fileType});
 
 class FavoriteExportDialog extends StatefulWidget {
   const FavoriteExportDialog({
-    required Future<void> Function({bool? productsChecked, bool? knowHowChecked}) onExportConfirmed,
+    Key? key,
+    required ExportConfirmedHandler onExportConfirmed,
     VoidCallback? onExportDeclined,
     FavoriteExportDialogVisualState initialDialogState = FavoriteExportDialogVisualState.selection,
     this.isProductsEmpty = false,
     this.isKnowHowEmpty = false,
   })  : _initialDialogState = initialDialogState,
         _onExportConfirmed = onExportConfirmed,
-        _onExportDeclined = onExportDeclined;
+        _onExportDeclined = onExportDeclined,
+        super(key: key);
 
   final FavoriteExportDialogVisualState _initialDialogState;
-  final Future<void> Function({bool? productsChecked, bool? knowHowChecked}) _onExportConfirmed;
+  final ExportConfirmedHandler _onExportConfirmed;
   final VoidCallback? _onExportDeclined;
   final bool isProductsEmpty;
   final bool isKnowHowEmpty;
@@ -39,6 +46,7 @@ class FavoriteExportDialog extends StatefulWidget {
 class _FavoriteExportDialogState extends State<FavoriteExportDialog> {
   bool _isProductsChecked = false;
   bool _isKnowHowChecked = false;
+  ExportFileType _formatValue = ExportFileType.pdf;
 
   FavoriteExportDialogVisualState _dialogState = FavoriteExportDialogVisualState.selection;
 
@@ -55,16 +63,17 @@ class _FavoriteExportDialogState extends State<FavoriteExportDialog> {
       confirmButtonText: _dialogState == FavoriteExportDialogVisualState.selection
           ? Translations.of(context)!.favorites_page_export_dialog_export_button
           : null,
-      onPressConfirm: _dialogState == FavoriteExportDialogVisualState.selection &&
-              (_isKnowHowChecked || _isProductsChecked)
-          ? () async {
-              setState(() {
-                _dialogState = FavoriteExportDialogVisualState.loading;
-              });
-              await widget._onExportConfirmed(productsChecked: _isProductsChecked, knowHowChecked: _isKnowHowChecked);
-              Navigator.of(context).pop();
-            }
-          : null,
+      onPressConfirm:
+          _dialogState == FavoriteExportDialogVisualState.selection && (_isKnowHowChecked || _isProductsChecked)
+              ? () async {
+                  setState(() {
+                    _dialogState = FavoriteExportDialogVisualState.loading;
+                  });
+                  await widget._onExportConfirmed(
+                      productsChecked: _isProductsChecked, knowHowChecked: _isKnowHowChecked, fileType: _formatValue);
+                  Navigator.of(context).pop();
+                }
+              : null,
       denyButtonText: _dialogState == FavoriteExportDialogVisualState.selection
           ? Translations.of(context)!.favorites_page_export_dialog_cancel_button
           : null,
@@ -86,8 +95,24 @@ class _FavoriteExportDialogState extends State<FavoriteExportDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(Translations.of(context)!.favorites_page_export_dialog_hint),
-          SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: CupertinoSegmentedControl(
+              borderColor: Theme.of(context).colorScheme.secondaryContainer,
+              selectedColor: Theme.of(context).colorScheme.secondaryContainer,
+              children: _buildSegments(context),
+              onValueChanged: (exportFormat) {
+                setState(() {
+                  _formatValue = ExportFileType.values[exportFormat as int];
+                });
+              },
+              groupValue: _formatValue.index,
+            ),
+          ),
+          Text(
+            Translations.of(context)!.favorites_page_export_dialog_hint,
+          ),
+          const SizedBox(height: 24),
           BamRadioListTile(
             value: _isProductsChecked,
             onChanged: (isChecked) {
@@ -102,19 +127,31 @@ class _FavoriteExportDialogState extends State<FavoriteExportDialog> {
             ),
             enabled: !widget.isProductsEmpty,
           ),
-          BamRadioListTile(
-            value: _isKnowHowChecked,
-            onChanged: (isChecked) {
-              setState(() {
-                _isKnowHowChecked = !_isKnowHowChecked;
-              });
-            },
-            title: Text(
-              Translations.of(context)!.favorites_page_export_dialog_know_how_checkbox,
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  color: widget.isKnowHowEmpty ? BamColorPalette.bamBlack45Optimized : BamColorPalette.bamBlack),
+          AnimatedSwitcher(
+            transitionBuilder: (child, animation) => SizeTransition(
+              sizeFactor: animation,
+              child: child,
             ),
-            enabled: !widget.isKnowHowEmpty,
+            switchOutCurve: Curves.easeOut,
+            switchInCurve: Curves.easeIn,
+            duration: const Duration(milliseconds: 150),
+            child: (_formatValue == ExportFileType.pdf)
+                ? BamRadioListTile(
+                    value: _isKnowHowChecked,
+                    onChanged: (isChecked) {
+                      setState(() {
+                        _isKnowHowChecked = !_isKnowHowChecked;
+                      });
+                    },
+                    title: Text(
+                      Translations.of(context)!.favorites_page_export_dialog_know_how_checkbox,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                          color:
+                              widget.isKnowHowEmpty ? BamColorPalette.bamBlack45Optimized : BamColorPalette.bamBlack),
+                    ),
+                    enabled: !widget.isKnowHowEmpty,
+                  )
+                : const SizedBox.shrink(),
           ),
         ],
       ),
@@ -127,11 +164,30 @@ class _FavoriteExportDialogState extends State<FavoriteExportDialog> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(Translations.of(context)!.favorites_page_export_dialog_loading_hint),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
-        CircularProgressIndicator(),
+        const CircularProgressIndicator(),
       ],
     );
+  }
+
+  Map<int, Widget> _buildSegments(BuildContext context) {
+    return {
+      ExportFileType.pdf.index: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+        child: Text(
+          'PDF',
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+      ExportFileType.csv.index: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+        child: Text(
+          'CSV',
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+    };
   }
 }

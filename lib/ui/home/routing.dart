@@ -11,9 +11,7 @@ import 'package:energielabel_app/ui/home/pages/home_page.dart';
 import 'package:energielabel_app/ui/infothek/about_app_page.dart';
 import 'package:energielabel_app/ui/infothek/app_license_page.dart';
 import 'package:energielabel_app/ui/infothek/first_steps_page.dart';
-import 'package:energielabel_app/ui/misc/pages/html_content_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class HomeRoutes {
   HomeRoutes._();
@@ -21,8 +19,6 @@ class HomeRoutes {
   static const String root = '/';
   static const String aboutApp = '/about_app';
   static const String aboutAppLicense = '/about_app/license';
-  static const String imprint = '/imprint';
-  static const String privacyPolicy = '/privacy_policy';
   static const String firstSteps = '/first_steps';
 }
 
@@ -32,23 +28,13 @@ class HomeRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HomeRoutes.root:
-        return MaterialPageRoute(builder: (context) => HomePage());
-      case HomeRoutes.imprint:
-        return MaterialPageRoute(
-          builder: (context) => HtmlContentPage(
-              htmlAssetPath: settings.arguments as String, pageTitle: Translations.of(context)!.imprint_page_title),
-        );
+        return MaterialPageRoute(builder: (context) => const HomePage());
       case HomeRoutes.aboutApp:
-        return MaterialPageRoute(builder: (context) => AboutAppPage());
+        return MaterialPageRoute(builder: (context) => const AboutAppPage());
       case HomeRoutes.aboutAppLicense:
         return MaterialPageRoute(builder: (context) => AppLicensePage());
-      case HomeRoutes.privacyPolicy:
-        return MaterialPageRoute(
-          builder: (context) => HtmlContentPage(
-              htmlAssetPath: settings.arguments as String, pageTitle: Translations.of(context)!.privacy_policy_title),
-        );
       case HomeRoutes.firstSteps:
-        return MaterialPageRoute(builder: (context) => FirstSteps());
+        return MaterialPageRoute(builder: (context) => const FirstSteps());
       default:
         throw ArgumentError.value(settings.name, null, 'Unexpected home route name.');
     }

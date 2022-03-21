@@ -7,10 +7,6 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
-import 'package:energielabel_app/data/news_repository.dart';
-import 'package:energielabel_app/data/quiz_repository.dart';
-import 'package:energielabel_app/data/settings_repository.dart';
-import 'package:energielabel_app/model/home/news.dart';
 import 'package:energielabel_app/ui/favorites/favorites_routes.dart';
 import 'package:energielabel_app/ui/favorites/favorites_tab_specification.dart';
 import 'package:energielabel_app/ui/home/home_tab_specification.dart';
@@ -24,63 +20,16 @@ import 'package:energielabel_app/ui/quiz/routing.dart';
 import 'package:energielabel_app/ui/scanner/routing.dart';
 import 'package:energielabel_app/ui/scanner/scanner_tab_specification.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:pedantic/pedantic.dart';
 
 class HomeViewModel extends BaseViewModel {
   HomeViewModel({
     required BuildContext context,
-    required QuizRepository quizRepository,
-    required NewsRepository newsRepository,
-    required SettingsRepository settingsRepository,
-    required QuizUpdateAvailableCallback quizUpdateAvailableCallback,
-  })   : _context = context,
-        _quizRepository = quizRepository,
-        _newsRepository = newsRepository,
-        _settingsRepository = settingsRepository,
-        _quizUpdateAvailableCallback = quizUpdateAvailableCallback;
+  }) : _context = context;
 
   final BuildContext _context;
-  final NewsRepository _newsRepository;
-  final QuizRepository _quizRepository;
-  final SettingsRepository _settingsRepository;
-  final QuizUpdateAvailableCallback _quizUpdateAvailableCallback;
-  News? _unreadNews;
-
-  bool get hasUnreadNews => _unreadNews != null;
-
-  News? get unreadNews => _unreadNews;
 
   @override
-  void onViewStarted() {
-    unawaited(_checkForQuizUpdates());
-  }
-
-  void onViewVisibilityChanged(bool becameVisible) {
-    if (becameVisible) {
-      unawaited(_loadUnreadNews());
-    }
-  }
-
-  void onNewsClosedAction() {
-    unawaited(_newsRepository.saveNews(_unreadNews!.copyWith(markedRead: true)));
-    _unreadNews = null;
-    notifyListeners();
-  }
-
-  Future<void> onQuizUpdateConfirmed() async {
-    try {
-      await _quizRepository.syncQuiz();
-      unawaited(_settingsRepository.setDeferredQuizUpdateAvailable(false));
-    } catch (e) {
-      Fimber.e('Failed to sync the quiz.', ex: e);
-      // TODO Notify the user?
-    }
-  }
-
-  void onQuizUpdateDeclined() {
-    unawaited(_settingsRepository.setDeferredQuizUpdateAvailable(true));
-  }
+  void onViewStarted() {}
 
   void onLabelGuideTilePressed() {
     TabScaffold.of(_context)!.navigateIntoTab(KnowHowTabSpecification, KnowHowRoutes.labelGuideCategoriesOverview);
@@ -100,38 +49,6 @@ class HomeViewModel extends BaseViewModel {
 
   void onQuizTilePressed() {
     TabScaffold.of(_context)!.navigateIntoTab(QuizTabSpecification, QuizRoutes.quizEntry);
-  }
-
-  Future<void> _loadUnreadNews() async {
-    try {
-      // Sync the news.
-      await _newsRepository.syncNews();
-
-      // Check if there are some unread news.
-      final news = _newsRepository.loadNews();
-      if (news != null && !news.markedRead!) {
-        _unreadNews = news;
-      } else {
-        _unreadNews = null;
-      }
-    } catch (e) {
-      Fimber.e('Failed to load unread news.', ex: e);
-      // TODO Notify user?
-    } finally {
-      notifyListeners();
-    }
-  }
-
-  Future<void> _checkForQuizUpdates() async {
-    try {
-      final updateAvailable = await _quizRepository.isUpdateAvailable();
-      if (updateAvailable) {
-        _quizUpdateAvailableCallback();
-      }
-    } catch (e) {
-      // TODO Proper error handling
-      Fimber.e('Failed to determine if quiz updates are available.', ex: e);
-    }
   }
 }
 

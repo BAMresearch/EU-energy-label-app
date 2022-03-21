@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/data/favorite_repository.dart';
 import 'package:energielabel_app/data/label_guide_repository.dart';
@@ -18,7 +19,6 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category_check
 import 'package:energielabel_app/model/know_how/label_guide/label_category_checklist_data.dart';
 import 'package:energielabel_app/ui/know_how/favorite_action_listener.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CategoryChecklistsViewModel extends BaseViewModel {
@@ -28,7 +28,7 @@ class CategoryChecklistsViewModel extends BaseViewModel {
     required LabelGuideRepository labelGuideRepository,
     required FavoriteRepository favoriteRepository,
     required FavoriteActionListener favoriteActionListener,
-  })   : _labelCategoryChecklistData = labelCategoryChecklistData,
+  })  : _labelCategoryChecklistData = labelCategoryChecklistData,
         _labelCategory = labelCategory,
         _checklistFavorite = ChecklistFavorite(categoryId: labelCategory.id),
         _favoriteRepository = favoriteRepository,
@@ -51,9 +51,11 @@ class CategoryChecklistsViewModel extends BaseViewModel {
   String? get description => _labelCategoryChecklistData.introText;
 
   String? get title => _labelCategoryChecklistData.title;
+
   String? get graphicPath => _labelCategory.graphicPath;
 
   String? get headerBackgroundColorHex => _headerBackgroundColorHex;
+
   String? get headerTextColorHex => _headerTextColorHex;
 
   String? get informationTitle => _labelCategoryChecklistData.informationTitle;
@@ -99,7 +101,7 @@ class CategoryChecklistsViewModel extends BaseViewModel {
       await _favoriteRepository.removeChecklistFavorite(_checklistFavorite);
       _favoriteActionListener.onRemoveFavoriteSuccess();
     } catch (e) {
-      Fimber.e('Failed to remove favorite.', ex: e);
+      log('Failed to remove favorite.', error: e);
       _favoriteActionListener.onRemoveFavoriteFailure();
     }
   }
@@ -109,7 +111,7 @@ class CategoryChecklistsViewModel extends BaseViewModel {
       await _favoriteRepository.addChecklistFavorite(_checklistFavorite);
       _favoriteActionListener.onAddFavoriteSuccess();
     } catch (e) {
-      Fimber.e('Failed to add favorite.', ex: e);
+      log('Failed to add favorite.', error: e);
       _favoriteActionListener.onAddFavoriteFailure();
     }
   }

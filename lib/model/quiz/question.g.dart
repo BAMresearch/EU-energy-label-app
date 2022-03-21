@@ -6,16 +6,12 @@ part of 'question.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Question _$QuestionFromJson(Map<String, dynamic> json) {
-  return Question(
-    viewType: json['view-type'] as String?,
-    title: json['title'] as String?,
-    explanation: json['explanation'] as String?,
-    answers: (json['answers'] as List<dynamic>?)
-        ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+Question _$QuestionFromJson(Map<String, dynamic> json) => Question(
+      viewType: json['view-type'] as String?,
+      title: json['title'] as String?,
+      explanation: json['explanation'] as String?,
+      answers: (json['answers'] as List<dynamic>?)?.map((e) => Answer.fromJson(e as Map<String, dynamic>)).toList(),
+    );
 
 Map<String, dynamic> _$QuestionToJson(Question instance) => <String, dynamic>{
       'view-type': instance.viewType,

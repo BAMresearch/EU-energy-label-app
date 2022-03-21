@@ -7,13 +7,13 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
-import 'package:energielabel_app/data/news_repository.dart';
+import 'dart:developer';
+
 import 'package:energielabel_app/data/quiz_repository.dart';
 import 'package:energielabel_app/data/settings_repository.dart';
 import 'package:energielabel_app/initialization_exception.dart';
 import 'package:energielabel_app/service_locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 /// 'View model'-like state class for the application.
 ///
@@ -32,11 +32,11 @@ class AppModel extends ChangeNotifier {
   Future<void> onAppStarted(BuildContext context) async {
     try {
       await Future.wait([
-        Future.delayed(Duration(seconds: _minInitializationDurationInSecs)),
+        Future.delayed(const Duration(seconds: _minInitializationDurationInSecs)),
         _initializeApp(context),
       ], eagerError: false);
     } catch (e, stacktrace) {
-      Fimber.e('Failed to initialize app.', ex: e, stacktrace: stacktrace);
+      log('Failed to initialize app.', error: e, stackTrace: stacktrace);
     } finally {
       _initializationInProgress = false;
       notifyListeners();
@@ -46,7 +46,6 @@ class AppModel extends ChangeNotifier {
   Future<void> _initializeApp(BuildContext context) async {
     await _initializeDependencies(context);
     await _checkOnboarding();
-    await _initializeNews();
     await _initializeQuiz();
   }
 
@@ -60,14 +59,6 @@ class AppModel extends ChangeNotifier {
 
   Future<void> _checkOnboarding() async {
     _onboardingFinished = ServiceLocator().get<SettingsRepository>()!.isOnboardingFinished();
-  }
-
-  Future<void> _initializeNews() async {
-    try {
-      await ServiceLocator().get<NewsRepository>()!.syncNews();
-    } catch (e) {
-      throw InitializationException('Failed to initialize the news.', e);
-    }
   }
 
   Future<void> _initializeQuiz() async {

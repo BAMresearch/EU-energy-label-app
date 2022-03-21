@@ -42,8 +42,12 @@ class GeneralInformationWidget extends StatelessWidget {
                     // Header
                     Row(
                       children: [
-                        SvgPicture.asset(AssetPaths.knowHowLightBulbIcon, color: BamColorPalette.bamYellow3),
-                        SizedBox(width: 20),
+                        SvgPicture.asset(
+                          AssetPaths.knowHowLightBulbIcon,
+                          color: BamColorPalette.bamYellow3,
+                          excludeFromSemantics: true,
+                        ),
+                        const SizedBox(width: 20),
                         Expanded(
                           child: Text(
                             informationTitle!,
@@ -53,7 +57,7 @@ class GeneralInformationWidget extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // Content
                     // TODO Add more spacing between bullets and make bullets smaller
@@ -63,7 +67,7 @@ class GeneralInformationWidget extends StatelessWidget {
               : DropCapText(
                   informationText,
                   style: Theme.of(context).textTheme.bodyText2,
-                  dropCapPadding: EdgeInsets.only(right: 14, bottom: 12, top: 4),
+                  dropCapPadding: const EdgeInsets.only(right: 14, bottom: 12, top: 4),
                   dropCap: DropCap(
                     width: 16,
                     height: 22,

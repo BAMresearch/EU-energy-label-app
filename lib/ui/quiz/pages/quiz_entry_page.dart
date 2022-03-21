@@ -9,17 +9,18 @@
 
 import 'package:energielabel_app/data/quiz_repository.dart';
 import 'package:energielabel_app/service_locator.dart';
+import 'package:energielabel_app/ui/misc/components/item_button.dart';
 import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_entry_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
+  const QuizEntryPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<QuizEntryViewModel>(
@@ -33,7 +34,7 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   // The quiz description
                   Html(
@@ -43,38 +44,20 @@ class QuizEntryPage extends StatelessPage<QuizEntryViewModel> {
                     },
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
                   // The level buttons
                   ...viewModel.levels!
                       .map((level) => Column(
                             children: [
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  overlayColor: MaterialStateProperty.all(BamColorPalette.bamBlack10),
-                                  elevation: MaterialStateProperty.all(0),
-                                  padding: MaterialStateProperty.all(EdgeInsets.all(16)),
-                                  backgroundColor: MaterialStateProperty.all(BamColorPalette.bamWhite),
-                                  foregroundColor: MaterialStateProperty.all(BamColorPalette.bamBlue3),
-                                  textStyle: MaterialStateProperty.all(
+                              ItemButton.fromIconString(
+                                label: level.name!,
+                                iconString: level.icon!,
+                                textStyle:
                                     Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamBlue3),
-                                  ),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))),
-                                ),
-                                onPressed: () => viewModel.onLevelSelected(level),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        level.name ?? '',
-                                      ),
-                                    ),
-                                    SvgPicture.string(level.icon!),
-                                  ],
-                                ),
+                                onTap: () => viewModel.onLevelSelected(level),
                               ),
-                              SizedBox(height: 16)
+                              const SizedBox(height: 16)
                             ],
                           ))
                       .toList(),

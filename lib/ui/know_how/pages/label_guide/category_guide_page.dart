@@ -22,8 +22,6 @@ import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +32,9 @@ class CategoryGuidePageArguments {
 }
 
 class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
-  CategoryGuidePage({required CategoryGuidePageArguments initialArguments})
-      : _labelCategory = initialArguments.labelCategory;
+  CategoryGuidePage({Key? key, required CategoryGuidePageArguments initialArguments})
+      : _labelCategory = initialArguments.labelCategory,
+        super(key: key);
 
   final LabelCategory _labelCategory;
 
@@ -58,7 +57,7 @@ class CategoryGuidePage extends StatelessPage<CategoryGuideViewModel> {
     return Scrollbar(
       child: ListView(
         controller: verticalScrollController,
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         padding: EdgeInsets.zero,
         children: [
           _buildGuideHeader(context),
@@ -213,7 +212,7 @@ class _FridgeInfoZoneState extends State<FridgeInfoZone> with SingleTickerProvid
           return Stack(
             children: [
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _fridgeScrollController,
                 scrollDirection: Axis.horizontal,
                 child: _FridgeBackgroundSwitcher(
@@ -299,7 +298,7 @@ class _FridgeSideSwitchButton extends StatelessWidget {
 
   static final double _switchBubbleTop = _getScaledToDisplayWithReference(152.0);
   static final double _switchBubbleLeft = _getScaledToDisplayWithReference(290.0);
-  static final double _switchBubbleRightIfTablet = 48;
+  static const double _switchBubbleRightIfTablet = 48;
 
   @override
   Widget build(BuildContext context) {
@@ -395,7 +394,7 @@ class FridgeInfoButtons extends StatelessWidget {
           future: Future.delayed(const Duration(milliseconds: 500)),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return Opacity(opacity: 0);
+              return const Opacity(opacity: 0);
             }
 
             return TweenAnimationBuilder(
@@ -723,7 +722,7 @@ class _Tooltip extends StatelessWidget {
     final overlayFacingStack = Stack(
       children: [
         // Prevent interaction with background while tooltip is open
-        Positioned.fill(
+        const Positioned.fill(
           child: ModalBarrier(
             dismissible: false,
             color: Colors.transparent,
@@ -853,7 +852,7 @@ class _TooltipPainter extends CustomPainter {
     final height = size.height;
     // draw rounded tooltip rectangle
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(paddingLeft, 0, width, height), Radius.circular(8.0)),
+      RRect.fromRectAndRadius(Rect.fromLTWH(paddingLeft, 0, width, height), const Radius.circular(8.0)),
       paint,
     );
     final double triangleYStartPosition = willFitOnTop ? height - paint.strokeWidth : 0;

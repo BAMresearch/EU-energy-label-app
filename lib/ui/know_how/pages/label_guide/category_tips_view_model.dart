@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/app_uri_schemes.dart';
 import 'package:energielabel_app/data/favorite_repository.dart';
@@ -20,8 +21,6 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_checklis
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/tab_routes.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:pedantic/pedantic.dart';
 
 class CategoryTipsViewModel extends BaseViewModel {
   CategoryTipsViewModel({
@@ -30,7 +29,7 @@ class CategoryTipsViewModel extends BaseViewModel {
     required LabelGuideRepository labelGuideRepository,
     required FavoriteActionListener favoriteActionListener,
     required BuildContext context,
-  })   : _categoryTipsFavorite = CategoryTipsFavorite(categoryId: labelCategory.id),
+  })  : _categoryTipsFavorite = CategoryTipsFavorite(categoryId: labelCategory.id),
         _favoriteRepository = favoriteRepository,
         _favoriteActionListener = favoriteActionListener,
         _labelGuideRepository = labelGuideRepository,
@@ -60,7 +59,7 @@ class CategoryTipsViewModel extends BaseViewModel {
       await _favoriteRepository.addCategoryTipsFavorite(_categoryTipsFavorite);
       _favoriteActionListener.onAddFavoriteSuccess();
     } catch (e, stacktrace) {
-      Fimber.e('Failed to add favorite.', ex: e, stacktrace: stacktrace);
+      log('Failed to add favorite.', error: e, stackTrace: stacktrace);
       _favoriteActionListener.onAddFavoriteFailure();
     }
   }
@@ -70,7 +69,7 @@ class CategoryTipsViewModel extends BaseViewModel {
       await _favoriteRepository.removeCategoryTipsFavorite(_categoryTipsFavorite);
       _favoriteActionListener.onRemoveFavoriteSuccess();
     } catch (e) {
-      Fimber.e('Failed to remove favorite.', ex: e);
+      log('Failed to remove favorite.', error: e);
       _favoriteActionListener.onRemoveFavoriteFailure();
     }
   }
@@ -83,7 +82,7 @@ class CategoryTipsViewModel extends BaseViewModel {
       })
         ..onError(
           (e, stacktrace) {
-            Fimber.e('Failed to observe favorite state.', ex: e, stacktrace: stacktrace);
+            log('Failed to observe favorite state.', error: e, stackTrace: stacktrace);
             // TODO Show error message to user?
           },
         ),

@@ -13,17 +13,17 @@ import 'package:energielabel_app/app_entry_routes.dart';
 import 'package:energielabel_app/data/settings_repository.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:pedantic/pedantic.dart';
 
 class OnboardingViewModel extends BaseViewModel {
   OnboardingViewModel({
     required BuildContext context,
     required SettingsRepository settingsRepository,
-  })   : _context = context,
+  })  : _context = context,
         _settingsRepository = settingsRepository;
 
   static const int _pageCount = 5;
 
+  final PageController pageController = PageController();
   final BuildContext _context;
   final SettingsRepository _settingsRepository;
   int _currentPageIndex = 0;
@@ -36,6 +36,12 @@ class OnboardingViewModel extends BaseViewModel {
 
   @override
   FutureOr<void> onViewStarted() {}
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   void onCompleteAction() {
     unawaited(_settingsRepository.setOnboardingFinished(true));

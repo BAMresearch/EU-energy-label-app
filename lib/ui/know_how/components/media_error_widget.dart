@@ -32,12 +32,12 @@ class MediaErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.image_not_supported_outlined,
               color: BamColorPalette.bamBlack30,
               size: 32,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               _getErrorMessage(context),
               style: Theme.of(context).textTheme.subtitle2!.copyWith(color: BamColorPalette.bamBlack30),

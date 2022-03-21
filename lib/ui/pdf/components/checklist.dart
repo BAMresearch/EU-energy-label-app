@@ -21,12 +21,12 @@ class Checklist extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(checklist.title!, style: Theme.of(context).header2),
           ),
           for (final checklistEntry in checklist.checklistEntries!) ChecklistEntryItem(checklistEntry),

@@ -19,9 +19,7 @@ import 'package:energielabel_app/ui/know_how/pages/label_guide/category_tips_vie
 import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +31,9 @@ class CategoryTipsPageArguments {
 
 /// Page showing tips for a specific label guide category (refrigerators, etc.).
 class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
-  CategoryTipsPage({required CategoryTipsPageArguments argument}) : _labelCategory = argument.labelCategory;
+  CategoryTipsPage({Key? key, required CategoryTipsPageArguments argument})
+      : _labelCategory = argument.labelCategory,
+        super(key: key);
 
   final LabelCategory _labelCategory;
 
@@ -50,8 +50,8 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
                 viewModel.isFavorite ? Icons.star : Icons.star_border,
                 color: BamColorPalette.bamBlack,
                 semanticLabel: viewModel.isFavorite
-                    ? Translations.of(context)!.label_tips_add_favorite_icon_semantics
-                    : Translations.of(context)!.label_tips_remove_favorite_icon_semantics,
+                    ? Translations.of(context)!.label_tips_remove_favorite_icon_semantics
+                    : Translations.of(context)!.label_tips_add_favorite_icon_semantics,
               ),
               onPressed: viewModel.onToggleFavoriteAction,
             )
@@ -76,7 +76,7 @@ class CategoryTipsPage extends StatelessPage<CategoryTipsViewModel> {
   Widget _buildBody(BuildContext context, CategoryTipsViewModel viewModel) {
     return Scrollbar(
       child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -19,9 +19,11 @@ class QuizQuestionViewModel extends BaseViewModel {
   final QuizState quizState;
 
   Answer? _selectedAnswer;
+
   Answer? get selectedAnswer => _selectedAnswer;
 
   int get currentIndex => quizState.level.questions!.indexOf(quizState.currentQuestion) + 1;
+
   int get maxIndex => quizState.level.questions!.length;
 
   double get progress => currentIndex / maxIndex;

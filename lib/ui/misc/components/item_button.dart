@@ -12,15 +12,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemButton extends StatelessWidget {
-  const ItemButton({
+  const ItemButton.fromIconAsset({
     Key? key,
     required this.label,
     required this.iconAssetPath,
+    this.textStyle,
     required this.onTap,
-  }) : super(key: key);
+  })  : iconString = null,
+        super(key: key);
+
+  const ItemButton.fromIconString({
+    Key? key,
+    required this.label,
+    required this.iconString,
+    this.textStyle,
+    required this.onTap,
+  })  : iconAssetPath = null,
+        super(key: key);
 
   final String label;
-  final String iconAssetPath;
+  final String? iconAssetPath;
+  final String? iconString;
+  final TextStyle? textStyle;
   final VoidCallback onTap;
 
   @override
@@ -28,11 +41,13 @@ class ItemButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          overlayColor: MaterialStateProperty.all(BamColorPalette.bamBlack10),
-          backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.surface),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-          padding: MaterialStateProperty.all(EdgeInsets.all(16))),
+        textStyle: MaterialStateProperty.all(textStyle),
+        elevation: MaterialStateProperty.all(0),
+        overlayColor: MaterialStateProperty.all(BamColorPalette.bamBlack10),
+        backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.surface),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(16)),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -45,7 +60,18 @@ class ItemButton extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: SvgPicture.asset(iconAssetPath, color: BamColorPalette.bamBlue3, height: 30),
+            child: iconAssetPath != null
+                ? SvgPicture.asset(
+                    iconAssetPath!,
+                    color: BamColorPalette.bamBlue3,
+                    height: 30,
+                    excludeFromSemantics: true,
+                  )
+                : SvgPicture.string(
+                    iconString!,
+                    color: BamColorPalette.bamBlue3,
+                    excludeFromSemantics: true,
+                  ),
           ),
         ],
       ),

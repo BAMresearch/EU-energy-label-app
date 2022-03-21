@@ -23,7 +23,9 @@ import 'category_light_adviser_page.dart';
 
 /// Page showing the details of a given [LabelCategory].
 class CategoryOverviewPage extends StatelessWidget with BasePage {
-  CategoryOverviewPage({required LabelCategory labelCategory}) : _labelCategory = labelCategory;
+  CategoryOverviewPage({Key? key, required LabelCategory labelCategory})
+      : _labelCategory = labelCategory,
+        super(key: key);
 
   final LabelCategory _labelCategory;
 
@@ -36,18 +38,18 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildBanner(context),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             _buildTooltip(context),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             _buildChecklistTile(context),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildTipsTile(context),
             if (_labelCategory.guideData != null) ...[
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildFridgeTile(context),
             ],
             if (_labelCategory.lightAdviser != null) ...[
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildLightAdviserTile(context),
             ]
           ],
@@ -124,7 +126,7 @@ class CategoryOverviewPage extends StatelessWidget with BasePage {
       {BuildContext? context, required String label, required String iconAssetPath, required VoidCallback onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ItemButton(label: label, iconAssetPath: iconAssetPath, onTap: onTap),
+      child: ItemButton.fromIconAsset(label: label, iconAssetPath: iconAssetPath, onTap: onTap),
     );
   }
 }

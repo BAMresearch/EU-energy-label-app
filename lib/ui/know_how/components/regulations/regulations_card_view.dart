@@ -16,29 +16,29 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RegulationsCardView extends StatelessWidget {
-  const RegulationsCardView({required this.regulation, this.viewModel});
+  const RegulationsCardView({Key? key, required this.regulation, this.viewModel}) : super(key: key);
   final Regulation regulation;
   final RegulationsViewModel? viewModel;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MergeSemantics(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Text(
                 regulation.title!,
                 style: Theme.of(context).textTheme.headline4!.copyWith(color: BamColorPalette.bamBlue3),
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           TextButton(
             onPressed: () => viewModel!.onRegulationSelected(regulation),
             child: Row(

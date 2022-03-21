@@ -17,12 +17,15 @@ import 'package:package_info/package_info.dart';
 import 'components/about.dart' as components;
 
 class AppLicensePage extends StatelessWidget with BasePage {
+  AppLicensePage({Key? key}) : super(key: key);
+
   final PackageInfo? packageInfo = ServiceLocator().get<PackageInfo>();
 
   @override
   Widget build(BuildContext context) {
     return components.LicensePage(
-      applicationVersion: Translations.of(context)!.about_dialog_version(packageInfo!.version, packageInfo!.buildNumber),
+      applicationVersion:
+          Translations.of(context)!.about_dialog_version(packageInfo!.version, packageInfo!.buildNumber),
       applicationName: packageInfo!.appName,
       applicationIcon: Padding(
         padding: const EdgeInsets.all(24),

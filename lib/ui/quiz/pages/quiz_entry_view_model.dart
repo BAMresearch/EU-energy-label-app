@@ -7,6 +7,8 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:async';
+
 import 'package:energielabel_app/data/quiz_repository.dart';
 import 'package:energielabel_app/model/quiz/level.dart';
 import 'package:energielabel_app/model/quiz/quiz.dart';
@@ -14,13 +16,12 @@ import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/quiz/quiz_state.dart';
 import 'package:energielabel_app/ui/quiz/routing.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pedantic/pedantic.dart';
 
 class QuizEntryViewModel extends BaseViewModel {
   QuizEntryViewModel({
     required BuildContext context,
     required QuizRepository quizRepository,
-  })   : _context = context,
+  })  : _context = context,
         _quizRepository = quizRepository;
 
   final BuildContext _context;

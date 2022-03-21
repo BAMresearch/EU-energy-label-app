@@ -13,9 +13,10 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class QuizUpdateAvailableDialog extends StatelessWidget {
   const QuizUpdateAvailableDialog({
+    Key? key,
     required this.onQuizUpdateConfirmed,
     required this.onQuizUpdateDeclined,
-  });
+  }) : super(key: key);
 
   final VoidCallback onQuizUpdateConfirmed;
   final VoidCallback onQuizUpdateDeclined;

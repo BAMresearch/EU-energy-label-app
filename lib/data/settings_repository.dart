@@ -13,8 +13,6 @@ class SettingsRepository {
   SettingsRepository(SharedPreferences preferences) : _preferences = preferences;
 
   static const String _onboardingFinishedKey = 'onboarding_finished';
-  static const String _deferredQuizUpdateKey = 'quiz_update_pending';
-  static const String _quizVersionHashKey = 'quiz_version_hash';
 
   final SharedPreferences _preferences;
 
@@ -24,21 +22,5 @@ class SettingsRepository {
 
   Future<void> setOnboardingFinished(bool onboardingFinished) async {
     await _preferences.setBool(_onboardingFinishedKey, onboardingFinished);
-  }
-
-  bool isDeferredQuizUpdateAvailable() {
-    return _preferences.getBool(_deferredQuizUpdateKey) ?? false;
-  }
-
-  Future<void> setDeferredQuizUpdateAvailable(bool updateAvailable) async {
-    await _preferences.setBool(_deferredQuizUpdateKey, updateAvailable);
-  }
-
-  Future<void> setQuizVersionHash(String versionHash) async {
-    await _preferences.setString(_quizVersionHashKey, versionHash);
-  }
-
-  String? getQuizVersionHash() {
-    return _preferences.getString(_quizVersionHashKey);
   }
 }

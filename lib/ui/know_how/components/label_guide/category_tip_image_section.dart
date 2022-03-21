@@ -8,13 +8,13 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:energielabel_app/ui/know_how/components/media_error_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 class CategoryTipImageSection extends StatelessWidget {
-  const CategoryTipImageSection({required this.imageData});
+  const CategoryTipImageSection({Key? key, required this.imageData}) : super(key: key);
 
   final String imageData;
 
@@ -23,7 +23,7 @@ class CategoryTipImageSection extends StatelessWidget {
     if (imageData.isNotEmpty) {
       try {
         return Image.memory(
-          Base64Decoder().convert(imageData),
+          const Base64Decoder().convert(imageData),
           fit: BoxFit.fitHeight,
           errorBuilder: _buildErrorState,
         );
@@ -31,11 +31,11 @@ class CategoryTipImageSection extends StatelessWidget {
         return _buildErrorState(context, e, stacktrace);
       }
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 
   Widget _buildErrorState(BuildContext context, Object error, StackTrace? stacktrace) {
-    Fimber.e('Failed to load image data.', ex: error, stacktrace: stacktrace);
+    log('Failed to load image data.', error: error, stackTrace: stacktrace);
     return MediaErrorWidget.image();
   }
 }

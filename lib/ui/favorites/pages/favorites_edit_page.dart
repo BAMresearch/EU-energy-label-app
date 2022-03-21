@@ -22,7 +22,6 @@ import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesEditArguments {
@@ -33,7 +32,7 @@ class FavoritesEditArguments {
 }
 
 class FavoritesEditPage extends StatefulPage {
-  FavoritesEditPage({required this.favoriteEditArguments});
+  const FavoritesEditPage({Key? key, required this.favoriteEditArguments}) : super(key: key);
 
   final FavoritesEditArguments favoriteEditArguments;
 
@@ -115,7 +114,7 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
                   ),
                   contentPadding: const EdgeInsets.symmetric(vertical: 4),
                 ),
-                Divider(color: BamColorPalette.bamBlack30, indent: 60, height: 2),
+                const Divider(color: BamColorPalette.bamBlack30, indent: 60, height: 2),
               ],
             )
         ],
@@ -144,7 +143,7 @@ class _FavoritesEditPageState extends PageState<FavoritesEditPage, FavoritesEdit
         label: Translations.of(context)!.edit_favorite_deletion_undo_action,
         onPressed: () => _viewModel!.onUndoDeletionAction(),
       ),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     final closeReason = await ScaffoldMessenger.maybeOf(context)!.showSnackBar(snackBar).closed;

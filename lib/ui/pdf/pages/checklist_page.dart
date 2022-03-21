@@ -37,12 +37,12 @@ class _ChecklistHeader extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: Text(title!, style: Theme.of(context).header0),
           ),
           Text(introText!),

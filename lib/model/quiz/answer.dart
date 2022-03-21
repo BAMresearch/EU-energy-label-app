@@ -14,6 +14,7 @@ part 'answer.g.dart';
 @JsonSerializable()
 class Answer {
   Answer({this.title, this.isCorrect});
+
   factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
 
   @JsonKey(name: 'title')

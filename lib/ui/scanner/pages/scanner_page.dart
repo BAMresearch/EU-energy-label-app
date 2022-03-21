@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:energielabel_app/ui/misc/components/bam_dialog.dart';
@@ -16,12 +17,13 @@ import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/scanner/components/scanner_overlay_shape.dart';
 import 'package:energielabel_app/ui/scanner/pages/scanner_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class ScannerPage extends StatefulPage {
+  const ScannerPage({Key? key}) : super(key: key);
+
   @override
   _ScannerPageState createPageState() => _ScannerPageState();
 }
@@ -53,7 +55,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     if (Platform.isAndroid) {
       _qrViewController!.pauseCamera();
     }
-    Fimber.i('resumeCamera(): CALLED');
+    log('resumeCamera(): CALLED');
     _qrViewController!.resumeCamera();
   }
 
@@ -71,14 +73,14 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
   @override
   Widget build(BuildContext context) {
     final overlayColor = Theme.of(context).colorScheme.surface;
-    final overlayOpacity = 0.7;
-    final overlayOpacityGradient = 0.49;
-    final cutOutSize = 230.0;
+    const overlayOpacity = 0.7;
+    const overlayOpacityGradient = 0.49;
+    const cutOutSize = 230.0;
 
     return PageScaffold(
       title: Translations.of(context)!.qrcode_page_title,
       body: VisibilityDetector(
-        key: ValueKey('Scanner-Visibility-Detector'),
+        key: const ValueKey('Scanner-Visibility-Detector'),
         onVisibilityChanged: _onVisibilityChanged,
         child: Stack(
           children: [
@@ -120,13 +122,13 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
                   child: DecoratedBox(
                     decoration: ShapeDecoration(
                         shape: ScannerOverlayShape(overlayColor: overlayColor, opacity: overlayOpacityGradient)),
-                    child: SizedBox.expand(),
+                    child: const SizedBox.expand(),
                   ),
                 ),
               ],
             ),
             Align(
-              alignment: Alignment(0, 0.8),
+              alignment: const Alignment(0, 0.8),
               child: SizedBox(
                 width: cutOutSize + 50,
                 child: Padding(
@@ -154,7 +156,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
   }
 
   void _onPermissionSet(QRViewController controller, bool permission) {
-    Fimber.i('Camera Permission: $permission');
+    log('Camera Permission: $permission');
   }
 
   void _onQRViewCreated(QRViewController qrViewController) {
@@ -171,8 +173,8 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
       (scanResult) async {
         // await _pauseScanner(); // Is needed in order to resume camera on pushReplacement
         _qrViewController!.dispose();
-        if (!_viewModel.isDialogOpen) {
-          _viewModel.onScanResult(scanResult.code.toLowerCase(), _onQRCodeInvalid, () {
+        if (!_viewModel.isDialogOpen && scanResult.code != null) {
+          _viewModel.onScanResult(scanResult.code!.toLowerCase(), _onQRCodeInvalid, () {
             Navigator.pushReplacementNamed(context, '/');
           });
         }
@@ -206,7 +208,7 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
   }
 
   Future<void> _pauseScanner() async {
-    Fimber.i('pauseCamera(): CALLED');
+    log('pauseCamera(): CALLED');
     await _qrViewController!.pauseCamera();
     _ignoreScannerEvents = true;
   }
@@ -217,11 +219,11 @@ class _ScannerPageState extends PageState<ScannerPage, ScannerViewModel> with Wi
     }
 
     if (_viewModel.isDialogOpen) {
-      Fimber.i('Dialog open! You cannot resume camera now!');
+      log('Dialog open! You cannot resume camera now!');
       return;
     }
 
-    Fimber.i('resumeCamera(): CALLED');
+    log('resumeCamera(): CALLED');
     await _qrViewController!.resumeCamera();
     _ignoreScannerEvents = false;
   }

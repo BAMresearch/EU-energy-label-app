@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/data/favorite_repository.dart';
 import 'package:energielabel_app/data/label_guide_repository.dart';
@@ -16,11 +17,9 @@ import 'package:energielabel_app/model/know_how/label_guide/label_category.dart'
 import 'package:energielabel_app/model/scanner/product.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum ProductDialogPage { dialogOverview, favoriteSetName, favoriteSetCategory }
+enum ProductDialogPage { dialogOverview, favoriteSetName, favoriteSetCategory, favoriteAddComment }
 
 enum ProductDialogFinishAction { cancel, website, favorite }
 
@@ -31,7 +30,7 @@ class ProductDialogViewModel extends BaseViewModel {
     required Function(ProductDialogFinishAction) onFinishDialog,
     required FavoriteRepository favoriteRepository,
     required LabelGuideRepository labelGuideRepository,
-  })   : _product = product,
+  })  : _product = product,
         _context = context,
         _onFinishDialog = onFinishDialog,
         _favoriteRepository = favoriteRepository,
@@ -63,7 +62,7 @@ class ProductDialogViewModel extends BaseViewModel {
     if (await canLaunch(productUrl!)) {
       unawaited(launch(productUrl!, forceSafariVC: false));
     } else {
-      Fimber.e('Failed to open browser for product.');
+      log('Failed to open browser for product.');
       // TODO Show a hint to the user, e.g. a snackBar.
     }
     _onFinishDialog(ProductDialogFinishAction.website);
@@ -86,13 +85,24 @@ class ProductDialogViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  dynamic onFavoriteConfirmationAction(LabelCategory? category) {
-    if (category != null) {
-      _productFavorite = _productFavorite.copyWith(categoryId: category.id);
-      _favoriteRepository.addProductFavorite(_productFavorite);
-    }
+  void onAddComment(String comment) {
+    _productFavorite = _productFavorite.copyWith(comments: [comment]);
+    notifyListeners();
+    onFavoriteConfirmationAction();
+  }
+
+  void onFavoriteConfirmationAction() {
     Navigator.pop(_context);
     _onFinishDialog(ProductDialogFinishAction.favorite);
+    _favoriteRepository.addProductFavorite(_productFavorite);
+  }
+
+  void onCategoryConfirmationAction(LabelCategory? category) {
+    if (category != null) {
+      _productFavorite = _productFavorite.copyWith(categoryId: category.id);
+    }
+    _visiblePage = ProductDialogPage.favoriteAddComment;
+    notifyListeners();
   }
 
   Future<void> _loadLabelCategories() async {

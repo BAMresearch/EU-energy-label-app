@@ -14,5 +14,6 @@ class FavoritesRoutes {
   static const String editFavorites = '/edit_favorites';
   static const String tipDetail = '/tips';
   static const String checklistDetails = '/checklist';
-  static const String exportPreview = '/export_preview';
+  static const String exportPdfPreview = '/export_pdf_preview';
+  static const String exportCsvPreview = '/export_csv_preview';
 }

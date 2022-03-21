@@ -14,9 +14,11 @@ abstract class FavoriteListItem {
   FavoriteListItem({
     required this.title,
     required this.favoriteType,
+    this.comments,
   });
 
   final String title;
+  final List<String>? comments;
   final FavoriteType favoriteType;
 }
 
@@ -37,7 +39,8 @@ class FavoriteListSectionEntry<T extends Favorite> extends FavoriteListItem {
     required String title,
     required FavoriteType favoriteType,
     required this.favorite,
-  }) : super(title: title, favoriteType: favoriteType);
+    comments,
+  }) : super(title: title, favoriteType: favoriteType, comments: comments);
 
   final T favorite;
 }

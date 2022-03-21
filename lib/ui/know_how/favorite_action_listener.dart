@@ -9,7 +9,10 @@
 
 abstract class FavoriteActionListener {
   void onAddFavoriteSuccess();
+
   void onAddFavoriteFailure();
+
   void onRemoveFavoriteSuccess();
+
   void onRemoveFavoriteFailure();
 }

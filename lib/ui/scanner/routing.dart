@@ -22,7 +22,7 @@ class ScannerRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case ScannerRoutes.root:
-        return MaterialPageRoute(builder: (context) => ScannerPage());
+        return MaterialPageRoute(builder: (context) => const ScannerPage());
       default:
         throw ArgumentError.value(settings.name, null, 'Unexpected scanner route name.');
     }

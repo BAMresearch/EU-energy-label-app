@@ -9,7 +9,6 @@ import 'package:energielabel_app/ui/misc/theme/bam_text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart'; //hide Flow;
 
 /// A [ListTile] that shows an about box.
 ///
@@ -867,7 +866,7 @@ class _PackageLicensePageState extends State<_PackageLicensePage> {
     if (widget.scrollController == null) {
       page = Scaffold(
         appBar: AppBar(
-          flexibleSpace: Container(decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
+          flexibleSpace: Container(decoration: const BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
           title: _PackageLicensePageTitle(
             title,
             subtitle,
@@ -1365,7 +1364,7 @@ class _MasterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
+        flexibleSpace: Container(decoration: const BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
         title: title,
         leading: leading,
         actions: actionBuilder == null ? const <Widget>[] : actionBuilder!(context, _ActionLevel.composite),

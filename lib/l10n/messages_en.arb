@@ -16,6 +16,7 @@
   "onboarding_page_5_description": "Create your own favourites to save product information when looking for an appliance. Use the \"favourites\" button in the navigation bar to create, view and change lists.",
   "onboarding_skip_button": "Skip",
   "onboarding_finish_button": "Done",
+  "semantics_onboarding_page_indicator": "Page {current} of {page}",
   "tab_label_home": "Home",
   "tab_label_know_how": "Know-how",
   "tab_label_qr_scan": "QR scan",
@@ -39,6 +40,11 @@
   "know_how_item_label_guide": "Label guide",
   "know_how_item_glossary": "Glossary",
   "know_how_item_regulations": "Regulations",
+  "know_how_checklist_selected_semantics": "Selected, {text}.",
+  "know_how_checklist_selected_semantics_hint": "Double tap to deselect.",
+  "know_how_checklist_deselected_semantics": "{text}.",
+  "know_how_checklist_deselected_semantics_hint": "Double tap to select.",
+  "know_how_light_advisor_semantics_hint": "Double tap to edit.",
   "tips_page_title": "Tips",
   "guide_page_title": "guide",
   "regulations_page_pdf_label": "Energy label (PDF)",
@@ -52,8 +58,12 @@
   "product_favorite_dialog_title": "Save product to lists",
   "product_favorite_dialog_set_title": "Enter name",
   "product_favorite_dialog_set_title_hint": "Name",
+  "product_favorite_dialog_add_comment_hint": "optional",
   "product_favorite_dialog_set_title_error": "Name cannot be empty",
   "product_favorite_dialog_set_category": "Choose product category",
+  "product_favorite_dialog_add_comment": "Add comment",
+  "product_favorite_dialog_edit_comment": "Edit comment",
+  "product_favorite_dialog_edit_name": "Edit name",
   "product_favorite_dialog_set_category_error": "Please choose a product category",
   "product_favorite_dialog_next": "Continue",
   "product_favorite_dialog_cancel_button": "Cancel",
@@ -67,10 +77,10 @@
   "quiz_replay_button": "play again",
   "quiz_answer_count_label": "answer {currentAnswer} of {maxAnswers}",
   "quiz_answer_congratulation_label": "Great, \nthis is correct!",
-  "quiz_answer_you_are_wrong_label": "Oops,\nwrong answer.",
-  "quiz_answer_explanation_header_label": "A short explanation.",
   "quiz_answer_congratulation_image_semantics": "thumbs up",
+  "quiz_answer_you_are_wrong_label": "Oops,\nwrong answer.",
   "quiz_answer_you_are_wrong_image_semantics": "thumbs down",
+  "quiz_answer_explanation_header_label": "A short explanation.",
   "quiz_result_score_label": "{correctAnswers} of {maxAnswers} questions answered correctly.",
   "quiz_result_label_good": "Congratulations! \nYou're an energy expert.",
   "quiz_result_label_bad": "Not bad.\nBut there's still something to learn.",
@@ -89,8 +99,9 @@
   "favorites_tab_know_how": "Know-how",
   "favorites_no_favorite": "Your list is empty",
   "favorites_know_how_checklists_section_title": "Checklists",
-  "favorites_page_export_preview_title": "PDF preview",
-  "favorites_page_export_dialog_title": "Export PDF",
+  "favorites_page_export_pdf_preview_title": "PDF preview",
+  "favorites_page_export_csv_preview_title": "CSV preview",
+  "favorites_page_export_dialog_title": "Export as file",
   "favorites_page_export_dialog_hint": "Please choose which information to export.",
   "favorites_page_export_dialog_export_button": "export",
   "favorites_page_export_dialog_cancel_button": "cancel",
@@ -98,6 +109,11 @@
   "favorites_page_export_dialog_know_how_checkbox": "Know-how",
   "favorites_page_export_dialog_loading_hint": "creating PDF",
   "pdf_filename": "energy-label-export",
+  "csv_filename": "energy-label-csv-export",
+  "csv_title_product": "Product",
+  "csv_title_category": "Category",
+  "csv_title_link": "Link",
+  "csv_title_comment": "Comment",
   "pdf_footer_link": "https://oekodesign.bam.de/energylabel",
   "pdf_products_category_title": "Products",
   "pdf_know_how_category_title": "Know-how",
@@ -140,6 +156,11 @@
   "semantic_home_dashboard_drawer_menu_close": "close menu",
   "webview_errorview_title": "An Error occurred while loading the webpage",
   "webview_errorview_reload_button": "Try again",
+  "semantics_headline_rank": "{title}. Headline. Rank {rank}",
+  "ext_dialog_open_link_button": "open browser",
+  "semantic_open_link_email": "open in mail app.",
+  "semantic_open_link_phone": "open in phone app.",
+  "semantics_open_link_template": "{label}. Link. By clicking this link you will leave the app, {externalTarget}",
   "@error_unknown": {},
   "@error_image_loading": {},
   "@error_video_loading": {},
@@ -156,6 +177,9 @@
   "@onboarding_page_5_description": {},
   "@onboarding_skip_button": {},
   "@onboarding_finish_button": {},
+  "@semantics_onboarding_page_indicator": {
+    "placeholders": {"current": {"type": "int"}, "page": {"type": "int"}}
+  },
   "@tab_label_home": {},
   "@tab_label_know_how": {},
   "@tab_label_qr_scan": {},
@@ -179,6 +203,15 @@
   "@know_how_item_label_guide": {},
   "@know_how_item_glossary": {},
   "@know_how_item_regulations": {},
+  "@know_how_checklist_selected_semantics": {
+    "placeholders": {"text": {"type": "String"}}
+  },
+  "@know_how_checklist_selected_semantics_hint": {},
+  "@know_how_checklist_deselected_semantics": {
+    "placeholders": {"text": {"type": "String"}}
+  },
+  "@know_how_checklist_deselected_semantics_hint": {},
+  "@know_how_light_advisor_semantics_hint": {},
   "@tips_page_title": {},
   "@guide_page_title": {},
   "@regulations_page_pdf_label": {},
@@ -191,6 +224,7 @@
   "@product_details_page_title": {},
   "@product_favorite_dialog_title": {},
   "@product_favorite_dialog_title_hint": {},
+  "@product_favorite_dialog_add_comment": {},
   "@product_favorite_dialog_cancel_button": {},
   "@product_favorite_dialog_confirmation_button": {},
   "@quiz_update_available_dialog_title": {},
@@ -288,5 +322,28 @@
   "@semantic_home_dashboard_close_news": {},
   "@semantic_home_dashboard_drawer_menu_close": {},
   "@webview_errorview_title": {},
-  "@webview_errorview_reload_button": {}
+  "@webview_errorview_reload_button": {},
+  "@semantics_headline_rank": {
+      "placeholders": {
+        "title": {
+          "type": "String"
+        },
+        "rank": {
+          "type": "String"
+        }
+      }
+    },
+    "@ext_dialog_open_link_button": {},
+    "@semantic_open_link_email": {},
+    "@semantic_open_link_phone": {},
+    "@semantics_open_link_template": {
+    "placeholders": {
+          "label": {
+            "type": "String"
+          },
+          "externalTarget": {
+            "type": "String"
+          }
+        }
+    }
 }

@@ -8,30 +8,28 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
-class ApiException implements Exception {
-  ApiException._(this.message, this.cause);
+class CsvExporter {
+  CsvExporter({
+    this.targetFileName = 'CSVExport.csv',
+    required this.csvData,
+  });
 
-  factory ApiException.from({required String message, required Object cause}) {
-    if (cause is DioError) {
-      if (cause.error is SocketException) {
-        return NoConnectionException(message, cause);
-      }
-    }
-    return ApiException._(message, cause);
+  final String targetFileName;
+  final String csvData;
+
+  Future<String> exportCsv() async {
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+
+    //export csv file
+    final file = File(join(appDocDir.path, targetFileName));
+    final Uint8List bytes = Uint8List.fromList(csvData.codeUnits);
+    final File generatedPdfFile = await file.writeAsBytes(bytes);
+
+    return generatedPdfFile.path;
   }
-
-  final String message;
-  final Object cause;
-
-  @override
-  String toString() {
-    return 'ApiException{message: $message, cause: ${cause.toString()}';
-  }
-}
-
-class NoConnectionException extends ApiException {
-  NoConnectionException(String message, Object cause) : super._(message, cause);
 }

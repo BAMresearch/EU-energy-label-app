@@ -19,7 +19,7 @@ class DeviceInfo {
     if (supportedLocales.any((locale) => locale.languageCode == preferredDeviceLocale.languageCode)) {
       return preferredDeviceLocale;
     } else {
-      return Locale('en');
+      return const Locale('en');
     }
   }
 

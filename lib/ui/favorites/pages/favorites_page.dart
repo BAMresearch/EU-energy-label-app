@@ -19,13 +19,14 @@ import 'package:energielabel_app/ui/misc/page_scaffold.dart';
 import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesPage extends StatelessPage<FavoritesViewModel> {
+  const FavoritesPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FavoritesViewModel>(
@@ -58,7 +59,7 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
                   case ViewState.initialized:
                     return _buildInitializedState(context, viewModel);
                   default:
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                 }
               },
             ),
@@ -78,7 +79,7 @@ class FavoritesPage extends StatelessPage<FavoritesViewModel> {
   }
 
   Widget _buildProgressState() {
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 
   Widget _buildInitializedState(BuildContext context, FavoritesViewModel viewModel) {

@@ -8,12 +8,12 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/data/why_is_there_repository.dart';
 import 'package:energielabel_app/model/know_how/why_is_there/why_is_there.dart';
 import 'package:energielabel_app/model/know_how/why_is_there/why_is_there_entry.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 class WhyIsThereViewModel extends BaseViewModel {
   WhyIsThereViewModel({required WhyIsThereRepository? whyIsThereRepository, required int initialIndex})
@@ -28,6 +28,7 @@ class WhyIsThereViewModel extends BaseViewModel {
   int _currentPageIndex;
 
   int get pageCount => _whyIsThereEntries.length;
+
   int get currentPageIndex => _currentPageIndex;
 
   @override
@@ -43,7 +44,7 @@ class WhyIsThereViewModel extends BaseViewModel {
         (whyIsThereEntryA, whyIsThereEntryB) => whyIsThereEntryA.orderIndex!.compareTo(whyIsThereEntryB.orderIndex!),
       );
     } catch (e) {
-      Fimber.e('Failed to load the why is there entries', ex: e);
+      log('Failed to load the why is there entries', error: e);
       throw Error(); // TODO Implement proper error handling
     } finally {
       notifyListeners();

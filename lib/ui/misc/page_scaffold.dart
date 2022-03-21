@@ -14,7 +14,8 @@ import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PageScaffold extends StatelessWidget {
-  PageScaffold({
+  const PageScaffold({
+    Key? key,
     this.title,
     this.drawer,
     this.drawerIcon,
@@ -25,7 +26,7 @@ class PageScaffold extends StatelessWidget {
     this.hasElevation = true,
     required this.body,
     this.titleSemanticLabel,
-  });
+  }) : super(key: key);
 
   final String? title;
   final String? titleSemanticLabel;
@@ -44,7 +45,7 @@ class PageScaffold extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
+        flexibleSpace: Container(decoration: const BoxDecoration(gradient: BamColorPalette.bamGrayGradient)),
         centerTitle: isSubTabScreen ? null : false,
         // When setting the height to 140, Flutter will not draw the elements correctly,
         // but introduce a horizontal line on some devices, e. g. Nexus 5X. There appear to be some

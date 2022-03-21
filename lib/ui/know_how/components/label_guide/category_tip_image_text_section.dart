@@ -11,7 +11,7 @@ import 'package:energielabel_app/model/know_how/label_guide/label_tip_content_im
 import 'package:flutter/cupertino.dart';
 
 class CategoryTipImageTextSection extends StatelessWidget {
-  const CategoryTipImageTextSection({required this.content});
+  const CategoryTipImageTextSection({Key? key, required this.content}) : super(key: key);
   final LabelTipContentImage content;
 
   @override
@@ -24,7 +24,7 @@ class CategoryTipImageTextSection extends StatelessWidget {
             image: NetworkImage(content.graphicPath!),
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Expanded(
           flex: 7,
           child: Text(

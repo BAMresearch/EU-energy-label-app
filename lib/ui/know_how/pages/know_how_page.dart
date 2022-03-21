@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class KnowHowPage extends StatelessWidget with BasePage {
+  const KnowHowPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
@@ -35,19 +37,19 @@ class KnowHowPage extends StatelessWidget with BasePage {
                   child: Column(
                     children: [
                       _buildDivider(),
-                      ItemButton(
+                      ItemButton.fromIconAsset(
                         label: Translations.of(context)!.know_how_item_why_is_there,
                         iconAssetPath: AssetPaths.knowHowMenuWhyIsThereIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.whyIsThere),
                       ),
                       _buildDivider(),
-                      ItemButton(
+                      ItemButton.fromIconAsset(
                         label: Translations.of(context)!.know_how_item_glossary,
                         iconAssetPath: AssetPaths.knowHowMenuGlossaryIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.glossary),
                       ),
                       _buildDivider(),
-                      ItemButton(
+                      ItemButton.fromIconAsset(
                         label: Translations.of(context)!.know_how_item_regulations,
                         iconAssetPath: AssetPaths.knowHowMenuRegulationsIcon,
                         onTap: () => Navigator.of(context).pushNamed(KnowHowRoutes.regulations),
@@ -64,6 +66,6 @@ class KnowHowPage extends StatelessWidget with BasePage {
   }
 
   Widget _buildDivider() {
-    return SizedBox(height: 16);
+    return const SizedBox(height: 16);
   }
 }

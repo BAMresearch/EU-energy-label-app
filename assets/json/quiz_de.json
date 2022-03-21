@@ -1,307 +1,270 @@
 {
-  "type": "Quiz",
-  "title": "Energie Quiz",
+  "_id": 22,
+  "_version": 82,
+  "title": "Energie-Quiz",
   "description": "Energie sparen kann ganz einfach sein – doch hier warten ein paar ziemlich knifflige Fragen auf Sie. Wie fit sind Sie darin, zu Hause Strom zu sparen? Testen Sie Ihr Wissen und holen Sie sich gleich noch ein paar nützliche Alltagstipps, die Ihr Konto und die Umwelt schonen. Ein Quiz für alle Rate- und Energiesparfüchse. Auf geht’s!",
   "levels": [
     {
-      "type": "Level",
-      "title": "Einsteiger*innen",
-      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.5\" height=\"23.5\" viewBox=\"0 0 19.5 23.5\">\n  <g id=\"chess-pawn\" transform=\"translate(-2.25 -0.25)\">\n    <circle id=\"Ellipse_385\" data-name=\"Ellipse 385\" cx=\"4\" cy=\"4\" r=\"4\" transform=\"translate(8 1)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_232\" data-name=\"Linie 232\" x2=\"10\" transform=\"translate(7 9)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_646\" data-name=\"Pfad 646\" d=\"M5.789,19A13.949,13.949,0,0,0,10,9\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_647\" data-name=\"Pfad 647\" d=\"M14,9a13.949,13.949,0,0,0,4.211,10\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2001\" data-name=\"Rechteck 2001\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>\n",
-      "score": {
-        "positive-response": "Gratulation! Diese Runde haben Sie mit Leichtigkeit gemeistert. Sie sind eine ziemliche (natürlich energieeffiziente) Leuchte, was das Stromsparen betrifft. Schauen Sie im <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder dem <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> vorbei, um noch mehr Wissen zu sammeln. Dann schneiden Sie sicher auch in unserem Quiz für Fortgeschrittene super ab!",
-        "negative-response": "Da ist noch Luft nach oben. Aber keine Sorge: Besuchen Sie einfach das <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder den <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> Dort erhalten Sie jede Menge wertvolle Energiespartipps. So steigern Sie beim nächsten Mal Ihre Punkteausbeute – und senken zugleich zu Hause Ihren Stromverbrauch.",
-        "min-positive-score": 5
-      },
       "questions": [
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": true,
+              "title": "Lange Laufzeit, niedrige Temperatur"
+            },
+            {
+              "correct": false,
+              "title": "Kurze Laufzeit, hohe Temperatur"
+            }
+          ],
+          "explanation": "Im Eco-Programm läuft die Waschmaschine im Vergleich zum Normalbetrieb länger, dafür mit niedriger Temperatur – und spart damit kräftig Strom. Denn die meiste Energie verbraucht die Waschmaschine beim Aufheizen des Wassers. Statt die Wäsche mit viel Wasser und hohen Temperaturen zu reinigen, verlängert das Eco-Programm die Zeit, in der das Waschmittel einwirkt und erzielt dadurch das gleiche Ergebnis. Viele Geräte sparen so pro Waschgang 30 bis 50% Energie.",
           "title": "Lang und kühl oder kurz und heiß – welches Programm wäscht die Wäsche sparsamer?",
-          "explanation": "Im Eco-Programm läuft die Waschmaschine im Vergleich zum Normalbetrieb länger, dafür mit niedriger Temperatur – und spart damit kräftig Strom. Denn die meiste Energie verbraucht die Waschmaschine beim Aufheizen des Wassers. Statt die Wäsche mit viel Wasser und hohen Temperaturen zu reinigen, verlängert das Eco-Programm die Zeit, in der das Waschmittel einwirkt und erzielt dadurch das gleiche Ergebnis. Viele Geräte sparen so pro Waschgang 30 bis 50 Prozent Energie.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "Lange Laufzeit, niedrige Temperatur",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "Kurze Laufzeit, hohe Temperatur",
-              "correct": false
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Manch brütend heißer Sommertag macht die Wohnung zur Sauna. Womit schaffen Sie energieeffizient Abhilfe?  ",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Klimaanlage anschaffen"
+            },
+            {
+              "correct": true,
+              "title": "Zimmerpflanzen aufstellen"
+            },
+            {
+              "correct": false,
+              "title": "Ganztätig lüften"
+            },
+            {
+              "correct": true,
+              "title": "Ventilator einschalten"
+            }
+          ],
           "explanation": "Hier waren gleich zwei Antworten richtig! Großblättrige Zimmerpflanzen wie Gummibaum oder Palme erhöhen die Luftfeuchtigkeit im Raum und schaffen damit Abkühlung. Ein Ventilator kann die empfundene Temperatur um bis zu 3 Grad senken. Damit verbraucht er deutlich weniger Energie als Klimaanlagen, auf deren Betrieb Sie besser verzichten. Die Fenster zum Lüften aufmachen sollten Sie nur, wenn die Außentemperatur niedriger als die Innentemperatur ist, also früh am Morgen oder spät in der Nacht.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "Klimaanlage anschaffen",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Zimmerpflanzen aufstellen",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "ganztätig lüften",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Ventilator einschalten",
-              "correct": true
-            }
-          ]
+          "title": "Manch brütend heißer Sommertag macht die Wohnung zur Sauna. Womit schaffen Sie energieeffizient Abhilfe?",
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Im Standby-Modus verbrauchen Elektrogeräte keinen Strom.",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Stimmt genau"
+            },
+            {
+              "correct": true,
+              "title": "Gar nicht wahr"
+            }
+          ],
           "explanation": "Manche Geräte schlucken auch im Standby-Modus viel Strom, das trifft gerade auf etwas ältere Modelle zu. Auch Ladegeräte verbrauchen Energie, sogar wenn das Endgerät nicht angeschlossen ist.  Das erkennen Sie daran, dass das Ladegerät warm wird. Wenn Sie den Standby-Modus vermeiden und alle Geräte immer komplett ausschalten, können Sie im Jahr 60 Euro und mehr sparen. Sie müssen nicht alle Stecker ziehen, praktischer ist eine Mehrfachsteckdose mit Ein-/Ausschalter.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "stimmt genau",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "gar nicht wahr",
-              "correct": true
-            }
-          ]
+          "title": "Im Standby-Modus verbrauchen Elektrogeräte keinen Strom.",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Endlich Sonntag! Wo backen Sie Ihre Brötchen fürs Frühstück energieeffizient auf?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Im Backofen"
+            },
+            {
+              "correct": true,
+              "title": "Auf dem Brötchenaufsatz des Toasters"
+            }
+          ],
           "explanation": "Brötchen sollten auf einem Toaster mit Brötchenaufsatz aufgebacken werden. Das spart 70% Energie im Vergleich zum Backofen.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "im Backofen",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "auf dem Brötchenaufsatz des Toasters",
-              "correct": true
-            }
-          ]
+          "title": "Endlich Sonntag! Wo backen Sie Ihre Brötchen fürs Frühstück energieeffizient auf?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": true,
+              "title": "Wenig Wasser im Topf verwenden"
+            },
+            {
+              "correct": true,
+              "title": "Nachwärme nutzen"
+            },
+            {
+              "correct": false,
+              "title": "Omas alten Emailletopf nutzen"
+            },
+            {
+              "correct": false,
+              "title": "Backofen vorheizen"
+            }
+          ],
+          "explanation": "Hier waren gleich zwei Antworten richtig! Kartoffeln, Eier oder Gemüse müssen nicht im Kochtopf baden. Um sie im Dampf zu garen, genügt eine Handbreit Wasser im Topf. Viel Energie sparen Sie auch, indem Sie beim Kochen die Nachwärme nutzen, also Ihre Herdplatte bereits 5 bis 10 Minuten vor Ende der Garzeit abdrehen. Alte Töpfe und Pfannen sind meist ineffizient: Sie leiten aufgrund veralteten Materials oder unebener Böden die Wärme schlecht. Das Vorheizen des Backofens verbraucht viel Energie und ist meist unnötig.     ",
           "title": "Mit welchen Tricks sparen Sie beim Kochen Energie?",
-          "explanation": "Hier waren gleich zwei Antworten richtig! Kartoffeln, Eier oder Gemüse müssen nicht im Kochtopf baden. Um sie im Dampf zu garen, genügt eine Handbreit Wasser im Topf. Viel Energie sparen Sie auch, indem Sie beim Kochen die Nachwärme nutzen, also Ihre Herdplatte bereits 5 bis 10 Minuten vor Ende der Garzeit abdrehen. Alte Töpfe und Pfannen sind meist ineffizient: Sie leiten aufgrund veralteten Materials oder unebener Böden die Wärme schlecht. Das Vorheizen des Backofens verbraucht viel Energie und ist meist unnötig.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "wenig Wasser im Topf verwenden",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "Nachwärme nutzen",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "Omas alten Emailletopf nutzen",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Backofen vorheizen",
-              "correct": false
-            }
-          ]
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Und nun noch der Abwasch: Welche Variante ist sparsamer?",
-          "explanation": "Überlassen Sie die unliebsame Tellerwäscherei einem Geschirrspüler. Das ist nicht nur bequemer, sondern auch effizient: Die richtige Nutzung eines Geschirrspülers spart im Vergleich zur Handwäsche 50 Prozent Energie und rund 30 Prozent Wasser.",
           "answers": [
             {
-              "type": "Answer",
-              "title": "Abwaschen per Hand",
-              "correct": false
+              "correct": false,
+              "title": "Abwaschen per Hand"
             },
             {
-              "type": "Answer",
-              "title": "Geschirrspüler",
-              "correct": true
+              "correct": true,
+              "title": "Geschirrspüler"
             }
-          ]
+          ],
+          "explanation": "Überlassen Sie die unliebsame Tellerwäscherei einem Geschirrspüler. Das ist nicht nur bequemer, sondern auch effizient: Die richtige Nutzung eines Geschirrspülers spart im Vergleich zur Handwäsche 50% Energie und rund 30% Wasser.",
+          "title": "Und nun noch der Abwasch: Welche Variante ist sparsamer?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         }
-      ]
+      ],
+      "score": {
+        "min-positive-score": 5,
+        "negative-response": "Da ist noch Luft nach oben. Aber keine Sorge: Besuchen Sie einfach das <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder den <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> Dort erhalten Sie jede Menge wertvolle Energiespartipps. So steigern Sie beim nächsten Mal Ihre Punkteausbeute – und senken zugleich zu Hause Ihren Stromverbrauch.",
+        "positive-response": "Gratulation! Diese Runde haben Sie mit Leichtigkeit gemeistert. Sie sind eine ziemliche (natürlich energieeffiziente) Leuchte, was das Stromsparen betrifft. Schauen Sie im <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder dem <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> vorbei, um noch mehr Wissen zu sammeln. Dann schneiden Sie sicher auch in unserem Quiz für Fortgeschrittene super ab!"
+      },
+      "title": "Einsteiger*innen",
+      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.5\" height=\"23.5\" viewBox=\"0 0 19.5 23.5\">\n  <g id=\"chess-pawn\" transform=\"translate(-2.25 -0.25)\">\n    <circle id=\"Ellipse_385\" data-name=\"Ellipse 385\" cx=\"4\" cy=\"4\" r=\"4\" transform=\"translate(8 1)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_232\" data-name=\"Linie 232\" x2=\"10\" transform=\"translate(7 9)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_646\" data-name=\"Pfad 646\" d=\"M5.789,19A13.949,13.949,0,0,0,10,9\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_647\" data-name=\"Pfad 647\" d=\"M14,9a13.949,13.949,0,0,0,4.211,10\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2001\" data-name=\"Rechteck 2001\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>"
     },
     {
-      "type": "Level",
-      "title": "Fortgeschrittene",
-      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"23.5\" height=\"23.5\" viewBox=\"0 0 23.5 23.5\">\n  <g id=\"icon-Profis\" transform=\"translate(-0.25 -0.25)\">\n    <circle id=\"Ellipse_379\" data-name=\"Ellipse 379\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_380\" data-name=\"Ellipse 380\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_381\" data-name=\"Ellipse 381\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_382\" data-name=\"Ellipse 382\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_644\" data-name=\"Pfad 644\" d=\"M11.59,3.936,9,13,3.561,7.561\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_230\" data-name=\"Linie 230\" x2=\"3.097\" y2=\"11.062\" transform=\"translate(2.903 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_645\" data-name=\"Pfad 645\" d=\"M20.439,7.561,15,13,12.41,3.936\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_231\" data-name=\"Linie 231\" y1=\"11.062\" x2=\"3.097\" transform=\"translate(18 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_383\" data-name=\"Ellipse 383\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_384\" data-name=\"Ellipse 384\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2000\" data-name=\"Rechteck 2000\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>\n",
-      "score": {
-        "positive-response": "Sie sind eine (Energie-)Klasse für sich! Beim sparsamen Umgang mit Kühlschrank, Lampe und TV macht Ihnen niemand etwas vor, Sie mögen es zu Hause am liebsten energieeffizient. Um in Ihrer Paradedisziplin topfit und am Ball zu bleiben, besuchen Sie doch einmal das <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder den <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a>. Vielleicht stoßen Sie auf den einen oder anderen Fakt, den sogar Sie noch nicht kannten.",
-        "negative-response": "Bei Ihrer Punkteausbeute gibt es noch Luft nach oben – und damit vermutlich auch bei Ihrer Energiebilanz zu Hause. Sehen Sie es also positiv: Bestimmt schlummern in Ihrem Alltag noch einige ungenutzte Chancen zum Sparen von Strom, Geld und CO2. Stöbern Sie einfach im <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder im <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> für jede Menge Energiespartipps rund um Wohnen und Alltag. Damit füllen Sie spielerisch letzte Wissenslücken – und sind bei der nächsten Quizrunde bestimmt ganz vorn dabei.",
-        "min-positive-score": 5
-      },
       "questions": [
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": true,
+              "title": "TV und Audiogeräte"
+            },
+            {
+              "correct": false,
+              "title": "Waschmaschine und Trockner"
+            },
+            {
+              "correct": false,
+              "title": "Kühlschrank"
+            },
+            {
+              "correct": false,
+              "title": "Kochen"
+            }
+          ],
+          "explanation": "In durchschnittlichen deutschen 3-Personen-Haushalten wird der meiste Strom für Informationstechnik wie TV und Audiogeräte (27%) verbraucht. Danach folgen Kühl- und Gefriergeräte (17%), Waschmaschine und Trockner (13%) sowie Kochen (11%).",
           "title": "Wofür verbrauchen wir den meisten Strom?",
-          "explanation": "In durchschnittlichen deutschen 3-Personen-Haushalten wird der meiste Strom für Informationstechnik wie TV und Audiogeräte (27 Prozent) verbraucht. Danach folgen Kühl- und Gefriergeräte (17), Waschmaschine und Trockner (13) sowie Kochen (11).",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "TV und Audiogeräte",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "Waschmaschine und Trockner",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Kühlschrank",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Kochen",
-              "correct": false
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Welche dieser einfachen Maßnahmen bietet das meiste Einsparpotential?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Internet: Router nachts ausschalten"
+            },
+            {
+              "correct": false,
+              "title": "Gefrierfach: regelmäßig abtauen"
+            },
+            {
+              "correct": false,
+              "title": "Waschmaschine: das Eco-Programm nutzen"
+            },
+            {
+              "correct": true,
+              "title": "Herd: beim Kochen den Deckel benutzen"
+            }
+          ],
           "explanation": "Wer mit Deckel kocht, spart bis zu 27 Euro und 46 kg CO2 im Jahr. Nachts ausgeschaltete WLAN-Router sparen 12 Euro (21 kg CO2). Ein regelmäßig abgetautes Gefrierfach bedeutet eine Ersparnis von 9 Euro (15 kg CO2). Nutzen Sie regelmäßig das Eco-Programm Ihrer Waschmaschine, sparen Sie jährlich rund 8 Euro Energie und 13 kg CO2.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "Internet: Router nachts ausschalten",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Gefrierfach: regelmäßig abtauen",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Waschmaschine: das Eco-Programm nutzen",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "Herd: beim Kochen den Deckel benutzen",
-              "correct": true
-            }
-          ]
+          "title": "Welche dieser einfachen Maßnahmen bietet das meiste Einsparpotential?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Welche Stromkosten fallen eigentlich an, wenn Sie einen Kuchen backen?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Etwa 0,4 Cent"
+            },
+            {
+              "correct": false,
+              "title": "Etwa 4 Cent"
+            },
+            {
+              "correct": true,
+              "title": "Etwa 40 Cent"
+            },
+            {
+              "correct": false,
+              "title": "Etwa 4 Euro"
+            }
+          ],
           "explanation": "Beim Backen eines Kuchens fallen Stromkosten von etwa 40 Cent an. Es lohnt sich nicht, für jedes Brötchen oder zum Aufwärmen eines einzelnen Pizzastücks den Ofen anzuschmeißen. Effizient ist es, mehrere Speisen hintereinander zu backen: Wer am Morgen den Marmorkuchen fürs Kaffeetrinken in die Röhre schiebt und anschließend die Lasagne für das Mittagessen vermeidet doppeltes Aufheizen.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "etwa 0,4 Cent",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "etwa 4 Cent",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "etwa 40 Cent",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "etwa 4 Euro",
-              "correct": false
-            }
-          ]
+          "title": "Welche Stromkosten fallen eigentlich an, wenn Sie einen Kuchen backen?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Lang lebe die Lampe! Auf der Verpackung Ihrer LED-Lampe ist die erwartbare Lebensdauer angegeben. Was dürfen Sie bei einer energieeffizienten Lampe erwarten?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Rund 10.000 Stunden"
+            },
+            {
+              "correct": true,
+              "title": "Mindestens 20.000 Stunden"
+            }
+          ],
           "explanation": "Mindestens 20.000 Stunden sollte eine energieeffiziente LED-Lampe leuchten. Auf manchen Verpackungen ist die Lebensdauer in Jahren angegeben, dann rechnen die Hersteller*innen mit 3 Stunden Betrieb pro Tag. In der Regel werden auch die Schaltzyklen angegeben, also wie häufig sich die Lampe an- und ausschalten lässt. Hier sollte der Wert nicht unter 50.000 betragen.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "rund 10.000 Stunden",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "mindestens 20.000 Stunden",
-              "correct": true
-            }
-          ]
+          "title": "Lang lebe die Lampe! Auf der Verpackung Ihrer LED-Lampe ist die erwartbare Lebensdauer angegeben. Was dürfen Sie bei einer energieeffizienten Lampe erwarten?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Auf der Lampenverpackung wird mit der Einheit Kelvin die Helligkeit der Lampe angegeben.",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Stimmt genau"
+            },
+            {
+              "correct": true,
+              "title": "Gar nicht wahr"
+            }
+          ],
           "explanation": "Die Helligkeit einer Lampe wird in der Einheit Lumen angegeben. Hingegen beschreibt die Einheit Kelvin die Lichtfarbe oder auch Farbtemperatur der LED-Lampen. Für Wohnräume eignet sich zum Beispiel Warmweiß (ca. 2.700 Kelvin), als Lichtfarbe für die Werkstatt oder den Badezimmerspiegel hingegen kaltweiß (5.000 Kelvin).",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "stimmt genau",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "gar nicht wahr",
-              "correct": true
-            }
-          ]
+          "title": "Auf der Lampenverpackung wird mit der Einheit Kelvin die Helligkeit der Lampe angegeben.",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Die sollten besser draußen bleiben: Welches Lebensmittel gehört nicht in den Kühlschrank?",
-          "explanation": "Hier waren gleich zwei Antworten richtig! Einigen Lebensmitteln schadet der Aufenthalt in der Kältekammer. So trocknet Brot im Kühlschrank schneller aus und wird hart. Und auch Zitrusfrüchte vertragen die Kälte nicht, sie verlieren ihr spritziges Aroma. Senf hingegen fühlt sich im Kühlschrank sehr wohl. Speisereste sollten Sie ebenfalls im Kühlschrank aufbewahren – jedoch erst, nachdem diese ausgekühlt sind.",
           "answers": [
             {
-              "type": "Answer",
-              "title": "Brot",
-              "correct": true
+              "correct": true,
+              "title": "Brot"
             },
             {
-              "type": "Answer",
-              "title": "Senf",
-              "correct": false
+              "correct": false,
+              "title": "Senf"
             },
             {
-              "type": "Answer",
-              "title": "Zitrusfrüchte",
-              "correct": true
+              "correct": true,
+              "title": "Zitrusfrüchte"
             },
             {
-              "type": "Answer",
-              "title": "die Reste des Mittagessens",
-              "correct": false
+              "correct": false,
+              "title": "Die Reste des Mittagessens"
             }
-          ]
+          ],
+          "explanation": "Hier waren gleich zwei Antworten richtig! Einigen Lebensmitteln schadet der Aufenthalt in der Kältekammer. So trocknet Brot im Kühlschrank schneller aus und wird hart. Und auch Zitrusfrüchte vertragen die Kälte nicht, sie verlieren ihr spritziges Aroma. Senf hingegen fühlt sich im Kühlschrank sehr wohl. Speisereste sollten Sie ebenfalls im Kühlschrank aufbewahren – jedoch erst, nachdem diese ausgekühlt sind.",
+          "title": "Die sollten besser draußen bleiben: Welches Lebensmittel gehört nicht in den Kühlschrank?",
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         }
-      ]
+      ],
+      "score": {
+        "min-positive-score": 5,
+        "negative-response": "Bei Ihrer Punkteausbeute gibt es noch Luft nach oben – und damit vermutlich auch bei Ihrer Energiebilanz zu Hause. Sehen Sie es also positiv: Bestimmt schlummern in Ihrem Alltag noch einige ungenutzte Chancen zum Sparen von Strom, Geld und CO2. Stöbern Sie einfach im <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder im <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a> für jede Menge Energiespartipps rund um Wohnen und Alltag. Damit füllen Sie spielerisch letzte Wissenslücken – und sind bei der nächsten Quizrunde bestimmt ganz vorn dabei.",
+        "positive-response": "Sie sind eine (Energie-)Klasse für sich! Beim sparsamen Umgang mit Kühlschrank, Lampe und TV macht Ihnen niemand etwas vor, Sie mögen es zu Hause am liebsten energieeffizient. Um in Ihrer Paradedisziplin topfit und am Ball zu bleiben, besuchen Sie doch einmal das <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">Glossar</a> oder den <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">Label-Lotsen</a>. Vielleicht stoßen Sie auf den einen oder anderen Fakt, den sogar Sie noch nicht kannten."
+      },
+      "title": "Fortgeschrittene",
+      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"23.5\" height=\"23.5\" viewBox=\"0 0 23.5 23.5\">\n  <g id=\"icon-Profis\" transform=\"translate(-0.25 -0.25)\">\n    <circle id=\"Ellipse_379\" data-name=\"Ellipse 379\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_380\" data-name=\"Ellipse 380\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_381\" data-name=\"Ellipse 381\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_382\" data-name=\"Ellipse 382\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_644\" data-name=\"Pfad 644\" d=\"M11.59,3.936,9,13,3.561,7.561\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_230\" data-name=\"Linie 230\" x2=\"3.097\" y2=\"11.062\" transform=\"translate(2.903 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_645\" data-name=\"Pfad 645\" d=\"M20.439,7.561,15,13,12.41,3.936\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_231\" data-name=\"Linie 231\" y1=\"11.062\" x2=\"3.097\" transform=\"translate(18 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_383\" data-name=\"Ellipse 383\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_384\" data-name=\"Ellipse 384\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2000\" data-name=\"Rechteck 2000\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>"
     }
   ]
 }

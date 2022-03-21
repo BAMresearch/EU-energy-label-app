@@ -42,7 +42,7 @@ class _ProductHeader extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.only(top: 28, bottom: 8),
+      padding: const EdgeInsets.only(top: 28, bottom: 8),
       child: Text(title.toUpperCase(), style: Theme.of(context).header3),
     );
   }

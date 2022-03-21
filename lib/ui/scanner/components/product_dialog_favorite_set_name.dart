@@ -42,9 +42,9 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
             onChanged: (input) => setState(() => _title = input),
             decoration: InputDecoration(
               hintText: Translations.of(context)!.product_favorite_dialog_set_title_hint,
-              enabledBorder: OutlineInputBorder(),
+              enabledBorder: const OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondaryVariant),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondaryContainer),
               ),
             ),
           ),
@@ -53,17 +53,17 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
               Translations.of(context)!.product_favorite_dialog_set_title_error,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).colorScheme.error),
             ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           TextButton(
             onPressed: () {
               _valid = _title.isNotEmpty;
               setState(() {});
               if (_valid) {
-                return widget.onConfirmName(_title);
+                widget.onConfirmName(_title);
               }
             },
             style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
@@ -72,12 +72,12 @@ class _ProductDialogFavoriteSetNameState extends State<ProductDialogFavoriteSetN
               style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           OutlinedButton(
             onPressed: widget.onTapCancel,
             style: OutlinedButton.styleFrom(
               primary: Theme.of(context).colorScheme.surface,
-              side: BorderSide(color: BamColorPalette.bamBlue1Optimized),
+              side: const BorderSide(color: BamColorPalette.bamBlue1Optimized),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),

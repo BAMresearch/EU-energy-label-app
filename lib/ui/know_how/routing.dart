@@ -32,11 +32,11 @@ class KnowHowRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case KnowHowRoutes.root:
-        return MaterialPageRoute(builder: (context) => KnowHowPage());
+        return MaterialPageRoute(builder: (context) => const KnowHowPage());
       case KnowHowRoutes.glossary:
         return MaterialPageRoute(builder: (context) => GlossaryPage(initialSearchText: settings.arguments as String?));
       case KnowHowRoutes.labelGuideCategoriesOverview:
-        return MaterialPageRoute(builder: (context) => CategoriesOverviewPage());
+        return MaterialPageRoute(builder: (context) => const CategoriesOverviewPage());
       case KnowHowRoutes.labelGuideCategoryOverview:
         return MaterialPageRoute(
             builder: (context) => CategoryOverviewPage(labelCategory: settings.arguments as LabelCategory));
@@ -63,7 +63,7 @@ class KnowHowRouter {
         return MaterialPageRoute(
             builder: (context) => WhyIsTherePage(initialIndex: int.parse(settings.arguments as String? ?? '0')));
       case KnowHowRoutes.regulations:
-        return MaterialPageRoute(builder: (context) => RegulationsPage());
+        return MaterialPageRoute(builder: (context) => const RegulationsPage());
       case KnowHowRoutes.regulationDetails:
         final Regulation? regulation = settings.arguments as Regulation?;
         return MaterialPageRoute(

@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 
 class FirstSteps extends StatelessWidget with BasePage {
+  const FirstSteps({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
@@ -22,5 +24,5 @@ class FirstSteps extends StatelessWidget with BasePage {
     );
   }
 
-  Widget _buildBody(BuildContext context) => OnboardingPage(showSkipButton: false);
+  Widget _buildBody(BuildContext context) => const OnboardingPage(showSkipButton: false);
 }

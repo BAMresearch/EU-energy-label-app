@@ -41,7 +41,9 @@ class CategoryLightAdviserViewModel extends BaseViewModel {
         );
 
   bool get isExpandedLayout => _isExpandedLayout;
+
   bool get isSelectionSheetVisible => _isSelectionSheetVisible;
+
   bool get shouldShowExpansionToggleButton => bottomLayoutState != BottomLayoutState.initial;
 
   BottomLayoutState get bottomLayoutState {
@@ -66,13 +68,13 @@ class CategoryLightAdviserViewModel extends BaseViewModel {
     final RoomType room = _selectedRoom ?? RoomType.mirror;
     final BrightnessType brightnessType = _selectedBrightnessLevel ?? BrightnessType.lowLight;
 
-    _lightAdviser.bulbImages.forEach((bulbImage) {
-      bulbImage.brightnessRoom.forEach((brightnessRoom) {
+    for (var bulbImage in _lightAdviser.bulbImages) {
+      for (var brightnessRoom in bulbImage.brightnessRoom) {
         if (brightnessRoom.brightness == brightnessType && brightnessRoom.room == room) {
           bulbImageFileName = bulbImage.image;
         }
-      });
-    });
+      }
+    }
 
     return bulbImageFileName;
   }

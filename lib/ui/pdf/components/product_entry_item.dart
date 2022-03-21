@@ -22,7 +22,7 @@ class ProductEntryItem extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,7 +30,7 @@ class ProductEntryItem extends StatelessWidget {
           UrlLink(
             destination: productFavorite.product!.url!,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SvgImage(svg: SvgAsset.getSvgString(context, AssetPaths.externalLinkIcon)!, height: 12),
                 SizedBox(width: 8),
@@ -41,6 +41,10 @@ class ProductEntryItem extends StatelessWidget {
               ]),
             ),
           ),
+          if (productFavorite.comments != null &&
+              productFavorite.comments!.isNotEmpty &&
+              productFavorite.comments!.first.isNotEmpty)
+            Text(productFavorite.comments!.first, style: Theme.of(context).defaultTextStyle),
         ],
       ),
     );

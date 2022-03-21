@@ -10,7 +10,7 @@
 import 'package:flutter/material.dart';
 
 class MultiCrossFadeAnimation extends StatelessWidget {
-  MultiCrossFadeAnimation({
+  const MultiCrossFadeAnimation({
     Key? key,
     required this.children,
     this.visibleWidgetIndex = 0,

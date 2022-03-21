@@ -26,7 +26,7 @@ class BamButtonThemes {
     style: TextButton.styleFrom(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       primary: BamColorScheme.colorScheme.secondary,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
     ),
   );
 

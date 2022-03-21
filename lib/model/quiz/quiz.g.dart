@@ -6,15 +6,11 @@ part of 'quiz.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Quiz _$QuizFromJson(Map<String, dynamic> json) {
-  return Quiz(
-    title: json['title'] as String?,
-    description: json['description'] as String?,
-    levels: (json['levels'] as List<dynamic>?)
-        ?.map((e) => Level.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+Quiz _$QuizFromJson(Map<String, dynamic> json) => Quiz(
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      levels: (json['levels'] as List<dynamic>?)?.map((e) => Level.fromJson(e as Map<String, dynamic>)).toList(),
+    );
 
 Map<String, dynamic> _$QuizToJson(Quiz instance) => <String, dynamic>{
       'title': instance.title,

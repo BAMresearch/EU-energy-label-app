@@ -36,7 +36,7 @@ class ProductDialogOverview extends StatelessWidget {
           TextButton(
             onPressed: onTapOpenBrowser,
             style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
@@ -45,13 +45,13 @@ class ProductDialogOverview extends StatelessWidget {
               style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           TextButton(
             onPressed: onTapFavorite,
             style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),
@@ -60,14 +60,14 @@ class ProductDialogOverview extends StatelessWidget {
               style: Theme.of(context).textTheme.button!.copyWith(color: BamColorPalette.bamWhite),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           OutlinedButton(
             onPressed: onTapCancel,
             style: OutlinedButton.styleFrom(
               primary: Theme.of(context).colorScheme.surface,
-              side: BorderSide(color: BamColorPalette.bamBlue1Optimized),
+              side: const BorderSide(color: BamColorPalette.bamBlue1Optimized),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.only(top: 18, bottom: 14),
             ),

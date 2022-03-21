@@ -24,7 +24,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_layout_builder/responsive_layout_builder.dart';
 
 class OnboardingPage extends StatelessPage<OnboardingViewModel> {
-  OnboardingPage({Key? key, this.showSkipButton = true});
+  const OnboardingPage({Key? key, this.showSkipButton = true}) : super(key: key);
 
   final bool showSkipButton;
 
@@ -75,7 +75,7 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
                   child: _buildTopBar(context, viewModel),
                 ),
                 Expanded(child: _buildContent(context, viewModel)),
-                _buildPagerIndicator(viewModel),
+                _buildPagerIndicator(context, viewModel),
               ],
             );
           }),
@@ -141,7 +141,7 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
 
     return ResponsiveLayoutBuilder(
       builder: (context, size) {
-        final backgroundAlignment = size.size == LayoutSize.tablet ? Alignment(0, -0.6) : Alignment.topCenter;
+        final backgroundAlignment = size.size == LayoutSize.tablet ? const Alignment(0, -0.6) : Alignment.topCenter;
 
         return Stack(
           children: [
@@ -178,6 +178,7 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
               ),
             ),
             PageView.builder(
+              controller: viewModel.pageController,
               onPageChanged: viewModel.onPageChangeAction,
               pageSnapping: true,
               itemCount: viewModel.pageCount,
@@ -193,12 +194,23 @@ class OnboardingPage extends StatelessPage<OnboardingViewModel> {
     return OnboardingContent(_onBoardingContent(context)[index]);
   }
 
-  Widget _buildPagerIndicator(OnboardingViewModel viewModel) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: DotsIndicator(
-        dotsCount: viewModel.pageCount,
-        position: viewModel.currentPageIndex.toDouble(),
+  Widget _buildPagerIndicator(BuildContext context, OnboardingViewModel viewModel) {
+    return Semantics(
+      label: Translations.of(context)!
+          .semantics_onboarding_page_indicator(viewModel.currentPageIndex + 1, viewModel.pageCount),
+      onTap: () {
+        if (viewModel.currentPageIndex + 1 < viewModel.pageCount) {
+          viewModel.pageController.jumpToPage(viewModel.currentPageIndex + 1);
+        } else {
+          viewModel.pageController.jumpToPage(0);
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: DotsIndicator(
+          dotsCount: viewModel.pageCount,
+          position: viewModel.currentPageIndex.toDouble(),
+        ),
       ),
     );
   }

@@ -1,307 +1,270 @@
 {
-  "type": "Quiz",
+  "_id": 23,
+  "_version": 81,
   "title": "Energy quiz",
   "description": "Saving energy can be simple – but here we have some trickier questions. How much do you know about energy conservation at home? Test your knowledge and get some hints to protect the environment and save money. A quiz for everyone interested in energy efficiency. Let's go!",
   "levels": [
     {
-      "type": "Level",
-      "title": "Beginner",
-      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.5\" height=\"23.5\" viewBox=\"0 0 19.5 23.5\">\n  <g id=\"chess-pawn\" transform=\"translate(-2.25 -0.25)\">\n    <circle id=\"Ellipse_385\" data-name=\"Ellipse 385\" cx=\"4\" cy=\"4\" r=\"4\" transform=\"translate(8 1)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_232\" data-name=\"Linie 232\" x2=\"10\" transform=\"translate(7 9)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_646\" data-name=\"Pfad 646\" d=\"M5.789,19A13.949,13.949,0,0,0,10,9\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_647\" data-name=\"Pfad 647\" d=\"M14,9a13.949,13.949,0,0,0,4.211,10\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2001\" data-name=\"Rechteck 2001\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>\n",
-      "score": {
-        "positive-response": "Congratulation! You managed this round easily. Concerning energy, you're bright as an (efficient!) light bulb. Have a look at the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> to learn even more. This way, you will easily manage the advanced level!",
-        "negative-response": "There is still much to learn. But don't worry: Have a look at the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> There you can find a lot of information and hints for saving energy. Of course, this will increase your score – and decrease your energy bill.",
-        "min-positive-score": 5
-      },
       "questions": [
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Long and cool or short an hot - which washing cycle is more efficient?",
+          "answers": [
+            {
+              "correct": true,
+              "title": "Long duration, low temperature"
+            },
+            {
+              "correct": false,
+              "title": "Short duration, high temperature"
+            }
+          ],
           "explanation": "Your washing machine's eco programme may take longer, but it's lower temperature saves electric energy. Most of the electricity a washing machine uses is consumed by heating the water. Instead of using a lot of hot water, the eco programme gives the detergent more time to do its job cleaning the laundry. This can save up to 30 or even 50 % energy per cycle.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "long duration, low temperature",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "short duration, high temperature",
-              "correct": false
-            }
-          ]
+          "title": "Long and cool or short an hot - which washing cycle is more efficient?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Hot summer days make you sweat. How can you get relief efficiently?  ",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Buy an air conditioner"
+            },
+            {
+              "correct": true,
+              "title": "Get potted plants"
+            },
+            {
+              "correct": false,
+              "title": "Open the windows all day"
+            },
+            {
+              "correct": true,
+              "title": "Use a fan"
+            }
+          ],
           "explanation": "There were two correct answers! Plants with large leaves like ficus or palm increase humidity and cool the room. A fan can also lower the perceived temperature. Fans use less energy than ari conditioners, which should only be used when absolutely necessary. Opening windows will only help as long as it is colder outdoors thn indoors, in the early morning or late at night.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "buy an air conditioner",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "get potted plants",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "open the windows all day",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "use a fan",
-              "correct": true
-            }
-          ]
+          "title": "Hot summer days make you sweat. How can you get relief efficiently?",
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Exactly"
+            },
+            {
+              "correct": true,
+              "title": "Not true"
+            }
+          ],
+          "explanation": "Some electric appliances or electronic devices use significant amounts of energy, especially older models. Chargers use some electricity even when not connected. You can check this easily: the more energy the charger uses, the warmer ist gets. Avoid standby in most devices by switching them of or disconnecting them from the grid and save 60 euro or more per year. If pulling plugs is inconvenient, you can use a multi-socket power strip with a switch.",
           "title": "Appliances on standby do not use electricity.",
-          "explanation": "Some electric appliances or electronic devices use significant amounts of energy, especially older models. Chargers use some electricity even when not connected. You can check this easily: the more energy the charger uses, the warmer ist gets. Avoid standby in most devices by switching them of or disconnecting them from the grid and save 60 Euro or more per year. If pulling plugs is inconvenient, you can use a multi-socket power strip with a switch.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "exactly",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "not true",
-              "correct": true
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Sunday morning! How do you warm up your breakfast rolls efficiently?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "In the oven"
+            },
+            {
+              "correct": true,
+              "title": "On the toaster"
+            }
+          ],
           "explanation": "For a small number of rolls use a toaster. This save 70% of energy compared to the oven.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "in the oven",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "on the toaster",
-              "correct": true
-            }
-          ]
+          "title": "Sunday morning! How do you warm up your breakfast rolls efficiently?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "How can you save energy when cooking a meal?",
+          "answers": [
+            {
+              "correct": true,
+              "title": "Use only a small amount of water in the pan"
+            },
+            {
+              "correct": true,
+              "title": "Switch of the electric plate early"
+            },
+            {
+              "correct": false,
+              "title": "Use grandma's old cooking gear"
+            },
+            {
+              "correct": false,
+              "title": "Pre-heat the oven"
+            }
+          ],
           "explanation": "There were two correct answers! Potatoes, eggs or vegetables do not need a bath in the pan. To steam them, a hand's width of water in the pan is sufficient. A lot of energy can be saved by using the heat still stored in the electric plate of the cooktop if you have one with older metal  plates. It can be worthwhile to use newer pots and pans made from modern materials that transfer heat more efficiently. Pre-heating the oven is often unnecessary and uses extra energy.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "use only a small amount of water in the pan",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "switch of the electric plate early",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "use grandma's old cooking gear",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "pre-heat the oven",
-              "correct": false
-            }
-          ]
+          "title": "How can you save energy when cooking a meal?",
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Now let us do the dishes - which way is more efficient?",
-          "explanation": "Let an automatic dishwasher do the chore of cleaning plates. Besides being convenient, it is often more efficient: Using a dishwasher correctly saves up to 50 percent energy and 30 percent water compared to washing by hand .",
           "answers": [
             {
-              "type": "Answer",
-              "title": "hand-wash your dishes",
-              "correct": false
+              "correct": false,
+              "title": "Hand-wash your dishes"
             },
             {
-              "type": "Answer",
-              "title": "use a dishwasher",
-              "correct": true
+              "correct": true,
+              "title": "Use a dishwasher"
             }
-          ]
+          ],
+          "explanation": "Let an automatic dishwasher do the chore of cleaning plates. Besides being convenient, it is often more efficient: Using a dishwasher correctly saves up to 50% energy and 30% water compared to washing by hand .",
+          "title": "Now let us do the dishes - which way is more efficient?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         }
-      ]
+      ],
+      "score": {
+        "min-positive-score": 5,
+        "negative-response": "There is still much to learn. But don't worry: Have a look at the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> There you can find a lot of information and hints for saving energy. Of course, this will increase your score – and decrease your energy bill.",
+        "positive-response": "Congratulations! You managed this round easily. Concerning energy, you're bright as an (efficient!) light bulb. Have a look at the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> to learn even more. This way, you will easily manage the advanced level!"
+      },
+      "title": "Beginner",
+      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.5\" height=\"23.5\" viewBox=\"0 0 19.5 23.5\">\n  <g id=\"chess-pawn\" transform=\"translate(-2.25 -0.25)\">\n    <circle id=\"Ellipse_385\" data-name=\"Ellipse 385\" cx=\"4\" cy=\"4\" r=\"4\" transform=\"translate(8 1)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_232\" data-name=\"Linie 232\" x2=\"10\" transform=\"translate(7 9)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_646\" data-name=\"Pfad 646\" d=\"M5.789,19A13.949,13.949,0,0,0,10,9\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_647\" data-name=\"Pfad 647\" d=\"M14,9a13.949,13.949,0,0,0,4.211,10\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2001\" data-name=\"Rechteck 2001\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#317597\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>"
     },
     {
-      "type": "Level",
-      "title": "Advanced",
-      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"23.5\" height=\"23.5\" viewBox=\"0 0 23.5 23.5\">\n  <g id=\"icon-Profis\" transform=\"translate(-0.25 -0.25)\">\n    <circle id=\"Ellipse_379\" data-name=\"Ellipse 379\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_380\" data-name=\"Ellipse 380\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_381\" data-name=\"Ellipse 381\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_382\" data-name=\"Ellipse 382\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_644\" data-name=\"Pfad 644\" d=\"M11.59,3.936,9,13,3.561,7.561\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_230\" data-name=\"Linie 230\" x2=\"3.097\" y2=\"11.062\" transform=\"translate(2.903 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_645\" data-name=\"Pfad 645\" d=\"M20.439,7.561,15,13,12.41,3.936\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_231\" data-name=\"Linie 231\" y1=\"11.062\" x2=\"3.097\" transform=\"translate(18 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_383\" data-name=\"Ellipse 383\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_384\" data-name=\"Ellipse 384\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2000\" data-name=\"Rechteck 2000\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>\n",
-      "score": {
-        "positive-response": "Top (energy) class! Using fridge, lamps and TV efficiently is your second nature, you like saving energy and money at home. To stay up to date, visit the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a>. Perhaps you find something even you didn't know yet.",
-        "negative-response": "There's room for improvement of your score – and maybe also opportunities for lowering your energy bill. Think positive: There's still some potential in your everyday energy use to save money and CO2 emissions. Browse the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> for lots of everyday efficiency hints. You can add to your efficiency skills – and get a higher score next round.",
-        "min-positive-score": 5
-      },
       "questions": [
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": true,
+              "title": "TV and other electronics"
+            },
+            {
+              "correct": false,
+              "title": "Washing machine and dryer"
+            },
+            {
+              "correct": false,
+              "title": "Fridge and freezer"
+            },
+            {
+              "correct": false,
+              "title": "Cooking"
+            }
+          ],
+          "explanation": "Average three-person-households use most electric energy for electronics like TVs, computers or audio equipment (27%). Second is refrigeration appliances (17%), followed by washing and drying (13%) and cooking (11%).",
           "title": "Where is most electric energy consumed in an average home?",
-          "explanation": "Average three-person-households use most electric energy for electronics like TVs, computers or audio equipment (27 percent). Second is refrigeration appliances (17), followed by washing and drying (13) and cooking (11).",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "TV and other electronics",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "washing machine and dryer",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "fridge and freezer",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "cooking",
-              "correct": false
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Internet: switch off wifi routers at night"
+            },
+            {
+              "correct": false,
+              "title": "Freezer: defrost regularly"
+            },
+            {
+              "correct": false,
+              "title": "Washing machine: use eco programme"
+            },
+            {
+              "correct": true,
+              "title": "Cooktop: use a lid when cooking"
+            }
+          ],
+          "explanation": "Simply using a lid on cooking pans saves 27 euro and 46 kg CO2 per year. Switching off wifi routers at night saves 12 euro (21 kg CO2). Regularly defrosting your freezer gets you savings around 9 euro (15 kg CO2). Washing with the eco-cycle reduces your energy bill around 8 euro and emissions by 13 kg CO2.",
           "title": "Which of these easy measures gives the largest energy savings?",
-          "explanation": "Simply using a lid on cooking pans saves 27 Euro and 46 kg CO2 per year. Switching off wifi routers at night saves 12 Euro (21 kg CO2). Regularly defrosting your freezer gets you savings around 9 Euro (15 kg CO2). Washing with the eco-cycle reduces your energy bill around 8 Euro and emissions by 13 kg CO2.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "internet: switch off wifi routers at night",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "freezer: defrost regularly",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "washing machine: use eco programme",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "cooktop: use a lid when cooking",
-              "correct": true
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
+          "answers": [
+            {
+              "correct": false,
+              "title": "About 0,4 cents"
+            },
+            {
+              "correct": false,
+              "title": "About 4 cents"
+            },
+            {
+              "correct": true,
+              "title": "About 40 cents"
+            },
+            {
+              "correct": false,
+              "title": "About 4 euros"
+            }
+          ],
+          "explanation": "Baking a cake costs about 40 cents of energy. Switching on the oven for just a leftover slice of pizza is inefficient. If possible, bake several things one after the other: For example start in the morning by baking a cake for afternoon tea and use the heat to make the lasagna for lunch.",
           "title": "What is the cost of energy for baking an average cake?",
-          "explanation": "Baking a cake costs about 40 Cents of energy. Switching on the oven for just a leftover slice of pizza is inefficient. If possible, bake several things one after the other: For example start in the morning by baking a cake for afternoon tea and use the heat to make the lasagna for lunch.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "about 0,4 Cents",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "about 4 Cents",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "about 40 Cents",
-              "correct": true
-            },
-            {
-              "type": "Answer",
-              "title": "about 4 Euros",
-              "correct": false
-            }
-          ]
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Long live the lamp! The packaging of your new LED lamp has information about its lifetime. How long can you expect an efficient lamp to last?",
+          "answers": [
+            {
+              "correct": false,
+              "title": "About 10.000 hours"
+            },
+            {
+              "correct": true,
+              "title": "At least 20.000 hours"
+            }
+          ],
           "explanation": "An efficient LED lamp should work for at least 20.000 hours. Some brands indicate lifetime also in years, assuming roughly 3 hours per day, 1000 hours per year. Switching cycles are also indicated, meaning the minimum number of times the lamp can be switched on and off. This should not be below 50.000 for an LED lamp.",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "about 10.000 hours",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "at least 20.000 hours",
-              "correct": true
-            }
-          ]
+          "title": "Long live the lamp! The packaging of your new LED lamp has information about its lifetime. How long can you expect an efficient lamp to last?",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "A lamp's brightness is given in Kelvins on the packaging.",
+          "answers": [
+            {
+              "correct": false,
+              "title": "Exactly"
+            },
+            {
+              "correct": true,
+              "title": "Not true"
+            }
+          ],
           "explanation": "Brightness of a lamp (luminous flux) is given in lumen. The unit Kelvin is used to indicate color temperature, which is a measure for the color of light. This is also given in words: warm-white (2.700 Kelvin) is common for living rooms, for bathrooms or cellars the more bluish cold-white is used (5.000 Kelvin).",
-          "answers": [
-            {
-              "type": "Answer",
-              "title": "exactly",
-              "correct": false
-            },
-            {
-              "type": "Answer",
-              "title": "not true",
-              "correct": true
-            }
-          ]
+          "title": "A lamp's brightness is given in Kelvins on the packaging.",
+          "selection-type": "single_select_multiple_choice",
+          "view-type": "text_only"
         },
         {
-          "type": "Question",
-          "view-type": "text_only",
-          "title": "Please keep out: Which of these foodstuffs is not recommended to be stored in the fridge?",
-          "explanation": "There were two correct answers! Some foodstuffs cannot handle the cold well. Bread gets dry and hard quickly in the fridge. Lemons and oranges lose their aroma. In contrast, mustard likes the cold. Leftovers from a meal should also be stored in the fridge – but only after cooling to room temperature.",
           "answers": [
             {
-              "type": "Answer",
-              "title": "bread",
-              "correct": true
+              "correct": true,
+              "title": "Bread"
             },
             {
-              "type": "Answer",
-              "title": "mustard",
-              "correct": false
+              "correct": false,
+              "title": "Mustard"
             },
             {
-              "type": "Answer",
-              "title": "lemons",
-              "correct": true
+              "correct": true,
+              "title": "Lemons"
             },
             {
-              "type": "Answer",
-              "title": "leftovers from lunch",
-              "correct": false
+              "correct": false,
+              "title": "Leftovers from lunch"
             }
-          ]
+          ],
+          "explanation": "There were two correct answers! Some foodstuffs cannot handle the cold well. Bread gets dry and hard quickly in the fridge. Lemons and oranges lose their aroma. In contrast, mustard likes the cold. Leftovers from a meal should also be stored in the fridge – but only after cooling to room temperature.",
+          "title": "Please keep out: Which of these foodstuffs is not recommended to be stored in the fridge?",
+          "selection-type": "multi_select_multiple_choice",
+          "view-type": "text_only"
         }
-      ]
+      ],
+      "score": {
+        "min-positive-score": 5,
+        "negative-response": "There's room for improvement of your score – and maybe also opportunities for lowering your energy bill. Think positive: There's still some potential in your everyday energy use to save money and CO2 emissions. Browse the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a> for lots of everyday efficiency hints. You can add to your efficiency skills – and get a higher score next round.",
+        "positive-response": "Top (energy) class! Using fridge, lamps and TV efficiently is your second nature, you like saving energy and money at home. To stay up to date, visit the <a href=\"energylabelapp:pushPage?tab=knowHow&page=glossary\">glossary</a> or the <a href=\"energylabelapp:pushPage?tab=knowHow&page=labelGuideCategoriesOverview\">label guide</a>. Perhaps you find something even you didn't know yet."
+      },
+      "title": "Advanced",
+      "icon-svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"23.5\" height=\"23.5\" viewBox=\"0 0 23.5 23.5\">\n  <g id=\"icon-Profis\" transform=\"translate(-0.25 -0.25)\">\n    <circle id=\"Ellipse_379\" data-name=\"Ellipse 379\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_380\" data-name=\"Ellipse 380\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_381\" data-name=\"Ellipse 381\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"#317597\"/>\n    <circle id=\"Ellipse_382\" data-name=\"Ellipse 382\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(10.5 1)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_644\" data-name=\"Pfad 644\" d=\"M11.59,3.936,9,13,3.561,7.561\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_230\" data-name=\"Linie 230\" x2=\"3.097\" y2=\"11.062\" transform=\"translate(2.903 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <path id=\"Pfad_645\" data-name=\"Pfad 645\" d=\"M20.439,7.561,15,13,12.41,3.936\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <line id=\"Linie_231\" data-name=\"Linie 231\" y1=\"11.062\" x2=\"3.097\" transform=\"translate(18 7.938)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_383\" data-name=\"Ellipse 383\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(20 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <circle id=\"Ellipse_384\" data-name=\"Ellipse 384\" cx=\"1.5\" cy=\"1.5\" r=\"1.5\" transform=\"translate(1 5)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n    <rect id=\"Rechteck_2000\" data-name=\"Rechteck 2000\" width=\"18\" height=\"4\" transform=\"translate(3 19)\" fill=\"none\" stroke=\"#357daf\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\"/>\n  </g>\n</svg>"
     }
   ]
 }

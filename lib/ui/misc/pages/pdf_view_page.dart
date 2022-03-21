@@ -15,10 +15,9 @@ import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/pages/pdf_view_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:provider/provider.dart';
 
 enum PathType { assetPath, documentFolderPath }
@@ -72,13 +71,14 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
         return PageScaffold(
           actions: [
             if (isShareActionAllowed)
-              IconButton(
-                key: _shareButtonKey,
-                icon: SvgPicture.asset(
-                  AssetPaths.shareIcon,
-                  semanticsLabel: Translations.of(context)!.share_page_share_button,
+              Semantics(
+                label: Translations.of(context)!.share_page_share_button,
+                button: true,
+                child: IconButton(
+                  key: _shareButtonKey,
+                  icon: SvgPicture.asset(AssetPaths.shareIcon),
+                  onPressed: () => viewModel.onShareContent(context),
                 ),
-                onPressed: () => viewModel.onShareContent(context),
               )
           ],
           title: pageTitle,
@@ -91,7 +91,7 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
   Widget _buildBody(PdfViewViewModel viewModel) {
     switch (viewModel.viewState) {
       case ViewState.uninitialized:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       case ViewState.error:
         return _buildErrorView();
       default:
@@ -116,20 +116,20 @@ class PdfViewPage extends StatelessPage<PdfViewViewModel> {
   }
 
   Widget _buildProgressView() {
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 
   Widget _buildPdfView(PdfViewViewModel viewModel) {
-    final PDF pdf = PDF(
-      preventLinkNavigation: true,
-      pageSnap: false,
-      onViewCreated: (_) => viewModel.onContentLoaded(),
-      onError: viewModel.onPdfError,
+    return PdfView(
+      controller: viewModel.pdfController,
+      onDocumentLoaded: (document) => viewModel.onContentLoaded(),
+      pageSnapping: false,
+      scrollDirection: Axis.vertical,
+      onDocumentError: viewModel.onPdfError,
     );
-    return pathType == PathType.assetPath ? pdf.fromAsset(pdfPath) : pdf.fromPath(pdfPath);
   }
 
   Widget _buildErrorView() {
-    return ErrorView();
+    return const ErrorView();
   }
 }

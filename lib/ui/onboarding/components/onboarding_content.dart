@@ -20,7 +20,10 @@ class OnboardingItem {
 }
 
 class OnboardingContent extends StatelessWidget {
-  const OnboardingContent(this.item);
+  const OnboardingContent(
+    this.item, {
+    Key? key,
+  }) : super(key: key);
 
   final OnboardingItem item;
 
@@ -53,7 +56,7 @@ class OnboardingContent extends StatelessWidget {
                     semanticsLabel: item.semanticTitle,
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 SizedBox(
                   width: width,
                   child: Text(

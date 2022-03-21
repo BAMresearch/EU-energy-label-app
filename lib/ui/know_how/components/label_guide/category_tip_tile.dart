@@ -11,18 +11,18 @@ import 'package:energielabel_app/model/know_how/label_guide/label_tip.dart';
 import 'package:energielabel_app/model/know_how/label_guide/label_tip_view_type.dart';
 import 'package:energielabel_app/ui/know_how/components/label_guide/category_tip_image_section.dart';
 import 'package:energielabel_app/ui/know_how/components/label_guide/category_tip_image_text_section.dart';
-import 'package:energielabel_app/ui/know_how/components/label_guide/category_tip_video_section.dart';
 import 'package:energielabel_app/ui/know_how/components/label_guide/general_information_widget.dart';
 import 'package:energielabel_app/ui/misc/html_utils.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTipTile extends StatelessWidget {
-  CategoryTipTile({
+  const CategoryTipTile({
+    Key? key,
     required this.tipNumber,
     required this.labelTip,
     required this.onLinkTap,
-  });
+  }) : super(key: key);
 
   final int tipNumber;
   final LabelTip labelTip;
@@ -36,11 +36,14 @@ class CategoryTipTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              '$tipNumber. ${labelTip.title}',
-              style: Theme.of(context).textTheme.headline2!.copyWith(color: BamColorPalette.bamBlue3),
+          Semantics(
+            header: true,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                '$tipNumber. ${labelTip.title}',
+                style: Theme.of(context).textTheme.headline2!.copyWith(color: BamColorPalette.bamBlue3),
+              ),
             ),
           ),
 
@@ -84,10 +87,8 @@ class CategoryTipTile extends StatelessWidget {
         return _buildTipContentImageTexts();
       case LabelTipViewType.graphics:
         return _buildTipContentImage();
-      case LabelTipViewType.video:
-        return _buildTipContentVideo();
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 
@@ -103,9 +104,5 @@ class CategoryTipTile extends StatelessWidget {
 
   Widget _buildTipContentImage() {
     return CategoryTipImageSection(imageData: labelTip.graphicData!);
-  }
-
-  Widget _buildTipContentVideo() {
-    return CategoryTipVideoSection(videoUrl: labelTip.videoPath!);
   }
 }

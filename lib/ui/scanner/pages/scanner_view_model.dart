@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/model/scanner/product.dart';
 import 'package:energielabel_app/ui/favorites/favorites_routes.dart';
@@ -19,7 +20,6 @@ import 'package:energielabel_app/ui/scanner/components/product_dialog.dart';
 import 'package:energielabel_app/ui/scanner/components/product_dialog_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 class ScannerViewModel extends BaseViewModel {
   ScannerViewModel({required BuildContext context}) : _context = context;
@@ -33,7 +33,7 @@ class ScannerViewModel extends BaseViewModel {
   FutureOr<void> onViewStarted() {}
 
   void onScanResult(String scanResult, Function onInvalidQrCode, Function onFinish) {
-    Fimber.i('OPEN SCAN DIALOG');
+    log('OPEN SCAN DIALOG');
     if (_isValidUrl(scanResult)) {
       _dialogOpen = true;
       showDialogWithBlur(

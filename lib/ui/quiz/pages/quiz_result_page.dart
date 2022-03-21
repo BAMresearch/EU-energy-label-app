@@ -14,7 +14,6 @@ import 'package:energielabel_app/ui/misc/pages/base_page.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:energielabel_app/ui/quiz/pages/quiz_result_view_model.dart';
 import 'package:energielabel_app/ui/quiz/quiz_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/translations.dart';
 import 'package:flutter_html/style.dart';
@@ -22,7 +21,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class QuizResultPage extends StatelessPage<QuizResultViewModel> {
-  QuizResultPage({required this.quizState});
+  const QuizResultPage({Key? key, required this.quizState}) : super(key: key);
 
   final QuizState quizState;
 
@@ -39,7 +38,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
               SvgPicture.asset(AssetPaths.quizResultBackgroundImage),
               Column(
                 children: [
-                  LinearProgressIndicator(
+                  const LinearProgressIndicator(
                     backgroundColor: BamColorPalette.bamWhite,
                     value: 1,
                     minHeight: 8,
@@ -48,7 +47,7 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           Text(
                             Translations.of(context)!
                                 .quiz_result_score_label(
@@ -61,9 +60,9 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                                 .bodyText2!
                                 .copyWith(color: BamColorPalette.bamBlack45Optimized),
                           ),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
                               viewModel.isResultPositive
                                   ? Translations.of(context)!.quiz_result_label_good
@@ -72,13 +71,13 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                               style: Theme.of(context).textTheme.headline1!.copyWith(color: BamColorPalette.bamGreen4),
                             ),
                           ),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
                           SvgPicture.asset(viewModel.isResultPositive
                               ? AssetPaths.quizResultCupGoldImage
                               : AssetPaths.quizResultCupSilverImage),
-                          SizedBox(height: 40),
+                          const SizedBox(height: 40),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: HtmlUtils.stringToHtml(context,
                                 viewModel.isResultPositive ? viewModel.positiveResult : viewModel.negativeResult,
                                 customStyle: {
@@ -86,15 +85,15 @@ class QuizResultPage extends StatelessPage<QuizResultViewModel> {
                                       .copyWith(color: BamColorPalette.bamBlack80),
                                 }),
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(Size(double.maxFinite, 60)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder()),
+                      minimumSize: MaterialStateProperty.all(const Size(double.maxFinite, 60)),
+                      shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
                     ),
                     onPressed: viewModel.onReplyButtonTapped,
                     child: Text(Translations.of(context)!.quiz_replay_button.toUpperCase()),

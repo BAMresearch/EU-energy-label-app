@@ -44,7 +44,7 @@ class LiRenderer extends PdfHtmlRenderer {
     }
 
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [Text(elementPrefix), SizedBox(width: 8), Expanded(child: childAsTextBuilder(node.nodes))],

@@ -7,12 +7,14 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:developer';
+
+import 'dart:async';
+
 import 'package:energielabel_app/data/glossary_repository.dart';
 import 'package:energielabel_app/model/know_how/glossary/glossary_entry.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:pedantic/pedantic.dart';
 
 class GlossaryViewModel extends BaseViewModel {
   GlossaryViewModel(
@@ -27,6 +29,7 @@ class GlossaryViewModel extends BaseViewModel {
   final GlossaryRepository _glossaryRepository;
   ViewState _viewState = ViewState.uninitialized;
   final List<GlossaryEntry?> _allGlossaryEntries = [];
+
   String get filterInput => _filterInput;
   String _filterInput;
 
@@ -70,7 +73,7 @@ class GlossaryViewModel extends BaseViewModel {
       _allGlossaryEntries.addAll(glossary.glossaryEntries!);
       _viewState = ViewState.initialized;
     } catch (e) {
-      Fimber.e('Failed to load the glossary entries', ex: e);
+      log('Failed to load the glossary entries', error: e);
       _viewState = ViewState.error;
     } finally {
       notifyListeners();

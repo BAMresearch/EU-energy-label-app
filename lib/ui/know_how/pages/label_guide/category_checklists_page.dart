@@ -33,9 +33,10 @@ class CategoryChecklistPageArguments {
 }
 
 class CategoryChecklistsPage extends StatelessPage<CategoryChecklistsViewModel> {
-  CategoryChecklistsPage({required CategoryChecklistPageArguments categoryChecklistPageArguments})
+  CategoryChecklistsPage({Key? key, required CategoryChecklistPageArguments categoryChecklistPageArguments})
       : _labelCategoryChecklistData = categoryChecklistPageArguments.labelCategory.checklistData,
-        _labelCategory = categoryChecklistPageArguments.labelCategory;
+        _labelCategory = categoryChecklistPageArguments.labelCategory,
+        super(key: key);
 
   final LabelCategoryChecklistData? _labelCategoryChecklistData;
   final LabelCategory _labelCategory;
@@ -53,15 +54,15 @@ class CategoryChecklistsPage extends StatelessPage<CategoryChecklistsViewModel> 
                 viewModel.isFavorite ? Icons.star : Icons.star_border,
                 color: BamColorPalette.bamBlack,
                 semanticLabel: viewModel.isFavorite
-                    ? Translations.of(context)!.checklists_add_favorite_icon_semantics
-                    : Translations.of(context)!.checklists_remove_favorite_icon_semantics,
+                    ? Translations.of(context)!.checklists_remove_favorite_icon_semantics
+                    : Translations.of(context)!.checklists_add_favorite_icon_semantics,
               ),
               onPressed: viewModel.onFavoriteButtonTapped,
             )
           ],
           body: Scrollbar(
             child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(), //prevents scroll bouncing
+              physics: const ClampingScrollPhysics(), //prevents scroll bouncing
               child: Column(
                 children: [
                   _buildHeader(viewModel),
@@ -70,11 +71,11 @@ class CategoryChecklistsPage extends StatelessPage<CategoryChecklistsViewModel> 
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         _buildIntroText(viewModel.description!, context),
-                        SizedBox(height: 32),
+                        const SizedBox(height: 32),
                         _buildChecklistsSection(context, viewModel),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         GeneralInformationWidget(
                           informationTitle: viewModel.informationTitle,
                           informationText: viewModel.informationText!,
@@ -173,12 +174,12 @@ class CategoryChecklistsPage extends StatelessPage<CategoryChecklistsViewModel> 
           ),
         ),
         if (!isLast)
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 0),
+          const Padding(
+            padding: EdgeInsets.only(top: 16, bottom: 0),
             child: Divider(),
           )
         else
-          SizedBox(height: 16)
+          const SizedBox(height: 16)
       ],
     );
   }

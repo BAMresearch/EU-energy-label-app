@@ -7,6 +7,7 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
@@ -17,10 +18,7 @@ import 'package:energielabel_app/ui/misc/tab_scaffold.dart';
 import 'package:energielabel_app/ui/misc/theme/bam_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HtmlUtils {
@@ -34,55 +32,23 @@ class HtmlUtils {
     EdgeInsets padding = const EdgeInsets.all(8.0),
     Future<bool> Function(String? url)? onLinkTap,
   }) {
-    final internalOnTap = (String? link) async {
-      if (onLinkTap != null && await onLinkTap(link)) {
-        return;
-      }
-
-      final Uri uri = Uri.parse(link!);
-      //  example URL
-      //  energylabelapp:pushPage?tab=knowHow&page=glossary
-
-      if (uri.isScheme(AppUriSchemes.appScheme) && uri.path == AppUriSchemes.pushPagePath && uri.hasQuery) {
-        final TabRoute? tabRoute = TabRoutes.getRoute(uri.queryParameters[AppUriSchemes.queryParameterTab],
-            uri.queryParameters[AppUriSchemes.queryParameterPage]);
-
-        final Type? tabSpecificationType =
-            TabRoutes.getSpecification(uri.queryParameters[AppUriSchemes.queryParameterTab]);
-        final bool isTabSelected =
-            TabScaffold.of(context)!.currentTabSpecification().runtimeType == tabSpecificationType;
-
-        if (isTabSelected) {
-          unawaited(
-            Navigator.of(context)
-                .pushNamed(tabRoute!.route!, arguments: uri.queryParameters[AppUriSchemes.queryParameterArguments]),
-          );
-        } else {
-          TabScaffold.of(context)!.navigateIntoTab(tabSpecificationType, tabRoute!.route,
-              routeArguments: uri.queryParameters[AppUriSchemes.queryParameterArguments]);
-        }
-      } else if (await canLaunch(link)) {
-        unawaited(launch(link));
-      }
-    };
-
     final formattedHtml = html?.replaceAll('<p></p>', '');
     return Html(
       key: key,
       data: formattedHtml,
-      onLinkTap: (String? url, context, attributes, elements) {
-        internalOnTap(url);
+      onLinkTap: (String? url, renderContext, attributes, elements) {
+        internalOnTap(url, context, onLinkTap);
       },
       style: {
         'body': Style(margin: EdgeInsets.zero, color: textColor),
         '*': Style.fromTextStyle(Theme.of(context).textTheme.bodyText2!.copyWith(color: textColor)),
         'li': Style(
           margin: EdgeInsets.zero,
-          padding: EdgeInsets.only(bottom: 0),
+          padding: const EdgeInsets.only(bottom: 0),
           color: textColor,
         ),
         'p': Style(
-          padding: EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.only(bottom: 12),
           margin: EdgeInsets.zero,
           color: textColor,
         ),
@@ -103,10 +69,42 @@ class HtmlUtils {
       },
       customRender: {
         'img': (context, child) => _customRenderImg(context, child),
-        'a': (context, child) => _customRenderA(context, child, internalOnTap),
+        'a': (renderContext, child) =>
+            _customRenderA(renderContext, child, (link) => internalOnTap(link, context, onLinkTap)),
         'li': (context, child) => _customRenderLi(context, child, padding, bulletColor),
       },
     );
+  }
+
+  static Future<void> internalOnTap(String? link, BuildContext context, onLinkTap) async {
+    if (onLinkTap != null && await onLinkTap(link)) {
+      return;
+    }
+
+    final Uri uri = Uri.parse(link!);
+    //  example URL
+    //  energylabelapp:pushPage?tab=knowHow&page=glossary
+
+    if (uri.isScheme(AppUriSchemes.appScheme) && uri.path == AppUriSchemes.pushPagePath && uri.hasQuery) {
+      final TabRoute? tabRoute = TabRoutes.getRoute(
+          uri.queryParameters[AppUriSchemes.queryParameterTab], uri.queryParameters[AppUriSchemes.queryParameterPage]);
+
+      final Type? tabSpecificationType =
+          TabRoutes.getSpecification(uri.queryParameters[AppUriSchemes.queryParameterTab]);
+      final bool isTabSelected = TabScaffold.of(context)!.currentTabSpecification().runtimeType == tabSpecificationType;
+
+      if (isTabSelected) {
+        unawaited(
+          Navigator.of(context)
+              .pushNamed(tabRoute!.route!, arguments: uri.queryParameters[AppUriSchemes.queryParameterArguments]),
+        );
+      } else {
+        TabScaffold.of(context)!.navigateIntoTab(tabSpecificationType, tabRoute!.route,
+            routeArguments: uri.queryParameters[AppUriSchemes.queryParameterArguments]);
+      }
+    } else if (await canLaunch(link)) {
+      unawaited(launch(link));
+    }
   }
 
   static Widget _customRenderImg(RenderContext context, Widget child) {
@@ -150,7 +148,7 @@ class HtmlUtils {
             AssetPaths.externalLinkIcon,
             height: 13,
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           child,
         ],
       );
@@ -188,7 +186,7 @@ class HtmlUtils {
         textBaseline: TextBaseline.ideographic,
         children: [
           Text(elementPrefix, style: TextStyle(color: bulletColor, fontSize: fontSize)),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

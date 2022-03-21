@@ -34,7 +34,7 @@ class _TipsHeader extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 4),
+      padding: const EdgeInsets.only(top: 20, bottom: 4),
       child: Text(title!, style: Theme.of(context).header0),
     );
   }

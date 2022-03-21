@@ -23,69 +23,75 @@ class LabelGuideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 375 / 128,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
+    return Semantics(
+      button: true,
+      label: Translations.of(context)!.home_dashboard_label_guide,
+      child: ExcludeSemantics(
+        child: AspectRatio(
+          aspectRatio: 375 / 128,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(gradient: BamColorPalette.bamGrayGradient),
-                ),
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(gradient: BamColorPalette.bamGrayGradient),
+                    ),
+                  ),
+                  const Expanded(child: SizedBox.shrink()),
+                ],
               ),
-              Expanded(child: SizedBox.shrink()),
+              AspectRatio(
+                aspectRatio: 336 / 128,
+                child: GestureDetector(
+                  onTap: onPressed,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: BamColorPalette.bamBlue1,
+                    ),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: Image.asset(AssetPaths.labelGuideImage),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                Translations.of(context)!.home_dashboard_label_guide,
+                                style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: BamColorPalette.bamBlue2Optimized,
+                                ),
+                                child: Text(
+                                  Translations.of(context)!.home_dashboard_label_guide_hint.toUpperCase(),
+                                  style: BamTextStyles.buttonSpecial.copyWith(color: BamColorPalette.bamWhite),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
-          AspectRatio(
-            aspectRatio: 336 / 128,
-            child: GestureDetector(
-              onTap: onPressed,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: BamColorPalette.bamBlue1,
-                ),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Image.asset(AssetPaths.labelGuideImage),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            Translations.of(context)!.home_dashboard_label_guide,
-                            style: Theme.of(context).textTheme.headline3!.copyWith(color: BamColorPalette.bamWhite),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: BamColorPalette.bamBlue2Optimized,
-                            ),
-                            child: Text(
-                              Translations.of(context)!.home_dashboard_label_guide_hint.toUpperCase(),
-                              style: BamTextStyles.buttonSpecial.copyWith(color: BamColorPalette.bamWhite),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

@@ -7,19 +7,20 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
+import 'dart:developer';
+
 import 'package:energielabel_app/data/regulation_data_repository.dart';
 import 'package:energielabel_app/model/know_how/regulations/regulation.dart';
 import 'package:energielabel_app/ui/know_how/know_how_routes.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:energielabel_app/ui/misc/pages/view_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 
 class RegulationsViewModel extends BaseViewModel {
   RegulationsViewModel({
     required BuildContext context,
     required RegulationDataRepository regulationDataRepository,
-  })   : _context = context,
+  })  : _context = context,
         _regulationDataRepository = regulationDataRepository;
 
   final BuildContext _context;
@@ -47,7 +48,7 @@ class RegulationsViewModel extends BaseViewModel {
       _viewState = ViewState.initialized;
     } catch (e) {
       _viewState = ViewState.error;
-      Fimber.e('Failed to initialize regulations page contents.', ex: e);
+      log('Failed to initialize regulations page contents.', error: e);
     } finally {
       notifyListeners();
     }

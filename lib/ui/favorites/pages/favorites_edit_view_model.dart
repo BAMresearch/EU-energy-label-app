@@ -8,6 +8,7 @@
 * See the Licence for the specific language governing permissions and limitations under the Licence.*/
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:energielabel_app/data/favorite_repository.dart';
 import 'package:energielabel_app/data/label_guide_repository.dart';
@@ -16,8 +17,6 @@ import 'package:energielabel_app/ui/favorites/favorite_list_item.dart';
 import 'package:energielabel_app/ui/favorites/pages/favorite_type.dart';
 import 'package:energielabel_app/ui/misc/pages/base_view_model.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:pedantic/pedantic.dart';
 
 class FavoritesEditViewModel extends BaseViewModel {
   FavoritesEditViewModel({
@@ -67,7 +66,7 @@ class FavoritesEditViewModel extends BaseViewModel {
       _restorableItems.clear();
     } catch (error, stacktrace) {
       // TODO Should the user be informed and the items be visible in the UI again?
-      Fimber.e('Failed to permanently delete favorites.', ex: error, stacktrace: stacktrace);
+      log('Failed to permanently delete favorites.', error: error, stackTrace: stacktrace);
     }
   }
 
@@ -95,7 +94,7 @@ class FavoritesEditViewModel extends BaseViewModel {
     if (category != null) {
       return category.productType;
     } else {
-      Fimber.e('Category lookup failed with ID: $categoryId');
+      log('Category lookup failed with ID: $categoryId');
       return '';
     }
   }
@@ -140,7 +139,7 @@ class FavoritesEditViewModel extends BaseViewModel {
       notifyListeners();
     })).onError((error, stacktrace) {
       // TODO Show error to the user.
-      Fimber.e('Failed to observe the favorites.', ex: error, stacktrace: stacktrace);
+      log('Failed to observe the favorites.', error: error, stackTrace: stacktrace);
     });
   }
 
@@ -169,7 +168,7 @@ class FavoritesEditViewModel extends BaseViewModel {
       }
     } catch (e, stacktrace) {
       // TODO Should we show an error message? Should we restore the previous list state?
-      Fimber.e('Failed to save the updated favorites.', ex: e, stacktrace: stacktrace);
+      log('Failed to save the updated favorites.', error: e, stackTrace: stacktrace);
     }
   }
 }
